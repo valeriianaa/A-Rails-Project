@@ -1,0 +1,4 @@
+Scaffolds_g
+
+rails g scaffold Persona nombre:string apellido:string nroIdentificacion:string fechaNacimiento:string direccion:string telefono:string email:string
+

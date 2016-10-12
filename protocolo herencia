@@ -1,0 +1,12 @@
+1 crear el scaffold
+
+2 ir al modelo e indicar la clase padre ejemplo:
+class Empleado < Persona
+end
+
+3 migracion clase padre agregar atributo type de tipo string
+t.string :type
+
+4 rutas
+resources :personas
+resources :empleados, controller: 'personas', type 'Empleado'
