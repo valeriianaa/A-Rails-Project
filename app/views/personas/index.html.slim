@@ -1,32 +1,32 @@
-h1 Listing personas
+h1 Listar Personas
 
-table
-  thead
-    tr
-      th Nombre
-      th Apellido
-      th Nroidentificacion
-      th Fechanacimiento
-      th Direccion
-      th Telefono
-      th Email
-      th
-      th
-      th
-
-  tbody
-    - @personas.each do |persona|
+.box
+  table class="table table-bordered"
+    thead
       tr
-        td = persona.nombre
-        td = persona.apellido
-        td = persona.nroIdentificacion
-        td = persona.fechaNacimiento
-        td = persona.direccion
-        td = persona.telefono
-        td = persona.email
-        td = link_to 'Show', persona
-        td = link_to 'Edit', edit_persona_path(persona)
-        td = link_to 'Destroy', persona, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Nombre
+        th Apellido
+        th Nro. Doc.
+        th Fecha de nacimiento
+        th Direccion
+        th Telefono
+        th Correo Electrónico
+        th colspan="3" Acciones
+        
+
+    tbody
+      - @personas.each do |persona|
+        tr
+          td = persona.nombre
+          td = persona.apellido
+          td = persona.nroIdentificacion
+          td = persona.fechaNacimiento
+          td = persona.direccion
+          td = persona.telefono
+          td = persona.email
+          td = link_to 'Show', persona
+          td = link_to 'Edit', edit_persona_path(persona)
+          td = link_to 'Destroy', persona, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 

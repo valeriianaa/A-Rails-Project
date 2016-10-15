@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @proyecto.nombre
+p
+  strong Descripcion:
+  = @proyecto.descripcion
+p
+  strong Calle:
+  = @proyecto.calle
+p
+  strong Nrodomicilio:
+  = @proyecto.nroDomicilio
+p
+  strong Piso:
+  = @proyecto.piso
+p
+  strong Dpto:
+  = @proyecto.dpto
+p
+  strong Telefono:
+  = @proyecto.telefono
+p
+  strong Email:
+  = @proyecto.email
+p
+  strong Pagweb:
+  = @proyecto.pagWeb
+
+= link_to 'Edit', edit_proyecto_path(@proyecto)
+'|
+= link_to 'Back', proyectos_path

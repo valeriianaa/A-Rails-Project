@@ -1,0 +1,19 @@
+h1 Listing miembros_equipo
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @miembros_equipo.each do |miembro_equipo|
+      tr
+        td = link_to 'Show', miembro_equipo
+        td = link_to 'Edit', edit_miembro_equipo_path(miembro_equipo)
+        td = link_to 'Destroy', miembro_equipo, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Miembro equipo', new_miembro_equipo_path

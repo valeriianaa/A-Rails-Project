@@ -1,0 +1,37 @@
+h1 Listing proyectos
+
+table
+  thead
+    tr
+      th Nombre
+      th Descripcion
+      th Calle
+      th Nrodomicilio
+      th Piso
+      th Dpto
+      th Telefono
+      th Email
+      th Pagweb
+      th
+      th
+      th
+
+  tbody
+    - @proyectos.each do |proyecto|
+      tr
+        td = proyecto.nombre
+        td = proyecto.descripcion
+        td = proyecto.calle
+        td = proyecto.nroDomicilio
+        td = proyecto.piso
+        td = proyecto.dpto
+        td = proyecto.telefono
+        td = proyecto.email
+        td = proyecto.pagWeb
+        td = link_to 'Show', proyecto
+        td = link_to 'Edit', edit_proyecto_path(proyecto)
+        td = link_to 'Destroy', proyecto, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Proyecto', new_proyecto_path

@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @tipo_documento.nombre
+
+= link_to 'Edit', edit_tipo_documento_path(@tipo_documento)
+'|
+= link_to 'Back', tipo_documentos_path

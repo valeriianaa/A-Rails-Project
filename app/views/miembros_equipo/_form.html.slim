@@ -1,0 +1,73 @@
+= form_for @miembro_equipo do |f|
+  - if @miembro_equipo.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@miembro_equipo.errors.count, "error")} prohibited this miembro_equipo from being saved:"
+      ul
+        - @miembro_equipo.errors.full_messages.each do |message|
+          li = message
+
+
+  .field
+    = f.label :nombre
+    = f.text_field :nombre
+  .field
+    = f.label :apellido
+    = f.text_field :apellido
+  .field
+    = f.label :tipo_documento_id, 'Tipo de Documento:'
+    = f.collection_select :tipo_documento_id, TipoDocumento.all, :id, :nombre
+  .field
+    = f.label :nroIdentificacion
+    = f.text_field :nroIdentificacion
+  .field
+    = f.label :fechaNacimiento
+    = f.date_select :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
+  .field
+    = f.label :pais_id, {class: "col-sm-3 control-label"}
+    br
+      .col-sm-9
+        select#miembro_equipo_pais_id.form-control.select2 style="width:50%" name="miembro_equipo[pais_id]"
+          - Pais.all.each do |pais|
+            - if @miembro_equipo.pais == pais
+              option selected='' value=(pais.id) = pais.nombre
+            - else
+              option value=(pais.id) = pais.nombre
+  .field
+    = f.label :provincia_id, {class: "col-sm-3 control-label"}
+    br
+      .col-sm-9
+        select#miembro_equipo_provincia_id.form-control.select2 style="width:50%" name="miembro_equipo[provincia_id]"
+          - Provincia.all.each do |provincia|
+            - if @miembro_equipo.provincia == provincia
+              option selected='' class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+            - else
+              option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+  .field
+    = f.label :ciudad_id, {class: "col-sm-3 control-label"}
+    br
+    .col-sm-9
+      select#miembro_equipo_ciudad_id.form-control.select2 style="width:50%" name="miembro_equipo[ciudad_id]"
+        - Ciudad.all.each do |ciudad|
+          - if @miembro_equipo.ciudad == ciudad
+            option selected='' class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+          - else
+            option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+  .field
+    = f.label :calle
+    = f.text_field :calle
+  .field
+    = f.label :nroDomicilio
+    = f.text_field :nroDomicilio
+  .field
+    = f.label :piso
+    = f.text_field :piso
+  .field
+    = f.label :dpto
+    = f.text_field :dpto
+  .field
+    = f.label :telefono
+    = f.text_field :telefono
+  .field
+    = f.label :email
+    = f.text_field :email
+  .actions = f.submit

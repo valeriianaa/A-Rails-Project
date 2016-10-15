@@ -1,0 +1,21 @@
+h1 Listing tipo_documentos
+
+table
+  thead
+    tr
+      th Nombre
+      th
+      th
+      th
+
+  tbody
+    - @tipo_documentos.each do |tipo_documento|
+      tr
+        td = tipo_documento.nombre
+        td = link_to 'Show', tipo_documento
+        td = link_to 'Edit', edit_tipo_documento_path(tipo_documento)
+        td = link_to 'Destroy', tipo_documento, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Tipo documento', new_tipo_documento_path

@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @actividad.nombre
+p
+  strong Descripcion:
+  = @actividad.descripcion
+p
+  strong Obligatorio:
+  = @actividad.obligatorio
+
+= link_to 'Edit', edit_actividad_path(@actividad)
+'|
+= link_to 'Back', actividades_path

@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   
-  resources :clientes
+  resources :actividades
+  resources :etapas
+  resources :proyectos
+  resources :miembros_equipo
+  resources :tipo_documentos
+  resources :ciudades
+  resources :provincias
+  resources :paises
   resources :personas
   resources :empleados
   #resources :empleados, controller: 'personas', type 'Empleado'

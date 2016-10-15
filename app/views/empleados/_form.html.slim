@@ -13,14 +13,56 @@
     = f.label :apellido
     = f.text_field :apellido
   .field
+    = f.label :tipo_documento_id, 'Tipo de Documento:'
+    = f.collection_select :tipo_documento_id, TipoDocumento.all, :id, :nombre
+  .field
     = f.label :nroIdentificacion
     = f.text_field :nroIdentificacion
   .field
     = f.label :fechaNacimiento
-    = f.text_field :fechaNacimiento
+    = f.date_select :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
   .field
-    = f.label :direccion
-    = f.text_field :direccion
+    = f.label :pais_id, {class: "col-sm-3 control-label"}
+    br
+      .col-sm-9
+        select#empleado_pais_id.form-control.select2 style="width:50%" name="empleado[pais_id]"
+          - Pais.all.each do |pais|
+            - if @empleado.pais == pais
+              option selected='' value=(pais.id) = pais.nombre
+            - else
+              option value=(pais.id) = pais.nombre
+  .field
+    = f.label :provincia_id, {class: "col-sm-3 control-label"}
+    br
+      .col-sm-9
+        select#empleado_provincia_id.form-control.select2 style="width:50%" name="empleado[provincia_id]"
+          - Provincia.all.each do |provincia|
+            - if @empleado.provincia == provincia
+              option selected='' class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+            - else
+              option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+  .field
+    = f.label :ciudad_id, {class: "col-sm-3 control-label"}
+    br
+    .col-sm-9
+      select#empleado_ciudad_id.form-control.select2 style="width:50%" name="empleado[ciudad_id]"
+        - Ciudad.all.each do |ciudad|
+          - if @empleado.ciudad == ciudad
+            option selected='' class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+          - else
+            option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+  .field
+    = f.label :calle
+    = f.text_field :calle
+  .field
+    = f.label :nroDomicilio
+    = f.text_field :nroDomicilio
+  .field
+    = f.label :piso
+    = f.text_field :piso
+  .field
+    = f.label :dpto
+    = f.text_field :dpto
   .field
     = f.label :telefono
     = f.text_field :telefono

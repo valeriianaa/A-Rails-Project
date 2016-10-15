@@ -4,8 +4,11 @@ class CreatePersonas < ActiveRecord::Migration
       t.string :nombre
       t.string :apellido
       t.string :nroIdentificacion
-      t.string :fechaNacimiento
-      t.string :direccion
+      t.date :fechaNacimiento
+      t.string :calle
+      t.string :nroDomicilio
+      t.string :piso
+      t.string :dpto
       t.string :telefono
       t.string :email
       t.string :type

@@ -1,0 +1,36 @@
+= form_for @proyecto do |f|
+  - if @proyecto.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@proyecto.errors.count, "error")} prohibited this proyecto from being saved:"
+      ul
+        - @proyecto.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :nombre
+    = f.text_field :nombre
+  .field
+    = f.label :descripcion
+    = f.text_area :descripcion
+  .field
+    = f.label :calle
+    = f.text_field :calle
+  .field
+    = f.label :nroDomicilio
+    = f.text_field :nroDomicilio
+  .field
+    = f.label :piso
+    = f.text_field :piso
+  .field
+    = f.label :dpto
+    = f.text_field :dpto
+  .field
+    = f.label :telefono
+    = f.text_field :telefono
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :pagWeb
+    = f.text_field :pagWeb
+  .actions = f.submit

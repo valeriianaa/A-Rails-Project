@@ -1,0 +1,21 @@
+= form_for @provincia do |f|
+  - if @provincia.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@provincia.errors.count, "error")} prohibited this provincia from being saved:"
+      ul
+        - @provincia.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :pais_id, 'Pais:'
+    .col-sm-9
+      select#pais_id.form-control.select2 style="width:50%" name="provincia[pais_id]"
+        - Pais.all.each do |pais|
+          - if @provincia.pais == pais
+            option selected='' value=(pais.id) = pais.nombre
+          - else
+            option value=(pais.id) = pais.nombre
+  .field
+    = f.label :nombre
+    = f.text_field :nombre
+  .actions = f.submit

@@ -1,0 +1,21 @@
+h1 Listing provincias
+
+table
+  thead
+    tr
+      th Nombre
+      th
+      th
+      th
+
+  tbody
+    - @provincias.each do |provincia|
+      tr
+        td = provincia.nombre
+        td = link_to 'Show', provincia
+        td = link_to 'Edit', edit_provincia_path(provincia)
+        td = link_to 'Destroy', provincia, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Provincia', new_provincia_path

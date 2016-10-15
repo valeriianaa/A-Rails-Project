@@ -1,0 +1,23 @@
+h1 Listing etapas
+
+table
+  thead
+    tr
+      th Nombre
+      th Descripcion
+      th
+      th
+      th
+
+  tbody
+    - @etapas.each do |etapa|
+      tr
+        td = etapa.nombre
+        td = etapa.descripcion
+        td = link_to 'Show', etapa
+        td = link_to 'Edit', edit_etapa_path(etapa)
+        td = link_to 'Destroy', etapa, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Etapa', new_etapa_path

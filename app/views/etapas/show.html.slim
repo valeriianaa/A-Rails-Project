@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @etapa.nombre
+p
+  strong Descripcion:
+  = @etapa.descripcion
+
+= link_to 'Edit', edit_etapa_path(@etapa)
+'|
+= link_to 'Back', etapas_path

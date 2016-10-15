@@ -1,0 +1,25 @@
+h1 Listing actividades
+
+table
+  thead
+    tr
+      th Nombre
+      th Descripcion
+      th Obligatorio
+      th
+      th
+      th
+
+  tbody
+    - @actividades.each do |actividad|
+      tr
+        td = actividad.nombre
+        td = actividad.descripcion
+        td = actividad.obligatorio
+        td = link_to 'Show', actividad
+        td = link_to 'Edit', edit_actividad_path(actividad)
+        td = link_to 'Destroy', actividad, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Actividad', new_actividad_path

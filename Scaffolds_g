@@ -1,4 +1,26 @@
 Scaffolds_g
 
-rails g scaffold Persona nombre:string apellido:string nroIdentificacion:string fechaNacimiento:string direccion:string telefono:string email:string
 
+
+--Lugares
+rails generate migration AddPaisRefToProvincia pais:references
+rails generate migration AddProvinciaRefToCiudad provincia:references
+
+--Persona
+rails g scaffold Persona nombre:string apellido:string nroIdentificacion:string fechaNacimiento:string calle:string nroDomicilio:string piso:string dpto:string telefono:string email:string
+
+rails generate migration AddPaisRefToPersona pais:references
+rails generate migration AddProvinciaRefToPersona provincia:references
+rails generate migration AddCiudadRefToPersona ciudad:references
+rails generate migration AddTipoDocumentoRefToPersona tipo_documento:references
+
+--Proyectos y Miembros de Equipo
+rails g scaffold Proyecto nombre:string descripcion:text calle:string nroDomicilio:string piso:string dpto:string telefono:string email:string pagWeb:string
+
+--Etapas y Actividades
+rails g scaffold Etapa nombre:string descripcion:text
+rails g scaffold Actividad nombre:string descripcion:text obligatorio:boolean
+
+--Parametros
+rails g scaffold TipoDocumento nombre:string
+(añadir) rails g scaffold Area
