@@ -1,21 +1,28 @@
-h1 Listing ciudades
+h1 Ciudades
 
-table
-  thead
-    tr
-      th Nombre
-      th
-      th
-      th
-
-  tbody
-    - @ciudades.each do |ciudad|
+.box
+  table class="table table-bordered"
+    thead
       tr
-        td = ciudad.nombre
-        td = link_to 'Show', ciudad
-        td = link_to 'Edit', edit_ciudad_path(ciudad)
-        td = link_to 'Destroy', ciudad, data: {:confirm => 'Are you sure?'}, :method => :delete
+      th Nombre
+      th Provincia
+      th Pais
+      th colspan="3" Acciones
+
+    tbody
+      - @ciudades.each do |ciudad|
+        tr
+          td = ciudad.nombre
+          td = ciudad.pais.nombre
+          td = ciudad.provincia.nombre
+          td style="padding: 3px;"
+            a href=(ciudad_path(ciudad))
+              i.fa.fa-search
+            a href=(edit_ciudad_path(ciudad))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(ciudad_path(ciudad)) 
+              i.fa.fa-trash
 
 br
 
-= link_to 'New Ciudad', new_ciudad_path
+= link_to 'Nueva Ciudad', new_ciudad_path

@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @evento.nombre
+p
+  strong Descripcion:
+  = @evento.descripcion
+p
+  strong Dia:
+  = @evento.dia
+p
+  strong Hora:
+  = @evento.hora
+
+= link_to 'Edit', edit_evento_path(@evento)
+'|
+= link_to 'Back', eventos_path

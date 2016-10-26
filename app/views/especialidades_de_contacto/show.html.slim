@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @especialidad_de_contacto.nombre
+p
+  strong Descripcion:
+  = @especialidad_de_contacto.descripcion
+
+= link_to 'Edit', edit_especialidad_de_contacto_path(@especialidad_de_contacto)
+'|
+= link_to 'Back', especialidades_de_contacto_path

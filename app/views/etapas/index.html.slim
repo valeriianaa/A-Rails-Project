@@ -1,23 +1,39 @@
-h1 Listing etapas
+h1 Etapas
 
-table
-  thead
-    tr
-      th Nombre
-      th Descripcion
-      th
-      th
-      th
+/ table
+/   thead
+/     tr
+/       th Nombre
+/       th Descripcion
+/       th
+/       th
+/       th
 
-  tbody
-    - @etapas.each do |etapa|
-      tr
-        td = etapa.nombre
-        td = etapa.descripcion
-        td = link_to 'Show', etapa
-        td = link_to 'Edit', edit_etapa_path(etapa)
-        td = link_to 'Destroy', etapa, data: { confirm: 'Are you sure?' }, method: :delete
+/   tbody
+/     - @etapas.each do |etapa|
+/       tr
+/         td = etapa.nombre
+/         td = etapa.descripcion
+/         td = link_to 'Show', etapa
+/         td = link_to 'Edit', edit_etapa_path(etapa)
+/         td = link_to 'Destroy', etapa, data: { confirm: 'Are you sure?' }, method: :delete
 
-br
-
+/ br
 = link_to 'New Etapa', new_etapa_path
+
+- @colors = ['aqua', 'green', 'yellow', 'red']
+
+
+div
+  - @etapas.each do |etapa| 
+    div class="col-lg-3 col-xs-6"
+        div class="small-box bg-#{@colors[etapa.que_color]}" 
+          .inner
+            h3 = Proyecto.where(etapa_id: etapa.id).count
+            p = etapa.nombre
+          .icon
+            i class="ion-stats-bars"
+          a href="etapas/#{etapa.id}" class="small-box-footer" 
+            |Mas Info 
+            i class="fa fa-arrow-circle-right"
+

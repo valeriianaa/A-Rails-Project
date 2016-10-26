@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
   
+  resources :eventos
+  resources :especialidades_de_contacto
+  resources :contactos
+  resources :pagos
+  resources :roles_de_empleados
+  resources :departamentos
+  
+  resources :tipos_de_pago
+  resources :actividades_proyectos
+  resources :personas_proyectos
+  resources :areas
   resources :actividades
   resources :etapas
   resources :proyectos
@@ -10,6 +21,9 @@ Rails.application.routes.draw do
   resources :paises
   resources :personas
   resources :empleados
+
+  match 'proyectos/:id/actividades_proyectos' => 'proyectos#actividadesProyecto',  :via => [:get], as: :actividades_del_proyecto
+  #match 'proyectos/:id/pagos' => 'proyectos#pagos',  :via => [:get], as: :proyecto_pagos
   #resources :empleados, controller: 'personas', type 'Empleado'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

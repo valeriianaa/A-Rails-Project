@@ -1,0 +1,21 @@
+h1 Listing pagos
+
+table
+  thead
+    tr
+      th Dia
+      th
+      th
+      th
+
+  tbody
+    - @pagos.each do |pago|
+      tr
+        td = pago.dia
+        td = link_to 'Show', pago
+        td = link_to 'Edit', edit_pago_path(pago)
+        td = link_to 'Destroy', pago, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Pago', new_pago_path

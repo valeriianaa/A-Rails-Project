@@ -1,19 +1,29 @@
-h1 Listing miembros_equipo
+h1 Miembros de Equipo
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @miembros_equipo.each do |miembro_equipo|
+.box
+  table class="table table-bordered"
+    thead
       tr
-        td = link_to 'Show', miembro_equipo
-        td = link_to 'Edit', edit_miembro_equipo_path(miembro_equipo)
-        td = link_to 'Destroy', miembro_equipo, data: { confirm: 'Are you sure?' }, method: :delete
+        th Nombre y Apellido
+        th Tipo y Número de Documento
+        th Teléfono
+        th Correo Electrónico
+        th colspan="3" Acciones
 
+    tbody
+      - @miembros_equipo.each do |miembro_equipo|
+        tr
+          td = miembro_equipo.nombre_y_apellido
+          td = miembro_equipo.tipo_y_nro_documento
+          td = miembro_equipo.telefono
+          td = miembro_equipo.email
+          td style="padding: 3px;"
+            a href=(miembro_equipo_path(miembro_equipo))
+              i.fa.fa-search
+            a href=(edit_miembro_equipo_path(miembro_equipo))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(miembro_equipo_path(miembro_equipo)) 
+              i.fa.fa-trash
 br
 
-= link_to 'New Miembro equipo', new_miembro_equipo_path
+= link_to 'Nuevo Miembro de Equipo', new_miembro_equipo_path

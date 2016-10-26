@@ -1,0 +1,1 @@
+json.partial! "roles_de_empleados/rol_de_empleado", rol_de_empleado: @rol_de_empleado

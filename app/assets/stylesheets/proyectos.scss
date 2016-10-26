@@ -1,3 +1,20 @@
 // Place all the styles related to the Proyectos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.box-header.with-border h3{
+  font-weight: 400;
+  line-height: 0;
+}
+
+.box#menu{
+	background: #99c43b;
+	background-color: #99c43b;
+	border-top-color: #99c43b;
+	
+}
+
+
+.box#menu .box-header.with-border{
+	color: #FFFFFF;
+}

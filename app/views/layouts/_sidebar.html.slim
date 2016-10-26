@@ -1,17 +1,74 @@
+div class="user panel"  
 ul.sidebar-menu
-	li
-      a href="" 
-        i.fa.fa-circle-o
-        | Top Navigation A
+  	li
+      a href=(empleados_path)
+        i.fa.fa-group
+        | Empleados
+    ul
+      li
+        a href=(departamentos_path)
+          i.fa.fa-circle-o
+          | Departamentos
+      li
+        a href=(roles_de_empleados_path)
+          i.fa.fa-circle-o
+          | Roles del Empleado
     li
-      a href="" 
-        i.fa.fa-circle-o
-        | Top Navigation B
+      a href=(etapas_path) 
+        i.fa.fa-th-large
+        | Etapas
     li
-      a href="" 
-        i.fa.fa-circle-o
-        | Top Navigation C
+      a href=(actividades_path)
+        i.fa.fa-tasks
+        | Actividades
     li
-      a href="" 
-        i.fa.fa-circle-o
-        | Top Navigation D
+      a href=(proyectos_path)
+        i.fa.fa-lightbulb-o
+        | Proyectos
+    li
+      a href=(miembros_equipo_path)
+        i.fa.fa-group
+        | Miembros de Equipo
+    li
+      a href=(tipos_de_pago_path)
+        i.fa.fa-money
+        | Tipos de Pago
+    li.treeview
+      a href=(contactos_path)
+        i.fa.fa-group
+        | Contactos
+      ul
+        li
+          a href=(especialidades_de_contacto_path)
+            i.fa.fa-circle-o
+            | Especilidades del Contacto
+        li
+          a href=(eventos_path)
+            i.fa.fa-circle-o
+            | Eventos
+    li.treeview
+      a href=""
+        | Parámetros
+      ul
+        li
+          a href=(paises_path)
+            i.fa.fa-circle-o
+            | Países
+        li
+          a href=(provincias_path)
+            i.fa.fa-circle-o
+            | Provincias
+        li
+          a href=(ciudades_path)
+            i.fa.fa-circle-o
+            | Ciudades
+        li
+          a href=(areas_path)
+            i.fa.fa-circle-o
+            | Áreas
+        li
+          a href=(tipo_documentos_path)
+            i.fa.fa-circle-o
+            | Tipos de Documento
+
+        

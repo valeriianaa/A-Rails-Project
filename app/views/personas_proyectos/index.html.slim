@@ -1,0 +1,19 @@
+h1 Listing personas_proyectos
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @personas_proyectos.each do |persona_proyecto|
+      tr
+        td = link_to 'Show', persona_proyecto
+        td = link_to 'Edit', edit_persona_proyecto_path(persona_proyecto)
+        td = link_to 'Destroy', persona_proyecto, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Persona proyecto', new_persona_proyecto_path

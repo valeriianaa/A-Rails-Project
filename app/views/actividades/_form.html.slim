@@ -6,13 +6,40 @@
         - @actividad.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :nombre
-    = f.text_field :nombre
-  .field
-    = f.label :descripcion
-    = f.text_area :descripcion
-  .field
-    = f.label :obligatorio
-    = f.check_box :obligatorio
-  .actions = f.submit
+  .box.box-primary style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"  
+      .field
+        = f.label :nombre, 'Nombre'
+        = f.text_field :nombre, :class => "form-control"
+      .field
+        = f.label :descripcion, 'Descripción'
+        = f.text_area :descripcion, :class => "form-control"
+      .field
+        = f.label :etapa_id, 'Etapa a la que pertenece:'
+        br
+          select#actividad_etapa_id.form-control.select2 style="width:50%" name="actividad[etapa_id]"
+            - Etapa.all.each do |etapa|
+              option value=(etapa.id) =etapa.nombre
+      / .field
+      /   = f.label :etapa_id, 'Etapa a la que pertenece:'
+      /   = f.collection_select :etapa_id, Etapa.all, :id, :nombre
+      .field
+        = f.label :fechaEstimada, 'Fecha Estimada'
+        = f.date_select :fechaEstimada
+      .field
+        = f.label :fechaActual, 'Fecha Actual'
+        = f.date_select :fechaActual
+      .field
+        = f.label :obligatorio, 'Obligatorio'
+        = f.check_box :obligatorio
+      .field
+        = f.label :actividadesAntecedentes, 'Actividades Antecedentes'
+        br
+          select#actividad_antecedente_id.form-control.select2 style="width:50%" name="actividad[actividad_id]" multiple="true"
+            - Actividad.all.each do |actividad|
+              option class=(actividad.etapa_id) value=(actividad.id) =actividad.nombre
+        / = f.label :actividadesAntecedentes, 'Actividades antecedentes:'
+        / = f.collection_select :actividadesAntecedentes, Actividad.all, :id, :nombre, {}, {:multiple => true}
+      .actions = f.submit

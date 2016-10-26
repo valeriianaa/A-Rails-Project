@@ -1,0 +1,1 @@
+json.array! @especialidades_de_contacto, partial: 'especialidades_de_contacto/especialidad_de_contacto', as: :especialidad_de_contacto

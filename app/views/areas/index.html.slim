@@ -1,0 +1,24 @@
+h1 Áreas
+
+.box
+  table class="table table-bordered"
+    thead
+      tr
+      th Nombre
+      th colspan="3" Acciones
+
+    tbody
+      - @areas.each do |area|
+        tr
+          td = area.nombre
+          td style="padding: 3px;"
+            a href=(area_path(area))
+              i.fa.fa-search
+            a href=(edit_area_path(area))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(area_path(area)) 
+              i.fa.fa-trash
+
+br
+
+= link_to 'Nueva Área', new_area_path

@@ -1,0 +1,16 @@
+= form_for @area do |f|
+  - if @area.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@area.errors.count, "error")} prohibited this area from being saved:"
+      ul
+        - @area.errors.full_messages.each do |message|
+          li = message
+
+  .box.box-primary style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :nombre
+        = f.text_field :nombre, :class => "form-control"
+      .actions = f.submit

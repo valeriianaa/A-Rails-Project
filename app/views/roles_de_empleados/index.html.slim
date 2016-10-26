@@ -1,0 +1,21 @@
+h1 Listing roles_de_empleados
+
+table
+  thead
+    tr
+      th Nombre
+      th
+      th
+      th
+
+  tbody
+    - @roles_de_empleados.each do |rol_de_empleado|
+      tr
+        td = rol_de_empleado.nombre
+        td = link_to 'Show', rol_de_empleado
+        td = link_to 'Edit', edit_rol_de_empleado_path(rol_de_empleado)
+        td = link_to 'Destroy', rol_de_empleado, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Rol de empleado', new_rol_de_empleado_path

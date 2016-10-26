@@ -28,6 +28,15 @@ class ProyectosController < ApplicationController
 
     respond_to do |format|
       if @proyecto.save
+        if @proyecto.etapa_id != nil
+          Actividad.where(:etapa_id => @proyecto.etapa_id).each do |act|
+            ap = ActividadProyecto.new
+            ap.proyecto_id= @proyecto.id 
+            ap.actividad_id = act.id
+            ap.fechaInicio, ap.fechaFin = Date.today
+            ap.save
+          end
+        end
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully created.' }
         format.json { render :show, status: :created, location: @proyecto }
       else
@@ -40,8 +49,18 @@ class ProyectosController < ApplicationController
   # PATCH/PUT /proyectos/1
   # PATCH/PUT /proyectos/1.json
   def update
+    etapaId_vieja = @proyecto.etapa_id
     respond_to do |format|
       if @proyecto.update(proyecto_params)
+        if @proyecto.etapa_id != etapaId_vieja
+          Actividad.where(:etapa_id => @proyecto.etapa_id).each do |act|
+            ap = ActividadProyecto.new
+            ap.proyecto_id= @proyecto.id 
+            ap.actividad_id = act.id
+            ap.fechaInicio, ap.fechaFin = Date.today
+            ap.save
+          end
+        end
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully updated.' }
         format.json { render :show, status: :ok, location: @proyecto }
       else
@@ -61,6 +80,16 @@ class ProyectosController < ApplicationController
     end
   end
 
+  def actividadesProyecto
+    #add_breadcrumb 'Pedidos'
+    @proyecto = Proyecto.find(params[:id])
+
+    respond_to do |format|
+      format.html { render 'actividades_del_proyecto.html.slim' }
+      format.json { render json: @proyecto }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_proyecto
@@ -69,6 +98,7 @@ class ProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
-      params.require(:proyecto).permit(:nombre, :descripcion, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :pagWeb)
+      params.require(:proyecto).permit(:nombre, :descripcion, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :pagWeb, {:persona_ids => []}, :etapa_id, :pais_id, :provincia_id, :ciudad_id)
+      #{:persona_ids => []}
     end
 end

@@ -1,21 +1,26 @@
-h1 Listing provincias
+h1 Provincias
 
-table
-  thead
-    tr
-      th Nombre
-      th
-      th
-      th
-
-  tbody
-    - @provincias.each do |provincia|
+.box
+  table class="table table-bordered"
+    thead
       tr
-        td = provincia.nombre
-        td = link_to 'Show', provincia
-        td = link_to 'Edit', edit_provincia_path(provincia)
-        td = link_to 'Destroy', provincia, data: {:confirm => 'Are you sure?'}, :method => :delete
+      th Nombre
+      th País
+      th colspan="3" Acciones
+
+    tbody
+      - @provincias.each do |provincia|
+        tr
+          td = provincia.nombre
+          td = provincia.pais.nombre
+          td style="padding: 3px;"
+            a href=(provincia_path(provincia))
+              i.fa.fa-search
+            a href=(edit_provincia_path(provincia))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(provincia_path(provincia)) 
+              i.fa.fa-trash
 
 br
 
-= link_to 'New Provincia', new_provincia_path
+= link_to 'Nueva Provincia', new_provincia_path

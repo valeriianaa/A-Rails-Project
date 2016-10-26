@@ -1,25 +1,30 @@
-h1 Listing actividades
+h1 Actividades
 
-table
-  thead
-    tr
+.box
+  table class="table table-bordered"
+    thead
+      tr
       th Nombre
       th Descripcion
       th Obligatorio
-      th
-      th
-      th
+      th Etapa
+      th colspan="3" Acciones
 
-  tbody
-    - @actividades.each do |actividad|
-      tr
-        td = actividad.nombre
-        td = actividad.descripcion
-        td = actividad.obligatorio
-        td = link_to 'Show', actividad
-        td = link_to 'Edit', edit_actividad_path(actividad)
-        td = link_to 'Destroy', actividad, data: { confirm: 'Are you sure?' }, method: :delete
+    tbody
+      - @actividades.each do |actividad|
+        tr
+          td = actividad.nombre
+          td = actividad.descripcion
+          td = actividad.obligatorio
+          td = actividad.etapa.nombre
+          td style="padding: 3px;"
+            a href=(actividad_path(actividad))
+              i.fa.fa-search
+            a href=(edit_actividad_path(actividad))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(actividad_path(actividad)) 
+              i.fa.fa-trash
 
 br
 
-= link_to 'New Actividad', new_actividad_path
+= link_to 'Nueva Actividad', new_actividad_path

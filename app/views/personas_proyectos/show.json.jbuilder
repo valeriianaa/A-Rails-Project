@@ -1,0 +1,1 @@
+json.partial! "personas_proyectos/persona_proyecto", persona_proyecto: @persona_proyecto

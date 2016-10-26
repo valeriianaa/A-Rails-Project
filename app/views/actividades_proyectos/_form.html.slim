@@ -1,0 +1,15 @@
+= form_for @actividad_proyecto do |f|
+  - if @actividad_proyecto.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@actividad_proyecto.errors.count, "error")} prohibited this actividad_proyecto from being saved:"
+      ul
+        - @actividad_proyecto.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :fechaInicio
+    = f.date_select :fechaInicio
+  .field
+    = f.label :fechaFin
+    = f.date_select :fechaFin
+  .actions = f.submit

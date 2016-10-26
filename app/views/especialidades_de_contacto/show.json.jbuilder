@@ -1,0 +1,1 @@
+json.partial! "especialidades_de_contacto/especialidad_de_contacto", especialidad_de_contacto: @especialidad_de_contacto

@@ -25,16 +25,14 @@ TipoDocumento.create!([
 #   {nombre: "Ana ", apellido: "Canteros", nroIdentificacion: "36063076", fechaNacimiento: "1991-11-05", calle: "176", nroDomicilio: "7141", piso: "", dpto: "", telefono: "4401604", email: "valeriianaa@gmail.com", type: "Empleado", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1}
 # ])
 
-Empleado.create!([
-  {nombre: "Ana", apellido: "Canteros", nroIdentificacion: "36063076", fechaNacimiento: "1991-11-05", calle: "176", nroDomicilio: "7141", piso: "", dpto: "", telefono: "4401604", email: "valeriianaa@gmail.com", type: "Empleado", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1}
-])
+# Empleado.create!([
+#   {nombre: "Ana", apellido: "Canteros", nroIdentificacion: "36063076", fechaNacimiento: "1991-11-05", calle: "176", nroDomicilio: "7141", piso: "", dpto: "", telefono: "4401604", email: "valeriianaa@gmail.com", type: "Empleado", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1}
+# ])
 
 
-MiembroEquipo.create!([
-  {nombre: "Daniela", apellido: "Schneider", nroIdentificacion: "33976521", fechaNacimiento: "1987-12-19", calle: "Av. Sarmiento", nroDomicilio: "8076", piso: "3", dpto: "7", telefono: "426924", email: "danischneider@gmail.com", type: "MiembroEquipo", pais_id: 1, provincia_id: 1, ciudad_id: 2, tipo_documento_id: 2}
-])
-
-#--------------------------------------------------------
+# MiembroEquipo.create!([
+#   {nombre: "Daniela", apellido: "Schneider", nroIdentificacion: "33976521", fechaNacimiento: "1987-12-19", calle: "Av. Sarmiento", nroDomicilio: "8076", piso: "3", dpto: "7", telefono: "426924", email: "danischneider@gmail.com", type: "MiembroEquipo", pais_id: 1, provincia_id: 1, ciudad_id: 2, tipo_documento_id: 2}
+# ])
 
 Empleado.create!([
   {nombre: "Ana", apellido: "Canteros", nroIdentificacion: "36063076", fechaNacimiento: "1991-11-05", calle: "176", nroDomicilio: "7141", piso: "", dpto: "", telefono: "4401604", email: "valeriianaa@gmail.com", type: "Empleado", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1},
@@ -51,3 +49,21 @@ MiembroEquipo.create!([
   {nombre: "Ernesto", apellido: "Barrios Rincón", nroIdentificacion: "29441422", fechaNacimiento: "1980-05-16", calle: "Av. Ucrania", nroDomicilio: "5206", piso: "", dpto: "", telefono: "423606", email: "ernestobr@gmail.com", type: "MiembroEquipo", pais_id: 1, provincia_id: 1, ciudad_id: 2, tipo_documento_id: 1},
   {nombre: "Evelyn", apellido: "Matos", nroIdentificacion: "20467791", fechaNacimiento: "1968-09-13", calle: "Paseo", nroDomicilio: "6118", piso: "", dpto: "", telefono: "423649", email: "evelynmatos@gmail.com", type: "MiembroEquipo", pais_id: 1, provincia_id: 1, ciudad_id: 2, tipo_documento_id: 1}
 ])
+
+Etapa.create!([
+  {nombre: "Pre incubacion", descripcion: "lalala"},
+  {nombre: "Incubación", descripcion: ""},
+  {nombre: "post incubacion", descripcion: ""},
+  {nombre: "Cuarta etapa", descripcion: "lalala"},
+])
+
+Actividad.create!([
+  {nombre: "Act 1", descripcion: "", obligatorio: false, fechaEstimada: nil, fechaActual: nil, etapa_id: 1},
+  {nombre: "Act 2", descripcion: "", obligatorio: false, fechaEstimada: nil, fechaActual: nil, etapa_id: 1},
+  {nombre: "Act 3", descripcion: "", obligatorio: false, fechaEstimada: nil, fechaActual: nil, etapa_id: 1},
+  {nombre: "Act 4", descripcion: "", obligatorio: false, fechaEstimada: nil, fechaActual: nil, etapa_id: 2},
+  {nombre: "Act 5", descripcion: "", obligatorio: false, fechaEstimada: nil, fechaActual: nil, etapa_id: 3},
+  {nombre: "Act 6", descripcion: "", obligatorio: false, fechaEstimada: nil, fechaActual: nil, etapa_id: 3}
+])
+
+#--------------------------------------------------------

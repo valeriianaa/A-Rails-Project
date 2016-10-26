@@ -1,0 +1,1 @@
+json.partial! "actividades_proyectos/actividad_proyecto", actividad_proyecto: @actividad_proyecto

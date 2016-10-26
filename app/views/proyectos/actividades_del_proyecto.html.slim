@@ -1,0 +1,21 @@
+h1 Listing actividades_proyectos
+
+table
+  thead
+    tr
+      th Fechainicio
+      th Fechafin
+      th Etapa
+      th
+      th
+
+  tbody
+    - @proyecto.actividades_proyectos.each do |actividad_proyecto|
+      tr
+        td = actividad_proyecto.fechaInicio
+        td = actividad_proyecto.fechaFin
+        td = Etapa.find(Actividad.find(actividad_proyecto.actividad_id).etapa_id).nombre
+        td = link_to 'Show', actividad_proyecto
+        td = link_to 'Edit', edit_actividad_proyecto_path(actividad_proyecto)
+
+br

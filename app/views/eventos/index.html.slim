@@ -1,0 +1,30 @@
+h1 Eventos
+
+.box
+  table class="table table-bordered"
+    thead
+      tr
+      th Nombre
+      th Descripción
+      th Día
+      th Hora
+      th colspan="3" Acciones
+
+    tbody
+      - @eventos.each do |evento|
+        tr
+          td = evento.nombre
+          td = evento.descripcion
+          td = evento.dia
+          td = evento.hora
+          td style="padding: 3px;"
+            a href=(evento_path(evento))
+              i.fa.fa-search
+            a href=(edit_evento_path(evento))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_path(evento)) 
+              i.fa.fa-trash
+
+br
+
+= link_to 'Nuevo Evento', new_evento_path

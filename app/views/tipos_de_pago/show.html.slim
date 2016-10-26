@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @tipo_de_pago.nombre
+p
+  strong Monto:
+  = @tipo_de_pago.monto
+p
+  strong Plazoinicio:
+  = @tipo_de_pago.plazoInicio
+p
+  strong Plazofin:
+  = @tipo_de_pago.plazoFin
+
+= link_to 'Edit', edit_tipo_de_pago_path(@tipo_de_pago)
+'|
+= link_to 'Back', tipos_de_pago_path

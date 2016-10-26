@@ -1,19 +1,38 @@
-h1 Listing empleados
+h1 Empleados
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @empleados.each do |empleado|
+.box
+  table class="table table-bordered"
+    thead
       tr
-        td = link_to 'Show', empleado
-        td = link_to 'Edit', edit_empleado_path(empleado)
-        td = link_to 'Destroy', empleado, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Nombre y Apellido
+        th Tipo y Número de Documento
+        th Teléfono
+        th Correo Electrónico
+        th Departamento
+        th Rol
+        th colspan="3" Acciones
+
+    tbody
+      - @empleados.each do |empleado|
+        tr
+          td = empleado.nombre_y_apellido
+          td = empleado.tipo_y_nro_documento
+          td = empleado.telefono
+          td = empleado.email
+          td
+          td
+          td style="padding: 3px;"
+            a href=(empleado_path(empleado))
+              i.fa.fa-search
+            a href=(edit_empleado_path(empleado))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(empleado_path(empleado)) 
+              i.fa.fa-trash
 
 br
 
-= link_to 'New Empleado', new_empleado_path
+= link_to 'Nuevo Empleado', new_empleado_path
+
+/= link_to 'Show', empleado
+/= link_to 'Edit', edit_empleado_path(empleado)
+/= link_to 'Destroy', empleado, data: {:confirm => 'Are you sure?'}, :method => :delete

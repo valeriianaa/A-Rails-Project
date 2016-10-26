@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Incubadora</title>
+  <head>
+    <title>Incubadora</title>
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag "bootstrap/css/bootstrap.min.css" %>
+    <%= stylesheet_link_tag "css/AdminLTE.css" %>
+    <%= stylesheet_link_tag "css/skins/skin-blue.css" %>
+    <%= stylesheet_link_tag "css/ionicons.css" %>
+    <%= stylesheet_link_tag "css/font-awesome.css" %>
+    <!--%= stylesheet_link_tag "../AdminLTE-master/build/less/header.less" %-->
+    <!--%= stylesheet_link_tag "../AdminLTE-master/build/less/variables.less" %-->
+    <!--%= stylesheet_link_tag "build/bootstraless/variables.less" %-->
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= stylesheet_link_tag "bootstrap/css/bootstrap.min.css" %>
-  <%= stylesheet_link_tag "css/AdminLTE.css" %>
-  <%= stylesheet_link_tag "css/skins/skin-blue.css" %>
-  <!--%= stylesheet_link_tag "build/less/header.less" %-->
-  <!--%= stylesheet_link_tag "build/less/variables.less" %-->
-  <!--%= stylesheet_link_tag "build/bootstraless/variables.less" %-->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="sidebar-mini skin-blue">
+    <div class="wrapper">
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body class="skin-blue">
-	<div class="wrapper">
-		<header class="main-header">
-			<%= render 'layouts/header' %>
-	  	</header>
-		<aside class="main-sidebar">
-		    <!-- sidebar: style can be found in sidebar.less -->
-		    <section class="sidebar" style="height: auto;">
-		      <%= render 'layouts/sidebar' %>
-		    </section>
-		    <!-- /.sidebar -->
-	  	</aside>
-	  	<div class="content-wrapper">
-	  		<section class="content">
-	  			<%= yield %>
-	  		</section>
-	  		
-	  	</div>
-		
-	</div>
-</body>
+      <header class="main-header">
+            <%= render 'layouts/header' %>
+
+      </header>
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar" style="height: auto;">
+          <%= render 'layouts/sidebar' %>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+      <div class="content-wrapper" style="min-height: 916px;">
+          <section class="content">
+              <%= yield %>
+          </section>
+          
+      </div>
+    </div>      
+  </body>
 </html>

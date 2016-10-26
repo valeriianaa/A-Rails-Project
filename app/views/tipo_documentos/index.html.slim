@@ -1,21 +1,24 @@
-h1 Listing tipo_documentos
+h1 Tipos de Documentos
 
-table
-  thead
-    tr
-      th Nombre
-      th
-      th
-      th
-
-  tbody
-    - @tipo_documentos.each do |tipo_documento|
+.box
+  table class="table table-bordered"
+    thead
       tr
-        td = tipo_documento.nombre
-        td = link_to 'Show', tipo_documento
-        td = link_to 'Edit', edit_tipo_documento_path(tipo_documento)
-        td = link_to 'Destroy', tipo_documento, data: { confirm: 'Are you sure?' }, method: :delete
+      th Nombre
+      th colspan="3" Acciones
+
+    tbody
+      - @tipo_documentos.each do |tipo_documento|
+        tr
+          td = tipo_documento.nombre
+          td style="padding: 3px;"
+            a href=(tipo_documento_path(tipo_documento))
+              i.fa.fa-search
+            a href=(edit_tipo_documento_path(tipo_documento))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(tipo_documento_path(tipo_documento)) 
+              i.fa.fa-trash
 
 br
 
-= link_to 'New Tipo documento', new_tipo_documento_path
+= link_to 'Nuevo Tipo de documento', new_tipo_documento_path

@@ -1,0 +1,23 @@
+h1 Listing actividades_proyectos
+
+table
+  thead
+    tr
+      th Fechainicio
+      th Fechafin
+      th
+      th
+      th
+
+  tbody
+    - @actividades_proyectos.each do |actividad_proyecto|
+      tr
+        td = actividad_proyecto.fechaInicio
+        td = actividad_proyecto.fechaFin
+        td = link_to 'Show', actividad_proyecto
+        td = link_to 'Edit', edit_actividad_proyecto_path(actividad_proyecto)
+        td = link_to 'Destroy', actividad_proyecto, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Actividad proyecto', new_actividad_proyecto_path

@@ -1,0 +1,26 @@
+h1 Especialidades
+
+.box
+  table class="table table-bordered"
+    thead
+      tr
+      th Nombre
+      th Descripcion
+      th colspan="3" Acciones
+
+    tbody
+      - @especialidades_de_contacto.each do |especialidad_de_contacto|
+        tr
+          td = especialidad_de_contacto.nombre
+          td = especialidad_de_contacto.descripcion
+          td style="padding: 3px;"
+            a href=(especialidad_de_contacto_path(especialidad_de_contacto))
+              i.fa.fa-search
+            a href=(edit_especialidad_de_contacto_path(especialidad_de_contacto))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(especialidad_de_contacto_path(especialidad_de_contacto)) 
+              i.fa.fa-trash
+
+br
+
+= link_to 'Nueva Especialidad de contacto', new_especialidad_de_contacto_path

@@ -1,0 +1,1 @@
+json.array! @roles_de_empleados, partial: 'roles_de_empleados/rol_de_empleado', as: :rol_de_empleado

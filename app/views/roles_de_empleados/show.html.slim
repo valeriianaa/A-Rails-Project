@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @rol_de_empleado.nombre
+
+= link_to 'Edit', edit_rol_de_empleado_path(@rol_de_empleado)
+'|
+= link_to 'Back', roles_de_empleados_path

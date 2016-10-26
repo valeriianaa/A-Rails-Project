@@ -1,10 +1,22 @@
-a href=""
-  	span.logo-lg
-		b Admin
-	| LTE
+/! Logo
+a.logo href="index2.html" 
+  /! mini logo for sidebar mini 50x50 pixels
+  span.logo-mini
+    b> A
+    | LT
+  /! logo for regular state and mobile devices
+  span.logo-lg
+    b> Incubadora
+    | App
 nav class="navbar navbar-static-top"
-	/a href="" class="sidebar-toggle"
-	.navbar-custom-menu
+	a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button"
+		span.sr-only Toggle
+	div.navbar-custom-menu
 		ul class="nav navbar-nav"
-			li.dropdown.user.user-menu
+			li class="dropdown messages-menu"
+			li class="dropdown notifications-menu"
+			li class="dropdown tasks-menu"
+			li class="dropdown user user-menu"
 			 
+
+

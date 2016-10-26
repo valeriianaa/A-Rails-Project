@@ -6,21 +6,23 @@
         - @ciudad.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :pais_id, 'Pais:'
-    br
-    .col-sm-9
-      select#ciudad_pais_id.form-control.select2 style="width:50%" name="ciudad[pais_id]"
-        - Pais.all.each do |pais|
-          option value=(pais.id) =pais.nombre
-  .field
-    = f.label :provincia_id, 'Provincia:'
-    br
-    .col-sm-9
-      select#ciudad_provincia_id.form-control.select2 style="width:50%" name="ciudad[provincia_id]"
-        - Provincia.all.each do |provincia|
-          option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
-  .field
-    = f.label :nombre
-    = f.text_field :nombre
-  .actions = f.submit
+  .box.box-primary style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :pais_id, 'Pais:'
+        br
+          select#ciudad_pais_id.form-control.select2 name="ciudad[pais_id]"
+            - Pais.all.each do |pais|
+              option value=(pais.id) =pais.nombre
+      .field
+        = f.label :provincia_id, 'Provincia:'
+        br
+          select#ciudad_provincia_id.form-control.select2 name="ciudad[provincia_id]"
+            - Provincia.all.each do |provincia|
+              option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+      .field
+        = f.label :nombre
+        = f.text_field :nombre, :class => "form-control"
+      .actions = f.submit

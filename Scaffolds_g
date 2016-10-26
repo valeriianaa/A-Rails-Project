@@ -17,10 +17,54 @@ rails generate migration AddTipoDocumentoRefToPersona tipo_documento:references
 --Proyectos y Miembros de Equipo
 rails g scaffold Proyecto nombre:string descripcion:text calle:string nroDomicilio:string piso:string dpto:string telefono:string email:string pagWeb:string
 
+rails d migration AddProyectoRefToMiembroEquipo proyecto:references
+rails d migration AddProyectoRefToPersona proyecto:references
+rails d migration AddPersonaRefToProyecto persona:references
+
+rails g migration AddProyectoRefToPersonaProyecto proyecto:references
+rails g migration AddPersonaRefToPersonaProyecto persona:references
+
+rails generate migration AddPaisRefToProyecto pais:references
+rails generate migration AddProvinciaRefToProyecto provincia:references
+rails generate migration AddCiudadRefToProyecto ciudad:references
+
 --Etapas y Actividades
 rails g scaffold Etapa nombre:string descripcion:text
 rails g scaffold Actividad nombre:string descripcion:text obligatorio:boolean
+rails generate migration AddEtapaRefToActividad etapa:references
+
+--Actividades y Proyectos
+rails g scaffold ActividadProyecto fechaInicio:date fechaFin:date
+
+rails generate migration AddProyectoRefToActividadProyecto proyecto:references
+rails generate migration AddActividadRefToActividadProyecto actividad:references
+
+-Etapas y proyectos
+
+rails generate migration AddEtapaRefToProyecto etapa:references
 
 --Parametros
 rails g scaffold TipoDocumento nombre:string
-(añadir) rails g scaffold Area
+(añadir) rails g scaffold Area nombre:string
+
+--empleados y otros parametros
+rails g scaffold Departamento nombre:string
+rails g scaffold RolDeEmpleado nombre:string
+
+rails g migration AddDepartamentoRefToPersona departamento:references
+rails g migration AddDepartamentoRefToRolDeEmpleado departamento:references
+
+--pagos y tipos de pago
+rails g scaffold TipoDePago nombre:string monto:float plazoInicio:date plazoFin:date
+rails g scaffold Pago dia:date
+
+rails g migration AddTipoDePagoRefToPago tipo_de_pago:references
+rails g migration AddProyectoRefToPago proyecto:references
+
+--Outsourcing y Eventos
+rails g scaffold Contacto
+rails g scaffold EspecialidadDeContacto nombre:string descripcion:text
+rails g scaffold Evento nombre:string descripcion:text dia:date hora:time
+
+rails g migration AddEspecialidadDeContactoToContacto especialidad_de_contacto:references
+rails g migration AddContactoRefToEvento contacto:references

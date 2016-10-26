@@ -6,31 +6,107 @@
         - @proyecto.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :nombre
-    = f.text_field :nombre
-  .field
-    = f.label :descripcion
-    = f.text_area :descripcion
-  .field
-    = f.label :calle
-    = f.text_field :calle
-  .field
-    = f.label :nroDomicilio
-    = f.text_field :nroDomicilio
-  .field
-    = f.label :piso
-    = f.text_field :piso
-  .field
-    = f.label :dpto
-    = f.text_field :dpto
-  .field
-    = f.label :telefono
-    = f.text_field :telefono
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :pagWeb
-    = f.text_field :pagWeb
-  .actions = f.submit
+  
+  .box.box-primary style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"     
+      .field
+        = f.label :nombre, "Nombre:", :class => "control-label"
+        = f.text_field :nombre, {:class => "form-control", :style => "width:100%"}
+      .field
+        = f.label :descripcion, "Descripción:", :class => "control-label"
+        = f.text_area :descripcion, :class => "form-control"
+      .field
+        = f.label :telefono, "Teléfono:", :class => "control-label"
+        = f.text_field :telefono, :class => "form-control"
+      .field
+        = f.label :email, "Correo Electrónico:", :class => "control-label"
+        = f.text_field :email, :class => "form-control"
+      .field
+        = f.label :pagWeb, "Página Web:", :class => "control-label"
+        = f.text_field :pagWeb, :class => "form-control"
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Domicilio
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"      
+      .field
+        = f.label :pais_id, "País:", {class: "control-label"}
+        br
+            select#proyecto_pais_id.form-control.select2 name="proyecto[pais_id]"
+              - Pais.all.each do |pais|
+                - if @proyecto.pais == pais
+                  option selected='' value=(pais.id) = pais.nombre
+                - else
+                  option value=(pais.id) = pais.nombre
+      .field
+        = f.label :provincia_id, "Provincia:",  {class: "control-label"}
+        br
+            select#proyecto_provincia_id.form-control.select2 name="proyecto[provincia_id]"
+              - Provincia.all.each do |provincia|
+                - if @proyecto.provincia == provincia
+                  option selected='' class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+                - else
+                  option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+      .field
+        = f.label :ciudad_id, "Ciudad:",  {class: "control-label"}
+        br
+          select#proyecto_ciudad_id.form-control.select2 name="proyecto[ciudad_id]"
+            - Ciudad.all.each do |ciudad|
+              - if @proyecto.ciudad == ciudad
+                option selected='' class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+              - else
+                option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+      .field
+        = f.label :calle, "Calle:", :class => "control-label"
+        = f.text_field :calle, :class => "form-control"
+      .field
+        = f.label :nroDomicilio, "Número:", :class => "control-label"
+        = f.text_field :nroDomicilio, :class => "form-control"
+      .field
+        = f.label :piso, "Piso:", :class => "control-label"
+        = f.text_field :piso, :class => "form-control"
+      .field
+        = f.label :dpto, "Departamento:", :class => "control-label"
+        = f.text_field :dpto, :class => "form-control"
+  .box.box-success style="width:100%"
+    .box-header.with-border
+      h3 Estado del Proyecto
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"     
+      .field
+        = f.label :persona_id, 'Seleccione a los miembros de equipo de este proyecto:'
+        = f.collection_select :persona_ids, Persona.where(:type => 'MiembroEquipo'), :id, :nombre_y_apellido, {:prompt => "Seleccione un Miembro de Equipo..."}, {:id => 'miembro_equipo_id', :multiple => true, :class => 'form-control'}
+      .field
+        = f.label :etapa_id, 'Etapa a la que pertenece:'
+        = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {:prompt => "Seleccione una Etapa"}, {:id => 'etapa_id', :class => 'form-control'}
+      .field
+        = f.label :departamento_id, {class: "control-label"}
+        br
+          select#proyecto_departamento_id.form-control.select2 name="proyecto[departamento_id]"
+            - Departamento.all.each do |departamento|
+              - if @proyecto.departamento == departamento
+                option selected='' value=(departamento.id) = departamento.nombre
+              - else
+                option value=(departamento.id) = departamento.nombre
+      .field
+        = f.label :rol_de_empleado_id, {class: "control-label"}
+        br
+          select#proyecto_rol_de_empleado_id.form-control.select2 name="proyecto[rol_de_empleado_id]"
+            - RolDeEmpleado.all.each do |rol_de_empleado|
+              - if @proyecto.rol_de_empleado == rol_de_empleado
+                option selected='' class=(rol_de_empleado.departamento_id) value=(rol_de_empleado.id) =rol_de_empleado.nombre
+              - else
+                option class=(rol_de_empleado.departamento_id) value=(rol_de_empleado.id) =rol_de_empleado.nombre
+      / .field
+      /   = f.label "Empleado a cargo del Proyecto:",  {class: "control-label"}
+      /   br
+      /     select#proyecto_empleado_id.form-control.select2 name="proyecto[empleado_id]"
+      /       - Empleado.all.each do |empleado|
+      /         - if @proyecto.empleado == empleado
+      /           option selected='' class=("#{empleado.departamento_id}\\#{empleado.rol_de_empleado_id}") value=( empleado.id) =empleado.nombre
+      /         - else
+      /           option class=("#{empleado.departamento_id}\\#{empleado.rol_de_empleado_id}") value=( empleado.id) =empleado.nombre
+      
+    
+    br
+    .actions = f.submit

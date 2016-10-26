@@ -6,67 +6,86 @@
         - @empleado.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :nombre
-    = f.text_field :nombre
-  .field
-    = f.label :apellido
-    = f.text_field :apellido
-  .field
-    = f.label :tipo_documento_id, 'Tipo de Documento:'
-    = f.collection_select :tipo_documento_id, TipoDocumento.all, :id, :nombre
-  .field
-    = f.label :nroIdentificacion
-    = f.text_field :nroIdentificacion
-  .field
-    = f.label :fechaNacimiento
-    = f.date_select :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
-  .field
-    = f.label :pais_id, {class: "col-sm-3 control-label"}
-    br
-      .col-sm-9
-        select#empleado_pais_id.form-control.select2 style="width:50%" name="empleado[pais_id]"
-          - Pais.all.each do |pais|
-            - if @empleado.pais == pais
-              option selected='' value=(pais.id) = pais.nombre
-            - else
-              option value=(pais.id) = pais.nombre
-  .field
-    = f.label :provincia_id, {class: "col-sm-3 control-label"}
-    br
-      .col-sm-9
-        select#empleado_provincia_id.form-control.select2 style="width:50%" name="empleado[provincia_id]"
-          - Provincia.all.each do |provincia|
-            - if @empleado.provincia == provincia
-              option selected='' class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
-            - else
-              option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
-  .field
-    = f.label :ciudad_id, {class: "col-sm-3 control-label"}
-    br
-    .col-sm-9
-      select#empleado_ciudad_id.form-control.select2 style="width:50%" name="empleado[ciudad_id]"
-        - Ciudad.all.each do |ciudad|
-          - if @empleado.ciudad == ciudad
-            option selected='' class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
-          - else
-            option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
-  .field
-    = f.label :calle
-    = f.text_field :calle
-  .field
-    = f.label :nroDomicilio
-    = f.text_field :nroDomicilio
-  .field
-    = f.label :piso
-    = f.text_field :piso
-  .field
-    = f.label :dpto
-    = f.text_field :dpto
-  .field
-    = f.label :telefono
-    = f.text_field :telefono
-  .field
-    = f.label :email
-    = f.text_field :email
-  .actions = f.submit
+  .box.box-primary style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :nombre
+        = f.text_field :nombre, :class => "form-control"
+      .field
+        = f.label :apellido
+        = f.text_field :apellido, :class => "form-control"
+      .field
+        = f.label :tipo_documento_id, 'Tipo de Documento:'
+        = f.collection_select :tipo_documento_id, TipoDocumento.all, :id, :nombre,{:prompt => "Seleccione un Tipo de documento"}, {:class => 'form-control'}
+      .field
+        = f.label :nroIdentificacion
+        = f.text_field :nroIdentificacion, :class => "form-control"
+      .field
+        = f.label :fechaNacimiento
+        = f.date_select :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
+      .field
+        = f.label :pais_id, {class: "col-sm-3 control-label"}
+        br
+          select#empleado_pais_id.form-control.select2 name="empleado[pais_id]"
+              - Pais.all.each do |pais|
+                - if @empleado.pais == pais
+                  option selected='' value=(pais.id) = pais.nombre
+                - else
+                  option value=(pais.id) = pais.nombre
+      .field
+        = f.label :provincia_id, {class: "col-sm-3 control-label"}
+        br
+          select#empleado_provincia_id.form-control.select2 name="empleado[provincia_id]"
+              - Provincia.all.each do |provincia|
+                - if @empleado.provincia == provincia
+                  option selected='' class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+                - else
+                  option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+      .field
+        = f.label :ciudad_id, {class: "col-sm-3 control-label"}
+        br
+          select#empleado_ciudad_id.form-control.select2 name="empleado[ciudad_id]"
+            - Ciudad.all.each do |ciudad|
+              - if @empleado.ciudad == ciudad
+                option selected='' class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+              - else
+                option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+      .field
+        = f.label :calle
+        = f.text_field :calle, :class => "form-control"
+      .field
+        = f.label :nroDomicilio
+        = f.text_field :nroDomicilio, :class => "form-control"
+      .field
+        = f.label :piso
+        = f.text_field :piso, :class => "form-control"
+      .field
+        = f.label :dpto
+        = f.text_field :dpto, :class => "form-control"
+      .field
+        = f.label :telefono
+        = f.text_field :telefono, :class => "form-control"
+      .field
+        = f.label :email
+        = f.text_field :email, :class => "form-control"
+      .field
+        = f.label :departamento_id, {class: "col-sm-3 control-label"}
+        br
+          select#empleado_departamento_id.form-control.select2 name="empleado[departamento_id]"
+              - Departamento.all.each do |departamento|
+                - if @empleado.departamento == departamento
+                  option selected='' value=(departamento.id) = departamento.nombre
+                - else
+                  option value=(departamento.id) = departamento.nombre
+      .field
+        = f.label :rol_de_empleado_id, {class: "col-sm-3 control-label"}
+        br
+          select#empleado_rol_de_empleado_id.form-control.select2 name="empleado[rol_de_empleado_id]"
+              - RolDeEmpleado.all.each do |rol_de_empleado|
+                - if @empleado.rol_de_empleado == rol_de_empleado
+                  option selected='' class=(rol_de_empleado.departamento_id) value=(rol_de_empleado.id) =rol_de_empleado.nombre
+                - else
+                  option class=(rol_de_empleado.departamento_id) value=(rol_de_empleado.id) =rol_de_empleado.nombre
+      .actions = f.submit

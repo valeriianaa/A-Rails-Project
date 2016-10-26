@@ -12,9 +12,33 @@
  *
  *= require_tree .
  *= require_self
- */
+*/
 
+/*.wrapper{
+	height: 916px;
+}
 
-.wrapper{
-	height:1367px;
+*/
+
+i.fa.fa-search{
+	background-color: #00a65a;
+	color: #FFFFFF;
+	padding: 10px;
+	border-radius: 5px;
+	margin-right: 3px;
+}
+
+i.fa.fa-pencil{
+	background-color: #f39c12;
+	color: #FFFFFF;
+	padding: 10px;
+	border-radius: 5px;
+	margin-right: 3px;
+}
+
+i.fa.fa-trash{
+	background-color: #dd4b39;
+	color: #FFFFFF;
+	padding: 10px;
+	border-radius: 5px;
 }
