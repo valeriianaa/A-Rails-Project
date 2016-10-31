@@ -37,7 +37,7 @@
       .field
         = f.label :actividadesAntecedentes, 'Actividades Antecedentes'
         br
-          select#actividad_antecedente_id.form-control.select2 style="width:50%" name="actividad[actividad_id]" multiple="true"
+          select#actividad_antecedente_id.form-control.select2 style="width:50%" name="actividad[actividad_ids]" multiple="true"
             - Actividad.all.each do |actividad|
               option class=(actividad.etapa_id) value=(actividad.id) =actividad.nombre
         / = f.label :actividadesAntecedentes, 'Actividades antecedentes:'

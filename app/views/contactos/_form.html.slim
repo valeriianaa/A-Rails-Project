@@ -53,21 +53,27 @@
               - else
                 option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
       .field
-        = f.label :calle
+        = f.label :area_id, 'Area:'
+        = f.collection_select :area_id, Area.all, :id, :nombre,{:prompt => "Seleccione un area"}, {:class => 'form-control'}
+      .field
+        = f.label :calle, 'Calle:'
         = f.text_field :calle, :class => "form-control"
       .field
-        = f.label :nroDomicilio
+        = f.label :nroDomicilio, 'Número:'
         = f.text_field :nroDomicilio, :class => "form-control"
       .field
-        = f.label :piso
+        = f.label :piso, 'Piso:'
         = f.text_field :piso, :class => "form-control"
       .field
-        = f.label :dpto
+        = f.label :dpto, 'Departamento'
         = f.text_field :dpto, :class => "form-control"
       .field
-        = f.label :telefono
+        = f.label :especialidad_de_contacto_id, 'Especialidad:'
+        = f.collection_select :especialidad_de_contacto_id, EspecialidadDeContacto.all, :id, :nombre, {:prompt => "Seleccione un Especialidad"}, {:class => 'form-control'}
+      .field
+        = f.label :telefono, 'Teléfono:'
         = f.text_field :telefono, :class => "form-control"
       .field
-        = f.label :email
+        = f.label :email, 'Correo Electrónicos'
         = f.text_field :email, :class => "form-control"
       .actions = f.submit

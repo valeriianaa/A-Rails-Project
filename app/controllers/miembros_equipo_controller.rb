@@ -69,7 +69,7 @@ class MiembrosEquipoController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def miembro_equipo_params
-      params.require(:miembro_equipo).permit(:nombre, :apellido, :nroIdentificacion, :fechaNacimiento, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :type, :pais_id, :provincia_id, :ciudad_id, :tipo_documento_id, :proyecto_id)
+      params.require(:miembro_equipo).permit(:nombre, :apellido, :nroIdentificacion, :fechaNacimiento, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :type, :pais_id, :provincia_id, :ciudad_id, :area_id, :tipo_documento_id, :proyecto_id)
       #params.fetch(:miembro_equipo, {})
     end
 end

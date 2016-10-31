@@ -13,6 +13,7 @@ rails generate migration AddPaisRefToPersona pais:references
 rails generate migration AddProvinciaRefToPersona provincia:references
 rails generate migration AddCiudadRefToPersona ciudad:references
 rails generate migration AddTipoDocumentoRefToPersona tipo_documento:references
+rails generate migration AddAreaRefToPersona area:references
 
 --Proyectos y Miembros de Equipo
 rails g scaffold Proyecto nombre:string descripcion:text calle:string nroDomicilio:string piso:string dpto:string telefono:string email:string pagWeb:string
@@ -35,6 +36,8 @@ rails generate migration AddEtapaRefToActividad etapa:references
 
 --Actividades y Proyectos
 rails g scaffold ActividadProyecto fechaInicio:date fechaFin:date
+
+rails generate migration AddAreaRefToProyecto area:references
 
 rails generate migration AddProyectoRefToActividadProyecto proyecto:references
 rails generate migration AddActividadRefToActividadProyecto actividad:references

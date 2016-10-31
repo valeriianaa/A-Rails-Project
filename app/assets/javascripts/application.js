@@ -15,3 +15,11 @@
 //= require jquery_ujs	
 //= require turbolinks
 //= require_tree .
+
+
+// $(document).ready(function() {
+//   $('#lista-cabecera').click(function() {
+//   	$(this).toggleClass('active');
+//   	$('#submenu').toggleClass('menu-open');
+//   }); 
+// });

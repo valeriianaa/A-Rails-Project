@@ -18,8 +18,16 @@ h1 Proyectos
         tr
           td = proyecto.nombre
           td = proyecto.descripcion
-          td 
-          td 
+          / td
+          /   -PersonaProyecto.where(:proyecto_id => proyecto.id).each do |pp|
+          /     - Persona.where(:type => 'MiembroEquipo',:id => pp.persona_id ).each do |me|
+          /       ul
+          /         li = me.nombre_y_apellido
+          td
+            ul 
+              - proyecto.personas.each do |p|
+                li = p.nombre_y_apellido
+          td
           td = proyecto.telefono
           td = proyecto.email
           td = proyecto.pagWeb

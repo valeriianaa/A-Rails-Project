@@ -58,6 +58,9 @@
               - else
                 option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
       .field
+        = f.label :area_id, 'Area:'
+        = f.collection_select :area_id, Area.all, :id, :nombre,{:prompt => "Seleccione un area"}, {:class => 'form-control'}
+      .field
         = f.label :calle, "Calle:", :class => "control-label"
         = f.text_field :calle, :class => "form-control"
       .field
@@ -97,16 +100,33 @@
                 option selected='' class=(rol_de_empleado.departamento_id) value=(rol_de_empleado.id) =rol_de_empleado.nombre
               - else
                 option class=(rol_de_empleado.departamento_id) value=(rol_de_empleado.id) =rol_de_empleado.nombre
-      / .field
-      /   = f.label "Empleado a cargo del Proyecto:",  {class: "control-label"}
-      /   br
-      /     select#proyecto_empleado_id.form-control.select2 name="proyecto[empleado_id]"
-      /       - Empleado.all.each do |empleado|
-      /         - if @proyecto.empleado == empleado
-      /           option selected='' class=("#{empleado.departamento_id}\\#{empleado.rol_de_empleado_id}") value=( empleado.id) =empleado.nombre
-      /         - else
-      /           option class=("#{empleado.departamento_id}\\#{empleado.rol_de_empleado_id}") value=( empleado.id) =empleado.nombre
+      .field
+        / = f.label "Empleado a cargo del Proyecto:",  {class: "control-label"}
+        / br
+        /   select#proyecto_empleado_id.form-control.select2 name="proyecto[empleado_id]"
+        /     - Persona.where(type: 'Empleado').each do |empleado|
+        /       - if @proyecto.persona == empleado
+        /         option selected='' class=("#{empleado.departamento_id}\\#{empleado.rol_de_empleado_id}") value=( empleado.id) =empleado.nombre
+        /       - else
+        /         option class=("#{empleado.departamento_id}\\#{empleado.rol_de_empleado_id}") value=( empleado.id) =empleado.nombre
       
     
     br
     .actions = f.submit
+
+//El siguiente código es para filtrar del select de miembros de equipo aquellas personas que ya forman parte de un proyecto
+- if @proyecto.new_record?
+  -if PersonaProyecto.exists?
+    - a = PersonaProyecto.where(persona_id: Persona.where(type:'MiembroEquipo'))
+- else
+  -if PersonaProyecto.exists?
+    - a = PersonaProyecto.where.not(proyecto_id: @proyecto.id)
+javascript:
+  b = "#{a.pluck(:persona_id)}";
+  for (i = 0; i < b.length; i++) {
+    $('#miembro_equipo_id option').each(function() {
+      if ($(this).val() == b[i]) {
+        return $(this).remove();
+      }
+    });
+  }  

@@ -2,6 +2,7 @@ class Persona < ActiveRecord::Base
 	belongs_to :ciudad
 	belongs_to :pais
 	belongs_to :provincia
+	belongs_to :area
 	belongs_to :tipo_documento
 	has_many :personas_proyectos, dependent: :destroy
 	has_many :personas , :through => :personas_proyectos

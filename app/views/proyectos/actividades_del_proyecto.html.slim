@@ -1,21 +1,23 @@
-h1 Listing actividades_proyectos
+h1 Actividades del Proyecto
 
-table
-  thead
-    tr
-      th Fechainicio
-      th Fechafin
+.box
+  table class="table table-bordered"
+    thead
+      th Fecha de inicio
+      th Fecha de finalización
       th Etapa
-      th
-      th
+      th colspan="3" Acciones
 
-  tbody
-    - @proyecto.actividades_proyectos.each do |actividad_proyecto|
-      tr
-        td = actividad_proyecto.fechaInicio
-        td = actividad_proyecto.fechaFin
-        td = Etapa.find(Actividad.find(actividad_proyecto.actividad_id).etapa_id).nombre
-        td = link_to 'Show', actividad_proyecto
-        td = link_to 'Edit', edit_actividad_proyecto_path(actividad_proyecto)
+    tbody
+      - @proyecto.actividades_proyectos.each do |actividad_proyecto|
+        tr
+          td = actividad_proyecto.fechaInicio
+          td = actividad_proyecto.fechaFin
+          td = Etapa.find(Actividad.find(actividad_proyecto.actividad_id).etapa_id).nombre
+          td style="padding: 3px;"
+            a href=""
+              i.fa.fa-search
+            a href=(edit_actividad_proyecto_path(actividad_proyecto))
+              i.fa.fa-pencil
 
 br

@@ -69,6 +69,7 @@ class ContactosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contacto_params
-      params.fetch(:contacto, {})
+      params.require(:contacto).permit(:nombre, :apellido, :nroIdentificacion, :fechaNacimiento, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :type, :pais_id, :provincia_id, :ciudad_id, :area_id, :tipo_documento_id)
+      #params.fetch(:contacto, {})
     end
 end

@@ -9,7 +9,10 @@
   .box.box-primary style="width:100%"
     .box-header.with-border
       h3 Datos Generales
-    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"
+      .field
+        = f.label :departamento_id, 'Departamento:'
+        = f.collection_select :departamento_id, Departamento.all, :id, :nombre,{:prompt => "Seleccione un Departamento"}, {:class => 'form-control'} 
       .field
         = f.label :nombre
         = f.text_field :nombre, :class => "form-control"

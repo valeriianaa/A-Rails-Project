@@ -54,6 +54,9 @@
               - else
                 option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
       .field
+        = f.label :area_id, 'Area:'
+        = f.collection_select :area_id, Area.all, :id, :nombre,{:prompt => "Seleccione un area"}, {:class => 'form-control'}
+      .field
         = f.label :calle
         = f.text_field :calle, :class => 'form-control'
       .field

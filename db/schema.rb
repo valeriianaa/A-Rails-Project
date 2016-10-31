@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026005907) do
+ActiveRecord::Schema.define(version: 20161026124310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,8 +145,10 @@ ActiveRecord::Schema.define(version: 20161026005907) do
     t.integer  "ciudad_id"
     t.integer  "tipo_documento_id"
     t.integer  "departamento_id"
+    t.integer  "area_id"
   end
 
+  add_index "personas", ["area_id"], name: "index_personas_on_area_id", using: :btree
   add_index "personas", ["ciudad_id"], name: "index_personas_on_ciudad_id", using: :btree
   add_index "personas", ["departamento_id"], name: "index_personas_on_departamento_id", using: :btree
   add_index "personas", ["pais_id"], name: "index_personas_on_pais_id", using: :btree
@@ -188,8 +190,10 @@ ActiveRecord::Schema.define(version: 20161026005907) do
     t.integer  "provincia_id"
     t.integer  "ciudad_id"
     t.integer  "etapa_id"
+    t.integer  "area_id"
   end
 
+  add_index "proyectos", ["area_id"], name: "index_proyectos_on_area_id", using: :btree
   add_index "proyectos", ["ciudad_id"], name: "index_proyectos_on_ciudad_id", using: :btree
   add_index "proyectos", ["etapa_id"], name: "index_proyectos_on_etapa_id", using: :btree
   add_index "proyectos", ["pais_id"], name: "index_proyectos_on_pais_id", using: :btree
@@ -228,6 +232,7 @@ ActiveRecord::Schema.define(version: 20161026005907) do
   add_foreign_key "eventos", "contactos"
   add_foreign_key "pagos", "proyectos"
   add_foreign_key "pagos", "tipos_de_pago"
+  add_foreign_key "personas", "areas"
   add_foreign_key "personas", "ciudades"
   add_foreign_key "personas", "departamentos"
   add_foreign_key "personas", "paises"
@@ -236,6 +241,7 @@ ActiveRecord::Schema.define(version: 20161026005907) do
   add_foreign_key "personas_proyectos", "personas"
   add_foreign_key "personas_proyectos", "proyectos"
   add_foreign_key "provincias", "paises"
+  add_foreign_key "proyectos", "areas"
   add_foreign_key "proyectos", "ciudades"
   add_foreign_key "proyectos", "etapas"
   add_foreign_key "proyectos", "paises"
