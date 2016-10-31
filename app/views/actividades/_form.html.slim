@@ -18,10 +18,14 @@
         = f.text_area :descripcion, :class => "form-control"
       .field
         = f.label :etapa_id, 'Etapa a la que pertenece:'
-        br
-          select#actividad_etapa_id.form-control.select2 style="width:50%" name="actividad[etapa_id]"
-            - Etapa.all.each do |etapa|
-              option value=(etapa.id) =etapa.nombre
+        = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {}, {:id => 'etapa_id', :class =>'form-control'}
+        / br
+        /   select#actividad_etapa_id.form-control name="actividad[etapa_id]"
+        /     - Etapa.all.each do |etapa|
+        /         - if @actividad.etapa == etapa
+        /           option selected='' value=(etapa.id) = etapa.nombre
+        /         - else
+        /           option value=(etapa.id) = etapa.nombre
       / .field
       /   = f.label :etapa_id, 'Etapa a la que pertenece:'
       /   = f.collection_select :etapa_id, Etapa.all, :id, :nombre
@@ -36,10 +40,13 @@
         = f.check_box :obligatorio
       .field
         = f.label :actividadesAntecedentes, 'Actividades Antecedentes'
-        br
-          select#actividad_antecedente_id.form-control.select2 style="width:50%" name="actividad[actividad_ids]" multiple="true"
-            - Actividad.all.each do |actividad|
-              option class=(actividad.etapa_id) value=(actividad.id) =actividad.nombre
+        / br
+        /   select#actividad_antecedente_id.form-control name="actividad[actividad_id]" multiple="true"
+        /     - Actividad.all.each do |actividad|
+        /         - if @actividad.actividadesAntecedentes == actividad
+        /           option selected='' class=(actividad.etapa_id) value=(actividad.id) =actividad.nombre
+        /         - else
+        /           option class=(actividad.etapa_id) value=(actividad.id) =actividad.nombre
         / = f.label :actividadesAntecedentes, 'Actividades antecedentes:'
-        / = f.collection_select :actividadesAntecedentes, Actividad.all, :id, :nombre, {}, {:multiple => true}
+        = f.grouped_collection_select :actividadesAntecedentes, Etapa.all, :actividades, :nombre, :id, :nombre, {:selected => @actividad.actividadesAntecedentes}, {:multiple => true, :id => 'actividad_antecedente_id', :class =>''}
       .actions = f.submit
