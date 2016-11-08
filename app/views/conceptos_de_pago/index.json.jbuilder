@@ -1,0 +1,1 @@
+json.array! @conceptos_de_pago, partial: 'conceptos_de_pago/concepto_de_pago', as: :concepto_de_pago

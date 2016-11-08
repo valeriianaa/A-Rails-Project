@@ -16,6 +16,11 @@ Ciudad.create!([
   {nombre: "Encarnación", provincia_id: 3, pais_id: 2}
 ])
 
+Area.create!([
+  {nombre: "Urbana"},
+  {nombre: "Rural"}
+])
+
 TipoDocumento.create!([
   {nombre: "DNI"},
   {nombre: "Libreta de Enrolamiento"}
@@ -81,18 +86,9 @@ ActividadProyecto.create!([
   {fechaInicio: "2016-10-26", fechaFin: nil, proyecto_id: 1, actividad_id: 3}
 ])
 
-Area.create!([
-  {nombre: "Urbana"},
-  {nombre: "Rural"}
-])
-
 Departamento.create!([
   {nombre: "Finanzas"},
   {nombre: "Mentoring"}
-])
-
-TipoDePago.create!([
-  {nombre: "Cuota Mensual", monto: 200.0, plazoInicio: "2016-10-01", plazoFin: "2016-10-10"}
 ])
 
 #--------------------------------------------------------

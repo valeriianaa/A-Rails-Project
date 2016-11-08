@@ -1,0 +1,29 @@
+h1 Listing conceptos_de_pago
+
+table
+  thead
+    tr
+      th Nombre
+      th Descripcion
+      th Monto
+      th Fechavencimiento
+      th Plazorecordatorio
+      th
+      th
+      th
+
+  tbody
+    - @conceptos_de_pago.each do |concepto_de_pago|
+      tr
+        td = concepto_de_pago.nombre
+        td = concepto_de_pago.descripcion
+        td = concepto_de_pago.monto
+        td = concepto_de_pago.fechaVencimiento
+        td = concepto_de_pago.plazoRecordatorio
+        td = link_to 'Show', concepto_de_pago
+        td = link_to 'Edit', edit_concepto_de_pago_path(concepto_de_pago)
+        td = link_to 'Destroy', concepto_de_pago, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Concepto de pago', new_concepto_de_pago_path

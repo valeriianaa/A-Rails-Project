@@ -58,11 +58,12 @@ rails g migration AddDepartamentoRefToPersona departamento:references
 rails g migration AddDepartamentoRefToRolDeEmpleado departamento:references
 
 --pagos y tipos de pago
-rails g scaffold TipoDePago nombre:string monto:float plazoInicio:date plazoFin:date
-rails g scaffold Pago dia:date
+rails g scaffold ConceptoDePago nombre:string descripcion:text monto:float fechaVencimiento:date plazoRecordatorio:date
+rails g scaffold Contrato interes:float descuento:float montoTotal:float
+rails g scaffold PagoRealizado fecha:date monto:float
 
-rails g migration AddTipoDePagoRefToPago tipo_de_pago:references
-rails g migration AddProyectoRefToPago proyecto:references
+rails g migration AddConceptoDePagoRefToContrato concepto_de_pago:references
+rails g migration AddPersonaProyectoRefToContrato persona_proyecto:references
 
 --Outsourcing y Eventos
 rails g scaffold Contacto

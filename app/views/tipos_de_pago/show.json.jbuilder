@@ -1,1 +1,0 @@
-json.partial! "tipos_de_pago/tipo_de_pago", tipo_de_pago: @tipo_de_pago

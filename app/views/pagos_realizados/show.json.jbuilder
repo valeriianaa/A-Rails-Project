@@ -1,0 +1,1 @@
+json.partial! "pagos_realizados/pago_realizado", pago_realizado: @pago_realizado

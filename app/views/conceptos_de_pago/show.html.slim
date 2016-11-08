@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @concepto_de_pago.nombre
+p
+  strong Descripcion:
+  = @concepto_de_pago.descripcion
+p
+  strong Monto:
+  = @concepto_de_pago.monto
+p
+  strong Fechavencimiento:
+  = @concepto_de_pago.fechaVencimiento
+p
+  strong Plazorecordatorio:
+  = @concepto_de_pago.plazoRecordatorio
+
+= link_to 'Edit', edit_concepto_de_pago_path(@concepto_de_pago)
+'|
+= link_to 'Back', conceptos_de_pago_path

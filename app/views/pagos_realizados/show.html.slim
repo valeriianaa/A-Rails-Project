@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Fecha:
+  = @pago_realizado.fecha
+p
+  strong Monto:
+  = @pago_realizado.monto
+
+= link_to 'Edit', edit_pago_realizado_path(@pago_realizado)
+'|
+= link_to 'Back', pagos_realizados_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026124310) do
+ActiveRecord::Schema.define(version: 20161108194551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 20161026124310) do
   add_index "ciudades", ["pais_id"], name: "index_ciudades_on_pais_id", using: :btree
   add_index "ciudades", ["provincia_id"], name: "index_ciudades_on_provincia_id", using: :btree
 
+  create_table "conceptos_de_pago", force: :cascade do |t|
+    t.string   "nombre"
+    t.text     "descripcion"
+    t.float    "monto"
+    t.date     "fechaVencimiento"
+    t.date     "plazoRecordatorio"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "contactos", force: :cascade do |t|
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
@@ -66,6 +76,19 @@ ActiveRecord::Schema.define(version: 20161026124310) do
   end
 
   add_index "contactos", ["especialidad_de_contacto_id"], name: "index_contactos_on_especialidad_de_contacto_id", using: :btree
+
+  create_table "contratos", force: :cascade do |t|
+    t.float    "interes"
+    t.float    "descuento"
+    t.float    "montoTotal"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "concepto_de_pago_id"
+    t.integer  "persona_proyecto_id"
+  end
+
+  add_index "contratos", ["concepto_de_pago_id"], name: "index_contratos_on_concepto_de_pago_id", using: :btree
+  add_index "contratos", ["persona_proyecto_id"], name: "index_contratos_on_persona_proyecto_id", using: :btree
 
   create_table "departamentos", force: :cascade do |t|
     t.string   "nombre"
@@ -109,16 +132,12 @@ ActiveRecord::Schema.define(version: 20161026124310) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pagos", force: :cascade do |t|
-    t.date     "dia"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "proyecto_id"
-    t.integer  "tipo_de_pago_id"
+  create_table "pagos_realizados", force: :cascade do |t|
+    t.date     "fecha"
+    t.float    "monto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "pagos", ["proyecto_id"], name: "index_pagos_on_proyecto_id", using: :btree
-  add_index "pagos", ["tipo_de_pago_id"], name: "index_pagos_on_tipo_de_pago_id", using: :btree
 
   create_table "paises", force: :cascade do |t|
     t.string   "nombre"
@@ -214,24 +233,15 @@ ActiveRecord::Schema.define(version: 20161026124310) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tipos_de_pago", force: :cascade do |t|
-    t.string   "nombre"
-    t.float    "monto"
-    t.date     "plazoInicio"
-    t.date     "plazoFin"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   add_foreign_key "actividades", "etapas"
   add_foreign_key "actividades_proyectos", "actividades"
   add_foreign_key "actividades_proyectos", "proyectos"
   add_foreign_key "ciudades", "paises"
   add_foreign_key "ciudades", "provincias"
   add_foreign_key "contactos", "especialidades_de_contacto"
+  add_foreign_key "contratos", "conceptos_de_pago"
+  add_foreign_key "contratos", "personas_proyectos"
   add_foreign_key "eventos", "contactos"
-  add_foreign_key "pagos", "proyectos"
-  add_foreign_key "pagos", "tipos_de_pago"
   add_foreign_key "personas", "areas"
   add_foreign_key "personas", "ciudades"
   add_foreign_key "personas", "departamentos"

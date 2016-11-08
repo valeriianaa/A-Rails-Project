@@ -1,0 +1,1 @@
+json.partial! "conceptos_de_pago/concepto_de_pago", concepto_de_pago: @concepto_de_pago

@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   
+  resources :contratos
+  resources :pagos_realizados
+  resources :conceptos_de_pago
   resources :eventos
   resources :especialidades_de_contacto
   resources :contactos
-  resources :pagos
   resources :roles_de_empleados
   resources :departamentos
   
-  resources :tipos_de_pago
   resources :actividades_proyectos
   resources :personas_proyectos
   resources :areas
