@@ -1,4 +1,6 @@
 class Ciudad < ActiveRecord::Base
+	#Esto es una prueba
+
 	belongs_to :provincia
 	belongs_to :pais
 
