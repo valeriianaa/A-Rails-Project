@@ -7,7 +7,7 @@ h1 Miembros de Equipo
         th Nombre y Apellido
         th Tipo y Número de Documento
         th Teléfono
-        th Correo Electrónico
+        th Proyectos
         th colspan="3" Acciones
 
     tbody
@@ -16,7 +16,11 @@ h1 Miembros de Equipo
           td = miembro_equipo.nombre_y_apellido
           td = miembro_equipo.tipo_y_nro_documento
           td = miembro_equipo.telefono
-          td = miembro_equipo.email
+          td 
+            - if PersonaProyecto.where(persona_id: miembro_equipo.id).exists?
+              ul
+                - PersonaProyecto.where(persona_id: miembro_equipo.id).each do |pp|
+                  li = Proyecto.find(pp.proyecto_id).nombre
           td style="padding: 3px;"
             a href=(miembro_equipo_path(miembro_equipo))
               i.fa.fa-search

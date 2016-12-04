@@ -1,9 +1,32 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @area.nombre
+/ p
+/   strong Nombre:
+/   = @area.nombre
 
-= link_to 'Edit', edit_area_path(@area)
-'|
-= link_to 'Back', areas_path
+/ = link_to 'Edit', edit_area_path(@area)
+/ '|
+/ = link_to 'Back', areas_path
+
+
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Área
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @area.nombre
+            tr
+              td colspan="2"
+                .row
+                  .col-xs-1 style="padding-right:40px;"
+                    a.btn.btn-block.btn-success href=(edit_area_path(@area)) style="width:70px;" id="editar_area"
+                      |Editar
+                  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+                    a.btn.btn-block.btn-default href=(areas_path) style="width:70px;" id="volver_area"
+                      |Volver

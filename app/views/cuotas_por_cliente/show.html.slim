@@ -1,0 +1,74 @@
+p#notice = notice
+
+
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Detalle de cuota asignada al cliente
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Proyecto
+              td = @cuota_por_cliente.proyecto.nombre
+            tr
+              td
+                strong Concepto de pago
+              td = @cuota_por_cliente.concepto_de_pago.nombre
+            tr
+              td
+                strong Subtotal
+              td = @cuota_por_cliente.concepto_de_pago.monto
+            -if @cuota_por_cliente.interes_id != nil
+              tr
+                td
+                  strong Interés
+                td = @cuota_por_cliente.interes.nombre
+            - if @cuota_por_cliente.descuento_id != nil
+              tr
+                td
+                  strong Descuento
+                td = @cuota_por_cliente.descuento.nombre
+            tr
+              td
+                strong Monto Total
+              td = @cuota_por_cliente.montoTotal
+          tfoot
+            tr
+              td colspan="2"
+                .row
+                  .col-xs-1 style="padding-right:40px;"
+                    a.btn.btn-block.btn-success href=(edit_cuota_por_cliente_path(@cuota_por_cliente)) style="width:70px;" id="editar_cuota_por_cliente"
+                      |Editar
+                  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+                    a.btn.btn-block.btn-default href=(cuotas_por_cliente_path) style="width:70px;" id="volver_cuota_por_cliente"
+                      |Volver
+/ p
+/   strong Proyecto:
+/   = @cuota_por_cliente.proyecto.nombre
+/ p
+/   strong Concepto de Pago:
+/   = @cuota_por_cliente.concepto_de_pago.nombre
+/ p
+/   strong Subtotal:
+/   = @cuota_por_cliente.concepto_de_pago.monto
+
+/ -if @cuota_por_cliente.interes_id != nil
+/ 	p
+/ 	  strong Interes:
+/ 	  = @cuota_por_cliente.interes.nombre
+/ - if @cuota_por_cliente.descuento_id != nil
+/ 	p
+/ 	  strong Descuento:
+/ 	  = @cuota_por_cliente.descuento.nombre
+/ p
+/   strong Monto total:
+/   = @cuota_por_cliente.montoTotal
+
+
+
+/ = link_to 'Edit', edit_cuota_por_cliente_path(@cuota_por_cliente)
+/ '|
+/ = link_to 'Back', cuotas_por_cliente_path

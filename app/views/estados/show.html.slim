@@ -1,0 +1,39 @@
+p#notice = notice
+
+
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Estado
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @estado.nombre
+            tr
+              td
+                strong Estado Anterior
+              -if @estado.previous != nil
+              	td = Estado.find(@estado.previous).nombre
+              -else
+              	td
+            tr
+              td
+                strong Último
+              td 
+              	-if @estado.ultimo == true
+	              i.glyphicon.glyphicon-ok 
+	            -else
+	              i.glyphicon.glyphicon-remove 
+            
+           
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_estado_path(@estado)) style="width:70px;" id="editar_estado"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(estados_path) style="width:70px;" id="volver_estado"
+      |Volver

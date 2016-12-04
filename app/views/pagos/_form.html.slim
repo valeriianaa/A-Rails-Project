@@ -1,0 +1,44 @@
+= form_for @pago do |f|
+  - if @pago.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@pago.errors.count, "error")} prohibited this pago from being saved:"
+      ul
+        - @pago.errors.full_messages.each do |message|
+          li = message
+
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos de pago
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :proyecto_id, "Proyecto:", {class: "control-label"}
+        br
+            select#pago_proyecto_id.form-control.select2 name="pago[proyecto_id]"
+              - Proyecto.all.each do |proyecto|
+                - if @pago.proyecto == proyecto
+                  option selected='' value=(proyecto.id) = proyecto.nombre
+                - else
+                  option value=(proyecto.id) = proyecto.nombre
+      .field
+        = f.label :persona_id, "Miembro equipo:",  {class: "control-label"}
+        br
+            select#pago_miembro_equipo_id.form-control.select2 name="pago[persona_id]"
+              - PersonaProyecto.all.each do |persona_proyecto|
+                - if @pago.persona == persona_proyecto
+                  option selected='' class=(persona_proyecto.proyecto_id) value=(persona_proyecto.persona_id) =persona_proyecto.persona.nombre_y_apellido
+                - else
+                  option class=(persona_proyecto.proyecto_id) value=(persona_proyecto.persona_id) =persona_proyecto.persona.nombre_y_apellido
+      .field
+        = f.label :cuota_por_cliente_id, 'E'
+        = f.collection_select :cuota_por_cliente_id, ConceptoDePago.all, :id, :nombre,{:prompt => "forma de pago"}, {:class => 'form-control'}
+      .field
+        = f.label :fecha
+        = f.date_select :fecha
+      .field
+        = f.label :tipo_de_pago
+        = f.collection_select :tipo_de_pago, TipoDePago.all, :id, :nombre,{:prompt => "forma de pago"}, {:class => 'form-control'}
+      .field
+        = f.label :montoAPagar, 'Monto a pagar'
+        = f.text_field :montoAPagar
+
+  .actions = f.submit

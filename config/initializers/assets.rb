@@ -17,6 +17,9 @@ Rails.application.config.assets.precompile += %w( bootstrap/css/bootstrap.min.cs
 Rails.application.config.assets.precompile += %w( css/*.*.css )
 Rails.application.config.assets.precompile += %w( css/*.css )
 Rails.application.config.assets.precompile += %w( css/skins/skin-blue.css )
+Rails.application.config.assets.precompile += %w( js/*.js )
+Rails.application.config.assets.precompile += %w( js/*.*.js )
+Rails.application.config.assets.precompile += %w( bootstrap/js/*.js )
 #Rails.application.config.assets.precompile += %w( build/less/header.less )
 #Rails.application.config.assets.precompile += %w( build/*/*.less )
 

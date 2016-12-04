@@ -1,0 +1,21 @@
+h1 Listing tipos_de_pago
+
+table
+  thead
+    tr
+      th Nombre
+      th
+      th
+      th
+
+  tbody
+    - @tipos_de_pago.each do |tipo_de_pago|
+      tr
+        td = tipo_de_pago.nombre
+        td = link_to 'Show', tipo_de_pago
+        td = link_to 'Edit', edit_tipo_de_pago_path(tipo_de_pago)
+        td = link_to 'Destroy', tipo_de_pago, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Tipo de pago', new_tipo_de_pago_path

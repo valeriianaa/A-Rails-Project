@@ -6,7 +6,7 @@
         - @ciudad.errors.full_messages.each do |message|
           li = message
 
-  .box.box-primary style="width:100%"
+  .box.box-info style="width:100%"
     .box-header.with-border
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
@@ -25,4 +25,4 @@
       .field
         = f.label :nombre
         = f.text_field :nombre, :class => "form-control"
-      .actions = f.submit
+  .actions = f.submit

@@ -1,12 +1,28 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @especialidad_de_contacto.nombre
-p
-  strong Descripcion:
-  = @especialidad_de_contacto.descripcion
-
-= link_to 'Edit', edit_especialidad_de_contacto_path(@especialidad_de_contacto)
-'|
-= link_to 'Back', especialidades_de_contacto_path
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos de la Especialidad
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @especialidad_de_contacto.nombre
+            tr
+              td
+                strong Descripción
+              td = @especialidad_de_contacto.descripcion
+          tfoot
+            tr
+              td colspan="2"
+                .row
+                  .col-xs-1 style="padding-right:40px;"
+                    a.btn.btn-block.btn-success href=(edit_especialidad_de_contacto_path(@especialidad_de_contacto)) style="width:70px;" id="editar_especialidad_de_contacto"
+                      |Editar
+                  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+                    a.btn.btn-block.btn-default href=(especialidades_de_contacto_path) style="width:70px;" id="volver_especialidad_de_contacto"
+                      |Volver

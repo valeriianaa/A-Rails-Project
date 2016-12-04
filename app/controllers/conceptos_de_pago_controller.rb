@@ -25,6 +25,8 @@ class ConceptosDePagoController < ApplicationController
   # POST /conceptos_de_pago.json
   def create
     @concepto_de_pago = ConceptoDePago.new(concepto_de_pago_params)
+    #@plazo = @concepto_de_pago.diferencia 
+    @concepto_de_pago.plazoRecordatorio = Chronic.parse(@concepto_de_pago.diferencia, :now => @concepto_de_pago.fechaVencimiento)
 
     respond_to do |format|
       if @concepto_de_pago.save
@@ -40,6 +42,7 @@ class ConceptosDePagoController < ApplicationController
   # PATCH/PUT /conceptos_de_pago/1
   # PATCH/PUT /conceptos_de_pago/1.json
   def update
+    @concepto_de_pago.plazoRecordatorio = Chronic.parse(@concepto_de_pago.diferencia, :now => @concepto_de_pago.fechaVencimiento)
     respond_to do |format|
       if @concepto_de_pago.update(concepto_de_pago_params)
         format.html { redirect_to @concepto_de_pago, notice: 'Concepto de pago was successfully updated.' }
@@ -69,6 +72,6 @@ class ConceptosDePagoController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concepto_de_pago_params
-      params.require(:concepto_de_pago).permit(:nombre, :descripcion, :monto, :fechaVencimiento, :plazoRecordatorio)
+      params.require(:concepto_de_pago).permit(:nombre, :descripcion, :monto, :fechaVencimiento, :plazoRecordatorio, :diferencia)
     end
 end

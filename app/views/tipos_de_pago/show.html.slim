@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @tipo_de_pago.nombre
+
+= link_to 'Edit', edit_tipo_de_pago_path(@tipo_de_pago)
+'|
+= link_to 'Back', tipos_de_pago_path

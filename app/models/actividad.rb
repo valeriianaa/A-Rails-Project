@@ -2,7 +2,7 @@ class Actividad < ActiveRecord::Base
 	belongs_to :etapa
 
 	has_many :actividades_proyectos, dependent: :destroy
-	has_many :actividades , :through => :actividades_proyectos
+	has_many :actividades, :through => :actividades_proyectos
 
 	serialize :actividadesAntecedentes
 

@@ -1,0 +1,60 @@
+doctype html
+html lang="en" 
+  head
+    meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /
+    meta charset="utf-8" /
+    title Inicio de Sesion
+    meta content=("Inicio de Sesion") name="description" /
+    /meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport" /
+
+    /link href="//fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" /
+    /! ace styles
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = javascript_include_tag params[:controller]
+
+    = stylesheet_link_tag "bootstrap/css/bootstrap.min.css" 
+    = stylesheet_link_tag "css/AdminLTE.css" 
+    = stylesheet_link_tag "css/skins/skin-blue.css" 
+    = stylesheet_link_tag "css/ionicons.css" 
+    = stylesheet_link_tag "css/font-awesome.css" 
+
+  head
+  body.hold-transition.login-page data-pinterest-extension-installed="cr2.0.5" 
+    .login-box
+      .login-logo
+        a href="" 
+          b> Incubadora
+          | App
+
+      .login-box-body
+        p.login-box-msg style="font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;" Inicio de sesión
+        == render template: "devise/sessions/new"
+    /     form method="post" 
+    /       .form-group.has-feedback
+    /         input.form-control placeholder="Email" type="email" 
+    /         span.glyphicon.glyphicon-envelope.form-control-feedback
+    /       .form-group.has-feedback
+    /         input.form-control placeholder="Password" type="password" 
+    /         span.glyphicon.glyphicon-lock.form-control-feedback
+    /       .row
+    /         .col-xs-8
+    /           .checkbox.icheck
+    /             label
+    /             .icheckbox_square-blue aria-checked="false" aria-disabled="false" style=("position: relative;") 
+    /               input style=("position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255), 255, 255);" type="checkbox" 
+    /               ins.iCheck-helper style=("position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255), 255, 255);" 
+    /             | Remember Me
+
+    /         .col-xs-4
+    /           button.btn.btn-primary.btn-block.btn-flat type="submit"  Sign In
+
+        
+    / javascript:
+    /   $(function () {
+    /     $('input').iCheck({
+    /       checkboxClass: 'icheckbox_square-blue',
+    /       radioClass: 'iradio_square-blue',
+    /       increaseArea: '20%' // optional
+    /      });
+    /   });

@@ -6,27 +6,38 @@
         - @empleado.errors.full_messages.each do |message|
           li = message
 
-  .box.box-primary style="width:100%"
+  .box.box-info style="width:100%"
     .box-header.with-border
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :nombre
+        = f.label :nombre, 'Nombre:'
         = f.text_field :nombre, :class => "form-control"
       .field
-        = f.label :apellido
+        = f.label :apellido, 'Apellido:'
         = f.text_field :apellido, :class => "form-control"
       .field
         = f.label :tipo_documento_id, 'Tipo de Documento:'
         = f.collection_select :tipo_documento_id, TipoDocumento.all, :id, :nombre,{:prompt => "Seleccione un Tipo de documento"}, {:class => 'form-control'}
       .field
-        = f.label :nroIdentificacion
+        = f.label :nroIdentificacion, 'Número de Identificación:'
         = f.text_field :nroIdentificacion, :class => "form-control"
       .field
-        = f.label :fechaNacimiento
+        = f.label :fechaNacimiento, 'Fecha de nacimiento:', :class => 'control-label'
         = f.date_select :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
       .field
-        = f.label :pais_id, {class: "col-sm-3 control-label"}
+        = f.label :telefono, 'Teléfono.'
+        = f.text_field :telefono, :class => "form-control"
+      .field
+        = f.label :email, 'Correo electrónico:'
+        = f.text_field :email, :class => "form-control"
+
+  .box.box-success#domicilio style="width:100%"
+    .box-header.with-border
+      h3 Domicilio
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :pais_id, 'País:', {class: "control-label"}
         br
           select#empleado_pais_id.form-control.select2 name="empleado[pais_id]"
               - Pais.all.each do |pais|
@@ -35,7 +46,7 @@
                 - else
                   option value=(pais.id) = pais.nombre
       .field
-        = f.label :provincia_id, {class: "col-sm-3 control-label"}
+        = f.label :provincia_id, 'Provincia:', {class: "control-label"}
         br
           select#empleado_provincia_id.form-control.select2 name="empleado[provincia_id]"
               - Provincia.all.each do |provincia|
@@ -44,7 +55,7 @@
                 - else
                   option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
       .field
-        = f.label :ciudad_id, {class: "col-sm-3 control-label"}
+        = f.label :ciudad_id, 'Ciudad:', {class: "control-label"}
         br
           select#empleado_ciudad_id.form-control.select2 name="empleado[ciudad_id]"
             - Ciudad.all.each do |ciudad|
@@ -53,28 +64,27 @@
               - else
                 option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
       .field
-        = f.label :area_id, 'Area:'
+        = f.label :area_id, 'Área:'
         = f.collection_select :area_id, Area.all, :id, :nombre,{:prompt => "Seleccione un area"}, {:class => 'form-control'}
       .field
-        = f.label :calle
+        = f.label :calle, 'Calle:'
         = f.text_field :calle, :class => "form-control"
       .field
-        = f.label :nroDomicilio
+        = f.label :nroDomicilio, 'Número:'
         = f.text_field :nroDomicilio, :class => "form-control"
       .field
-        = f.label :piso
+        = f.label :piso, 'Piso:'
         = f.text_field :piso, :class => "form-control"
       .field
-        = f.label :dpto
+        = f.label :dpto, 'Departamento:'
         = f.text_field :dpto, :class => "form-control"
+      
+  .box#funcion style="width:100%"
+    .box-header.with-border
+      h3 Función dentro de la empresa
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :telefono
-        = f.text_field :telefono, :class => "form-control"
-      .field
-        = f.label :email
-        = f.text_field :email, :class => "form-control"
-      .field
-        = f.label :departamento_id, {class: "col-sm-3 control-label"}
+        = f.label :departamento_id, 'Departamento:', {class: "control-label"}
         br
           select#empleado_departamento_id.form-control.select2 name="empleado[departamento_id]"
               - Departamento.all.each do |departamento|
@@ -83,7 +93,7 @@
                 - else
                   option value=(departamento.id) = departamento.nombre
       .field
-        = f.label :rol_de_empleado_id, {class: "col-sm-3 control-label"}
+        = f.label :rol_de_empleado_id, 'Rol:', {class: "control-label"}
         br
           select#empleado_rol_de_empleado_id.form-control.select2 name="empleado[rol_de_empleado_id]"
               - RolDeEmpleado.all.each do |rol_de_empleado|
@@ -91,4 +101,14 @@
                   option selected='' class=(rol_de_empleado.departamento_id) value=(rol_de_empleado.id) =rol_de_empleado.nombre
                 - else
                   option class=(rol_de_empleado.departamento_id) value=(rol_de_empleado.id) =rol_de_empleado.nombre
-      .actions = f.submit
+  
+  .actions = f.submit
+
+/ javascript:
+
+/   $(document).ready(function() {
+/     return $('#datetimepicker1').datetimepicker()({
+/       defaultDate: "05/11/2016",
+/       format: 'DD/MM/YYYY'
+/     });
+/   });

@@ -1,6 +1,93 @@
 p#notice = notice
 
 
-= link_to 'Edit', edit_miembro_equipo_path(@miembro_equipo)
-'|
-= link_to 'Back', miembros_equipo_path
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Miembro de Equipo
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre y Apellido
+              td = @miembro_equipo.nombre_y_apellido
+            tr
+              td
+                strong Tipo de Documento
+              td = @miembro_equipo.tipo_documento.nombre
+            tr
+              td
+                strong Número de Documento
+              td = @miembro_equipo.nroIdentificacion
+            tr
+              td
+                strong Fecha de Nacimiento
+              td = @miembro_equipo.fechaNacimiento.strftime('%d-%m-%y')
+            tr
+              td
+                strong Teléfono
+              td = @miembro_equipo.telefono
+            tr
+              td
+                strong Correo electrónico
+              td = @miembro_equipo.email
+            tr
+              td
+                strong Proyectos de los que forma parte
+              td 
+	            - if PersonaProyecto.where(persona_id: @miembro_equipo.id).exists?
+	              ul
+	                - PersonaProyecto.where(persona_id: @miembro_equipo.id).each do |pp|
+	                  li = Proyecto.find(pp.proyecto_id).nombre
+
+.row
+  .col-md-8
+    .box.box-success#domicilio
+      .box-header.with-border
+        h3 Datos de domicilio
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong País
+              td = @miembro_equipo.pais.nombre
+            tr
+              td
+                strong Provincia
+              td = @miembro_equipo.provincia.nombre
+            tr
+              td
+                strong Ciudad
+              td = @miembro_equipo.ciudad.nombre
+            tr
+              td
+                strong Calle
+              td = @miembro_equipo.calle
+            tr
+              td
+                strong Número
+              td = @miembro_equipo.nroDomicilio
+            tr
+              td
+                strong Piso
+              td = @miembro_equipo.piso
+            tr
+              td
+                strong Departamento
+              td = @miembro_equipo.dpto
+            tr
+              td
+                strong Area
+              td = @miembro_equipo.area.nombre
+            /tr
+              /td colspan="2"
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_miembro_equipo_path(@miembro_equipo)) style="width:70px;" id="editar_miembro_equipo"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(miembros_equipo_path) style="width:70px;" id="volver_miembro_equipo"
+      |Volver

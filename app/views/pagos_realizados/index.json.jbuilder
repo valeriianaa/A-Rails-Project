@@ -1,1 +1,0 @@
-json.array! @pagos_realizados, partial: 'pagos_realizados/pago_realizado', as: :pago_realizado

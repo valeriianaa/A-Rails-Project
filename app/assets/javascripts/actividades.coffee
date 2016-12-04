@@ -4,9 +4,11 @@
 
 
 //= require jquery.chained
+//= require select2
 
 
 $(document).ready ->
+  #$("#actividad_antecedente_id").select2 {}
   #$("#actividad_antecedente_id").chained("#actividad_etapa_id")
   actividades = $('#actividad_antecedente_id').html()
   $('#etapa_id').change ->

@@ -1,0 +1,8 @@
+dd-mm-yy 
+strftime('%d-%m-%y')
+
+dia_semana, dia_nro de Mes de Año, Hora:minutos hs
+strftime("%a, %e de %B de %Y, %H:%M hs")
+
+dd-mm-yy   hr:min
+strftime('%d-%m-%y   %H:%M')

@@ -10,3 +10,4 @@ $(document).ready ->
   $("#proyecto_rol_de_empleado_id").chained("#proyecto_departamento_id")
   $("#proyecto_empleado_id").chained("#proyecto_departamento_id, #proyecto_rol_de_empleado_id")
   
+  

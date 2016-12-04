@@ -1,6 +1,93 @@
 p#notice = notice
 
 
-= link_to 'Edit', edit_empleado_path(@empleado)
-'|
-= link_to 'Back', empleados_path
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Empleado
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Departamento
+              td = @empleado.departamento.nombre
+            tr
+              td
+                strong Rol
+              td = @empleado.rol_de_empleado.nombre
+            tr
+              td
+                strong Nombre y Apellido
+              td = @empleado.nombre_y_apellido
+            tr
+              td
+                strong Tipo de Documento
+              td = @empleado.tipo_documento.nombre
+            tr
+              td
+                strong Número de Documento
+              td = @empleado.nroIdentificacion
+            tr
+              td
+                strong Fecha de Nacimiento
+              td = @empleado.fechaNacimiento.strftime('%d-%m-%y')
+            tr
+              td
+                strong Teléfono
+              td = @empleado.telefono
+            tr
+              td
+                strong Correo electrónico
+              td = @empleado.email
+
+.row
+  .col-md-8
+    .box.box-success#domicilio
+      .box-header.with-border
+        h3 Datos de domicilio
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong País
+              td = @empleado.pais.nombre
+            tr
+              td
+                strong Provincia
+              td = @empleado.provincia.nombre
+            tr
+              td
+                strong Ciudad
+              td = @empleado.ciudad.nombre
+            tr
+              td
+                strong Calle
+              td = @empleado.calle
+            tr
+              td
+                strong Número
+              td = @empleado.nroDomicilio
+            tr
+              td
+                strong Piso
+              td = @empleado.piso
+            tr
+              td
+                strong Departamento
+              td = @empleado.dpto
+            tr
+              td
+                strong Area
+              td = @empleado.area.nombre
+            /tr
+              /td colspan="2"
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_empleado_path(@empleado)) style="width:70px;" id="editar_empleado"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(empleados_path) style="width:70px;" id="volver_empleado"
+      |Volver

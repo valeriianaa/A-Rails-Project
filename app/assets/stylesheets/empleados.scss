@@ -3,3 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.box.box-success#domicilio .box-header.with-border {
+	background-color: #00a65a;
+	color: #FFFFFF;	
+}
+
+.box#funcion .box-header.with-border{
+	background-color: #ae2bca;
+	border-top-color: #ae2bca;
+	color: #FFFFFF;	
+}
+
+div#funcion.box{
+	border-top-color: #ae2bca;
+}

@@ -4,20 +4,18 @@ h1 Proyectos
   table class="table table-bordered"
     thead
       tr
-      th Nombre
-      th Descripcion
-      th Equipo que lo compone
-      th Empleado a Cargo
-      th Telefono
-      th Email
-      th Página web
-      th colspan="3" Acciones
+        th Nombre
+        th Equipo que lo compone
+        th Empleado a Cargo
+        th Telefono
+        th Email
+        th Página web
+        th colspan="3" Acciones
 
     tbody
       - @proyectos.each do |proyecto|
         tr
           td = proyecto.nombre
-          td = proyecto.descripcion
           / td
           /   -PersonaProyecto.where(:proyecto_id => proyecto.id).each do |pp|
           /     - Persona.where(:type => 'MiembroEquipo',:id => pp.persona_id ).each do |me|

@@ -1,0 +1,1 @@
+json.partial! "descuentos/descuento", descuento: @descuento

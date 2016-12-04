@@ -8,3 +8,6 @@ $(document).ready ->
   $("#empleado_provincia_id").chained("#empleado_pais_id")
   $("#empleado_ciudad_id").chained("#empleado_pais_id, #empleado_provincia_id")
   $("#empleado_rol_de_empleado_id").chained("#empleado_departamento_id")
+  # $('#datetimepicker1').datetimepicker()
+  # 	defaultDate: "05/11/2016"
+  # 	format: 'DD/MM/YYYY'

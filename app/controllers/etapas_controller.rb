@@ -69,6 +69,6 @@ class EtapasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def etapa_params
-      params.require(:etapa).permit(:nombre, :descripcion)
+      params.require(:etapa).permit(:nombre, :descripcion, :etapaAnterior)
     end
 end

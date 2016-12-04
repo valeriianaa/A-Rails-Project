@@ -1,0 +1,1 @@
+json.array! @descuentos, partial: 'descuentos/descuento', as: :descuento

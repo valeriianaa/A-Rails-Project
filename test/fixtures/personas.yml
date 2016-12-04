@@ -1,19 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  nombre: MyString
-  apellido: MyString
-  nroIdentificacion: MyString
-  fechaNacimiento: MyString
-  direccion: MyString
-  telefono: MyString
-  email: MyString
+# one:
+#   nombre: Pedro
+#   apellido: Marquez
+#   nroIdentificacion: "36063076"
+#   fechaNacimiento: MyString
+#   telefono: MyString
+#   email: MyString
 
-two:
-  nombre: MyString
-  apellido: MyString
-  nroIdentificacion: MyString
-  fechaNacimiento: MyString
-  direccion: MyString
-  telefono: MyString
-  email: MyString
+# two:
+#   nombre: MyString
+#   apellido: MyString
+#   nroIdentificacion: MyString
+#   fechaNacimiento: MyString
+#   telefono: MyString
+#   email: MyString

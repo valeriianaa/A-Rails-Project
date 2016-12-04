@@ -6,14 +6,22 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag "bootstrap/css/bootstrap.min.css" %>
     <%= stylesheet_link_tag "css/AdminLTE.css" %>
+    <%= stylesheet_link_tag "css/bootstrap-datetimepicker.css" %>
     <%= stylesheet_link_tag "css/skins/skin-blue.css" %>
     <%= stylesheet_link_tag "css/ionicons.css" %>
     <%= stylesheet_link_tag "css/font-awesome.css" %>
+    <%= stylesheet_link_tag "css/select2.css" %>
     <!--%= stylesheet_link_tag "../AdminLTE-master/build/less/header.less" %-->
     <!--%= stylesheet_link_tag "../AdminLTE-master/build/less/variables.less" %-->
     <!--%= stylesheet_link_tag "build/bootstraless/variables.less" %-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "bootstrap/js/bootstrap.js" %>
+    <%= javascript_include_tag "js/app.js" %>
+    <%= javascript_include_tag "js/bootstrap-datetimepicker.js" %>
     <%= csrf_meta_tags %>
   </head>
   <body class="sidebar-mini skin-blue">

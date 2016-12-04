@@ -6,10 +6,28 @@
         - @actividad_proyecto.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :fechaInicio
-    = f.date_select :fechaInicio
-  .field
-    = f.label :fechaFin
-    = f.date_select :fechaFin
+        
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"  
+      .field
+        = f.label :unEstado, 'Estado'
+        = f.collection_select :unEstado, Estado.all, :id, :nombre,{:prompt => "Estado de la Actividad"}, {:class => 'form-control'}
+      .field
+        = f.label 'Es esta la fecha correcta?' 
+        /p#pfecha = Date.today.strftime('%d-%m-%y') 
+        /a#fecha Cambiar
+        div#select-fecha
+          =f.datetime_select :unaFecha
   .actions = f.submit
+
+/ javascript:
+
+/   $(document).ready(function(){
+/     $('#select-fecha').hide();
+/       $("#fecha").click(function(){
+/           $('#select-fecha').show();
+/           $('#pfecha').hide();
+/       });
+/   });

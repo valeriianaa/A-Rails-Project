@@ -4,18 +4,20 @@ h1 Actividades
   table class="table table-bordered"
     thead
       tr
-      th Nombre
-      th Descripcion
-      th Obligatorio
-      th Etapa
-      th colspan="3" Acciones
+        th Nombre
+        th Obligatorio
+        th Etapa
+        th colspan="3" Acciones
 
     tbody
       - @actividades.each do |actividad|
         tr
           td = actividad.nombre
-          td = actividad.descripcion
-          td = actividad.obligatorio
+          td 
+            -if actividad.obligatorio == true
+              i.glyphicon.glyphicon-ok 
+            -else
+              i.glyphicon.glyphicon-remove 
           td = actividad.etapa.nombre
           td style="padding: 3px;"
             a href=(actividad_path(actividad))

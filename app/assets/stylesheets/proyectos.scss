@@ -24,3 +24,18 @@
 .box#menu .box-header.with-border{
 	color: #FFFFFF;
 }
+
+.box.box-success#domicilio .box-header.with-border {
+	background-color: #00a65a;
+	color: #FFFFFF;	
+}
+
+.box#estado .box-header.with-border{
+	background-color: #ae2bca;
+	border-top-color: #ae2bca;
+	color: #FFFFFF;	
+}
+
+div#estado.box{
+	border-top-color: #ae2bca;
+}

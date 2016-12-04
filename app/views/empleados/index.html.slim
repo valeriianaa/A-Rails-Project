@@ -6,8 +6,6 @@ h1 Empleados
       tr
         th Nombre y Apellido
         th Tipo y Número de Documento
-        th Teléfono
-        th Correo Electrónico
         th Departamento
         th Rol
         th colspan="3" Acciones
@@ -17,10 +15,8 @@ h1 Empleados
         tr
           td = empleado.nombre_y_apellido
           td = empleado.tipo_y_nro_documento
-          td = empleado.telefono
-          td = empleado.email
-          td
-          td
+          td = empleado.departamento.nombre
+          td = empleado.rol_de_empleado.nombre
           td style="padding: 3px;"
             a href=(empleado_path(empleado))
               i.fa.fa-search

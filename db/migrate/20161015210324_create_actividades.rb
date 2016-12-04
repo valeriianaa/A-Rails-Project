@@ -4,8 +4,6 @@ class CreateActividades < ActiveRecord::Migration
       t.string :nombre
       t.text :descripcion
       t.boolean :obligatorio
-      t.date :fechaEstimada
-      t.date :fechaActual
       t.text :actividadesAntecedentes
 
       t.timestamps null: false

@@ -33,7 +33,6 @@ class ProyectosController < ApplicationController
             ap = ActividadProyecto.new
             ap.proyecto_id= @proyecto.id 
             ap.actividad_id = act.id
-            ap.fechaInicio, ap.fechaFin = Date.today
             ap.save
           end
         end
@@ -57,7 +56,6 @@ class ProyectosController < ApplicationController
             ap = ActividadProyecto.new
             ap.proyecto_id= @proyecto.id 
             ap.actividad_id = act.id
-            ap.fechaInicio, ap.fechaFin = Date.today
             ap.save
           end
         end
@@ -89,6 +87,7 @@ class ProyectosController < ApplicationController
       format.json { render json: @proyecto }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

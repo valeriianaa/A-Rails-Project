@@ -16,6 +16,9 @@
       .field
         = f.label :descripcion
         = f.text_area :descripcion, :class => "form-control"
+      .field
+        = f.label :etapaAnterior, 'Etapa Anterior:'
+        = f.collection_select :etapaAnterior, Etapa.all, :id, :nombre,{:prompt => "Etapa"}, {:class => 'form-control'}
       / .field
       /   = f.label 'color'
       /   = f.select :descripcion, options_for_select([['Masculino', {class: 'opt1'}],['Femenino', {class: 'opt2'}]]) ,:prompt => 'Seleccione Color...'

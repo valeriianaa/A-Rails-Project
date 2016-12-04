@@ -1,29 +1,31 @@
-h1 Listing conceptos_de_pago
-
-table
-  thead
-    tr
-      th Nombre
-      th Descripcion
-      th Monto
-      th Fechavencimiento
-      th Plazorecordatorio
-      th
-      th
-      th
-
-  tbody
-    - @conceptos_de_pago.each do |concepto_de_pago|
+h1 Conceptos de pago
+.box
+  table class="table table-bordered"
+    thead
       tr
-        td = concepto_de_pago.nombre
-        td = concepto_de_pago.descripcion
-        td = concepto_de_pago.monto
-        td = concepto_de_pago.fechaVencimiento
-        td = concepto_de_pago.plazoRecordatorio
-        td = link_to 'Show', concepto_de_pago
-        td = link_to 'Edit', edit_concepto_de_pago_path(concepto_de_pago)
-        td = link_to 'Destroy', concepto_de_pago, data: { confirm: 'Are you sure?' }, method: :delete
+        th Nombre
+        th Descripcion
+        th Monto
+        th Fechavencimiento
+        th Plazorecordatorio
+        th colspan="3" Acciones
+
+    tbody
+      - @conceptos_de_pago.each do |concepto_de_pago|
+        tr
+          td = concepto_de_pago.nombre
+          td = concepto_de_pago.descripcion
+          td = concepto_de_pago.monto
+          td = concepto_de_pago.fechaVencimiento.strftime('%d-%m-%y')
+          td = concepto_de_pago.plazoRecordatorio.strftime('%d-%m-%y')
+          td style="padding: 3px;"
+            a href=(concepto_de_pago_path(concepto_de_pago))
+              i.fa.fa-search
+            a href=(edit_concepto_de_pago_path(concepto_de_pago))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(concepto_de_pago_path(concepto_de_pago)) 
+              i.fa.fa-trash
 
 br
 
-= link_to 'New Concepto de pago', new_concepto_de_pago_path
+= link_to 'Nuevo Concepto de pago', new_concepto_de_pago_path

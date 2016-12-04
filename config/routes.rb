@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   
-  resources :contratos
-  resources :pagos_realizados
+  resources :descuentos
+  resources :intereses
+  resources :tipos_de_pago
+  devise_for :users
+  resources :estados
+  resources :cuotas_por_cliente
+  resources :pagos
   resources :conceptos_de_pago
   resources :eventos
   resources :especialidades_de_contacto
@@ -24,6 +29,10 @@ Rails.application.routes.draw do
   resources :empleados
 
   match 'proyectos/:id/actividades_proyectos' => 'proyectos#actividadesProyecto',  :via => [:get], as: :actividades_del_proyecto
+
+  #devise_for :installs
+  #match 'proyectos/:proyecto_id/actividades_proyectos/:id/historial' => 'actividades_proyectos#historial',  :via => [:get], as: :historial
+  
   #match 'proyectos/:id/pagos' => 'proyectos#pagos',  :via => [:get], as: :proyecto_pagos
   #resources :empleados, controller: 'personas', type 'Empleado'
   # The priority is based upon order of creation: first created -> highest priority.

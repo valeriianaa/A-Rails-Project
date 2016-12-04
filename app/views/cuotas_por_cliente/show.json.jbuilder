@@ -1,0 +1,1 @@
+json.partial! "cuotas_por_cliente/cuota_por_cliente", cuota_por_cliente: @cuota_por_cliente

@@ -1,0 +1,36 @@
+h1 Estados
+
+.box
+  table class="table table-bordered"
+    thead
+      tr
+        th Nombre
+        th Estado anterior
+        th Ultimo
+        th colspan="3" Acciones
+
+    tbody
+      - @estados.each do |estado|
+        tr
+          td = estado.nombre
+          - if estado.previous != nil
+            td = Estado.find(estado.previous).nombre
+          - else
+            td
+          td 
+            -if estado.ultimo == true
+              i.glyphicon.glyphicon-ok 
+            -else
+              i.glyphicon.glyphicon-remove 
+          
+          td style="padding: 3px;"
+              a href=(estado_path(estado))
+                i.fa.fa-search
+              a href=(edit_estado_path(estado))
+                i.fa.fa-pencil
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(estado_path(estado)) 
+                i.fa.fa-trash
+
+br
+
+= link_to 'Nuevo Estado', new_estado_path

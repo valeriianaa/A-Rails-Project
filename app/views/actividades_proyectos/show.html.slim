@@ -2,10 +2,27 @@ p#notice = notice
 
 p
   strong Fechainicio:
-  = @actividad_proyecto.fechaInicio
+  /= @actividad_proyecto.fechaInicio
 p
   strong Fechafin:
-  = @actividad_proyecto.fechaFin
+  /= @actividad_proyecto.fechaFin
+
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Historial
+      .box-body
+        table.table.table-bordered
+	        tr
+	          th Fecha y hora
+	          th Estado
+	          th Usuario que realizó la acción
+            - Historial.where(actividad_proyecto_id: @actividad_proyecto.id).each do |h|
+              tr
+                td = h.fechaHora.strftime('%d-%m-%y')
+                td = h.estado.nombre 
+                td
 
 = link_to 'Edit', edit_actividad_proyecto_path(@actividad_proyecto)
 '|

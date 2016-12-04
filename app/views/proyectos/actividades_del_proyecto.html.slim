@@ -3,19 +3,28 @@ h1 Actividades del Proyecto
 .box
   table class="table table-bordered"
     thead
-      th Fecha de inicio
-      th Fecha de finalización
       th Etapa
+      th Nombre de la Actividad
+      th Estado de la actividad
+      th Fecha última actualización
       th colspan="3" Acciones
 
     tbody
       - @proyecto.actividades_proyectos.each do |actividad_proyecto|
         tr
-          td = actividad_proyecto.fechaInicio
-          td = actividad_proyecto.fechaFin
           td = Etapa.find(Actividad.find(actividad_proyecto.actividad_id).etapa_id).nombre
+          td = actividad_proyecto.actividad.nombre
+          -if actividad_proyecto.historiales.exists?
+            td = Estado.find(Historial.where(actividad_proyecto_id: actividad_proyecto.id).last.estado_id).nombre
+          -else
+            td
+          -if actividad_proyecto.historiales.exists?
+            td = Historial.where(actividad_proyecto_id: actividad_proyecto.id).last.fechaHora.strftime('%d-%m-%y   %H:%M')
+
+          -else
+            td 
           td style="padding: 3px;"
-            a href=""
+            a href=(actividad_proyecto_path(actividad_proyecto))
               i.fa.fa-search
             a href=(edit_actividad_proyecto_path(actividad_proyecto))
               i.fa.fa-pencil

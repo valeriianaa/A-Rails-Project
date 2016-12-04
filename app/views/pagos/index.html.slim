@@ -1,0 +1,30 @@
+h1 Pagos
+
+.box
+  table class="table table-bordered"
+    thead
+      tr
+        th Proyecto
+        th Cliente
+        th Concepto de pago
+        th Fecha
+        th Monto
+        th Forma de pago
+        th colspan="3" Acciones
+
+    tbody
+      - @pagos.each do |pago|
+        tr
+          td = pago.proyecto.nombre
+          td = pago.persona.nombre_y_apellido
+          td = pago.cuota_por_cliente.concepto_de_pago.nombre
+          td = pago.fecha
+          td = pago.montoAPagar
+          td = pago.tipo_de_pago.nombre
+          td = link_to 'Show', pago
+          td = link_to 'Edit', edit_pago_path(pago)
+          td = link_to 'Destroy', pago, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Pago', new_pago_path

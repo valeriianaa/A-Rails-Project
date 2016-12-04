@@ -1,21 +1,60 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @concepto_de_pago.nombre
-p
-  strong Descripcion:
-  = @concepto_de_pago.descripcion
-p
-  strong Monto:
-  = @concepto_de_pago.monto
-p
-  strong Fechavencimiento:
-  = @concepto_de_pago.fechaVencimiento
-p
-  strong Plazorecordatorio:
-  = @concepto_de_pago.plazoRecordatorio
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Proyecto
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @concepto_de_pago.nombre
+            tr
+              td
+                strong Descripción
+              td = @concepto_de_pago.descripcion
+            tr
+              td
+                strong Monto
+              td = @concepto_de_pago.monto
+            tr
+              td
+                strong Fecha de vencimiento
+              td = @concepto_de_pago.fechaVencimiento.strftime("%a, %e de %B de %Y")
+            tr
+              td
+                strong Fecha de recordatorio
+              td = @concepto_de_pago.plazoRecordatorio.strftime("%a, %e de %B de %Y")
+          tfoot
+            tr
+              td colspan="2"
+                .row
+                  .col-xs-1 style="padding-right:40px;"
+                    a.btn.btn-block.btn-success href=(edit_concepto_de_pago_path(@concepto_de_pago)) style="width:70px;" id="editar_concepto_de_pago"
+                      |Editar
+                  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+                    a.btn.btn-block.btn-default href=(conceptos_de_pago_path) style="width:70px;" id="volver_concepto_de_pago"
+                      |Volver
 
-= link_to 'Edit', edit_concepto_de_pago_path(@concepto_de_pago)
-'|
-= link_to 'Back', conceptos_de_pago_path
+/ p
+/   strong Nombre:
+/   = @concepto_de_pago.nombre
+/ p
+/   strong Descripcion:
+/   = @concepto_de_pago.descripcion
+/ p
+/   strong Monto:
+/   = @concepto_de_pago.monto
+/ p
+/   strong Fechavencimiento:
+/   = @concepto_de_pago.fechaVencimiento
+/ p
+/   strong Plazorecordatorio:
+/   = @concepto_de_pago.plazoRecordatorio
+
+/ = link_to 'Edit', edit_concepto_de_pago_path(@concepto_de_pago)
+/ '|
+/ = link_to 'Back', conceptos_de_pago_path

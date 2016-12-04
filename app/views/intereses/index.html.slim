@@ -1,0 +1,28 @@
+h1 Intereses
+
+.box
+  table class="table table-bordered"
+    thead
+      tr
+        th Nombre
+        th Descripción
+        th Porcentaje
+        th colspan="3" Acciones
+
+    tbody
+      - @intereses.each do |interes|
+        tr
+          td = interes.nombre
+          td = interes.descripcion
+          td = interes.porcentaje
+          td style="padding: 3px;"
+            a href=(interes_path(interes))
+              i.fa.fa-search
+            a href=(edit_interes_path(interes))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(interes_path(interes)) 
+              i.fa.fa-trash
+
+br
+
+= link_to 'Nuevo Interes', new_interes_path

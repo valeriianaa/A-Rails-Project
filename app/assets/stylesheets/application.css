@@ -42,3 +42,11 @@ i.fa.fa-trash{
 	padding: 10px;
 	border-radius: 5px;
 }
+
+i.glyphicon.glyphicon-ok{
+	color: #00a65a;
+}
+
+i.glyphicon.glyphicon-remove{
+	color: #dd4b39;
+}

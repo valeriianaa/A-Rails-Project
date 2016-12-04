@@ -18,7 +18,7 @@ class PersonasControllerTest < ActionController::TestCase
 
   def test_create
     assert_difference("Persona.count") do
-      post :create, persona: { apellido: persona.apellido, direccion: persona.direccion, email: persona.email, fechaNacimiento: persona.fechaNacimiento, nombre: persona.nombre, nroIdentificacion: persona.nroIdentificacion, telefono: persona.telefono }
+      post :create, persona: { apellido: persona.apellido, email: persona.email, fechaNacimiento: persona.fechaNacimiento, nombre: persona.nombre, nroIdentificacion: persona.nroIdentificacion, telefono: persona.telefono }
     end
 
     assert_redirected_to persona_path(assigns(:persona))
@@ -35,7 +35,7 @@ class PersonasControllerTest < ActionController::TestCase
   end
 
   def test_update
-    put :update, id: persona, persona: { apellido: persona.apellido, direccion: persona.direccion, email: persona.email, fechaNacimiento: persona.fechaNacimiento, nombre: persona.nombre, nroIdentificacion: persona.nroIdentificacion, telefono: persona.telefono }
+    put :update, id: persona, persona: { apellido: persona.apellido, email: persona.email, fechaNacimiento: persona.fechaNacimiento, nombre: persona.nombre, nroIdentificacion: persona.nroIdentificacion, telefono: persona.telefono }
     assert_redirected_to persona_path(assigns(:persona))
   end
 

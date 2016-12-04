@@ -20,6 +20,7 @@ gem "twitter-bootstrap-rails"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'chained-rails'
+gem "select2-rails"
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -34,6 +35,12 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem "minitest-rails"
 
 gem 'seed_dump'
+
+gem 'workflow'
+gem 'chronic'
+gem 'devise'
+gem 'devise-i18n'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
