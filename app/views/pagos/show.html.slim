@@ -1,24 +1,63 @@
 p#notice = notice
 
-p
-  strong Proyecto:
-  = @pago.proyecto.nombre
-p
-  strong Cliente:
-  = @pago.persona.nombre_y_apellido
-p
-  strong Concepto de Pago:
-  = @pago.cuota_por_cliente.concepto_de_pago.nombre
-p
-  strong Fecha:
-  = @pago.fecha  
-p
-  strong Monto:
-  = @pago.montoAPagar
 / p
-/   strong Forma de pago:
-/   = @pago.fecha
+/   strong Proyecto:
+/   = @pago.proyecto.nombre
+/ p
+/   strong Cliente:
+/   = @pago.persona.nombre_y_apellido
+/ p
+/   strong Concepto de Pago:
+/   = @pago.cuota_por_cliente.concepto_de_pago.nombre
+/ p
+/   strong Fecha:
+/   = @pago.fecha  
+/ p
+/   strong Monto:
+/   = @pago.montoAPagar
+/ / p
+/ /   strong Forma de pago:
+/ /   = @pago.fecha
 
-= link_to 'Edit', edit_pago_path(@pago)
-'|
-= link_to 'Back', pagos_path
+/ = link_to 'Edit', edit_pago_path(@pago)
+/ '|
+/ = link_to 'Back', pagos_path
+
+
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Pago
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Proyecto
+              td = @pago.proyecto.nombre
+            tr
+              td
+                strong Cliente
+              td = @pago.persona.nombre_y_apellido
+            tr
+              td
+                strong Concepto de pago
+              td = @pago.cuota_por_cliente.concepto_de_pago.nombre
+            tr
+              td
+                strong Monto
+              td = @pago.montoAPagar
+            tr
+              td
+                strong Forma de pago
+              td = @pago.fecha
+            
+
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_pago_path(@pago)) style="width:70px;" id="editar_pago"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(pagos_path) style="width:70px;" id="volver_pago"
+      |Volver

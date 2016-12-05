@@ -1,9 +1,26 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @rol_de_empleado.nombre
-
-= link_to 'Edit', edit_rol_de_empleado_path(@rol_de_empleado)
-'|
-= link_to 'Back', roles_de_empleados_path
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Rol de empleado
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @rol_de_empleado.nombre
+            tr
+              td
+                strong Departamento al cual pertenece
+              td = @rol_de_empleado.departamento.nombre
+            
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_rol_de_empleado_path(@rol_de_empleado)) style="width:70px;" id="editar_rol_de_empleado"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(roles_de_empleados_path) style="width:70px;" id="volver_rol_de_empleado"
+      |Volver

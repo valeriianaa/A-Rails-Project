@@ -1,7 +1,7 @@
 = form_for @miembro_equipo do |f|
   - if @miembro_equipo.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@miembro_equipo.errors.count, "error")} prohibited this miembro_equipo from being saved:"
+      h2 = "#{pluralize(@miembro_equipo.errors.count, "error")} #{pluralize_without_count(@miembro_equipo.errors.count, "prohibe", "prohiben")} almacenar este Miembro de equipo:"
       ul
         - @miembro_equipo.errors.full_messages.each do |message|
           li = message
@@ -12,19 +12,19 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :nombre, 'Nombre:'
+        = f.label :nombre, 'Nombre: (*)'
         = f.text_field :nombre, :class => 'form-control'
       .field
-        = f.label :apellido, 'Apellido:'
+        = f.label :apellido, 'Apellido: (*)'
         = f.text_field :apellido, :class => 'form-control'
       .field
-        = f.label :tipo_documento_id, 'Tipo de Documento:'
+        = f.label :tipo_documento_id, 'Tipo de Documento: (*)'
         = f.collection_select :tipo_documento_id, TipoDocumento.all, :id, :nombre,{:prompt => "Seleccione un Tipo de documento"}, {:class => 'form-control'}
       .field
-        = f.label :nroIdentificacion, 'Número de Identificación'
+        = f.label :nroIdentificacion, 'Número de Identificación (*)'
         = f.text_field :nroIdentificacion, :class => 'form-control'
       .field
-        = f.label :fechaNacimiento, 'Fecha de Nacimiento:'
+        = f.label :fechaNacimiento, 'Fecha de Nacimiento: (*)'
         = f.date_select :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
       .field
         = f.label :telefono, 'Teléfono'
@@ -38,7 +38,7 @@
       h3 Domicilio
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :pais_id, 'País:', {class: "control-label"}
+        = f.label :pais_id, 'País: (*)', {class: "control-label"}
         br
           select#miembro_equipo_pais_id.form-control.select2 name="miembro_equipo[pais_id]"
             - Pais.all.each do |pais|
@@ -47,7 +47,7 @@
               - else
                 option value=(pais.id) = pais.nombre
       .field
-        = f.label :provincia_id, 'Provincia:', {class: "control-label"}
+        = f.label :provincia_id, 'Provincia: (*)', {class: "control-label"}
         br
           select#miembro_equipo_provincia_id.form-control.select2 name="miembro_equipo[provincia_id]"
             - Provincia.all.each do |provincia|
@@ -56,7 +56,7 @@
               - else
                 option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
       .field
-        = f.label :ciudad_id, 'Ciudad:', {class: "control-label"}
+        = f.label :ciudad_id, 'Ciudad: (*)', {class: "control-label"}
         br
           select#miembro_equipo_ciudad_id.form-control.select2 name="miembro_equipo[ciudad_id]"
             - Ciudad.all.each do |ciudad|
@@ -68,10 +68,10 @@
         = f.label :area_id, 'Área:'
         = f.collection_select :area_id, Area.all, :id, :nombre,{:prompt => "Seleccione un area"}, {:class => 'form-control'}
       .field
-        = f.label :calle, 'Calle:'
+        = f.label :calle, 'Calle: (*)'
         = f.text_field :calle, :class => 'form-control'
       .field
-        = f.label :nroDomicilio, 'Número:'
+        = f.label :nroDomicilio, 'Número: (*)'
         = f.text_field :nroDomicilio, :class => 'form-control'
       .field
         = f.label :piso, 'Piso:'
@@ -79,5 +79,7 @@
       .field
         = f.label :dpto, 'Departamento:'
         = f.text_field :dpto, :class => 'form-control'
+    .box-footer
+      p#foot = "(*) Campo Obligatorio" 
       
   .actions = f.submit

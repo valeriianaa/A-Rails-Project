@@ -29,46 +29,90 @@ ul.sidebar-menu
       a href=(miembros_equipo_path)
         i.fa.fa-group
         | Miembros de Equipo
-    li
+    li.treeview#lista-cabecera
       a href=''
         i.fa.fa-money
-        | Tipos de Pago
-    li.treeview
-      a href=(contactos_path)
-        i.fa.fa-group
-        | Contactos
-      ul
-        li
+        | Finanzas
+        i.fa.fa-angle-down.pull-right
+      ul.treeview-menu#submenu
+        li#tree
+          a href=(conceptos_de_pago_path)
+            i.fa.fa-angle-double-right
+            | Conceptos de pago
+        li#tree
+          a href=(tipos_de_pago_path)
+            i.fa.fa-angle-double-right
+            | Tipos de pago
+        li#tree
+          a href=(intereses_path)
+            i.fa.fa-angle-double-right
+            | Intereses
+        li#tree
+          a href=(descuentos_path)
+            i.fa.fa-angle-double-right
+            | Descuentos
+        li#tree
+          a href=(cuotas_por_cliente_path)
+            i.fa.fa-angle-double-right
+            | Cuotas por cliente
+        li#tree
+          a href=(pagos_path)
+            i.fa.fa-angle-double-right
+            | Pagos
+    li.treeview#lista-cabecera
+      a href=''
+        i.fa.fa-cloud
+        | Outsourcing
+        i.fa.fa-angle-down.pull-right
+      ul.treeview-menu#submenu
+        li#tree
+          a href=(contactos_path)
+            i.fa.fa-angle-double-right
+            | Contactos
+        li#tree
           a href=(especialidades_de_contacto_path)
-            i.fa.fa-circle-o
+            i.fa.fa-angle-double-right
             | Especilidades del Contacto
-        li
+        li#tree
           a href=(eventos_path)
-            i.fa.fa-circle-o
+            i.fa.fa-angle-double-right
             | Eventos
+        li#tree
+          a href=''
+            i.fa.fa-angle-double-right
+            | Proyectos asociados 
+            br
+            | a eventos
     li.treeview#lista-cabecera
       a href=""
+        i.fa.fa-gear
         | Parámetros
+        i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu
-        li
+        li#tree
           a href=(paises_path)
             i.fa.fa-angle-double-right
             | Países
-        li
+        li#tree
           a href=(provincias_path)
             i.fa.fa-angle-double-right
             | Provincias
-        li
+        li#tree
           a href=(ciudades_path)
             i.fa.fa-angle-double-right
             | Ciudades
-        li
+        li#tree
           a href=(areas_path)
             i.fa.fa-angle-double-right
             | Áreas
-        li
+        li#tree
           a href=(tipo_documentos_path)
             i.fa.fa-angle-double-right
             | Tipos de Documento
+        li#tree
+          a href=(estados_path)
+            i.fa.fa-angle-double-right
+            | Estados
+
 
         

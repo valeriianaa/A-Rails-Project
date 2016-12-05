@@ -1,9 +1,23 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @pais.nombre
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del País
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @pais.nombre
+            
 
-= link_to 'Edit', edit_pais_path(@pais)
-'|
-= link_to 'Back', paises_path
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_pais_path(@pais)) style="width:70px;" id="editar_pais"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(paises_path) style="width:70px;" id="volver_pais"
+      |Volver

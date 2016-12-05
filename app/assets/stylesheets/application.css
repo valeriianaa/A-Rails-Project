@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require dataTables/jquery.dataTables
  *= require_self
 */
 
@@ -49,4 +50,14 @@ i.glyphicon.glyphicon-ok{
 
 i.glyphicon.glyphicon-remove{
 	color: #dd4b39;
+}
+
+li#tree > a{
+	font-size: 13px;
+}
+
+p#foot {
+	font-size: 13px;
+	font-weight: 700;
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

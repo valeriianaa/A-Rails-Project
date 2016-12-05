@@ -21,10 +21,15 @@ h1 Pagos
           td = pago.fecha
           td = pago.montoAPagar
           td = pago.tipo_de_pago.nombre
-          td = link_to 'Show', pago
-          td = link_to 'Edit', edit_pago_path(pago)
-          td = link_to 'Destroy', pago, data: { confirm: 'Are you sure?' }, method: :delete
+          td style="padding: 3px;"
+            a href=(pago_path(pago))
+              i.fa.fa-search
+            a href=(edit_pago_path(pago))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(pago_path(pago)) 
+              i.fa.fa-trash
+br
 
 br
 
-= link_to 'New Pago', new_pago_path
+= link_to 'Nuevo Pago', new_pago_path

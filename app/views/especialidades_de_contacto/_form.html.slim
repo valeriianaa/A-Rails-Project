@@ -1,7 +1,7 @@
 = form_for @especialidad_de_contacto do |f|
   - if @especialidad_de_contacto.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@especialidad_de_contacto.errors.count, "error")} prohibited this especialidad_de_contacto from being saved:"
+      h2 = "#{pluralize(@especialidad_de_contacto.errors.count, "error")} #{pluralize_without_count(@especialidad_de_contacto.errors.count, "prohibe", "prohiben")} almacenar esta Especialidad de contacto:"
       ul
         - @especialidad_de_contacto.errors.full_messages.each do |message|
           li = message
@@ -11,9 +11,12 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :nombre
+        = f.label :nombre, 'Nombre: (*)'
         = f.text_field :nombre, :class => "form-control"
       .field
-        = f.label :descripcion
+        = f.label :descripcion, 'Descripción:'
         = f.text_area :descripcion, :class => "form-control"
+    .box-footer
+      p#foot = "(*) Campo Obligatorio" 
+
   .actions = f.submit

@@ -11,14 +11,17 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"  
       .field
-        = f.label :nombre, 'Nombre'
+        = f.label :nombre, 'Nombre: (*)'
         = f.text_field :nombre, :class => "form-control"
       .field
-        = f.label :descripcion, 'Descripción'
+        = f.label :descripcion, 'Descripción:'
         = f.text_area :descripcion, :class => "form-control"
       .field
-        = f.label :etapa_id, 'Etapa a la que pertenece:'
-        = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {}, {:id => 'etapa_id', :class =>'form-control'}
+        = f.label :obligatorio, 'Indicar si es Obligatorio: '
+        = f.check_box :obligatorio
+      .field
+        = f.label :etapa_id, 'Etapa a la que pertenece: (*)'
+        = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {:prompt => "Seleccione una etapa"}, {:id => 'etapa_id', :class =>'form-control'}
         / br
         /   select#actividad_etapa_id.form-control name="actividad[etapa_id]"
         /     - Etapa.all.each do |etapa|
@@ -30,10 +33,7 @@
       /   = f.label :etapa_id, 'Etapa a la que pertenece:'
       /   = f.collection_select :etapa_id, Etapa.all, :id, :nombre
       .field
-        = f.label :obligatorio, 'Obligatorio'
-        = f.check_box :obligatorio
-      .field
-        = f.label :actividadesAntecedentes, 'Actividades Antecedentes'
+        = f.label :actividadesAntecedentes, 'Actividades Antecedentes: (**)', :id => 'antecedente_label'
         / br
         /   select#actividad_antecedente_id.form-control name="actividad[actividad_id]" multiple="true"
         /     - Actividad.all.each do |actividad|
@@ -43,5 +43,7 @@
         /           option class=(actividad.etapa_id) value=(actividad.id) =actividad.nombre
         / = f.label :actividadesAntecedentes, 'Actividades antecedentes:'
         = f.grouped_collection_select :actividadesAntecedentes, Etapa.all, :actividades, :nombre, :id, :nombre, {:selected => @actividad.actividadesAntecedentes}, {:multiple => true, :id => 'actividad_antecedente_id', :class =>'form-control'}
-  
+    .box-footer
+      p#foot = "(*) Campo Obligatorio"
+      p#foot = "(**) Las actividades antecedentes deben pertenecer a la misma etapa"
   .actions = f.submit

@@ -21,12 +21,11 @@ p#notice = notice
               td
                 strong Nombre
               td = @area.nombre
-            tr
-              td colspan="2"
-                .row
-                  .col-xs-1 style="padding-right:40px;"
-                    a.btn.btn-block.btn-success href=(edit_area_path(@area)) style="width:70px;" id="editar_area"
-                      |Editar
-                  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-                    a.btn.btn-block.btn-default href=(areas_path) style="width:70px;" id="volver_area"
-                      |Volver
+            
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_area_path(@area)) style="width:70px;" id="editar_area"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(areas_path) style="width:70px;" id="volver_area"
+      |Volver

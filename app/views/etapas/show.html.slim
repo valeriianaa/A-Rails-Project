@@ -1,12 +1,28 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @etapa.nombre
-p
-  strong Descripcion:
-  = @etapa.descripcion
 
-= link_to 'Edit', edit_etapa_path(@etapa)
-'|
-= link_to 'Back', etapas_path
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos de la Etapa
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @etapa.nombre
+            tr
+              td
+                strong Descripción
+              td = @etapa.descripcion
+            
+           
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_etapa_path(@etapa)) style="width:70px;" id="editar_etapa"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(etapas_path) style="width:70px;" id="volver_etapa"
+      |Volver

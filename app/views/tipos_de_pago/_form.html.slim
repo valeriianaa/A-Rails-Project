@@ -1,12 +1,19 @@
 = form_for @tipo_de_pago do |f|
   - if @tipo_de_pago.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@tipo_de_pago.errors.count, "error")} prohibited this tipo_de_pago from being saved:"
+      h2 = "#{pluralize(@tipo_de_pago.errors.count, "error")} #{pluralize_without_count(@tipo_de_pago.errors.count, "prohibe", "prohiben")} almacenar este Tipo de pago:"
       ul
         - @tipo_de_pago.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :nombre
-    = f.text_field :nombre
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :nombre, 'Nombre: (*)'
+        = f.text_field :nombre, :class => "form-control"
+    .box-footer
+      p#foot = "(*) Campo Obligatorio" 
+  
   .actions = f.submit

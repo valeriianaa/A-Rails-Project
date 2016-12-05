@@ -1,7 +1,7 @@
 = form_for @ciudad do |f|
   - if @ciudad.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@ciudad.errors.count, "error")} prohibited this ciudad from being saved:"
+      h2 = "#{pluralize(@ciudad.errors.count, "error")} #{pluralize_without_count(@ciudad.errors.count, "prohibe", "prohiben")} almacenar esta Ciudad:"
       ul
         - @ciudad.errors.full_messages.each do |message|
           li = message
@@ -11,18 +11,21 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :pais_id, 'Pais:'
+        = f.label :pais_id, 'País: (*)'
         br
           select#ciudad_pais_id.form-control.select2 name="ciudad[pais_id]"
             - Pais.all.each do |pais|
               option value=(pais.id) =pais.nombre
       .field
-        = f.label :provincia_id, 'Provincia:'
+        = f.label :provincia_id, 'Provincia: (*)'
         br
           select#ciudad_provincia_id.form-control.select2 name="ciudad[provincia_id]"
             - Provincia.all.each do |provincia|
               option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
       .field
-        = f.label :nombre
+        = f.label :nombre, 'Nombre: (*)'
         = f.text_field :nombre, :class => "form-control"
+    .box-footer
+      p#foot = "(*) Campo Obligatorio"
+
   .actions = f.submit

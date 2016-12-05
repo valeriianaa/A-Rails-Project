@@ -1,9 +1,23 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @tipo_de_pago.nombre
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Tipo de pago
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @tipo_de_pago.nombre
+            
 
-= link_to 'Edit', edit_tipo_de_pago_path(@tipo_de_pago)
-'|
-= link_to 'Back', tipos_de_pago_path
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_tipo_de_pago_path(@tipo_de_pago)) style="width:70px;" id="editar_tipo_de_pago"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(tipos_de_pago_path) style="width:70px;" id="volver_tipo_de_pago"
+      |Volver

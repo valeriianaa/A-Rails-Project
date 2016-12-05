@@ -12,12 +12,11 @@ p#notice = notice
               td
                 strong Nombre
               td = @departamento.nombre
-            tr
-              td colspan="2"
-                .row
-                  .col-xs-1 style="padding-right:40px;"
-                    a.btn.btn-block.btn-success href=(edit_departamento_path(@departamento)) style="width:70px;" id="editar_departamento"
-                      |Editar
-                  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-                    a.btn.btn-block.btn-default href=(departamentos_path) style="width:70px;" id="volver_departamento"
-                      |Volver
+            
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_departamento_path(@departamento)) style="width:70px;" id="editar_departamento"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(departamentos_path) style="width:70px;" id="volver_departamento"
+      |Volver

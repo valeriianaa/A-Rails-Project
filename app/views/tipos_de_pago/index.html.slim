@@ -1,21 +1,24 @@
-h1 Listing tipos_de_pago
+h1 Tipos de pago
 
-table
-  thead
-    tr
-      th Nombre
-      th
-      th
-      th
-
-  tbody
-    - @tipos_de_pago.each do |tipo_de_pago|
+.box
+  table class="table table-bordered"
+    thead
       tr
-        td = tipo_de_pago.nombre
-        td = link_to 'Show', tipo_de_pago
-        td = link_to 'Edit', edit_tipo_de_pago_path(tipo_de_pago)
-        td = link_to 'Destroy', tipo_de_pago, data: { confirm: 'Are you sure?' }, method: :delete
+      th Nombre
+      th colspan="3" Acciones
+
+    tbody
+      - @tipos_de_pago.each do |tipo_de_pago|
+        tr
+          td = tipo_de_pago.nombre
+          td style="padding: 3px;"
+            a href=(tipo_de_pago_path(tipo_de_pago))
+              i.fa.fa-search
+            a href=(edit_tipo_de_pago_path(tipo_de_pago))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(tipo_de_pago_path(tipo_de_pago)) 
+              i.fa.fa-trash
 
 br
 
-= link_to 'New Tipo de pago', new_tipo_de_pago_path
+= link_to 'Nuevo Tipo de pago', new_tipo_de_pago_path

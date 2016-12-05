@@ -1,9 +1,23 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @tipo_documento.nombre
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Tipo de documento
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @tipo_documento.nombre
+            
 
-= link_to 'Edit', edit_tipo_documento_path(@tipo_documento)
-'|
-= link_to 'Back', tipo_documentos_path
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_tipo_documento_path(@tipo_documento)) style="width:70px;" id="editar_tipo_documento"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(tipo_documentos_path) style="width:70px;" id="volver_tipo_documento"
+      |Volver

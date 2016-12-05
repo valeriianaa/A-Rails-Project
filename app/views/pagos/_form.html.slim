@@ -1,7 +1,7 @@
 = form_for @pago do |f|
   - if @pago.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@pago.errors.count, "error")} prohibited this pago from being saved:"
+      h2 = "#{pluralize(@pago.errors.count, "error")} #{pluralize_without_count(@pago.errors.count, "prohibe", "prohiben")} almacenar este Pago:"
       ul
         - @pago.errors.full_messages.each do |message|
           li = message
@@ -11,7 +11,7 @@
       h3 Datos de pago
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :proyecto_id, "Proyecto:", {class: "control-label"}
+        = f.label :proyecto_id, "Proyecto: (*)", {class: "control-label"}
         br
             select#pago_proyecto_id.form-control.select2 name="pago[proyecto_id]"
               - Proyecto.all.each do |proyecto|
@@ -20,7 +20,7 @@
                 - else
                   option value=(proyecto.id) = proyecto.nombre
       .field
-        = f.label :persona_id, "Miembro equipo:",  {class: "control-label"}
+        = f.label :persona_id, "Miembro equipo: (*)",  {class: "control-label"}
         br
             select#pago_miembro_equipo_id.form-control.select2 name="pago[persona_id]"
               - PersonaProyecto.all.each do |persona_proyecto|
@@ -35,10 +35,12 @@
         = f.label :fecha
         = f.date_select :fecha
       .field
-        = f.label :tipo_de_pago
-        = f.collection_select :tipo_de_pago, TipoDePago.all, :id, :nombre,{:prompt => "forma de pago"}, {:class => 'form-control'}
+        = f.label :tipo_de_pago_id, 'Tipo de pago: (*)'
+        = f.collection_select :tipo_de_pago_id, TipoDePago.all, :id, :nombre,{:prompt => "forma de pago"}, {:class => 'form-control'}
       .field
-        = f.label :montoAPagar, 'Monto a pagar'
-        = f.text_field :montoAPagar
+        = f.label :montoAPagar, 'Monto a pagar: (*)'
+        = f.text_field :montoAPagar, :class => 'form-control'
+    .box-footer
+      p#foot = "(*) Campo Obligatorio"  
 
   .actions = f.submit

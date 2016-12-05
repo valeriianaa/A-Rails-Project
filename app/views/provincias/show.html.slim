@@ -1,9 +1,26 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @provincia.nombre
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos de la Provincia
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @provincia.nombre
+            tr
+              td
+                strong País al que pertenece
+              td = @provincia.pais.nombre
 
-= link_to 'Edit', edit_provincia_path(@provincia)
-'|
-= link_to 'Back', provincias_path
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_provincia_path(@provincia)) style="width:70px;" id="editar_provincia"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(provincias_path) style="width:70px;" id="volver_provincia"
+      |Volver
