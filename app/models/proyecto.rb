@@ -16,6 +16,9 @@ class Proyecto < ActiveRecord::Base
 	has_many :actividades_proyectos, dependent: :destroy
 	has_many :actividades , :through => :actividades_proyectos
 
+	has_many :eventos_proyectos, dependent: :destroy
+	has_many :eventos , :through => :eventos_proyectos
+
 	validates :nombre, :descripcion, :calle, :nroDomicilio, :pais_id, :provincia_id, :ciudad_id, :etapa_id, presence: true
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :email?
 	validates :dpto, presence: true, if: :piso?

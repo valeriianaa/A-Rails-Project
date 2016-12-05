@@ -4,7 +4,7 @@ p#notice = notice
   .col-md-8
     .box.box-info
       .box-header.with-border
-        h3 Datos del Proyecto
+        h3 Datos del Contacto
       .box-body
         table.table.table-bordered
           tbody
@@ -15,20 +15,70 @@ p#notice = notice
             tr
               td
                 strong Tipo de Documento
-              td = @contacto.descripcion
+              td = @contacto.tipo_documento.nombre
             tr
               td
                 strong Número de Documento
-              td = @contacto.monto
+              td = @contacto.nroIdentificacion
             tr
               td
-                strong Fecha de vencimiento
-              td = @contacto.fechaVencimiento.strftime("%a, %e de %B de %Y")
+                strong Fecha de Nacimiento
+              td = @contacto.fechaNacimiento.strftime('%d-%m-%y')
             tr
               td
-                strong Fecha de recordatorio
-              td = @contacto.plazoRecordatorio.strftime("%a, %e de %B de %Y")
-          
+                strong Teléfono
+              td = @contacto.telefono
+            tr
+              td
+                strong Correo electrónico
+              td = @contacto.email
+            tr
+              td
+                strong Especialidad
+              td = @contacto.especialidad_de_contacto.nombre
+
+.row
+  .col-md-8
+    .box.box-success#domicilio
+      .box-header.with-border
+        h3 Datos de domicilio
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong País
+              td = @contacto.pais.nombre
+            tr
+              td
+                strong Provincia
+              td = @contacto.provincia.nombre
+            tr
+              td
+                strong Ciudad
+              td = @contacto.ciudad.nombre
+            tr
+              td
+                strong Calle
+              td = @contacto.calle
+            tr
+              td
+                strong Número
+              td = @contacto.nroDomicilio
+            tr
+              td
+                strong Piso
+              td = @contacto.piso
+            tr
+              td
+                strong Departamento
+              td = @contacto.dpto
+            tr
+              td
+                strong Area
+              td = @contacto.area.nombre
+            /tr
+              /td colspan="2"
 .row
   .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-success href=(edit_contacto_path(@contacto)) style="width:70px;" id="editar_contacto"

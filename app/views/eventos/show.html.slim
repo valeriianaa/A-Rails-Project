@@ -37,11 +37,11 @@ p#notice = notice
             tr
               td
                 strong Expositor
-              td = @evento.contacto.nombre_y_apellido
+              td = @evento.persona.nombre_y_apellido
             tr
               td
                 strong Fecha y Hora
-              td = "#{@evento.día} #{@evento.hora}"
+              td = "#{@evento.dia.strftime('%d-%m-%y')} #{@evento.hora.strftime('%H:%M hs')}"
             
            
 .row

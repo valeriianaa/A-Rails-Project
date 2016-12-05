@@ -1,0 +1,47 @@
+
+
+/ table
+/   thead
+/     tr
+/       th
+/       th
+/       th
+
+/   tbody
+/     - @eventos_proyectos.each do |evento_proyecto|
+/       tr
+/         td = link_to 'Show', evento_proyecto
+/         td = link_to 'Edit', edit_evento_proyecto_path(evento_proyecto)
+/         td = link_to 'Destroy', evento_proyecto, data: { confirm: 'Are you sure?' }, method: :delete
+
+/ br
+
+/ = link_to 'New Evento proyecto', new_evento_proyecto_path
+
+
+h1 Eventos asociados a proyectos
+
+.box
+  table class="table table-bordered"
+    thead
+      tr
+        th Evento
+        th Proyecto
+        th colspan="3" Acciones
+
+    tbody
+      - @eventos_proyectos.each do |evento_proyecto|
+        tr
+          td = evento_proyecto.evento.nombre
+          td = evento_proyecto.proyecto.nombre
+          td style="padding: 3px;"
+            a href=(evento_proyecto_path(evento_proyecto))
+              i.fa.fa-search
+            a href=(edit_evento_proyecto_path(evento_proyecto))
+              i.fa.fa-pencil
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_proyecto_path(evento_proyecto)) 
+              i.fa.fa-trash
+
+br
+
+= link_to 'Asociar nuevo evento a proyecto', new_evento_proyecto_path

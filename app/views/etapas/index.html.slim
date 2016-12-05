@@ -33,7 +33,11 @@ div
             p = etapa.nombre
           .icon
             i class="ion-stats-bars"
-          a href="etapas/#{etapa.id}" class="small-box-footer" 
-            |Mas Info 
-            i class="fa fa-arrow-circle-right"
+          div class="small-box-footer" 
+            a href="etapas/#{etapa.id}" style="color:#FFFFFF;"
+              |Mas Info
+              i class="fa fa-arrow-circle-right" |
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(etapa_path(etapa)) style="color:#FFFFFF;"
+              |Eliminar
+
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123083454) do
+ActiveRecord::Schema.define(version: 20161205073159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,12 +69,9 @@ ActiveRecord::Schema.define(version: 20161123083454) do
   end
 
   create_table "contactos", force: :cascade do |t|
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "especialidad_de_contacto_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "contactos", ["especialidad_de_contacto_id"], name: "index_contactos_on_especialidad_de_contacto_id", using: :btree
 
   create_table "cuotas_por_cliente", force: :cascade do |t|
     t.string   "mensaje"
@@ -146,9 +143,21 @@ ActiveRecord::Schema.define(version: 20161123083454) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "contacto_id"
+    t.integer  "persona_id"
   end
 
   add_index "eventos", ["contacto_id"], name: "index_eventos_on_contacto_id", using: :btree
+  add_index "eventos", ["persona_id"], name: "index_eventos_on_persona_id", using: :btree
+
+  create_table "eventos_proyectos", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "proyecto_id"
+    t.integer  "evento_id"
+  end
+
+  add_index "eventos_proyectos", ["evento_id"], name: "index_eventos_proyectos_on_evento_id", using: :btree
+  add_index "eventos_proyectos", ["proyecto_id"], name: "index_eventos_proyectos_on_proyecto_id", using: :btree
 
   create_table "historiales", force: :cascade do |t|
     t.datetime "fechaHora"
@@ -211,13 +220,14 @@ ActiveRecord::Schema.define(version: 20161123083454) do
     t.string   "telefono"
     t.string   "email"
     t.string   "type"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "pais_id"
     t.integer  "provincia_id"
     t.integer  "ciudad_id"
     t.integer  "tipo_documento_id"
     t.integer  "departamento_id"
+    t.integer  "especialidad_de_contacto_id"
     t.integer  "area_id"
     t.integer  "rol_de_empleado_id"
   end
@@ -225,6 +235,7 @@ ActiveRecord::Schema.define(version: 20161123083454) do
   add_index "personas", ["area_id"], name: "index_personas_on_area_id", using: :btree
   add_index "personas", ["ciudad_id"], name: "index_personas_on_ciudad_id", using: :btree
   add_index "personas", ["departamento_id"], name: "index_personas_on_departamento_id", using: :btree
+  add_index "personas", ["especialidad_de_contacto_id"], name: "index_personas_on_especialidad_de_contacto_id", using: :btree
   add_index "personas", ["pais_id"], name: "index_personas_on_pais_id", using: :btree
   add_index "personas", ["provincia_id"], name: "index_personas_on_provincia_id", using: :btree
   add_index "personas", ["rol_de_empleado_id"], name: "index_personas_on_rol_de_empleado_id", using: :btree
@@ -319,13 +330,15 @@ ActiveRecord::Schema.define(version: 20161123083454) do
   add_foreign_key "actividades_proyectos", "proyectos"
   add_foreign_key "ciudades", "paises"
   add_foreign_key "ciudades", "provincias"
-  add_foreign_key "contactos", "especialidades_de_contacto"
   add_foreign_key "cuotas_por_cliente", "conceptos_de_pago"
   add_foreign_key "cuotas_por_cliente", "descuentos"
   add_foreign_key "cuotas_por_cliente", "intereses"
   add_foreign_key "cuotas_por_cliente", "personas_proyectos"
   add_foreign_key "cuotas_por_cliente", "proyectos"
   add_foreign_key "eventos", "contactos"
+  add_foreign_key "eventos", "personas"
+  add_foreign_key "eventos_proyectos", "eventos"
+  add_foreign_key "eventos_proyectos", "proyectos"
   add_foreign_key "historiales", "actividades_proyectos"
   add_foreign_key "historiales", "estados"
   add_foreign_key "historiales", "proyectos"
@@ -336,6 +349,7 @@ ActiveRecord::Schema.define(version: 20161123083454) do
   add_foreign_key "personas", "areas"
   add_foreign_key "personas", "ciudades"
   add_foreign_key "personas", "departamentos"
+  add_foreign_key "personas", "especialidades_de_contacto"
   add_foreign_key "personas", "paises"
   add_foreign_key "personas", "provincias"
   add_foreign_key "personas", "roles_de_empleados"

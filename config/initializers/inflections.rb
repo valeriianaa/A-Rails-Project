@@ -42,4 +42,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'TipoDePago', 'TiposDePago'
 	inflect.irregular 'interes', 'intereses'
 	inflect.irregular 'descuento', 'descuentos'
+	inflect.irregular 'EventoProyecto', 'EventosProyectos'
+	inflect.irregular 'evento_proyecto', 'eventos_proyectos'
 end

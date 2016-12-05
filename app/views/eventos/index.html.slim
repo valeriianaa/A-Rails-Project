@@ -8,6 +8,7 @@ h1 Eventos
         th Descripción
         th Día
         th Hora
+        th Expositor
         th colspan="3" Acciones
 
     tbody
@@ -15,8 +16,9 @@ h1 Eventos
         tr
           td = evento.nombre
           td = evento.descripcion
-          td = evento.dia
-          td = evento.hora
+          td = evento.dia.strftime('%d-%m-%y')
+          td = evento.hora.strftime('%H:%M')
+          td = evento.persona.nombre_y_apellido
           td style="padding: 3px;"
             a href=(evento_path(evento))
               i.fa.fa-search

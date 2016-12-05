@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :eventos_proyectos
   resources :descuentos
   resources :intereses
   resources :tipos_de_pago

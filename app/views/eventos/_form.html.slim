@@ -17,13 +17,13 @@
         = f.label :descripcion, 'Descripción:'
         = f.text_area :descripcion, :class => "form-control"
       .field
-        = f.label :contacto_id, 'Expositor: (*)'
-        = f.collection_select :contacto_id, Contacto.all, :id, :nombre_y_apellido ,{:prompt => "Expositor"}, {:class => 'form-control'}
+        = f.label :persona_id, 'Expositor: (*)'
+        = f.collection_select :persona_id, Contacto.all, :id, :nombre_y_apellido ,{:prompt => "Expositor"}, {:class => 'form-control'}
       .field
         = f.label :dia, 'Día: (*)'
         = f.date_select :dia
       .field
-        = f.label :hora 'Hora: (*)'
+        = f.label :hora, 'Hora: (*)'
         = f.time_select :hora
     .box-footer
       p#foot = "(*) Campo Obligatorio"  

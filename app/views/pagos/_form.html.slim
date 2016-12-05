@@ -19,17 +19,17 @@
                   option selected='' value=(proyecto.id) = proyecto.nombre
                 - else
                   option value=(proyecto.id) = proyecto.nombre
+      / .field
+      /   = f.label :persona_id, "Miembro equipo: (*)",  {class: "control-label"}
+      /   br
+      /       select#pago_miembro_equipo_id.form-control.select2 name="pago[persona_id]"
+      /         - PersonaProyecto.all.each do |persona_proyecto|
+      /           - if @pago.persona == persona_proyecto
+      /             option selected='' class=(persona_proyecto.proyecto_id) value=(persona_proyecto.persona_id) =persona_proyecto.persona.nombre_y_apellido
+      /           - else
+      /             option class=(persona_proyecto.proyecto_id) value=(persona_proyecto.persona_id) =persona_proyecto.persona.nombre_y_apellido
       .field
-        = f.label :persona_id, "Miembro equipo: (*)",  {class: "control-label"}
-        br
-            select#pago_miembro_equipo_id.form-control.select2 name="pago[persona_id]"
-              - PersonaProyecto.all.each do |persona_proyecto|
-                - if @pago.persona == persona_proyecto
-                  option selected='' class=(persona_proyecto.proyecto_id) value=(persona_proyecto.persona_id) =persona_proyecto.persona.nombre_y_apellido
-                - else
-                  option class=(persona_proyecto.proyecto_id) value=(persona_proyecto.persona_id) =persona_proyecto.persona.nombre_y_apellido
-      .field
-        = f.label :cuota_por_cliente_id, 'E'
+        = f.label :cuota_por_cliente_id, 'Cuotas de este cliente:'
         = f.collection_select :cuota_por_cliente_id, ConceptoDePago.all, :id, :nombre,{:prompt => "forma de pago"}, {:class => 'form-control'}
       .field
         = f.label :fecha
