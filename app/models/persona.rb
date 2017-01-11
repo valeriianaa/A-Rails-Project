@@ -8,7 +8,6 @@ class Persona < ActiveRecord::Base
 	has_many :proyectos , :through => :personas_proyectos, dependent: :nullify
 	
 	validates :nombre, :apellido, :nroIdentificacion, presence: true
-	validates :nombre, :apellido, uniqueness: true, length: { minimum: 3 }
 	validates :tipo_documento_id, presence: true
 	validates :pais_id, :provincia_id, :ciudad_id, presence: true
 	validates :calle, :nroDomicilio, presence: true

@@ -42,6 +42,7 @@ gem 'chronic'
 gem 'devise'
 gem 'devise-i18n'
 
+gem "gretel"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

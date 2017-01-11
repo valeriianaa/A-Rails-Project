@@ -38,10 +38,14 @@
         </section>
         <!-- /.sidebar -->
       </aside>
-      <div class="content-wrapper" style="min-height: 916px;">
-          <section class="content">
-              <%= yield %>
-          </section>
+      <div class="content-wrapper" >
+        <section class="head-content" style="padding:5px;">
+            <%= breadcrumbs separator: " &rsaquo; " %>  
+        </section>
+
+        <section class="content" style="min-height: 916px; background-color: #ffffff;">
+            <%= yield %>
+        </section>
           
       </div>
     </div>      
