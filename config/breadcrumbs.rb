@@ -38,9 +38,14 @@ crumb :actividades_proyectos do |proyecto|
   parent :proyecto, proyecto
 end
 
-crumb :actividad_proyecto do |ap|
-  link "Actividad", actividad_proyecto_path(ap)
-  parent :actividades_proyectos, ap.proyecto
+crumb :actividad_proyecto do |proyecto|
+  link "Actividad", actividad_proyecto_path(proyecto)
+  parent :actividades_proyectos, proyecto
+end
+
+crumb :actividad_proyecto_editar do |proyecto|
+  link "Editar", edit_actividad_proyecto_path(proyecto)
+  parent :actividad_proyecto, proyecto
 end
 
 # crumb :projects do

@@ -16,10 +16,13 @@ h1 Descuentos
           td = descuento.descripcion
           td = descuento.porcentaje
           td style="padding: 3px;"
+            - if can? :show, Descuento
               a href=(descuento_path(descuento))
                 i.fa.fa-search
+            - if can? :update, Descuento
               a href=(edit_descuento_path(descuento))
                 i.fa.fa-pencil
+            - if can? :destroy, Descuento                
               a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(descuento_path(descuento)) 
                 i.fa.fa-trash
 

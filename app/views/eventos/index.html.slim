@@ -20,12 +20,15 @@ h1 Eventos
           td = evento.hora.strftime('%H:%M')
           td = evento.persona.nombre_y_apellido
           td style="padding: 3px;"
-            a href=(evento_path(evento))
-              i.fa.fa-search
-            a href=(edit_evento_path(evento))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_path(evento)) 
-              i.fa.fa-trash
+            - if can? :show, Evento
+              a href=(evento_path(evento))
+                i.fa.fa-search
+            - if can? :update, Evento
+              a href=(edit_evento_path(evento))
+                i.fa.fa-pencil
+            - if can? :destroy, Evento              
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_path(evento)) 
+                i.fa.fa-trash
 
 br
 

@@ -12,12 +12,15 @@ h1 Tipos de Documentos
         tr
           td = tipo_documento.nombre
           td style="padding: 3px;"
-            a href=(tipo_documento_path(tipo_documento))
-              i.fa.fa-search
-            a href=(edit_tipo_documento_path(tipo_documento))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(tipo_documento_path(tipo_documento)) 
-              i.fa.fa-trash
+            - if can? :show, TipoDocumento          
+              a href=(tipo_documento_path(tipo_documento))
+                i.fa.fa-search
+            - if can? :update, TipoDocumento              
+              a href=(edit_tipo_documento_path(tipo_documento))
+                i.fa.fa-pencil
+            - if can? :destroy, TipoDocumento              
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(tipo_documento_path(tipo_documento)) 
+                i.fa.fa-trash
 
 br
 

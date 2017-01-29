@@ -1,0 +1,21 @@
+h1 Listing modelos
+
+table
+  thead
+    tr
+      th Nombre
+      th
+      th
+      th
+
+  tbody
+    - @modelos.each do |modelo|
+      tr
+        td = modelo.nombre
+        td = link_to 'Show', modelo
+        td = link_to 'Edit', edit_modelo_path(modelo)
+        td = link_to 'Destroy', modelo, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Modelo', new_modelo_path

@@ -14,12 +14,15 @@ h1 Contactos
           td = contacto.nombre_y_apellido
           td = contacto.especialidad_de_contacto.nombre
           td style="padding: 3px;"
-            a href=(contacto_path(contacto))
-              i.fa.fa-search
-            a href=(edit_contacto_path(contacto))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(contacto_path(contacto)) 
-              i.fa.fa-trash
+            - if can? :show, Contacto
+              a href=(contacto_path(contacto))
+                i.fa.fa-search
+            - if can? :update, Contacto
+              a href=(edit_contacto_path(contacto))
+                i.fa.fa-pencil
+            - if can? :destroy, Contacto
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(contacto_path(contacto)) 
+                i.fa.fa-trash
 
 br
 

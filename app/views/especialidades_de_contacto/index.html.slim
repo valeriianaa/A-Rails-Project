@@ -14,12 +14,15 @@ h1 Especialidades
           td = especialidad_de_contacto.nombre
           td = especialidad_de_contacto.descripcion
           td style="padding: 3px;"
-            a href=(especialidad_de_contacto_path(especialidad_de_contacto))
-              i.fa.fa-search
-            a href=(edit_especialidad_de_contacto_path(especialidad_de_contacto))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(especialidad_de_contacto_path(especialidad_de_contacto)) 
-              i.fa.fa-trash
+            - if can? :show, EspecialidadDeContacto
+              a href=(especialidad_de_contacto_path(especialidad_de_contacto))
+                i.fa.fa-search
+            - if can? :update, EspecialidadDeContacto
+              a href=(edit_especialidad_de_contacto_path(especialidad_de_contacto))
+                i.fa.fa-pencil
+            - if can? :destroy, EspecialidadDeContacto              
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(especialidad_de_contacto_path(especialidad_de_contacto)) 
+                i.fa.fa-trash
 
 br
 

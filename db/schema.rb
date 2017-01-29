@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205073159) do
+ActiveRecord::Schema.define(version: 20170126222906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "acciones", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "key_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "actividades", force: :cascade do |t|
     t.string   "nombre"
@@ -185,6 +192,12 @@ ActiveRecord::Schema.define(version: 20161205073159) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "modelos", force: :cascade do |t|
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pagos", force: :cascade do |t|
     t.date     "fecha"
     t.float    "montoAcreditado"
@@ -207,6 +220,24 @@ ActiveRecord::Schema.define(version: 20161205073159) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "permisos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "accion_id"
+    t.integer  "modelo_id"
+  end
+
+  add_index "permisos", ["accion_id"], name: "index_permisos_on_accion_id", using: :btree
+  add_index "permisos", ["modelo_id"], name: "index_permisos_on_modelo_id", using: :btree
+
+  create_table "permisos_roles", id: false, force: :cascade do |t|
+    t.integer "permiso_id"
+    t.integer "rol_id"
+  end
+
+  add_index "permisos_roles", ["permiso_id"], name: "index_permisos_roles_on_permiso_id", using: :btree
+  add_index "permisos_roles", ["rol_id"], name: "index_permisos_roles_on_rol_id", using: :btree
 
   create_table "personas", force: :cascade do |t|
     t.string   "nombre"
@@ -285,6 +316,12 @@ ActiveRecord::Schema.define(version: 20161205073159) do
   add_index "proyectos", ["pais_id"], name: "index_proyectos_on_pais_id", using: :btree
   add_index "proyectos", ["provincia_id"], name: "index_proyectos_on_provincia_id", using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles_de_empleados", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at",      null: false
@@ -319,10 +356,14 @@ ActiveRecord::Schema.define(version: 20161205073159) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "persona_id"
+    t.integer  "rol_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["persona_id"], name: "index_users_on_persona_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["rol_id"], name: "index_users_on_rol_id", using: :btree
 
   add_foreign_key "actividades", "etapas"
   add_foreign_key "actividades_proyectos", "actividades"
@@ -346,6 +387,8 @@ ActiveRecord::Schema.define(version: 20161205073159) do
   add_foreign_key "pagos", "personas"
   add_foreign_key "pagos", "proyectos"
   add_foreign_key "pagos", "tipos_de_pago"
+  add_foreign_key "permisos", "acciones"
+  add_foreign_key "permisos", "modelos"
   add_foreign_key "personas", "areas"
   add_foreign_key "personas", "ciudades"
   add_foreign_key "personas", "departamentos"
@@ -363,4 +406,6 @@ ActiveRecord::Schema.define(version: 20161205073159) do
   add_foreign_key "proyectos", "paises"
   add_foreign_key "proyectos", "provincias"
   add_foreign_key "roles_de_empleados", "departamentos"
+  add_foreign_key "users", "personas"
+  add_foreign_key "users", "roles"
 end

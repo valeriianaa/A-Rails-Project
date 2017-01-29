@@ -19,12 +19,15 @@ h1 Empleados
           td = empleado.departamento.nombre
           td = empleado.rol_de_empleado.nombre
           td style="padding: 3px;"
-            a href=(empleado_path(empleado))
-              i.fa.fa-search
-            a href=(edit_empleado_path(empleado))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(empleado_path(empleado)) 
-              i.fa.fa-trash
+            - if can? :show, Empleado
+              a href=(empleado_path(empleado))
+                i.fa.fa-search
+            - if can? :update, Empleado            
+              a href=(edit_empleado_path(empleado))
+                i.fa.fa-pencil
+            - if can? :destroy, Empleado            
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(empleado_path(empleado)) 
+                i.fa.fa-trash
 
 br
 

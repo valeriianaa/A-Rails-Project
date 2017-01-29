@@ -44,4 +44,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'descuento', 'descuentos'
 	inflect.irregular 'EventoProyecto', 'EventosProyectos'
 	inflect.irregular 'evento_proyecto', 'eventos_proyectos'
+	inflect.irregular 'accion', 'acciones'
+	inflect.irregular 'modelo', 'modelos'
+	inflect.irregular 'permiso', 'permisos'
+	inflect.irregular 'rol', 'roles'
 end

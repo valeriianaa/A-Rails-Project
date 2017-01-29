@@ -22,12 +22,15 @@ h1 Miembros de Equipo
                 - PersonaProyecto.where(persona_id: miembro_equipo.id).each do |pp|
                   li = Proyecto.find(pp.proyecto_id).nombre
           td style="padding: 3px;"
-            a href=(miembro_equipo_path(miembro_equipo))
-              i.fa.fa-search
-            a href=(edit_miembro_equipo_path(miembro_equipo))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(miembro_equipo_path(miembro_equipo)) 
-              i.fa.fa-trash
+            - if can? :show, MiembroEquipo          
+              a href=(miembro_equipo_path(miembro_equipo))
+                i.fa.fa-search
+            - if can? :update, MiembroEquipo              
+              a href=(edit_miembro_equipo_path(miembro_equipo))
+                i.fa.fa-pencil
+            - if can? :destroy, MiembroEquipo              
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(miembro_equipo_path(miembro_equipo)) 
+                i.fa.fa-trash
 br
 
 = link_to 'Nuevo Miembro de Equipo', new_miembro_equipo_path

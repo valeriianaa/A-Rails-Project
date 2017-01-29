@@ -24,10 +24,13 @@ h1 Estados
               i.glyphicon.glyphicon-remove 
           
           td style="padding: 3px;"
+            - if can? :show, Estado
               a href=(estado_path(estado))
                 i.fa.fa-search
+            - if can? :update, Estado            
               a href=(edit_estado_path(estado))
                 i.fa.fa-pencil
+            - if can? :destroy, Estado            
               a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(estado_path(estado)) 
                 i.fa.fa-trash
 

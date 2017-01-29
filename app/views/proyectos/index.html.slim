@@ -30,12 +30,15 @@ h1 Proyectos
           td = proyecto.email
           td = proyecto.pagWeb
           td style="padding: 3px;"
-            a href=(proyecto_path(proyecto))
-              i.fa.fa-search
-            a href=(edit_proyecto_path(proyecto))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(proyecto_path(proyecto)) 
-              i.fa.fa-trash
+            - if can? :show, Proyecto          
+              a href=(proyecto_path(proyecto))
+                i.fa.fa-search
+            - if can? :update, Proyecto              
+              a href=(edit_proyecto_path(proyecto))
+                i.fa.fa-pencil
+            - if can? :destroy, Proyecto              
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(proyecto_path(proyecto)) 
+                i.fa.fa-trash
 
 br
 

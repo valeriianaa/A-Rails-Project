@@ -47,6 +47,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.6)
+    cancan (1.6.10)
     chained-rails (0.1.0)
     chronic (0.10.2)
     coffee-rails (4.1.1)
@@ -209,8 +210,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   bootstrap-sass (~> 3.3.5)
   byebug
+  cancan
   chained-rails
   chronic
   coffee-rails (~> 4.1.0)

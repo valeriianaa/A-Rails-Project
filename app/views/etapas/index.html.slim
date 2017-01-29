@@ -1,24 +1,5 @@
 h1 Etapas
 
-/ table
-/   thead
-/     tr
-/       th Nombre
-/       th Descripcion
-/       th
-/       th
-/       th
-
-/   tbody
-/     - @etapas.each do |etapa|
-/       tr
-/         td = etapa.nombre
-/         td = etapa.descripcion
-/         td = link_to 'Show', etapa
-/         td = link_to 'Edit', edit_etapa_path(etapa)
-/         td = link_to 'Destroy', etapa, data: { confirm: 'Are you sure?' }, method: :delete
-
-/ br
 = link_to 'Nueva Etapa', new_etapa_path
 
 - @colors = ['aqua', 'green', 'yellow', 'red']
@@ -34,10 +15,12 @@ div
           .icon
             i class="ion-stats-bars"
           div class="small-box-footer" 
-            a href="etapas/#{etapa.id}" style="color:#FFFFFF;"
-              |Mas Info
-              i class="fa fa-arrow-circle-right" |
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(etapa_path(etapa)) style="color:#FFFFFF;"
-              |Eliminar
+            - if can? [:show, :update], Etapa
+              a href="etapas/#{etapa.id}" style="color:#FFFFFF;"
+                |Mas Info
+                i class="fa fa-arrow-circle-right" |
+            - if can? :destroy, Etapa
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(etapa_path(etapa)) style="color:#FFFFFF;"
+                |Eliminar
 
 

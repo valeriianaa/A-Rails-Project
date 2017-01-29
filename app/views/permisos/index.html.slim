@@ -1,0 +1,19 @@
+h1 Listing permisos
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @permisos.each do |permiso|
+      tr
+        td = link_to 'Show', permiso
+        td = link_to 'Edit', edit_permiso_path(permiso)
+        td = link_to 'Destroy', permiso, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Permiso', new_permiso_path

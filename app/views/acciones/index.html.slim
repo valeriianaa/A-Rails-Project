@@ -1,0 +1,31 @@
+h1 Acciones
+
+.box
+  table class="table table-bordered"
+    thead
+      tr
+        th Nombre
+        th Palabra clave
+        th Modelos Asociados
+        th colspan="3" Acciones
+
+    tbody
+      - @acciones.each do |accion|
+        tr
+          td = accion.nombre
+          td = accion.key_name
+          td  
+          td style="padding: 3px;"
+            - if can? :show, Accion
+              a href=(accion_path(accion))
+                i.fa.fa-search
+            - if can? :update, Accion
+              a href=(edit_accion_path(accion))
+                i.fa.fa-pencil
+            - if can? :destroy, Accion
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(accion_path(accion)) 
+                i.fa.fa-trash
+
+br
+
+= link_to 'Nueva Accion', new_accion_path

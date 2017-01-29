@@ -20,12 +20,15 @@ h1 Actividades
               i.glyphicon.glyphicon-remove 
           td = actividad.etapa.nombre
           td style="padding: 3px;"
-            a href=(actividad_path(actividad))
-              i.fa.fa-search
-            a href=(edit_actividad_path(actividad))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(actividad_path(actividad)) 
-              i.fa.fa-trash
+            - if can? :show, Actividad
+              a href=(actividad_path(actividad))
+                i.fa.fa-search
+            - if can? :update, Actividad
+              a href=(edit_actividad_path(actividad))
+                i.fa.fa-pencil
+            - if can? :destroy, Actividad
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(actividad_path(actividad)) 
+                i.fa.fa-trash
 
 br
 

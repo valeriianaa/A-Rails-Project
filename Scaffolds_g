@@ -97,3 +97,18 @@ rails g migration AddEventoRefToEventoProyecto evento:references
 rails g migration AddActividadProyectoRefToHistorial actividad_proyecto:references
 rails g migration AddEstadoRefToHistorial estado:references
 rails g migration AddProyectoRefToHistorial proyecto:references
+
+--Permisos y roles
+rails g scaffold Accion nombre:string key_name:string
+rails g scaffold Modelo nombre:string
+rails g scaffold Permiso
+rails g scaffold Rol nombre:string
+
+rails g migration AddAccionRefToModelo accion:references
+rails g migration AddModeloRefToAccion modelo:references
+rails g migration AddAccionRefToPermiso accion:references
+rails g migration AddModeloRefToPermiso modelo:references
+rails g migration AddPermisoRefToRol permiso:references
+
+rails g migration AddEmpleadoRefToUser empleado:references
+rails g migration AddRolRefToUser rol:references

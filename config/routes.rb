@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :roles
+  resources :permisos
+  resources :modelos
+  resources :acciones
   get "/pages/:page" => "pages#show"
 
   root "pages#show", page: "home"
@@ -8,7 +12,7 @@ Rails.application.routes.draw do
   resources :descuentos
   resources :intereses
   resources :tipos_de_pago
-  devise_for :users
+  
   resources :estados
   resources :cuotas_por_cliente
   resources :pagos
@@ -35,6 +39,10 @@ Rails.application.routes.draw do
 
   match 'proyectos/:id/actividades_proyectos' => 'proyectos#actividadesProyecto',  :via => [:get], as: :actividades_del_proyecto
 
+  resources :users
+  devise_for :user, controllers: {
+    sessions:  "devise_overrides/sessions"
+  } 
   #devise_for :installs
   #match 'proyectos/:proyecto_id/actividades_proyectos/:id/historial' => 'actividades_proyectos#historial',  :via => [:get], as: :historial
   

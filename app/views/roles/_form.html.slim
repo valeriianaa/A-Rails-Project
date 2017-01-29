@@ -1,0 +1,71 @@
+= form_for @rol do |f|
+  - if @rol.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@rol.errors.count, "error")} prohibited this rol from being saved:"
+      ul
+        - @rol.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :nombre
+    = f.text_field :nombre
+  .row-fluid
+    .col-sm-12
+      h4 Permisos
+    .tabbable
+      ul#myTab.nav.nav-tabs
+        - Modelo.all.each_with_index do |modelo, index|
+          - if index == 0
+            li.active
+              a aria-expanded="true" data-toggle="tab" href="##{modelo.nombre}" 
+                | #{modelo.nombre.pluralize.titleize}
+          - else   
+            li
+              a aria-expanded="true" data-toggle="tab" href="##{modelo.nombre}" 
+                | #{modelo.nombre.pluralize.titleize} 
+
+      .tab-content
+        - Modelo.all.each_with_index do |modelo, index|
+          - if index == 0
+            div.tab-pane.fade.active.in id=(modelo.nombre)
+              - if modelo.nombre == "Accion" or modelo.nombre == "Modelo"
+                .alert.alert-warning
+                  strong Cuidado! 
+                  | Estos Permisos son de riesgo para el funcionamiento del Sistema, deben utilizarlos unicamente los Administradores del Sistema.
+                  br/
+
+              table.table.table-striped.table-bordered.table-hover style="width:600px"
+                thead
+                  th Nombre
+                  th Autorizado?
+                tbody
+                  - modelo.permisos.each do |perm|
+                    tr
+                      td = perm.accion.nombre
+                      td
+                        label.pos-rel
+                          = check_box_tag "rol[permiso_ids][]", perm.id,
+                            @rol.can?(modelo, perm.accion)
+                          span.lbl
+          - else
+            div.tab-pane.fade id=(modelo.nombre)
+              - if modelo.nombre == "Accion" or modelo.nombre == "Modelo"
+                .alert.alert-warning
+                  strong Cuidado! 
+                  | Estos Permisos son de riesgo para el funcionamiento del Sistema, deben utilizarlos unicamente los Administradores del Sistema.
+                  br/
+
+              table.table.table-striped.table-bordered.table-hover style="width:600px"
+                thead
+                  th Nombre
+                  th Autorizado?
+                tbody
+                  - modelo.permissions.each do |perm|
+                    tr
+                      td = perm.accion.nombre
+                      td
+                        label.pos-rel
+                          = check_box_tag "rol[permiso_ids][]", perm.id,
+                            @rol.can?(modelo, perm.accion)
+                          span.lbl
+  .actions = f.submit

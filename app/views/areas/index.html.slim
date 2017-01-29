@@ -12,12 +12,15 @@ h1 Áreas
         tr
           td = area.nombre
           td style="padding: 3px;"
-            a href=(area_path(area))
-              i.fa.fa-search
-            a href=(edit_area_path(area))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(area_path(area)) 
-              i.fa.fa-trash
+            - if can? :show, Area
+              a href=(area_path(area))
+                i.fa.fa-search
+            - if can? :update, Area
+              a href=(edit_area_path(area))
+                i.fa.fa-pencil
+            - if can? :destroy, Area
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(area_path(area)) 
+                i.fa.fa-trash
 
 br
 

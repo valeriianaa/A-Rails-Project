@@ -8,6 +8,7 @@
     <%= stylesheet_link_tag "css/AdminLTE.css" %>
     <%= stylesheet_link_tag "css/bootstrap-datetimepicker.css" %>
     <%= stylesheet_link_tag "css/skins/skin-blue.css" %>
+    <%= stylesheet_link_tag "css/skins/skin-blue-light.css" %>
     <%= stylesheet_link_tag "css/ionicons.css" %>
     <%= stylesheet_link_tag "css/font-awesome.css" %>
     <%= stylesheet_link_tag "css/select2.css" %>
@@ -24,7 +25,7 @@
     <%= javascript_include_tag "js/bootstrap-datetimepicker.js" %>
     <%= csrf_meta_tags %>
   </head>
-  <body class="sidebar-mini skin-blue">
+  <body class="sidebar-mini skin-blue-light">
     <div class="wrapper">
 
       <header class="main-header">
@@ -39,8 +40,9 @@
         <!-- /.sidebar -->
       </aside>
       <div class="content-wrapper" >
-        <section class="head-content" style="padding:5px;">
-            <%= breadcrumbs separator: " &rsaquo; " %>  
+        <section class="head-content" style="padding:5px; display:inline-block;">
+          <i class="fa fa-home" style="display:inline-block;"></i>
+          <%= breadcrumbs separator: " &rsaquo; " %>  
         </section>
 
         <section class="content" style="min-height: 916px; background-color: #ffffff;">

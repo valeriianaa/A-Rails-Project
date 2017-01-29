@@ -1,0 +1,15 @@
+= form_for @modelo do |f|
+  - if @modelo.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@modelo.errors.count, "error")} prohibited this modelo from being saved:"
+      ul
+        - @modelo.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :nombre
+    = f.text_field :nombre
+  .field
+        = f.label :accion_ids, 'Acción: (*)'
+        = f.collection_select :accion_ids, Accion.all, :id, :nombre, {:prompt => "Seleccione una accion"}, {:multiple => true, :id => 'accion_ids', :class =>'form-control'}
+  .actions = f.submit

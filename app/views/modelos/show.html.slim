@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Nombre:
+  = @modelo.nombre
+
+= link_to 'Edit', edit_modelo_path(@modelo)
+'|
+= link_to 'Back', modelos_path

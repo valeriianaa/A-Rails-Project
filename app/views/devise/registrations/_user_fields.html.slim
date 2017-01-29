@@ -1,0 +1,43 @@
+.row
+  = f.label :empleado, {class: "col-sm-3 control-label"}
+  .col-sm-9
+      = f.select :empleado_id, Empleado.all.map { |e| [e.nombre, e.id, {"data-email"=> e.email}] },{},
+          {class: "form-control col-xs-10 col-sm-5 select2", style: "width:50%;"}
+br/
+.row
+  = f.label :email, {class: "col-sm-3 control-label"}
+  .col-sm-9
+    .input-group.input-group-sm style="width: 50%"
+      span.input-group-addon
+        i.ace-icon.fa.fa-envelope
+      = f.email_field :email, {autofocus: false, 
+        class: "form-control", required: true, readonly: true}
+
+br
+.row
+  = f.label "contraseña", {class: "col-sm-3 control-label"}
+  .col-sm-9
+    = f.password_field :password, {autocomplete: "off", 
+        class: "form-control", style: "width:50%;", required: true}
+    - if @minimum_password_length
+      em 
+        = @minimum_password_length 
+        | &nbsp;caracteres minimo
+br
+.row
+  = f.label "Confirmar contraseña", {class: "col-sm-3 control-label"}
+  .col-sm-9
+    = f.password_field :password_confirmation, {autocomplete: "off", 
+        class: "form-control", style: "width:50%;", required: true}
+    - if @minimum_password_length
+      em 
+        = @minimum_password_length 
+        | &nbsp;caracteres minimo
+br
+
+.row
+  = f.label "rol", {class: "col-sm-3 control-label"}
+  .col-sm-9
+    = f.select :rol_id, Rol.all.map { |e| [e.descripcion, e.id] },{},
+      {class: "form-control col-xs-10 col-sm-5", style: "width:50%;"}
+br

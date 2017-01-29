@@ -16,12 +16,15 @@ h1 Intereses
           td = interes.descripcion
           td = interes.porcentaje
           td style="padding: 3px;"
-            a href=(interes_path(interes))
-              i.fa.fa-search
-            a href=(edit_interes_path(interes))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(interes_path(interes)) 
-              i.fa.fa-trash
+            - if can? :show, Interes          
+              a href=(interes_path(interes))
+                i.fa.fa-search
+            - if can? :update, Interes              
+              a href=(edit_interes_path(interes))
+                i.fa.fa-pencil
+            - if can? :destroy, Interes              
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(interes_path(interes)) 
+                i.fa.fa-trash
 
 br
 

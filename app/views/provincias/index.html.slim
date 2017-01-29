@@ -14,12 +14,15 @@ h1 Provincias
           td = provincia.nombre
           td = provincia.pais.nombre
           td style="padding: 3px;"
-            a href=(provincia_path(provincia))
-              i.fa.fa-search
-            a href=(edit_provincia_path(provincia))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(provincia_path(provincia)) 
-              i.fa.fa-trash
+            - if can? :show, Provincia            
+              a href=(provincia_path(provincia))
+                i.fa.fa-search
+            - if can? :update, Provincia                
+              a href=(edit_provincia_path(provincia))
+                i.fa.fa-pencil
+            - if can? :destroy, Provincia                
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(provincia_path(provincia)) 
+                i.fa.fa-trash
 
 br
 

@@ -1,0 +1,1 @@
+json.array! @acciones, partial: 'acciones/accion', as: :accion

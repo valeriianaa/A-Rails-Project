@@ -16,12 +16,15 @@ h1 Ciudades
           td = ciudad.pais.nombre
           td = ciudad.provincia.nombre
           td style="padding: 3px;"
-            a href=(ciudad_path(ciudad))
-              i.fa.fa-search
-            a href=(edit_ciudad_path(ciudad))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(ciudad_path(ciudad)) 
-              i.fa.fa-trash
+            - if can? :show, Ciudad
+              a href=(ciudad_path(ciudad))
+                i.fa.fa-search
+            - if can? :update, Ciudad
+              a href=(edit_ciudad_path(ciudad))
+                i.fa.fa-pencil
+            - if can? :destroy, Ciudad
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(ciudad_path(ciudad)) 
+                i.fa.fa-trash
 
 br
 

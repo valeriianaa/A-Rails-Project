@@ -12,12 +12,15 @@ h1 Paises
         tr
           td = pais.nombre
           td style="padding: 3px;"
-            a href=(pais_path(pais))
-              i.fa.fa-search
-            a href=(edit_pais_path(pais))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(pais_path(pais)) 
-              i.fa.fa-trash
+            - if can? :show, Pais          
+              a href=(pais_path(pais))
+                i.fa.fa-search
+            - if can? :update, Pais              
+              a href=(edit_pais_path(pais))
+                i.fa.fa-pencil
+            - if can? :destroy, Pais              
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(pais_path(pais)) 
+                i.fa.fa-trash
 
 br
 
