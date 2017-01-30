@@ -1,0 +1,38 @@
+h1 Editar Usuario
+= form_for(resource, as: resource_name, url: registration_path(resource_name), method: :put) do |f|
+  = devise_error_messages! 
+
+      /= render :partial => 'devise/registrations/user_fields' , :locals => {:f => f}
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :persona_id, 'Empleado: (*)'
+        = f.collection_select :persona_id, Empleado.all, :id, :nombre_y_apellido, {:prompt => "Seleccione un Empleado"}, {:class => 'form-control'}
+      .field
+        = f.label :email, 'Correo electrónico: (*)'
+        = f.email_field :email, {autofocus: true, :class => "form-control"}
+        -if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          div Currently waiting confirmation for: = resource.unconfirmed_email
+      .field
+        = f.label :password, 'Contraseña: (*)'
+        -if @minimum_password_length
+          = f.password_field :password, {autocomplete: "off", :class => "form-control"}
+          em = @minimum_password_length
+          |  caracteres mínimo
+      .field
+        = f.label :password_confirmation, 'Confirmar contraseña: (*)'
+        = f.password_field :password_confirmation, {autocomplete: "off", :class => "form-control"}
+      .field
+        = f.label :current_password
+        = f.password_field :current_password, {autocomplete: "off", :class => "form-control"}
+        i
+        | (Se necesita su contraseña actual para confirmar los)
+      .field
+        = f.label :rol_id, 'Rol de usuario: (*)'
+        = f.collection_select :rol_id, Rol.all, :id, :nombre, {:prompt => "Seleccione un Rol"}, {:class => 'form-control'}
+    .box-footer
+      p#foot = "(*) Campo Obligatorio"  
+  
+  .actions = f.submit

@@ -14,19 +14,19 @@ h1 Usuarios
         tr
           td = usuario.persona.nombre_y_apellido
           td = usuario.email
-          td 
+          td = usuario.rol.nombre
           /= usuario.rol.nombre
           td style="padding: 3px;"
             - if can? :show, User          
-              a href=(user_path(usuario))
+              a href=(user_show_path(usuario))
                 i.fa.fa-search
             - if can? :update, User              
-              a href=(edit_user_path(usuario))
+              a href=(edit_user_registration_path(usuario))
                 i.fa.fa-pencil
             - if can? :destroy, User              
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(usuario_path(usuario)) 
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(user_path(usuario)) 
                 i.fa.fa-trash
 
 br
 
-= link_to 'Nuevo Usuario', new_user_path
+= link_to 'Nuevo Usuario', new_user_registration_path

@@ -39,10 +39,11 @@ Rails.application.routes.draw do
 
   match 'proyectos/:id/actividades_proyectos' => 'proyectos#actividadesProyecto',  :via => [:get], as: :actividades_del_proyecto
 
-  resources :users
-  devise_for :user, controllers: {
-    sessions:  "devise_overrides/sessions"
-  } 
+  #resources :users
+  devise_for :users, :path => 'user', :controllers => {:registrations => "registrations"}
+  match 'users' => 'users#index', :via => [:get]
+  match 'users/:id' => 'users#show', :via => [:get], as: :user_show
+  match 'users/:id' => 'users#destroy', :via => [:delete], as: :user
   #devise_for :installs
   #match 'proyectos/:proyecto_id/actividades_proyectos/:id/historial' => 'actividades_proyectos#historial',  :via => [:get], as: :historial
   

@@ -11,12 +11,12 @@ class Rol < ActiveRecord::Base
     permisos.select { |e| e.modelo == modelo }
   end
 
-  def can?(modelo, accion)
-    perms = permisos.select {|e| e.modelo == modelo and accion == e.accion}
-    if perms.size == 0
-      return false
-    else
-      return true
-    end 
-  end
+  # def can?(modelo, accion)
+  #   perms = permisos.select {|e| e.modelo == modelo and accion == e.accion}
+  #   if perms.size == 0
+  #     return false
+  #   else
+  #     return true
+  #   end 
+  # end
 end

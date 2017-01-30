@@ -1,6 +1,10 @@
 div class="user panel"  
 ul.sidebar-menu
-  /- if can? :index, Empleado
+  li
+    a href=(users_path)
+      i.fa.fa-group
+      | Usuarios
+  - if can? :read, Empleado
   	li
       a href=(empleados_path)
         i.fa.fa-group
@@ -14,22 +18,22 @@ ul.sidebar-menu
         a href=(roles_de_empleados_path)
           i.fa.fa-circle-o
           | Roles del Empleado
-    /- if can? :index, Etapa
+  - if can? :read, Etapa
     li
       a href=(etapas_path) 
         i.fa.fa-th-large
         | Etapas
-    /- if can? :index, Actividad        
+  - if can? :read, Actividad        
     li
       a href=(actividades_path)
         i.fa.fa-tasks
         | Actividades
-    /- if can? :index, Proyecto        
+  - if can? :read, Proyecto        
     li
       a href=(proyectos_path)
         i.fa.fa-lightbulb-o
         | Proyectos
-    /- if can? :index, MiembroEquipo        
+  - if can? :read, MiembroEquipo        
     li
       a href=(miembros_equipo_path)
         i.fa.fa-group
@@ -41,32 +45,32 @@ ul.sidebar-menu
         | Finanzas
         i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu
-        /- if can? :index, ConceptoDePago
+      - if can? :read, ConceptoDePago
         li#tree
           a href=(conceptos_de_pago_path)
             i.fa.fa-angle-double-right
             | Conceptos de pago
-        /- if can? :index, TipoDePago
+      - if can? :read, TipoDePago
         li#tree
           a href=(tipos_de_pago_path)
             i.fa.fa-angle-double-right
             | Tipos de pago
-        /- if can? :index, Interes
+      - if can? :read, Interes
         li#tree
           a href=(intereses_path)
             i.fa.fa-angle-double-right
             | Intereses
-        /- if can? :index, Descuento
+      - if can? :read, Descuento
         li#tree
           a href=(descuentos_path)
             i.fa.fa-angle-double-right
             | Descuentos
-        /- if can? :index, CuotaPorCliente
+      - if can? :read, CuotaPorCliente
         li#tree
           a href=(cuotas_por_cliente_path)
             i.fa.fa-angle-double-right
             | Cuotas por cliente
-        /- if can? :index, Pago            
+      - if can? :read, Pago            
         li#tree
           a href=(pagos_path)
             i.fa.fa-angle-double-right
@@ -77,64 +81,64 @@ ul.sidebar-menu
         | Outsourcing
         i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu
-        /- if can? :index, Contacto      
-        li#tree
-          a href=(contactos_path)
-            i.fa.fa-angle-double-right
-            | Contactos
-        /- if can? :index, EspecialidadDeContacto        
-        li#tree
-          a href=(especialidades_de_contacto_path)
-            i.fa.fa-angle-double-right
-            | Especilidades del Contacto
-        /- if can? :index, Evento        
-        li#tree
-          a href=(eventos_path)
-            i.fa.fa-angle-double-right
-            | Eventos
-        /- if can? :index, EventoProyecto        
-        li#tree
-          a href=(eventos_proyectos_path)
-            i.fa.fa-angle-double-right
-            | Proyectos asociados 
-            br
-            | a eventos
+        - if can? :read, Contacto      
+          li#tree
+            a href=(contactos_path)
+              i.fa.fa-angle-double-right
+              | Contactos
+        - if can? :read, EspecialidadDeContacto        
+          li#tree
+            a href=(especialidades_de_contacto_path)
+              i.fa.fa-angle-double-right
+              | Especilidades del Contacto
+        - if can? :read, Evento        
+          li#tree
+            a href=(eventos_path)
+              i.fa.fa-angle-double-right
+              | Eventos
+        - if can? :read, EventoProyecto        
+          li#tree
+            a href=(eventos_proyectos_path)
+              i.fa.fa-angle-double-right
+              | Proyectos asociados 
+              br
+              | a eventos
     li.treeview#lista-cabecera
       a href=""
         i.fa.fa-gear
         | Parámetros
         i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu
-        /- if can? :index, Pais      
-        li#tree
-          a href=(paises_path)
-            i.fa.fa-angle-double-right
-            | Países
-        /- if can? :index, Provincia            
-        li#tree
-          a href=(provincias_path)
-            i.fa.fa-angle-double-right
-            | Provincias
-        /- if can? :index, Ciudad            
-        li#tree
-          a href=(ciudades_path)
-            i.fa.fa-angle-double-right
-            | Ciudades
-        /- if can? :index, Area            
-        li#tree
-          a href=(areas_path)
-            i.fa.fa-angle-double-right
-            | Áreas
-        /- if can? :index, TipoDocumento        
-        li#tree
-          a href=(tipo_documentos_path)
-            i.fa.fa-angle-double-right
-            | Tipos de Documento
-        /- if can? :index, Estado        
-        li#tree
-          a href=(estados_path)
-            i.fa.fa-angle-double-right
-            | Estados
+        - if can? :read, Pais      
+          li#tree
+            a href=(paises_path)
+              i.fa.fa-angle-double-right
+              | Países
+        - if can? :read, Provincia            
+          li#tree
+            a href=(provincias_path)
+              i.fa.fa-angle-double-right
+              | Provincias
+        - if can? :read, Ciudad            
+          li#tree
+            a href=(ciudades_path)
+              i.fa.fa-angle-double-right
+              | Ciudades
+        - if can? :read, Area            
+          li#tree
+            a href=(areas_path)
+              i.fa.fa-angle-double-right
+              | Áreas
+        - if can? :read, TipoDocumento        
+          li#tree
+            a href=(tipo_documentos_path)
+              i.fa.fa-angle-double-right
+              | Tipos de Documento
+        - if can? :read, Estado        
+          li#tree
+            a href=(estados_path)
+              i.fa.fa-angle-double-right
+              | Estados
 
 
         

@@ -5,11 +5,12 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     #user ||= User.new # guest user (not logged in)
-    if user.rol :super_admin
-      can :nav, :all
+    user ||= User.new
+    if user.rol? :super_admin
+      can :read, :all
       can :manage, :all
     else
-      user.rol.permissions.each do |permission|
+      user.rol.permisos.each do |permiso|
         # if permission.subject_class == "all"
           # can permission.action.to_sym, permission.subject_class.to_sym
         # else
@@ -17,7 +18,7 @@ class Ability
         # if ["index"].include? permission.accion.key_name
         #   can :nav, permission.modelo.nombre.constantize  
         # end
-        can permission.accion.key_name.to_sym, permission.modelo.nombre.constantize
+        can permiso.accion.key_name.to_sym, permiso.modelo.nombre.constantize
       end
     end
     

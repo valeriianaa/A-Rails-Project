@@ -1,1 +1,1 @@
-json.partial! "paises/pais", pais: @pais
+json.partial! "users/user", user: @user

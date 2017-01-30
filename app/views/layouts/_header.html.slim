@@ -17,6 +17,29 @@ nav class="navbar navbar-static-top"
 			li class="dropdown notifications-menu"
 			li class="dropdown tasks-menu"
 			li class="dropdown user user-menu"
-			 
+			  a.dropdown-toggle data-toggle="dropdown" href="#" 
+			    img.user-image src="/assets/default_avatar.png" 
+			    span.hidden-xs 
+			    = current_user.persona.nombre_y_apellido
+			  ul.dropdown-menu
+			    li.user-header
+			      img.img-circle src="/assets/default_avatar.png" 
+			      p
+			        = current_user.persona.nombre_y_apellido
+			        small
+			       		= current_user.email
+			    li.user-body
+			      .row
+			        .col-xs-4.text-center
+			          a href="#"  
+			        .col-xs-4.text-center
+			          a href="#"  
+			        .col-xs-4.text-center
+			          a href="#"  
+			    li.user-footer
+			      .pull-left
+			        a.btn.btn-default.btn-flat href="#"  Perfil
+			      .pull-right
+			        a.btn.btn-default.btn-flat data-method="delete" href=(destroy_user_session_path) Cerrar Sesión
 
 

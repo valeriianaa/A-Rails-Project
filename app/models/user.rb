@@ -6,5 +6,10 @@ class User < ActiveRecord::Base
   belongs_to :persona
 
   devise :database_authenticatable, 
-         :recoverable, :rememberable, :trackable
+         :recoverable, :rememberable, :trackable,
+         :registerable, :validatable
+
+  def rol?(role_sym)
+    self.rol.nombre.to_sym == role_sym
+  end
 end
