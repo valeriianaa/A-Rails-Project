@@ -7,3 +7,4 @@
 $(document).ready ->
   $("#contacto_provincia_id").chained("#contacto_pais_id")
   $("#contacto_ciudad_id").chained("#contacto_pais_id, #contacto_provincia_id")
+  $("#contactos_table").dataTable()

@@ -1,38 +1,43 @@
 - breadcrumb :empleados
 h1 Empleados
+br
 
-.box
-  table class="table table-bordered table-striped"
-    thead
+table id="empleados_table" class="table table-bordered table-striped dataTable"
+  thead
+    tr
+      th Nombre y Apellido
+      th Tipo y Número de Documento
+      th Departamento
+      th Rol
+      th.no-print Acciones
+  tbody
+    - @empleados.each do |empleado|
       tr
-        th Nombre y Apellido
-        th Tipo y Número de Documento
-        th Departamento
-        th Rol
-        th colspan="3" Acciones
-
-    tbody
-      - @empleados.each do |empleado|
-        tr
-          td = empleado.nombre_y_apellido
-          td = empleado.tipo_y_nro_documento
-          td = empleado.departamento.nombre
-          td = empleado.rol_de_empleado.nombre
-          td style="padding: 3px;"
-            - if can? :show, Empleado
-              a href=(empleado_path(empleado))
-                i.fa.fa-search
-            - if can? :update, Empleado            
-              a href=(edit_empleado_path(empleado))
-                i.fa.fa-pencil
-            - if can? :destroy, Empleado            
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(empleado_path(empleado)) 
-                i.fa.fa-trash
+        td = empleado.nombre_y_apellido
+        td = empleado.tipo_y_nro_documento
+        td = empleado.departamento.nombre
+        td = empleado.rol_de_empleado.nombre
+        td.no-print style="padding: 3px;"
+          - if can? :show, Empleado
+            a href=(empleado_path(empleado))
+              i.fa.fa-search
+          - if can? :update, Empleado            
+            a href=(edit_empleado_path(empleado))
+              i.fa.fa-pencil
+          - if can? :destroy, Empleado            
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(empleado_path(empleado)) 
+              i.fa.fa-trash
 
 br
 
 = link_to 'Nuevo Empleado', new_empleado_path
 
+// javascript:
+//   $(document).ready(function() {
+//     $('.dataTable').dataTable();
+//   } );
+
 /= link_to 'Show', empleado
 /= link_to 'Edit', edit_empleado_path(empleado)
 /= link_to 'Destroy', empleado, data: {:confirm => 'Are you sure?'}, :method => :delete
+          /th colspan="3" Acciones

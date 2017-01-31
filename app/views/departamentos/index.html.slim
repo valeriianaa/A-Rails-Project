@@ -1,17 +1,17 @@
 h1 Departamentos
 
 .box
-  table class="table table-bordered"
+  table id="departamentos_table" class="table table-bordered"
     thead
       tr
         th Nombre
-        th colspan="3" Acciones
+        th.no-print Acciones
 
     tbody
       - @departamentos.each do |departamento|
         tr
           td = departamento.nombre
-          td style="padding: 3px;"
+          td.no-print style="padding: 3px;"
             - if can? :show, Departamento
               a href=(departamento_path(departamento))
                 i.fa.fa-search

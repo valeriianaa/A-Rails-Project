@@ -22,19 +22,19 @@
 h1 Eventos asociados a proyectos
 
 .box
-  table class="table table-bordered"
+  table id="eventos_proyectos_table" class="table table-bordered"
     thead
       tr
         th Evento
         th Proyecto
-        th colspan="3" Acciones
+        th.no-print Acciones
 
     tbody
       - @eventos_proyectos.each do |evento_proyecto|
         tr
           td = evento_proyecto.evento.nombre
           td = evento_proyecto.proyecto.nombre
-          td style="padding: 3px;"
+          td.no-print style="padding: 3px;"
             a href=(evento_proyecto_path(evento_proyecto))
               i.fa.fa-search
             a href=(edit_evento_proyecto_path(evento_proyecto))

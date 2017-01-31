@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126222906) do
+ActiveRecord::Schema.define(version: 20170131055922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,26 @@ ActiveRecord::Schema.define(version: 20170126222906) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "configuraciones", force: :cascade do |t|
+    t.string   "logo"
+    t.string   "nombre"
+    t.string   "eslogan"
+    t.string   "cuit"
+    t.string   "condicion_iva"
+    t.datetime "plazo_abandono"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "pais_id"
+    t.integer  "provincia_id"
+    t.integer  "ciudad_id"
+    t.integer  "area_id"
+  end
+
+  add_index "configuraciones", ["area_id"], name: "index_configuraciones_on_area_id", using: :btree
+  add_index "configuraciones", ["ciudad_id"], name: "index_configuraciones_on_ciudad_id", using: :btree
+  add_index "configuraciones", ["pais_id"], name: "index_configuraciones_on_pais_id", using: :btree
+  add_index "configuraciones", ["provincia_id"], name: "index_configuraciones_on_provincia_id", using: :btree
 
   create_table "contactos", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -371,6 +391,10 @@ ActiveRecord::Schema.define(version: 20170126222906) do
   add_foreign_key "actividades_proyectos", "proyectos"
   add_foreign_key "ciudades", "paises"
   add_foreign_key "ciudades", "provincias"
+  add_foreign_key "configuraciones", "areas"
+  add_foreign_key "configuraciones", "ciudades"
+  add_foreign_key "configuraciones", "paises"
+  add_foreign_key "configuraciones", "provincias"
   add_foreign_key "cuotas_por_cliente", "conceptos_de_pago"
   add_foreign_key "cuotas_por_cliente", "descuentos"
   add_foreign_key "cuotas_por_cliente", "intereses"

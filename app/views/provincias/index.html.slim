@@ -1,28 +1,28 @@
 h1 Provincias
 
-.box
-  table class="table table-bordered"
-    thead
-      tr
+br
+table id="provincias_table" class="table table-bordered"
+  thead
+    tr
       th Nombre
       th País
-      th colspan="3" Acciones
+      th.no-print Acciones
 
-    tbody
-      - @provincias.each do |provincia|
-        tr
-          td = provincia.nombre
-          td = provincia.pais.nombre
-          td style="padding: 3px;"
-            - if can? :show, Provincia            
-              a href=(provincia_path(provincia))
-                i.fa.fa-search
-            - if can? :update, Provincia                
-              a href=(edit_provincia_path(provincia))
-                i.fa.fa-pencil
-            - if can? :destroy, Provincia                
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(provincia_path(provincia)) 
-                i.fa.fa-trash
+  tbody
+    - @provincias.each do |provincia|
+      tr
+        td = provincia.nombre
+        td = provincia.pais.nombre
+        td.no-print style="padding: 3px;"
+          - if can? :show, Provincia            
+            a href=(provincia_path(provincia))
+              i.fa.fa-search
+          - if can? :update, Provincia                
+            a href=(edit_provincia_path(provincia))
+              i.fa.fa-pencil
+          - if can? :destroy, Provincia                
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(provincia_path(provincia)) 
+              i.fa.fa-trash
 
 br
 

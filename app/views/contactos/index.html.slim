@@ -1,19 +1,19 @@
 h1 Contactos
 
 .box
-  table class="table table-bordered"
+  table id="contactos_table" class="table table-bordered"
     thead
       tr
         th Nombre
         th Especialidad
-        th colspan="3" Acciones
+        th.no-print Acciones
 
     tbody
       - @contactos.each do |contacto|
         tr
           td = contacto.nombre_y_apellido
           td = contacto.especialidad_de_contacto.nombre
-          td style="padding: 3px;"
+          td.no-print style="padding: 3px;"
             - if can? :show, Contacto
               a href=(contacto_path(contacto))
                 i.fa.fa-search

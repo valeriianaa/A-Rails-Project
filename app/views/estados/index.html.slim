@@ -1,13 +1,13 @@
 h1 Estados
 
 .box
-  table class="table table-bordered"
+  table id="estados_table" class="table table-bordered"
     thead
       tr
         th Nombre
         th Estado anterior
         th Ultimo
-        th colspan="3" Acciones
+        th.no-print Acciones
 
     tbody
       - @estados.each do |estado|
@@ -23,7 +23,7 @@ h1 Estados
             -else
               i.glyphicon.glyphicon-remove 
           
-          td style="padding: 3px;"
+          td.no-print style="padding: 3px;"
             - if can? :show, Estado
               a href=(estado_path(estado))
                 i.fa.fa-search

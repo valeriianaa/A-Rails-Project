@@ -1,21 +1,29 @@
-h1 Listing modelos
-
-table
+h1 Modelos
+br
+table id="modelos_table" class="table table-bordered table-striped dataTable"
   thead
     tr
       th Nombre
-      th
-      th
-      th
+      th.no-print Acciones
 
   tbody
     - @modelos.each do |modelo|
       tr
         td = modelo.nombre
-        td = link_to 'Show', modelo
-        td = link_to 'Edit', edit_modelo_path(modelo)
-        td = link_to 'Destroy', modelo, data: { confirm: 'Are you sure?' }, method: :delete
+        td.no-print style="padding: 3px;"
+            - if can? :show, Modelo
+              a href=(modelo_path(modelo))
+                i.fa.fa-search
+            - if can? :update, Modelo            
+              a href=(edit_modelo_path(modelo))
+                i.fa.fa-pencil
+            - if can? :destroy, Modelo            
+              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(modelo_path(modelo)) 
+                i.fa.fa-trash
 
 br
 
 = link_to 'New Modelo', new_modelo_path
+        / td = link_to 'Show', modelo
+        / td = link_to 'Edit', edit_modelo_path(modelo)
+        / td = link_to 'Destroy', modelo, data: { confirm: 'Are you sure?' }, method: :delete

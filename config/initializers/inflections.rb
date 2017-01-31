@@ -17,6 +17,7 @@
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
 	#inflect.irregular 'categoria', 'categorias'
+	inflect.irregular 'error', 'errores'
 	inflect.irregular 'pais', 'paises'
 	inflect.irregular 'provincia', 'provincias'
 	inflect.irregular 'ciudad', 'ciudades'
@@ -48,4 +49,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'modelo', 'modelos'
 	inflect.irregular 'permiso', 'permisos'
 	inflect.irregular 'rol', 'roles'
+	inflect.irregular 'configuracion','configuraciones'
 end

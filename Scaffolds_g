@@ -112,3 +112,10 @@ rails g migration AddPermisoRefToRol permiso:references
 
 rails g migration AddEmpleadoRefToUser empleado:references
 rails g migration AddRolRefToUser rol:references
+
+--Configuraciones
+
+rails g migration AddPaisRefToConfiguracion pais:references
+rails g migration AddProvinciaRefToConfiguracion provincia:references
+rails g migration AddCiudadRefToConfiguracion ciudad:references
+rails g migration AddAreaRefToConfiguracion area:references

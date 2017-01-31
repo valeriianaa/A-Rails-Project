@@ -1,36 +1,36 @@
 h1 Miembros de Equipo
+br
 
-.box
-  table class="table table-bordered"
-    thead
+table id="miembros_equipo_table" class="table table-bordered" style="background-color: #ffffff;"
+  thead
+    tr
+      th Nombre y Apellido
+      th Tipo y Número de Documento
+      th Teléfono
+      th Proyectos
+      th.no-print Acciones
+
+  tbody
+    - @miembros_equipo.each do |miembro_equipo|
       tr
-        th Nombre y Apellido
-        th Tipo y Número de Documento
-        th Teléfono
-        th Proyectos
-        th colspan="3" Acciones
-
-    tbody
-      - @miembros_equipo.each do |miembro_equipo|
-        tr
-          td = miembro_equipo.nombre_y_apellido
-          td = miembro_equipo.tipo_y_nro_documento
-          td = miembro_equipo.telefono
-          td 
-            - if PersonaProyecto.where(persona_id: miembro_equipo.id).exists?
-              ul
-                - PersonaProyecto.where(persona_id: miembro_equipo.id).each do |pp|
-                  li = Proyecto.find(pp.proyecto_id).nombre
-          td style="padding: 3px;"
-            - if can? :show, MiembroEquipo          
-              a href=(miembro_equipo_path(miembro_equipo))
-                i.fa.fa-search
-            - if can? :update, MiembroEquipo              
-              a href=(edit_miembro_equipo_path(miembro_equipo))
-                i.fa.fa-pencil
-            - if can? :destroy, MiembroEquipo              
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(miembro_equipo_path(miembro_equipo)) 
-                i.fa.fa-trash
+        td = miembro_equipo.nombre_y_apellido
+        td = miembro_equipo.tipo_y_nro_documento
+        td = miembro_equipo.telefono
+        td 
+          - if PersonaProyecto.where(persona_id: miembro_equipo.id).exists?
+            ul
+              - PersonaProyecto.where(persona_id: miembro_equipo.id).each do |pp|
+                li = Proyecto.find(pp.proyecto_id).nombre
+        td.no-print style="padding: 3px;"
+          - if can? :show, MiembroEquipo          
+            a href=(miembro_equipo_path(miembro_equipo))
+              i.fa.fa-search
+          - if can? :update, MiembroEquipo              
+            a href=(edit_miembro_equipo_path(miembro_equipo))
+              i.fa.fa-pencil
+          - if can? :destroy, MiembroEquipo              
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(miembro_equipo_path(miembro_equipo)) 
+              i.fa.fa-trash
 br
 
 = link_to 'Nuevo Miembro de Equipo', new_miembro_equipo_path

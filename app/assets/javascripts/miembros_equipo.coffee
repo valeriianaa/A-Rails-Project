@@ -5,5 +5,6 @@
 //= require jquery.chained
 
 $(document).ready ->
+  $('#miembros_equipo_table').dataTable()
   $("#miembro_equipo_provincia_id").chained("#miembro_equipo_pais_id")
   $("#miembro_equipo_ciudad_id").chained("#miembro_equipo_pais_id, #miembro_equipo_provincia_id")

@@ -1,7 +1,7 @@
 h1 Eventos
 
 .box
-  table class="table table-bordered"
+  table id="eventos_table" class="table table-bordered"
     thead
       tr
         th Nombre
@@ -9,7 +9,7 @@ h1 Eventos
         th Día
         th Hora
         th Expositor
-        th colspan="3" Acciones
+        th.no-print Acciones
 
     tbody
       - @eventos.each do |evento|
@@ -19,7 +19,7 @@ h1 Eventos
           td = evento.dia.strftime('%d-%m-%y')
           td = evento.hora.strftime('%H:%M')
           td = evento.persona.nombre_y_apellido
-          td style="padding: 3px;"
+          td.no-print style="padding: 3px;"
             - if can? :show, Evento
               a href=(evento_path(evento))
                 i.fa.fa-search

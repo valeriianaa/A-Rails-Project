@@ -1,13 +1,13 @@
 h1 Intereses
 
 .box
-  table class="table table-bordered"
+  table id="intereses_table" class="table table-bordered"
     thead
       tr
         th Nombre
         th Descripción
         th Porcentaje
-        th colspan="3" Acciones
+        th.no-print Acciones
 
     tbody
       - @intereses.each do |interes|
@@ -15,7 +15,7 @@ h1 Intereses
           td = interes.nombre
           td = interes.descripcion
           td = interes.porcentaje
-          td style="padding: 3px;"
+          td.no-print style="padding: 3px;"
             - if can? :show, Interes          
               a href=(interes_path(interes))
                 i.fa.fa-search

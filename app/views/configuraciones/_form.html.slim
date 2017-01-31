@@ -1,0 +1,74 @@
+= form_for @configuracion do |f|
+  - if @configuracion.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@configuracion.errors.count, "error")} prohibited this configuracion from being saved:"
+      ul
+        - @configuracion.errors.full_messages.each do |message|
+          li = message
+
+  .box.box-info style="width:100%"
+	.box-header.with-border
+	  h3 Datos Generales
+	.box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+	  .field
+		= f.label :logo, 'Nombre: (*)'
+		= f.file_field :nombre, :class => "form-control"
+	  .field
+		= f.label :nombre, 'Nombre: (*)'
+		= f.text_field :nombre, :class => "form-control"
+	  .field
+		= f.label :eslogan, 'Nombre: (*)'
+		= f.text_field :eslogan, :class => "form-control"
+	  .field
+		= f.label :cuit, 'Nombre: (*)'
+		= f.text_field :cuit, :class => "form-control"
+	  .field
+		= f.label :condicion_iva, 'Nombre: (*)'
+		= f.select :condicion_iva, options_for_select([["Consumidor Final","cf"],["Exento", "exento"],["Monotributista", "monotributista"],["Responsable Inscripto", "ri"]]), :class => "form-control"
+  .box.box-success#domicilio style="width:100%"
+    .box-header.with-border
+      h3 Domicilio
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :pais_id, 'País: (*)', {class: "control-label"}
+        br
+          select#empleado_pais_id.form-control.select2 name="configuracion[pais_id]"
+              - Pais.all.each do |pais|
+                - if @configuracion.pais == pais
+                  option selected='' value=(pais.id) = pais.nombre
+                - else
+                  option value=(pais.id) = pais.nombre
+      .field
+        = f.label :provincia_id, 'Provincia: (*)', {class: "control-label"}
+        br
+          select#configuracion_provincia_id.form-control.select2 name="configuracion[provincia_id]"
+              - Provincia.all.each do |provincia|
+                - if @configuracion.provincia == provincia
+                  option selected='' class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+                - else
+                  option class=(provincia.pais_id) value=(provincia.id) =provincia.nombre
+      .field
+        = f.label :ciudad_id, 'Ciudad: (*)', {class: "control-label"}
+        br
+          select#configuracion_ciudad_id.form-control.select2 name="configuracion[ciudad_id]"
+            - Ciudad.all.each do |ciudad|
+              - if @configuracion.ciudad == ciudad
+                option selected='' class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+              - else
+                option class=("#{ciudad.pais_id}\\#{ciudad.provincia_id}") value=( ciudad.id) =ciudad.nombre
+      .field
+        = f.label :area_id, 'Área:'
+        = f.collection_select :area_id, Area.all, :id, :nombre,{:prompt => "Seleccione un area"}, {:class => 'form-control'}
+      / .field
+      /   = f.label :calle, 'Calle: (*)'
+      /   = f.text_field :calle, :class => "form-control"
+      / .field
+      /   = f.label :nroDomicilio, 'Número: (*)'
+      /   = f.text_field :nroDomicilio, :class => "form-control"
+      / .field
+      /   = f.label :piso, 'Piso:'
+      /   = f.text_field :piso, :class => "form-control"
+      / .field
+      /   = f.label :dpto, 'Departamento:'
+      /   = f.text_field :dpto, :class => "form-control"
+  .actions = f.submit

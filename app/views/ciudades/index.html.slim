@@ -1,13 +1,13 @@
 h1 Ciudades
 
 .box
-  table class="table table-bordered"
+  table id="ciudades_table" class="table table-bordered"
     thead
       tr
       th Nombre
       th Provincia
       th Pais
-      th colspan="3" Acciones
+      th.no-print Acciones
 
     tbody
       - @ciudades.each do |ciudad|
@@ -15,7 +15,7 @@ h1 Ciudades
           td = ciudad.nombre
           td = ciudad.pais.nombre
           td = ciudad.provincia.nombre
-          td style="padding: 3px;"
+          td.no-print style="padding: 3px;"
             - if can? :show, Ciudad
               a href=(ciudad_path(ciudad))
                 i.fa.fa-search

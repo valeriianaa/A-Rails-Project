@@ -1,34 +1,34 @@
 h1 Actividades
+br
 
-.box
-  table class="table table-bordered"
-    thead
+table id="actividades_table" class="table table-bordered"
+  thead
+    tr
+      th Nombre
+      th Obligatorio
+      th Etapa
+      th.no-print Acciones
+
+  tbody
+    - @actividades.each do |actividad|
       tr
-        th Nombre
-        th Obligatorio
-        th Etapa
-        th colspan="3" Acciones
-
-    tbody
-      - @actividades.each do |actividad|
-        tr
-          td = actividad.nombre
-          td 
-            -if actividad.obligatorio == true
-              i.glyphicon.glyphicon-ok 
-            -else
-              i.glyphicon.glyphicon-remove 
-          td = actividad.etapa.nombre
-          td style="padding: 3px;"
-            - if can? :show, Actividad
-              a href=(actividad_path(actividad))
-                i.fa.fa-search
-            - if can? :update, Actividad
-              a href=(edit_actividad_path(actividad))
-                i.fa.fa-pencil
-            - if can? :destroy, Actividad
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(actividad_path(actividad)) 
-                i.fa.fa-trash
+        td = actividad.nombre
+        td 
+          -if actividad.obligatorio == true
+            i.glyphicon.glyphicon-ok 
+          -else
+            i.glyphicon.glyphicon-remove 
+        td = actividad.etapa.nombre
+        td.no-print style="padding: 3px;"
+          - if can? :show, Actividad
+            a href=(actividad_path(actividad))
+              i.fa.fa-search
+          - if can? :update, Actividad
+            a href=(edit_actividad_path(actividad))
+              i.fa.fa-pencil
+          - if can? :destroy, Actividad
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(actividad_path(actividad)) 
+              i.fa.fa-trash
 
 br
 

@@ -1,28 +1,27 @@
 h1 Roles de empleados
+br
+table id="roles_empleados_table" class="table table-bordered"
+  thead
+    tr
+      th Nombre
+      th Departamento al cual pertenece
+      th.no-print Acciones
 
-.box
-  table class="table table-bordered"
-    thead
+  tbody
+    - @roles_de_empleados.each do |rol_de_empleado|
       tr
-        th Nombre
-        th Departamento al cual pertenece
-        th colspan="3" Acciones
-
-    tbody
-      - @roles_de_empleados.each do |rol_de_empleado|
-        tr
-          td = rol_de_empleado.nombre
-          td = rol_de_empleado.departamento.nombre
-          td style="padding: 3px;"
-            - if can? :show, RolDeEmpleado          
-              a href=(rol_de_empleado_path(rol_de_empleado))
-                i.fa.fa-search
-            - if can? :update, RolDeEmpleado              
-              a href=(edit_rol_de_empleado_path(rol_de_empleado))
-                i.fa.fa-pencil
-            - if can? :destroy, RolDeEmpleado              
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(rol_de_empleado_path(rol_de_empleado)) 
-                i.fa.fa-trash
+        td = rol_de_empleado.nombre
+        td = rol_de_empleado.departamento.nombre
+        td.no-print style="padding: 3px;"
+          - if can? :show, RolDeEmpleado          
+            a href=(rol_de_empleado_path(rol_de_empleado))
+              i.fa.fa-search
+          - if can? :update, RolDeEmpleado              
+            a href=(edit_rol_de_empleado_path(rol_de_empleado))
+              i.fa.fa-pencil
+          - if can? :destroy, RolDeEmpleado              
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(rol_de_empleado_path(rol_de_empleado)) 
+              i.fa.fa-trash
 
 br
 

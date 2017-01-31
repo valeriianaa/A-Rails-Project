@@ -1,20 +1,26 @@
-h1 Listing roles
+h1 Roles
+br
 
-table
+table id="roles_table" class="table table-bordered"
   thead
     tr
       th Nombre
-      th
-      th
-      th
+      th.no-print Acciones
 
   tbody
     - @roles.each do |rol|
       tr
         td = rol.nombre
-        td = link_to 'Show', rol
-        td = link_to 'Edit', edit_rol_path(rol)
-        td = link_to 'Destroy', rol, data: { confirm: 'Are you sure?' }, method: :delete
+        td.no-print style="padding: 3px;"
+          - if can? :show, Rol
+            a href=(rol_path(rol))
+              i.fa.fa-search
+          - if can? :update, Rol
+            a href=(edit_rol_path(rol))
+              i.fa.fa-pencil
+          - if can? :destroy, Rol
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(rol_path(rol)) 
+              i.fa.fa-trash
 
 br
 

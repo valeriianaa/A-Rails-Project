@@ -7,3 +7,4 @@
 
 $(document).ready ->
   $("#ciudad_provincia_id").chained("#ciudad_pais_id")
+  $("#ciudades_table").dataTable()

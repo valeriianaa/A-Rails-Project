@@ -1,13 +1,13 @@
 h1 Descuentos
 
 .box
-  table class="table table-bordered"
+  table id="descuentos_table" class="table table-bordered"
     thead
       tr
         th Nombre
         th Descripcion
         th Porcentaje
-        th colspan="3" Acciones
+        th.no-print Acciones
 
     tbody
       - @descuentos.each do |descuento|
@@ -15,7 +15,7 @@ h1 Descuentos
           td = descuento.nombre
           td = descuento.descripcion
           td = descuento.porcentaje
-          td style="padding: 3px;"
+          td.no-print style="padding: 3px;"
             - if can? :show, Descuento
               a href=(descuento_path(descuento))
                 i.fa.fa-search

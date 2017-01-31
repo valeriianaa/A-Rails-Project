@@ -8,6 +8,7 @@
 
 
 $(document).ready ->
+  $('#actividades_table').dataTable()
   $('#actividad_antecedente_id').hide()
   $('#antecedente_label').hide()
   #$("#actividad_antecedente_id").select2 {}
