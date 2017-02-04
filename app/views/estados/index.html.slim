@@ -1,38 +1,37 @@
 h1 Estados
+br
+table id="estados_table" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Nombre
+      th Estado anterior
+      th Ultimo
+      th.no-print Acciones
 
-.box
-  table id="estados_table" class="table table-bordered"
-    thead
+  tbody
+    - @estados.each do |estado|
       tr
-        th Nombre
-        th Estado anterior
-        th Ultimo
-        th.no-print Acciones
-
-    tbody
-      - @estados.each do |estado|
-        tr
-          td = estado.nombre
-          - if estado.previous != nil
-            td = Estado.find(estado.previous).nombre
-          - else
-            td
-          td 
-            -if estado.ultimo == true
-              i.glyphicon.glyphicon-ok 
-            -else
-              i.glyphicon.glyphicon-remove 
-          
-          td.no-print style="padding: 3px;"
-            - if can? :show, Estado
-              a href=(estado_path(estado))
-                i.fa.fa-search
-            - if can? :update, Estado            
-              a href=(edit_estado_path(estado))
-                i.fa.fa-pencil
-            - if can? :destroy, Estado            
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(estado_path(estado)) 
-                i.fa.fa-trash
+        td = estado.nombre
+        - if estado.previous != nil
+          td = Estado.find(estado.previous).nombre
+        - else
+          td
+        td 
+          -if estado.ultimo == true
+            i.glyphicon.glyphicon-ok 
+          -else
+            i.glyphicon.glyphicon-remove 
+        
+        td.no-print style="padding: 3px;"
+          - if can? :show, Estado
+            a href=(estado_path(estado))
+              i.fa.fa-search
+          - if can? :update, Estado            
+            a href=(edit_estado_path(estado))
+              i.fa.fa-pencil
+          - if can? :destroy, Estado            
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(estado_path(estado)) 
+              i.fa.fa-trash
 
 br
 

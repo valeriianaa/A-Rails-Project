@@ -1,26 +1,26 @@
 h1 Áreas
+br
 
-.box
-  table class="table table-bordered"
-    thead
-      tr
+table class="table table-bordered table-striped" 
+  thead
+    tr
       th Nombre
       th colspan="3" Acciones
 
-    tbody
-      - @areas.each do |area|
-        tr
-          td = area.nombre
-          td style="padding: 3px;"
-            - if can? :show, Area
-              a href=(area_path(area))
-                i.fa.fa-search
-            - if can? :update, Area
-              a href=(edit_area_path(area))
-                i.fa.fa-pencil
-            - if can? :destroy, Area
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(area_path(area)) 
-                i.fa.fa-trash
+  tbody
+    - @areas.each do |area|
+      tr
+        td = area.nombre
+        td style="padding: 3px;"
+          - if can? :show, Area
+            a href=(area_path(area))
+              i.fa.fa-search
+          - if can? :update, Area
+            a href=(edit_area_path(area))
+              i.fa.fa-pencil
+          - if can? :destroy, Area
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(area_path(area)) 
+              i.fa.fa-trash
 
 br
 

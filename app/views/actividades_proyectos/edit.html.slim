@@ -5,5 +5,5 @@ h1 Editar actividad_proyecto
 
 = link_to 'Mostrar', @actividad_proyecto
 '|
-= link_to 'Volver', actividades_del_proyecto_path
+= link_to 'Volver', actividades_del_proyecto_path(Proyecto.find(@actividad_proyecto.proyecto_id))
 

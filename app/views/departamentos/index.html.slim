@@ -1,26 +1,26 @@
 h1 Departamentos
 
-.box
-  table id="departamentos_table" class="table table-bordered"
-    thead
-      tr
-        th Nombre
-        th.no-print Acciones
 
-    tbody
-      - @departamentos.each do |departamento|
-        tr
-          td = departamento.nombre
-          td.no-print style="padding: 3px;"
-            - if can? :show, Departamento
-              a href=(departamento_path(departamento))
-                i.fa.fa-search
-            - if can? :update, Departamento
-              a href=(edit_departamento_path(departamento))
-                i.fa.fa-pencil
-            - if can? :destroy, Departamento
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(departamento_path(departamento)) 
-                i.fa.fa-trash
+table id="departamentos_table" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Nombre
+      th.no-print Acciones
+
+  tbody
+    - @departamentos.each do |departamento|
+      tr
+        td = departamento.nombre
+        td.no-print style="padding: 3px;"
+          - if can? :show, Departamento
+            a href=(departamento_path(departamento))
+              i.fa.fa-search
+          - if can? :update, Departamento
+            a href=(edit_departamento_path(departamento))
+              i.fa.fa-pencil
+          - if can? :destroy, Departamento
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(departamento_path(departamento)) 
+              i.fa.fa-trash
 
 br
 

@@ -1,30 +1,29 @@
 h1 Ciudades
-
-.box
-  table id="ciudades_table" class="table table-bordered"
-    thead
-      tr
+br
+table id="ciudades_table" class="table table-bordered table-striped" 
+  thead
+    tr
       th Nombre
       th Provincia
       th Pais
       th.no-print Acciones
 
-    tbody
-      - @ciudades.each do |ciudad|
-        tr
-          td = ciudad.nombre
-          td = ciudad.pais.nombre
-          td = ciudad.provincia.nombre
-          td.no-print style="padding: 3px;"
-            - if can? :show, Ciudad
-              a href=(ciudad_path(ciudad))
-                i.fa.fa-search
-            - if can? :update, Ciudad
-              a href=(edit_ciudad_path(ciudad))
-                i.fa.fa-pencil
-            - if can? :destroy, Ciudad
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(ciudad_path(ciudad)) 
-                i.fa.fa-trash
+  tbody
+    - @ciudades.each do |ciudad|
+      tr
+        td = ciudad.nombre
+        td = ciudad.pais.nombre
+        td = ciudad.provincia.nombre
+        td.no-print style="padding: 3px;"
+          - if can? :show, Ciudad
+            a href=(ciudad_path(ciudad))
+              i.fa.fa-search
+          - if can? :update, Ciudad
+            a href=(edit_ciudad_path(ciudad))
+              i.fa.fa-pencil
+          - if can? :destroy, Ciudad
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(ciudad_path(ciudad)) 
+              i.fa.fa-trash
 
 br
 

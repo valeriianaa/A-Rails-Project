@@ -18,10 +18,10 @@ p
 	          th Usuario que realizó la acción
             - Historial.where(actividad_proyecto_id: @actividad_proyecto.id).each do |h|
               tr
-                td = h.fechaHora.strftime('%d-%m-%y')
+                td = h.fechaHora.strftime('%d-%m-%y %H:%M hs')
                 td = h.estado.nombre 
-                td
+                td 
 
 = link_to 'Editar', edit_actividad_proyecto_path(@actividad_proyecto)
 '|
-= link_to 'Volver', actividades_del_proyecto_path
+= link_to 'Volver', actividades_del_proyecto_path(Proyecto.find(@actividad_proyecto.proyecto_id))

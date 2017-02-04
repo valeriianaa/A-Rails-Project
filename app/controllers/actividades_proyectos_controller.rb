@@ -42,7 +42,6 @@ class ActividadesProyectosController < ApplicationController
   # PATCH/PUT /actividades_proyectos/1
   # PATCH/PUT /actividades_proyectos/1.json
   def update
-    puts 'lalalalalaalalal'
     puts params[:actividad_proyecto][:unEstado]
     una_fecha_aux = Time.new(params[:actividad_proyecto]['unaFecha(1i)'], params[:actividad_proyecto]['unaFecha(2i)'], params[:actividad_proyecto]['unaFecha(3i)'], params[:actividad_proyecto]['unaFecha(4i)'], params[:actividad_proyecto]['unaFecha(5i)'])
     puts una_fecha_aux
@@ -65,9 +64,25 @@ class ActividadesProyectosController < ApplicationController
       f = Historial.where(actividad_proyecto_id: @actividad_proyecto.id).last
       puts f
       if @actividad_proyecto.update(actividad_proyecto_params)
+        if f.estado.ultimo == true
+          if @actividad_proyecto.estado_ultimo_y_obligatorio == true
+            if @actividad_proyecto.obligatorias_completadas == true
+              unProyecto = Proyecto.find(@actividad_proyecto.proyecto_id)
+              etapaAnterior = unProyecto.etapa_id
+              etapaSiguiente = Etapa.where(etapaAnterior: etapaAnterior)
+              #unProyecto.update(etapa_id: etapaSiguiente.pluck(:id)[0].to_i)
+              #Rails.logger.info(unProyecto.errors.inspect)
+              #unProyecto.anadir_actividades
+              #flash[:notice] = "Tu proyecto ha avanzado a la siguiente etapa"
+              puts 'no esta haciendo lo que queremos :('
+            end
+          end
+        end
         format.html { redirect_to @actividad_proyecto, notice: 'Actividad proyecto was successfully updated.' }
         format.json { render :show, status: :ok, location: @actividad_proyecto }
-        @actividad_proyecto.transicion_sig_etapa
+        # if @actividad_proyecto.obligatorias_completadas == true
+        #   @actividad_proyecto.proyecto.transicion_siguiente_etapa(@actividad_proyecto.proyecto_id)
+        # end
       else
         format.html { render :edit }
         format.json { render json: @actividad_proyecto.errors, status: :unprocessable_entity }

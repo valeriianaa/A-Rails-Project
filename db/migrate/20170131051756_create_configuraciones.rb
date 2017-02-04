@@ -7,6 +7,12 @@ class CreateConfiguraciones < ActiveRecord::Migration
       t.string :cuit
       t.string :condicion_iva
       t.datetime :plazo_abandono
+      t.string :calle
+      t.string :nroDomicilio
+      t.string :piso
+      t.string :dpto
+      t.string :telefono
+      t.string :email
 
       t.timestamps null: false
     end

@@ -52,12 +52,7 @@ class ProyectosController < ApplicationController
     respond_to do |format|
       if @proyecto.update(proyecto_params)
         if @proyecto.etapa_id != etapaId_vieja
-          Actividad.where(:etapa_id => @proyecto.etapa_id).each do |act|
-            ap = ActividadProyecto.new
-            ap.proyecto_id= @proyecto.id 
-            ap.actividad_id = act.id
-            ap.save
-          end
+          @proyecto.anadir_actividades
         end
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully updated.' }
         format.json { render :show, status: :ok, location: @proyecto }

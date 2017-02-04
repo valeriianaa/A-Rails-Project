@@ -22,4 +22,13 @@ class Proyecto < ActiveRecord::Base
 	validates :nombre, :descripcion, :calle, :nroDomicilio, :pais_id, :provincia_id, :ciudad_id, :etapa_id, presence: true
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :email?
 	validates :dpto, presence: true, if: :piso?
+
+	def anadir_actividades
+      Actividad.where(:etapa_id => self.etapa_id).each do |act|
+        ap = ActividadProyecto.new
+        ap.proyecto_id= self.id 
+        ap.actividad_id = act.id
+        ap.save
+      end
+	end
 end

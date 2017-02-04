@@ -1,34 +1,34 @@
 h1 Eventos
 
-.box
-  table id="eventos_table" class="table table-bordered"
-    thead
-      tr
-        th Nombre
-        th Descripción
-        th Día
-        th Hora
-        th Expositor
-        th.no-print Acciones
+br
+table id="eventos_table" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Nombre
+      th Descripción
+      th Día
+      th Hora
+      th Expositor
+      th.no-print Acciones
 
-    tbody
-      - @eventos.each do |evento|
-        tr
-          td = evento.nombre
-          td = evento.descripcion
-          td = evento.dia.strftime('%d-%m-%y')
-          td = evento.hora.strftime('%H:%M')
-          td = evento.persona.nombre_y_apellido
-          td.no-print style="padding: 3px;"
-            - if can? :show, Evento
-              a href=(evento_path(evento))
-                i.fa.fa-search
-            - if can? :update, Evento
-              a href=(edit_evento_path(evento))
-                i.fa.fa-pencil
-            - if can? :destroy, Evento              
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_path(evento)) 
-                i.fa.fa-trash
+  tbody
+    - @eventos.each do |evento|
+      tr
+        td = evento.nombre
+        td = evento.descripcion
+        td = evento.dia.strftime('%d-%m-%y')
+        td = evento.hora.strftime('%H:%M')
+        td = evento.persona.nombre_y_apellido
+        td.no-print style="padding: 3px;"
+          - if can? :show, Evento
+            a href=(evento_path(evento))
+              i.fa.fa-search
+          - if can? :update, Evento
+            a href=(edit_evento_path(evento))
+              i.fa.fa-pencil
+          - if can? :destroy, Evento              
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_path(evento)) 
+              i.fa.fa-trash
 
 br
 

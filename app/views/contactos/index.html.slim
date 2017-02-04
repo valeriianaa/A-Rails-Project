@@ -1,28 +1,27 @@
 h1 Contactos
+br
+table id="contactos_table" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Nombre
+      th Especialidad
+      th.no-print Acciones
 
-.box
-  table id="contactos_table" class="table table-bordered"
-    thead
+  tbody
+    - @contactos.each do |contacto|
       tr
-        th Nombre
-        th Especialidad
-        th.no-print Acciones
-
-    tbody
-      - @contactos.each do |contacto|
-        tr
-          td = contacto.nombre_y_apellido
-          td = contacto.especialidad_de_contacto.nombre
-          td.no-print style="padding: 3px;"
-            - if can? :show, Contacto
-              a href=(contacto_path(contacto))
-                i.fa.fa-search
-            - if can? :update, Contacto
-              a href=(edit_contacto_path(contacto))
-                i.fa.fa-pencil
-            - if can? :destroy, Contacto
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(contacto_path(contacto)) 
-                i.fa.fa-trash
+        td = contacto.nombre_y_apellido
+        td = contacto.especialidad_de_contacto.nombre
+        td.no-print style="padding: 3px;"
+          - if can? :show, Contacto
+            a href=(contacto_path(contacto))
+              i.fa.fa-search
+          - if can? :update, Contacto
+            a href=(edit_contacto_path(contacto))
+              i.fa.fa-pencil
+          - if can? :destroy, Contacto
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(contacto_path(contacto)) 
+              i.fa.fa-trash
 
 br
 

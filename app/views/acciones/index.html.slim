@@ -1,30 +1,30 @@
 h1 Acciones
 
-.box
-  table id="acciones_table" class="table table-bordered"
-    thead
-      tr
-        th Nombre
-        th Palabra clave
-        th Modelos Asociados
-        th.no-print Acciones
+br
+table id="acciones_table" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Nombre
+      th Palabra clave
+      th Modelos Asociados
+      th.no-print Acciones
 
-    tbody
-      - @acciones.each do |accion|
-        tr
-          td = accion.nombre
-          td = accion.key_name
-          td  
-          td.no-print style="padding: 3px;"
-            - if can? :show, Accion
-              a href=(accion_path(accion))
-                i.fa.fa-search
-            - if can? :update, Accion
-              a href=(edit_accion_path(accion))
-                i.fa.fa-pencil
-            - if can? :destroy, Accion
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(accion_path(accion)) 
-                i.fa.fa-trash
+  tbody
+    - @acciones.each do |accion|
+      tr
+        td = accion.nombre
+        td = accion.key_name
+        td  
+        td.no-print style="padding: 3px;"
+          - if can? :show, Accion
+            a href=(accion_path(accion))
+              i.fa.fa-search
+          - if can? :update, Accion
+            a href=(edit_accion_path(accion))
+              i.fa.fa-pencil
+          - if can? :destroy, Accion
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(accion_path(accion)) 
+              i.fa.fa-trash
 
 br
 

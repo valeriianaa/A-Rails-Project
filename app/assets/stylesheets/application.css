@@ -61,3 +61,7 @@ p#foot {
 	font-weight: 700;
 	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+table.table-bordered.table-striped{
+	background-color: #FFFFFF;
+}

@@ -1,28 +1,28 @@
 h1 Especialidades
 
-.box
-  table id="especialidades_table" class="table table-bordered"
-    thead
-      tr
+br
+table id="especialidades_table" class="table table-bordered table-striped" 
+  thead
+    tr
       th Nombre
       th Descripcion
       th.no-print Acciones
 
-    tbody
-      - @especialidades_de_contacto.each do |especialidad_de_contacto|
-        tr
-          td = especialidad_de_contacto.nombre
-          td = especialidad_de_contacto.descripcion
-          td.no-print style="padding: 3px;"
-            - if can? :show, EspecialidadDeContacto
-              a href=(especialidad_de_contacto_path(especialidad_de_contacto))
-                i.fa.fa-search
-            - if can? :update, EspecialidadDeContacto
-              a href=(edit_especialidad_de_contacto_path(especialidad_de_contacto))
-                i.fa.fa-pencil
-            - if can? :destroy, EspecialidadDeContacto              
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(especialidad_de_contacto_path(especialidad_de_contacto)) 
-                i.fa.fa-trash
+  tbody
+    - @especialidades_de_contacto.each do |especialidad_de_contacto|
+      tr
+        td = especialidad_de_contacto.nombre
+        td = especialidad_de_contacto.descripcion
+        td.no-print style="padding: 3px;"
+          - if can? :show, EspecialidadDeContacto
+            a href=(especialidad_de_contacto_path(especialidad_de_contacto))
+              i.fa.fa-search
+          - if can? :update, EspecialidadDeContacto
+            a href=(edit_especialidad_de_contacto_path(especialidad_de_contacto))
+              i.fa.fa-pencil
+          - if can? :destroy, EspecialidadDeContacto              
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(especialidad_de_contacto_path(especialidad_de_contacto)) 
+              i.fa.fa-trash
 
 br
 

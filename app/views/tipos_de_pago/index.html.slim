@@ -1,23 +1,23 @@
 h1 Tipos de pago
 
-.box
-  table class="table table-bordered"
-    thead
-      tr
+
+table class="table table-bordered table-striped" 
+  thead
+    tr
       th Nombre
       th colspan="3" Acciones
 
-    tbody
-      - @tipos_de_pago.each do |tipo_de_pago|
-        tr
-          td = tipo_de_pago.nombre
-          td style="padding: 3px;"
-            a href=(tipo_de_pago_path(tipo_de_pago))
-              i.fa.fa-search
-            a href=(edit_tipo_de_pago_path(tipo_de_pago))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(tipo_de_pago_path(tipo_de_pago)) 
-              i.fa.fa-trash
+  tbody
+    - @tipos_de_pago.each do |tipo_de_pago|
+      tr
+        td = tipo_de_pago.nombre
+        td style="padding: 3px;"
+          a href=(tipo_de_pago_path(tipo_de_pago))
+            i.fa.fa-search
+          a href=(edit_tipo_de_pago_path(tipo_de_pago))
+            i.fa.fa-pencil
+          a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(tipo_de_pago_path(tipo_de_pago)) 
+            i.fa.fa-trash
 
 br
 

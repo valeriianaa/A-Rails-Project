@@ -1,30 +1,30 @@
 h1 Intereses
 
-.box
-  table id="intereses_table" class="table table-bordered"
-    thead
-      tr
-        th Nombre
-        th Descripción
-        th Porcentaje
-        th.no-print Acciones
+br
+table id="intereses_table" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Nombre
+      th Descripción
+      th Porcentaje
+      th.no-print Acciones
 
-    tbody
-      - @intereses.each do |interes|
-        tr
-          td = interes.nombre
-          td = interes.descripcion
-          td = interes.porcentaje
-          td.no-print style="padding: 3px;"
-            - if can? :show, Interes          
-              a href=(interes_path(interes))
-                i.fa.fa-search
-            - if can? :update, Interes              
-              a href=(edit_interes_path(interes))
-                i.fa.fa-pencil
-            - if can? :destroy, Interes              
-              a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(interes_path(interes)) 
-                i.fa.fa-trash
+  tbody
+    - @intereses.each do |interes|
+      tr
+        td = interes.nombre
+        td = interes.descripcion
+        td = interes.porcentaje
+        td.no-print style="padding: 3px;"
+          - if can? :show, Interes          
+            a href=(interes_path(interes))
+              i.fa.fa-search
+          - if can? :update, Interes              
+            a href=(edit_interes_path(interes))
+              i.fa.fa-pencil
+          - if can? :destroy, Interes              
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(interes_path(interes)) 
+              i.fa.fa-trash
 
 br
 
