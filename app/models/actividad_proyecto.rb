@@ -5,13 +5,14 @@ class ActividadProyecto < ActiveRecord::Base
 	has_many :historiales
 	attr_accessor :unEstado, :unaFecha  
 
-	validate :antecedentes_completados
+	audited
+	# validate :antecedentes_completados
 
-	def antecedentes_completados
-		if self.estado.ultimo == true
-			errors.add(:base, "la actividad no puede actualizar a este estado")
-		end
-	end
+	# def antecedentes_completados
+	# 	if self.estado.ultimo == true
+	# 		errors.add(:base, "la actividad no puede actualizar a este estado")
+	# 	end
+	# end
 
 	def estado_ultimo_y_obligatorio
 		if (self.actividad.obligatorio == true) and (self.estado.ultimo == true)

@@ -126,10 +126,18 @@ Estado.create!([
 ])
 
 ConceptoDePago.create!([
-  {nombre: "Cuota de Septiembre", descripcion: "corresponde al año 2016", monto: 200.0, fechaVencimiento: "2016-09-10 00:00:00", plazoRecordatorio: "2016-08-31 00:00:00"},
-  {nombre: "Cuota de Octubre", descripcion: "año 2016", monto: 200.0, fechaVencimiento: "2016-10-10 00:00:00", plazoRecordatorio: "2016-09-25 00:00:00"},
-  {nombre: "Cuota de Noviembre", descripcion: "año 2016", monto: 200.0, fechaVencimiento: "2016-11-10 00:00:00", plazoRecordatorio: "2016-10-21 00:00:00"},
-  {nombre: "Cuota de Diciembre", descripcion: "año 2016", monto: 200.0, fechaVencimiento: "2016-12-10 00:00:00", plazoRecordatorio: "2016-11-26 00:00:00"}
+  {nombre: "Cuota de Enero", descripcion: "enero 2017", monto: 200.0, fechaInicioDePago: "2017-01-01 00:00:00", fechaVencimiento: "2017-01-04 00:00:00", plazoRecordatorio: "2016-12-19 00:00:00"},
+  {nombre: "Cuota de Febrero", descripcion: "febrero 2017", monto: 200.0, fechaInicioDePago: "2017-02-01 00:00:00", fechaVencimiento: "2017-02-10 00:00:00", plazoRecordatorio: "2017-01-26 00:00:00"},
+  {nombre: "Cuota de Marzo", descripcion: "marzo 2017", monto: 200.0, fechaInicioDePago: "2017-03-01 00:00:00", fechaVencimiento: "2017-03-10 00:00:00", plazoRecordatorio: "2017-02-26 00:00:00"},
+  {nombre: "Cuota de Abril", descripcion: "abril 2017", monto: 200.0, fechaInicioDePago: "2017-04-01 00:00:00", fechaVencimiento: "2017-04-04 00:00:00", plazoRecordatorio: "2017-03-19 00:00:00"},
+  {nombre: "Cuota de Mayo", descripcion: "mayo 2017", monto: 200.0, fechaInicioDePago: "2017-05-01 00:00:00", fechaVencimiento: "2017-05-10 00:00:00", plazoRecordatorio: "2017-04-26 00:00:00"},
+  {nombre: "Cuota de Junio", descripcion: "junio 2017", monto: 200.0, fechaInicioDePago: "2017-06-01 00:00:00", fechaVencimiento: "2017-06-10 00:00:00", plazoRecordatorio: "2017-05-26 00:00:00"},
+  {nombre: "Cuota de Julio", descripcion: "julio 2017", monto: 200.0, fechaInicioDePago: "2017-07-01 00:00:00", fechaVencimiento: "2017-07-04 00:00:00", plazoRecordatorio: "2017-06-19 00:00:00"},
+  {nombre: "Cuota de Agosto", descripcion: "agosto 2017", monto: 200.0, fechaInicioDePago: "2017-08-01 00:00:00", fechaVencimiento: "2017-08-10 00:00:00", plazoRecordatorio: "2017-07-26 00:00:00"},
+  {nombre: "Cuota de Septiembre", descripcion: "septiembre 2017", monto: 200.0, fechaInicioDePago: "2017-09-01 00:00:00", fechaVencimiento: "2017-09-10 00:00:00", plazoRecordatorio: "2017-08-26 00:00:00"},
+  {nombre: "Cuota de Octubre", descripcion: "octubre 2017", monto: 200.0, fechaInicioDePago: "2017-10-01 00:00:00", fechaVencimiento: "2017-10-04 00:00:00", plazoRecordatorio: "2017-09-19 00:00:00"},
+  {nombre: "Cuota de Noviembre", descripcion: "noviembre 2017", monto: 200.0, fechaInicioDePago: "2017-11-01 00:00:00", fechaVencimiento: "2017-11-10 00:00:00", plazoRecordatorio: "2017-10-26 00:00:00"},
+  {nombre: "Cuota de Diciembre", descripcion: "diciembre 2017", monto: 200.0, fechaInicioDePago: "2017-12-01 00:00:00", fechaVencimiento: "2017-12-10 00:00:00", plazoRecordatorio: "2017-11-25 00:00:00"}
 ])
 
 Descuento.create!([
@@ -140,16 +148,11 @@ Interes.create!([
   {nombre: "Interes 20%", descripcion: "-", porcentaje: 20.0}
 ])
 
-CuotaPorCliente.create!([
-  {mensaje: nil, montoTotal: 192.0, montoAcreditado: 0.0, concepto_de_pago_id: 1, persona_proyecto_id: nil, proyecto_id: 2, interes_id: 1, descuento_id: 1},
-  {mensaje: nil, montoTotal: 240.0, montoAcreditado: 0.0, concepto_de_pago_id: 2, persona_proyecto_id: nil, proyecto_id: 2, interes_id: 1, descuento_id: nil},
-  {mensaje: nil, montoTotal: 180.0, montoAcreditado: 0.0, concepto_de_pago_id: 3, persona_proyecto_id: nil, proyecto_id: 2, interes_id: nil, descuento_id: 1}
-])
-
 Accion.create!([
   {nombre: "Crear", key_name: "create"},
   {nombre: "Editar", key_name: "edit"},
-  {nombre: "Eliminar", key_name: "destroy"}
+  {nombre: "Eliminar", key_name: "destroy"},
+  {nombre: "Ver", key_name: "show"}
 ])
 
 Modelo.create!([
@@ -159,15 +162,19 @@ Modelo.create!([
 Permiso.create!([
   {accion_id: 1, modelo_id: 1},
   {accion_id: 2, modelo_id: 1},
-  {accion_id: 3, modelo_id: 1}
+  {accion_id: 3, modelo_id: 1},
+  {accion_id: 4, modelo_id: 1}
 ])
 
 Rol.create!([
-  {nombre: "admin_empleados"}
+  {nombre: "admin_empleados"},
+  {nombre: "super_admin"}
 ])
 
 User.create!([
-  {email: "mq@gmail.com", encrypted_password: "12345678", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 2, rol_id: 1}
+  {email: "mq@gmail.com", password: "12345678", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 2, rol_id: 1},
+  {email: "valeriianaa@gmail.com", password: "12345678", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 1, rol_id: 2}
 ])
 #--------------------------------------------------------
+
 

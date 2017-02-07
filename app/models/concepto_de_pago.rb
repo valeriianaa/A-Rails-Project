@@ -5,4 +5,6 @@ class ConceptoDePago < ActiveRecord::Base
 
 	validates :nombre, :monto, presence: true
 	validates :nombre, uniqueness: { case_sensitive: false }
+
+	audited
 end

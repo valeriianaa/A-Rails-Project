@@ -61,6 +61,11 @@ class EventosProyectosController < ApplicationController
     end
   end
 
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "EventoProyecto"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_evento_proyecto

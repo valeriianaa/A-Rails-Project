@@ -111,6 +111,10 @@ class ActividadesProyectosController < ApplicationController
     end
   end
   
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "ActividadProyecto"
+  end
   # def estado_ultimo_y_obligatorio
   #   retorno = false
   #   h = Historial.where(actividad_proyecto_id: @actividad_proyecto.id).last

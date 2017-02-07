@@ -62,7 +62,7 @@ rails g migration AddDepartamentoRefToRolDeEmpleado departamento:references
 
 --pagos y tipos de pago
 rails g scaffold ConceptoDePago nombre:string descripcion:text monto:float fechaVencimiento:date plazoRecordatorio:date
-rails g scaffold Contrato interes:float descuento:float montoTotal:float
+rails g scaffold Contrato fechaInicio:date fechaFin:date
 rails g scaffold Pago fecha:date monto:float
 rails g scaffold TipoDePago nombre:string
 rails g scaffold Interes nombre:string descripcion:text porcentaje:float
@@ -70,15 +70,18 @@ rails g scaffold Descuento nombre:string descripcion:text porcentaje:float
 
 
 rails g migration AddConceptoDePagoRefToContrato concepto_de_pago:references
-rails g migration AddPersonaProyectoRefToContrato persona_proyecto:references
+rails g migration AddPersonaRefToContrato persona:references
+rails g migration AddProyectoRefToContrato proyecto:references
 rails g migration AddProyectoRefToContrato proyecto:references
 
 rails g migration AddCuotaPorClienteRefToPago cuota_por_cliente:references
 rails g migration AddTipoDePagoToPago tipo_de_pago:references
 rails g migration AddProyectoRefToPago proyecto:references
 rails g migration AddPersonaRefToPago persona:references
+
 rails g migration AddInteresRefToCuotaPorCliente interes:references
 rails g migration AddDescuentoRefToCuotaPorCliente descuento:references
+rails g migration AddContratoRefToCuotaPorCliente contrato:references
 
 
 --Outsourcing y Eventos

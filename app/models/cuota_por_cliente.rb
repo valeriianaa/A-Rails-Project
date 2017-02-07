@@ -7,6 +7,8 @@ class CuotaPorCliente < ActiveRecord::Base
 	validates :proyecto_id, :concepto_de_pago_id , presence: true
 	validates :concepto_de_pago_id, uniqueness: { scope: :proyecto_id, message: "El concepto de pago ya está asociado al proyecto" }
 
+	estados = ['no pagado', 'pago incompleto', 'pagado']
+	audited
 	def setear_monto_total
 		monto_inicial = ConceptoDePago.find(self.concepto_de_pago_id).monto
 		monto_retorno = monto_inicial

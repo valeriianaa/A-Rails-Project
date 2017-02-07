@@ -6,3 +6,14 @@ strftime("%a, %e de %B de %Y, %H:%M hs")
 
 dd-mm-yy   hr:min
 strftime('%d-%m-%y   %H:%M')
+
+
+Consultas especiales
+
+cpf1 = Date.new (2017, 8, 1)
+cpf2 = Date.new (2018, 4, 30)
+
+ConceptoDePago.where("date(:fechaVencimiento) between :start and :end", {start: cpf1.to_formatted_s(:month_and_year), end: cpf2.to_formatted_s(:month_and_year)})
+
+
+ConceptoDePago.where(:fechaVencimiento => cpf1..cpf2).count

@@ -64,6 +64,11 @@ class ConceptosDePagoController < ApplicationController
     end
   end
 
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "ConceptoDePago"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_concepto_de_pago
@@ -72,6 +77,6 @@ class ConceptosDePagoController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concepto_de_pago_params
-      params.require(:concepto_de_pago).permit(:nombre, :descripcion, :monto, :fechaVencimiento, :plazoRecordatorio, :diferencia)
+      params.require(:concepto_de_pago).permit(:nombre, :descripcion, :monto, :fechaInicioDePago, :fechaVencimiento, :plazoRecordatorio, :diferencia)
     end
 end

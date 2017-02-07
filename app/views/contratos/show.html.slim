@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Fechainicio:
+  = @contrato.fechaInicio
+p
+  strong Fechafin:
+  = @contrato.fechaFin
+
+= link_to 'Edit', edit_contrato_path(@contrato)
+'|
+= link_to 'Back', contratos_path

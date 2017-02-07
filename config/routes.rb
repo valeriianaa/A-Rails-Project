@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :contratos
   resources :configuraciones
   resources :roles
   resources :permisos
@@ -45,6 +46,17 @@ Rails.application.routes.draw do
   match 'users' => 'users#index', :via => [:get]
   match 'users/:id' => 'users#show', :via => [:get], as: :user_show
   match 'users/:id' => 'users#destroy', :via => [:delete], as: :user
+
+
+  #Audited
+  match 'actividades_proyectos_audited' => 'actividades_proyectos#audited', :via => [:get], as: :actividades_proyectos_audited
+  match 'conceptos_de_pago_audited' => 'conceptos_de_pago#audited', :via => [:get], as: :conceptos_de_pago_audited
+  match 'contratos_audited' => 'contratos#audited', :via => [:get], as: :contratos_audited
+  match 'cuotas_por_cliente_audited' => 'cuotas_por_cliente#audited', :via => [:get], as: :cuotas_por_cliente_audited
+  match 'eventos_audited' => 'eventos#audited', :via => [:get], as: :eventos_audited
+  match 'eventos_proyectos_audited' => 'eventos_proyectos#audited', :via => [:get], as: :eventos_proyectos_audited
+  match 'proyectos_audited' => 'proyectos#audited', :via => [:get], as: :proyectos_audited
+  #match 'pagos_audited' => 'pagos#audited', :via => [:get], as: :pagos_audited
   #devise_for :installs
   #match 'proyectos/:proyecto_id/actividades_proyectos/:id/historial' => 'actividades_proyectos#historial',  :via => [:get], as: :historial
   

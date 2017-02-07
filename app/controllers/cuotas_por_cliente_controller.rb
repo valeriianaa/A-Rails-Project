@@ -64,6 +64,11 @@ class CuotasPorClienteController < ApplicationController
     end
   end
 
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "CuotaPorCliente"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cuota_por_cliente
@@ -72,6 +77,6 @@ class CuotasPorClienteController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cuota_por_cliente_params
-      params.require(:cuota_por_cliente).permit(:mensaje, :concepto_de_pago_id, :proyecto_id, :interes_id, :descuento_id, :montoTotal, :montoAcreditado)
+      params.require(:cuota_por_cliente).permit(:concepto_de_pago_id, :montoTotal, :montoAcreditado, :estado)
     end
 end

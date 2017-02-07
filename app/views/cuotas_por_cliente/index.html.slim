@@ -6,9 +6,6 @@ h1 Cuotas por Cliente
       tr
         th Proyecto
         th Concepto de Pago
-        th Subtotal
-        th Interes
-        th Descuento
         th Monto Total
         th Monto Acreditado
         th colspan="3" Acciones
@@ -18,15 +15,6 @@ h1 Cuotas por Cliente
         tr
           td = cuota_por_cliente.proyecto.nombre
           td = cuota_por_cliente.concepto_de_pago.nombre
-          td = cuota_por_cliente.concepto_de_pago.monto
-          -if cuota_por_cliente.interes_id != nil
-            td = cuota_por_cliente.interes.nombre
-          -else
-            td
-          -if cuota_por_cliente.descuento_id != nil
-            td = cuota_por_cliente.descuento.nombre
-          -else
-            td
           td = cuota_por_cliente.montoTotal
           td = cuota_por_cliente.montoAcreditado
           td style="padding: 3px;"
@@ -41,3 +29,18 @@ h1 Cuotas por Cliente
 br
 
 = link_to 'Asignar nueva cuota a cliente', new_cuota_por_cliente_path
+          
+
+          / th Subtotal
+          / th Interes
+          / th Descuento
+              
+              / td = cuota_por_cliente.concepto_de_pago.monto
+              / -if cuota_por_cliente.interes_id != nil
+              /   td = cuota_por_cliente.interes.nombre
+              / -else
+              /   td
+              / -if cuota_por_cliente.descuento_id != nil
+              /   td = cuota_por_cliente.descuento.nombre
+              / -else
+              /   td

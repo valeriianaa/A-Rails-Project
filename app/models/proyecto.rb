@@ -23,6 +23,8 @@ class Proyecto < ActiveRecord::Base
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :email?
 	validates :dpto, presence: true, if: :piso?
 
+	audited
+	
 	def anadir_actividades
       Actividad.where(:etapa_id => self.etapa_id).each do |act|
         ap = ActividadProyecto.new

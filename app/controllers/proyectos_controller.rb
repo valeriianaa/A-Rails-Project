@@ -83,6 +83,10 @@ class ProyectosController < ApplicationController
     end
   end
 
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Proyecto"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

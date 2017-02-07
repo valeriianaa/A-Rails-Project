@@ -48,6 +48,9 @@ gem 'cancan'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
 
+gem "audited", "~> 4.0"
+
+gem 'audited-activerecord', '~> 4.2'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
