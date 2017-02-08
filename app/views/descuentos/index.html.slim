@@ -1,7 +1,12 @@
-h1 Descuentos
-
+.index-header
+  h1 
+    | Descuentos  
+    - if can? :create, Descuento
+      a.btn.btn-info href=(new_descuento_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-table id="descuentos_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -28,4 +33,4 @@ table id="descuentos_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Descuento', new_descuento_path
+/= link_to 'Nuevo Descuento', new_descuento_path

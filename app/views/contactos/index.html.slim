@@ -1,6 +1,12 @@
-h1 Contactos
+.index-header
+  h1 
+    | Contactos  
+    - if can? :create, Contacto
+      a.btn.btn-info href=(new_contacto_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-table id="contactos_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre

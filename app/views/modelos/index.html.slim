@@ -1,6 +1,12 @@
-h1 Modelos
+.index-header
+  h1 
+    | Modelos  
+    - if can? :create, Modelo
+      a.btn.btn-info href=(new_modelo_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-table id="modelos_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -23,7 +29,7 @@ table id="modelos_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'New Modelo', new_modelo_path
+/= link_to 'New Modelo', new_modelo_path
         / td = link_to 'Show', modelo
         / td = link_to 'Edit', edit_modelo_path(modelo)
         / td = link_to 'Destroy', modelo, data: { confirm: 'Are you sure?' }, method: :delete

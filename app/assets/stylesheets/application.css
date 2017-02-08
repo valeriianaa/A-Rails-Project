@@ -65,3 +65,19 @@ p#foot {
 table.table-bordered.table-striped{
 	background-color: #FFFFFF;
 }
+
+div.index-header{
+	border-bottom-style: solid; 
+	border-color: #f4f4f4;
+	border-bottom-width:1px;
+}
+
+div.index-header a{
+	color: #ffffff;
+}
+
+div.index-header a#etapa{
+	color: #ffffff;
+	background-color: #605ca8;
+	border-color: #555299;
+}

@@ -1,7 +1,12 @@
-h1 Usuarios
+.index-header
+  h1 
+    | Usuarios  
+    - if can? :create, User
+      a.btn.btn-info href=(new_user_registration_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-
-table id="usuarios_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
     th Empleado
@@ -29,4 +34,14 @@ table id="usuarios_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Usuario', new_user_registration_path
+/= link_to 'Nuevo Usuario', new_user_registration_path
+
+  / h1
+  /   | Todas las Acciones
+  /   - if can? :new, Accion
+  /     small.no-print
+  /       i.ace-icon.fa.fa-angle-double-right
+  /       | &nbsp;
+  /       a.btn.btn-xs.btn-success href=(new_accion_path)
+  /         i.ace-icon.fa.fa-plus.bigger-110
+  /         | Nueva Accion

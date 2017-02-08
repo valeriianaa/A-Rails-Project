@@ -1,7 +1,12 @@
-h1 Miembros de Equipo
+.index-header
+  h1 
+    | Miembros de equipo  
+    - if can? :create, MiembroEquipo
+      a.btn.btn-info href=(new_miembro_equipo_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-
-table id="miembros_equipo_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre y Apellido
@@ -33,4 +38,4 @@ table id="miembros_equipo_table" class="table table-bordered table-striped"
               i.fa.fa-trash
 br
 
-= link_to 'Nuevo Miembro de Equipo', new_miembro_equipo_path
+/= link_to 'Nuevo Miembro de Equipo', new_miembro_equipo_path

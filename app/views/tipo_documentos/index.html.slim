@@ -1,7 +1,12 @@
-h1 Tipos de Documentos
-
+.index-header
+  h1 
+    | Tipos de documentos  
+    - if can? :create, TipoDocumento
+      a.btn.btn-info href=(new_tipo_documento_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-table id="tipos_documentos_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -24,4 +29,4 @@ table id="tipos_documentos_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Tipo de documento', new_tipo_documento_path
+/= link_to 'Nuevo Tipo de documento', new_tipo_documento_path

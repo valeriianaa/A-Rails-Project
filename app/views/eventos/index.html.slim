@@ -1,7 +1,12 @@
-h1 Eventos
-
+.index-header
+  h1 
+    | Eventos  
+    - if can? :create, Evento
+      a.btn.btn-info href=(new_evento_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-table id="eventos_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre

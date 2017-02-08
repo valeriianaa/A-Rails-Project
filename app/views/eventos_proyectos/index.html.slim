@@ -19,9 +19,15 @@
 / = link_to 'New Evento proyecto', new_evento_proyecto_path
 
 
-h1 Eventos asociados a proyectos
-
-table id="eventos_proyectos_table" class="table table-bordered table-striped" 
+.index-header
+  h1 
+    | Eventos asociados a proyectos  
+    - if can? :create, EventoProyecto
+      a.btn.btn-info href=(new_evento_proyecto_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
+br
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Evento
@@ -34,13 +40,16 @@ table id="eventos_proyectos_table" class="table table-bordered table-striped"
         td = evento_proyecto.evento.nombre
         td = evento_proyecto.proyecto.nombre
         td.no-print style="padding: 3px;"
-          a href=(evento_proyecto_path(evento_proyecto))
-            i.fa.fa-search
-          a href=(edit_evento_proyecto_path(evento_proyecto))
-            i.fa.fa-pencil
-          a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_proyecto_path(evento_proyecto)) 
-            i.fa.fa-trash
+          - if can? :show, EventoProyecto
+            a href=(evento_path(evento_proyecto))
+              i.fa.fa-search
+          - if can? :update, EventoProyecto
+            a href=(edit_evento_path(evento_proyecto))
+              i.fa.fa-pencil
+          - if can? :destroy, EventoProyecto              
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_proyecto_path(evento_proyecto)) 
+              i.fa.fa-trash
 
 br
 
-= link_to 'Asociar nuevo evento a proyecto', new_evento_proyecto_path
+/= link_to 'Asociar nuevo evento a proyecto', new_evento_proyecto_path

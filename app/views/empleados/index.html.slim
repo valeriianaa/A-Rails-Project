@@ -1,8 +1,13 @@
 - breadcrumb :empleados
-h1 Empleados
+.index-header
+  h1 
+    | Empleados  
+    - if can? :create, Empleado
+      a.btn.btn-info href=(new_empleado_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-
-table id="empleados_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre y Apellido
@@ -30,7 +35,7 @@ table id="empleados_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Empleado', new_empleado_path
+/= link_to 'Nuevo Empleado', new_empleado_path
 
 // javascript:
 //   $(document).ready(function() {

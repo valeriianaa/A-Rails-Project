@@ -1,9 +1,14 @@
 - breadcrumb :proyectos
 
-h1 Proyectos
+.index-header
+  h1 
+    | Proyectos  
+    - if can? :create, Proyecto
+      a.btn.btn-info href=(new_proyecto_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-
-table id="proyectos_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -42,4 +47,4 @@ table id="proyectos_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Proyecto', new_proyecto_path
+/= link_to 'Nuevo Proyecto', new_proyecto_path

@@ -1,7 +1,12 @@
-h1 Actividades
+.index-header
+  h1 
+    | Actividades  
+    - if can? :create, Actividad
+      a.btn.btn-info href=(new_actividad_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-
-table id="actividades_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -32,4 +37,4 @@ table id="actividades_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nueva Actividad', new_actividad_path
+/= link_to 'Nueva Actividad', new_actividad_path

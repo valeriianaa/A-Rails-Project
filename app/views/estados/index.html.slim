@@ -1,6 +1,12 @@
-h1 Estados
+.index-header
+  h1 
+    | Estados  
+    - if can? :create, Estado
+      a.btn.btn-info href=(new_estado_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-table id="estados_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre

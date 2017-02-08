@@ -1,7 +1,12 @@
-h1 Departamentos
-
-
-table id="departamentos_table" class="table table-bordered table-striped" 
+.index-header
+  h1 
+    | Departamentos  
+    - if can? :create, Departamento
+      a.btn.btn-info href=(new_departamento_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
+br
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -24,4 +29,4 @@ table id="departamentos_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Departamento', new_departamento_path
+/= link_to 'Nuevo Departamento', new_departamento_path

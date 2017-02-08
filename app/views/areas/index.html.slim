@@ -1,6 +1,11 @@
-h1 Áreas
+.index-header
+  h1 
+    | Areas  
+    - if can? :create, Area
+      a.btn.btn-info href=(new_area_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-
 table class="table table-bordered table-striped" 
   thead
     tr
@@ -24,4 +29,4 @@ table class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nueva Área', new_area_path
+/= link_to 'Nueva Área', new_area_path

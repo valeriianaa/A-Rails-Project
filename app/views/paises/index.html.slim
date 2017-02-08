@@ -1,7 +1,12 @@
-h1 Paises
-
-
-table id="paises_table" class="table table-bordered table-striped" 
+.index-header
+  h1 
+    | Paises  
+    - if can? :create, Pais
+      a.btn.btn-info href=(new_pais_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
+br
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -24,4 +29,4 @@ table id="paises_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Pais', new_pais_path
+/= link_to 'Nuevo Pais', new_pais_path

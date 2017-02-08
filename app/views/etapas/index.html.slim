@@ -1,7 +1,11 @@
-h1 Etapas
-
-= link_to 'Nueva Etapa', new_etapa_path
-
+.index-header
+  h1 
+    | Etapas  
+    - if can? :create, Etapa
+      a.btn.btn-info#etapa href=(new_etapa_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
+br
 - @colors = ['aqua', 'green', 'yellow', 'red']
 
 

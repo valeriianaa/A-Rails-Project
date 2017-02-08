@@ -1,7 +1,12 @@
-h1 Provincias
-
+.index-header
+  h1 
+    | Provincias  
+    - if can? :create, Provincia
+      a.btn.btn-info href=(new_provincia_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-table id="provincias_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -26,4 +31,4 @@ table id="provincias_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nueva Provincia', new_provincia_path
+/= link_to 'Nueva Provincia', new_provincia_path

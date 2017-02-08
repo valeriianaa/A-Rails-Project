@@ -1,6 +1,12 @@
-h1 Roles de empleados
+.index-header
+  h1 
+    | Roles de Empleados  
+    - if can? :create, RolDeEmpleado
+      a.btn.btn-info href=(new_rol_de_empleado_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
 br
-table id="roles_empleados_table" class="table table-bordered table-striped" 
+table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
       th Nombre
@@ -25,4 +31,4 @@ table id="roles_empleados_table" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Rol de empleado', new_rol_de_empleado_path
+/= link_to 'Nuevo Rol de empleado', new_rol_de_empleado_path
