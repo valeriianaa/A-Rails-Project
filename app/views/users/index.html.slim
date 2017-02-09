@@ -26,12 +26,11 @@ table id="datatable" class="table table-bordered table-striped"
             a href=(user_show_path(usuario))
               i.fa.fa-search
           - if can? :update, User              
-            a href=(edit_user_registration_path(usuario))
+            a href=(edit_user_path(usuario))
               i.fa.fa-pencil
-          - if can? :destroy, User              
+          - if can? :destroy, User and usuario.id = current_user.id unless (usuario.rol.nombre == "super_admin")
             a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(user_path(usuario)) 
               i.fa.fa-trash
-
 br
 
 /= link_to 'Nuevo Usuario', new_user_registration_path

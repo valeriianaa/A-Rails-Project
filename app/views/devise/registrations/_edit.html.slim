@@ -1,5 +1,5 @@
 h1 Editar Usuario
-= form_for(resource, as: resource_name, url: registration_path(resource_name), method: :put) do |f|
+= form_for @user do |f|
   = devise_error_messages! 
 
       /= render :partial => 'devise/registrations/user_fields' , :locals => {:f => f}

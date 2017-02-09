@@ -4,14 +4,14 @@ p#notice = notice
   .col-md-8
     .box.box-info
       .box-header.with-border
-        h3 Datos del País
+        h3 Datos del Usuario
       .box-body
         table.table.table-bordered
           tbody
             tr
               td
                 strong Nombre
-              td = @user.nombre
+              td = @user.persona.nombre_y_apellido
             
 
 .row

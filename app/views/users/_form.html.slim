@@ -1,32 +1,11 @@
-= form_for @user do |f|
+= form_for @user, url: update_user_path, method: :post do |f|
   - if @user.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@user.errors.count, "error")} #{pluralize_without_count(@user.errors.count, "prohibe", "prohiben")} almacenar este Usuario:"
+      h2 = "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
       ul
         - @user.errors.full_messages.each do |message|
           li = message
+    
+  = render :partial => 'devise/registrations/user_fields' , :locals => {:f => f, :flag => "Edit"}
 
-  /= render :partial => 'devise/registrations/user_fields' , :locals => {:f => f}
-  .box.box-info style="width:100%"
-    .box-header.with-border
-      h3 Datos Generales
-    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
-      .field
-        = f.label :persona_id, 'Empleado: (*)'
-        = f.collection_select :persona_id, Empleado.all, :id, :nombre_y_apellido, {:prompt => "Seleccione un Empleado"}, {:class => 'form-control'}
-      .field
-        = f.label :email, 'Correo electrónico: (*)'
-        = f.text_field :email, :class => "form-control"
-      .field
-        = f.label :encrypted_password, 'Contraseña: (*)'
-        = f.text_field :encrypted_password, :class => "form-control"
-      .field
-        = f.label :password_confirmation, 'Confirmar contraseña: (*)'
-        = f.text_field :password_confirmation, :class => "form-control"
-      .field
-        = f.label :rol_id, 'Confirmar contraseña: (*)'
-        = f.collection_select :rol_id, Rol.all, :id, :nombre, {:prompt => "Seleccione un Rol"}, {:class => 'form-control'}
-    .box-footer
-      p#foot = "(*) Campo Obligatorio"  
-  
   .actions = f.submit

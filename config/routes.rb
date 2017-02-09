@@ -43,7 +43,11 @@ Rails.application.routes.draw do
 
   #resources :users
   devise_for :users, :path => 'user', :controllers => {:registrations => "registrations"}
+  #devise_for :users, :path_prefix => 'd'
+  #resources :users
   match 'users' => 'users#index', :via => [:get]
+  match 'users/:id/edit' => 'users#edit', :via => [:get], :as => :edit_user
+  match 'users/:id' => 'users#update', via: :post, as: :update_user
   match 'users/:id' => 'users#show', :via => [:get], as: :user_show
   match 'users/:id' => 'users#destroy', :via => [:delete], as: :user
 

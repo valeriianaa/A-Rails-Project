@@ -1,43 +1,26 @@
-.row
-  = f.label :empleado, {class: "col-sm-3 control-label"}
-  .col-sm-9
-      = f.select :empleado_id, Empleado.all.map { |e| [e.nombre, e.id, {"data-email"=> e.email}] },{},
-          {class: "form-control col-xs-10 col-sm-5 select2", style: "width:50%;"}
-br/
-.row
-  = f.label :email, {class: "col-sm-3 control-label"}
-  .col-sm-9
-    .input-group.input-group-sm style="width: 50%"
-      span.input-group-addon
-        i.ace-icon.fa.fa-envelope
-      = f.email_field :email, {autofocus: false, 
-        class: "form-control", required: true, readonly: true}
-
-br
-.row
-  = f.label "contraseña", {class: "col-sm-3 control-label"}
-  .col-sm-9
-    = f.password_field :password, {autocomplete: "off", 
-        class: "form-control", style: "width:50%;", required: true}
-    - if @minimum_password_length
-      em 
-        = @minimum_password_length 
-        | &nbsp;caracteres minimo
-br
-.row
-  = f.label "Confirmar contraseña", {class: "col-sm-3 control-label"}
-  .col-sm-9
-    = f.password_field :password_confirmation, {autocomplete: "off", 
-        class: "form-control", style: "width:50%;", required: true}
-    - if @minimum_password_length
-      em 
-        = @minimum_password_length 
-        | &nbsp;caracteres minimo
-br
-
-.row
-  = f.label "rol", {class: "col-sm-3 control-label"}
-  .col-sm-9
-    = f.select :rol_id, Rol.all.map { |e| [e.descripcion, e.id] },{},
-      {class: "form-control col-xs-10 col-sm-5", style: "width:50%;"}
-br
+.box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :persona_id, 'FRUTAAAAAAAAAAAAAA: (*)'
+        = f.collection_select :persona_id, Empleado.all, :id, :nombre_y_apellido, {:prompt => "Seleccione un Empleado"}, {:class => 'form-control'}
+      .field
+        = f.label :email, 'Correo electrónico: (*)'
+        = f.email_field :email, {autofocus: true, :class => "form-control"}
+      .field
+        = f.label :password, 'Contraseña: (*)'
+        = f.password_field :password, {autocomplete: "off", :class => "form-control"}
+      .field
+        = f.label :password_confirmation, 'Confirmar contraseña: (*)'
+        = f.password_field :password_confirmation, {autocomplete: "off", :class => "form-control"}
+      .field
+        = f.label :current_password
+        = f.password_field :current_password, {autocomplete: "off", :class => "form-control"}
+        i
+        | (Se necesita su contraseña actual para confirmar los)
+      .field
+        = f.label :rol_id, 'Rol de usuario: (*)'
+        = f.collection_select :rol_id, Rol.all, :id, :nombre, {:prompt => "Seleccione un Rol"}, {:class => 'form-control'}
+    .box-footer
+      p#foot = "(*) Campo Obligatorio"  

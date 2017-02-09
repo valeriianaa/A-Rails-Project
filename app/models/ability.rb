@@ -9,6 +9,9 @@ class Ability
     if user.rol? :super_admin
       can :read, :all
       can :manage, :all
+      # cannot :destroy, User do |usuario|
+      #   usuario.persona.nombre == "Martina"
+      # end
     else
       user.rol.permisos.each do |permiso|
         # if permission.subject_class == "all"
