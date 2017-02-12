@@ -14,6 +14,8 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/extras/dataTables.responsive
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require jquery.bootstrap.wizard
+//= require prettify
 //= require jquery-ui
 //= require jquery_ujs	
 //= require turbolinks
@@ -55,6 +57,8 @@ $(document).ready(function() {
 	    }
     }
   });
+
+  $('#rootwizard').bootstrapWizard();
 
 });
 

@@ -1,0 +1,19 @@
+.box
+  table#tabla_cuotas class="table table-bordered"
+    thead
+      tr
+        th Concepto de Pago
+        th Monto Total
+        th Monto Acreditado
+        th Estado
+        th Seleccionar
+
+    tbody
+      - @cuotas.each do |cuota_por_cliente|
+        tr
+          td = cuota_por_cliente.concepto_de_pago.nombre
+          td = cuota_por_cliente.montoTotal
+          td = cuota_por_cliente.montoAcreditado
+          td = cuota_por_cliente.estado
+          td 
+            input type="checkbox"

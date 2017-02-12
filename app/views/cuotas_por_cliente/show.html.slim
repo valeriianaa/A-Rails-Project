@@ -38,10 +38,10 @@ p#notice = notice
           
 .row
   .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_cuota_por_cliente_path(@cuota_por_cliente)) style="width:70px;" id="editar_cuota_por_cliente"
+    a.btn.btn-block.btn-success href=(edit_proyecto_cuota_por_cliente_path(@cuota_por_cliente.proyecto, @cuota_por_cliente)) style="width:70px;" id="editar_cuota_por_cliente"
       |Editar
   .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(cuotas_por_cliente_path) style="width:70px;" id="volver_cuota_por_cliente"
+    a.btn.btn-block.btn-default href=(proyecto_cuotas_por_cliente_path(@cuota_por_cliente.proyecto)) style="width:70px;" id="volver_cuota_por_cliente"
       |Volver
 / p
 /   strong Proyecto:

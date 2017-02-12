@@ -18,17 +18,17 @@ h1 Cuotas por Cliente
           td = cuota_por_cliente.montoTotal
           td = cuota_por_cliente.montoAcreditado
           td style="padding: 3px;"
-            a href=(cuota_por_cliente_path(cuota_por_cliente))
+            a href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente))
               i.fa.fa-search
-            a href=(edit_cuota_por_cliente_path(cuota_por_cliente))
+            a href=(edit_proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente))
               i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(cuota_por_cliente_path(cuota_por_cliente)) 
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente)) 
               i.fa.fa-trash
 
 
 br
 
-= link_to 'Asignar nueva cuota a cliente', new_cuota_por_cliente_path
+= link_to 'Asignar nueva cuota a cliente', new_proyecto_cuota_por_cliente_path
           
 
           / th Subtotal

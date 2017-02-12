@@ -1,4 +1,4 @@
-= form_for @pago do |f|
+= form_for @pago, remote: true do |f|
   - if @pago.errors.any?
     #error_explanation
       h2 = "#{pluralize(@pago.errors.count, "error")} #{pluralize_without_count(@pago.errors.count, "prohibe", "prohiben")} almacenar este Pago:"
@@ -6,41 +6,78 @@
         - @pago.errors.full_messages.each do |message|
           li = message
 
-  .box.box-info style="width:100%"
-    .box-header.with-border
-      h3 Datos de pago
-    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
-      .field
-        = f.label :proyecto_id, "Proyecto: (*)", {class: "control-label"}
-        br
-            select#pago_proyecto_id.form-control.select2 name="pago[proyecto_id]"
-              - Proyecto.all.each do |proyecto|
-                - if @pago.proyecto == proyecto
-                  option selected='' value=(proyecto.id) = proyecto.nombre
-                - else
-                  option value=(proyecto.id) = proyecto.nombre
-      / .field
-      /   = f.label :persona_id, "Miembro equipo: (*)",  {class: "control-label"}
-      /   br
-      /       select#pago_miembro_equipo_id.form-control.select2 name="pago[persona_id]"
-      /         - PersonaProyecto.all.each do |persona_proyecto|
-      /           - if @pago.persona == persona_proyecto
-      /             option selected='' class=(persona_proyecto.proyecto_id) value=(persona_proyecto.persona_id) =persona_proyecto.persona.nombre_y_apellido
-      /           - else
-      /             option class=(persona_proyecto.proyecto_id) value=(persona_proyecto.persona_id) =persona_proyecto.persona.nombre_y_apellido
-      .field
-        = f.label :cuota_por_cliente_id, 'Cuotas de este cliente:'
-        = f.collection_select :cuota_por_cliente_id, ConceptoDePago.all, :id, :nombre,{:prompt => "forma de pago"}, {:class => 'form-control'}
-      .field
-        = f.label :fecha
-        = f.date_select :fecha
-      .field
-        = f.label :tipo_de_pago_id, 'Tipo de pago: (*)'
-        = f.collection_select :tipo_de_pago_id, TipoDePago.all, :id, :nombre,{:prompt => "forma de pago"}, {:class => 'form-control'}
-      .field
-        = f.label :montoAPagar, 'Monto a pagar: (*)'
-        = f.text_field :montoAPagar, :class => 'form-control'
-    .box-footer
-      p#foot = "(*) Campo Obligatorio"  
 
+
+  .span11
+    a name="demo" 
+    h2 Demo
+    p Basic Demo Example.
+    #rootwizard
+      .navbar
+        .navbar-inner
+          .container
+            ul.nav.nav-pills
+              li
+                a aria-expanded="false" data-toggle="tab" href="#tab1"  First
+              li
+                a aria-expanded="false" data-toggle="tab" href="#tab2"  Second
+              li
+                a aria-expanded="false" data-toggle="tab" href="#tab3"  Third
+              li
+                a aria-expanded="false" data-toggle="tab" href="#tab4"  Forth
+              li
+                a aria-expanded="false" data-toggle="tab" href="#tab5"  Fifth
+              li.active
+                a aria-expanded="true" data-toggle="tab" href="#tab6"  Sixth
+              li
+                a aria-expanded="false" data-toggle="tab" href="#tab7"  Seventh
+      #bar.progress.progress-striped.active
+        .bar style=("width: 85.7143%;") 
+      .tab-content
+        #tab1.tab-pane
+          | 1
+          .field
+            select#pago_persona_id.form-control.select2 name="pago[persona_id]"
+              - MiembroEquipo.all.each do |persona|
+                  option selected='' value=(persona.id) = persona.nombre_y_apellido
+            p#una_persona Algo
+            = render partial: "cuota"
+
+        #tab2.tab-pane
+          | 2
+        #tab3.tab-pane
+          | 3
+        #tab4.tab-pane
+          | 4
+        #tab5.tab-pane
+          | 5
+        #tab6.tab-pane.active
+          | 6
+        #tab7.tab-pane
+          | 7
+        ul.pager.wizard
+          li.previous.first style="display:none;" 
+            a href="javascript:;"  First
+          li.previous
+            a href="javascript:;"  Previous
+          li.next.last style="display:none;" 
+            a href="javascript:;"  Last
+          li.next
+            a href="javascript:;"  Next
+  
   .actions = f.submit
+
+
+
+
+javascript:
+  $('#tabla_cuotas').hide();
+  $('#pago_persona_id').change(function() {
+    var persona = $('#pago_persona_id :selected').val();
+    if ((persona == 6) || (persona == 8)){
+      $('#tabla_cuotas').show();
+    }else{
+      $('#tabla_cuotas').hide();
+    }
+  });
+

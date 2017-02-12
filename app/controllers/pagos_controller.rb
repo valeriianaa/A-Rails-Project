@@ -15,6 +15,7 @@ class PagosController < ApplicationController
   # GET /pagos_realizados/new
   def new
     @pago = Pago.new
+    @cuotas = CuotaPorCliente.all
   end
 
   # GET /pagos_realizados/1/edit

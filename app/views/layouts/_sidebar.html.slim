@@ -65,11 +65,6 @@ ul.sidebar-menu
           a href=(descuentos_path)
             i.fa.fa-angle-double-right
             | Descuentos
-      - if can? :read, CuotaPorCliente
-        li#tree
-          a href=(cuotas_por_cliente_path)
-            i.fa.fa-angle-double-right
-            | Cuotas por cliente
       - if can? :read, Pago            
         li#tree
           a href=(pagos_path)

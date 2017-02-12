@@ -2,7 +2,7 @@ h1 Editar Cuota por cliente
 
 == render 'form'
 
-= link_to 'Mostrar', @cuota_por_cliente
+= link_to 'Mostrar', [@cuota_por_cliente.proyecto, @cuota_por_cliente]
 '|
-= link_to 'Vovler', cuotas_por_cliente_path
+= link_to 'Vovler', proyecto.cuotas_por_cliente_path(@cuota_por_cliente.proyecto)
 

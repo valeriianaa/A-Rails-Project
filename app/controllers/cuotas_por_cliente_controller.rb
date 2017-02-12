@@ -4,7 +4,8 @@ class CuotasPorClienteController < ApplicationController
   # GET /contratos
   # GET /contratos.json
   def index
-    @cuotas_por_cliente = CuotaPorCliente.all
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @cuotas_por_cliente = @proyecto_cuotas_por_cliente.all
   end
 
   # GET /contratos/1
@@ -14,7 +15,8 @@ class CuotasPorClienteController < ApplicationController
 
   # GET /contratos/new
   def new
-    @cuota_por_cliente = CuotaPorCliente.new
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @cuota_por_cliente = @proyecto.cuotas_por_cliente.new
   end
 
   # GET /contratos/1/edit
@@ -24,13 +26,14 @@ class CuotasPorClienteController < ApplicationController
   # POST /contratos
   # POST /contratos.json
   def create
-    @cuota_por_cliente = CuotaPorCliente.new(cuota_por_cliente_params)
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @cuota_por_cliente = @proyecto.cuotas_por_cliente.new(cuota_por_cliente_params)
     @cuota_por_cliente.montoTotal = @cuota_por_cliente.setear_monto_total
     @cuota_por_cliente.montoAcreditado = @cuota_por_cliente.setear_monto_acreditado
 
     respond_to do |format|
       if @cuota_por_cliente.save
-        format.html { redirect_to @cuota_por_cliente, notice: 'CuotaPorCliente was successfully created.' }
+        format.html { redirect_to [@cuota_por_cliente.proyecto, @cuota_por_cliente], notice: 'CuotaPorCliente was successfully created.' }
         format.json { render :show, status: :created, location: @cuota_por_cliente }
       else
         format.html { render :new }
@@ -42,10 +45,12 @@ class CuotasPorClienteController < ApplicationController
   # PATCH/PUT /contratos/1
   # PATCH/PUT /contratos/1.json
   def update
-     @cuota_por_cliente.montoTotal = @cuota_por_cliente.setear_monto_total
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @cuota_por_cliente = @proyecto.cuotas_por_cliente.find(params[:id])
+    @cuota_por_cliente.montoTotal = @cuota_por_cliente.setear_monto_total
     respond_to do |format|
       if @cuota_por_cliente.update(cuota_por_cliente_params)
-        format.html { redirect_to @cuota_por_cliente, notice: 'CuotaPorCliente was successfully updated.' }
+        format.html { redirect_to [@cuota_por_cliente.proyecto, @cuota_por_cliente], notice: 'CuotaPorCliente was successfully updated.' }
         format.json { render :show, status: :ok, location: @cuota_por_cliente }
       else
         format.html { render :edit }
@@ -57,9 +62,11 @@ class CuotasPorClienteController < ApplicationController
   # DELETE /contratos/1
   # DELETE /contratos/1.json
   def destroy
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @cuota_por_cliente = @proyecto.cuotas_por_cliente.find(params[:id])
     @cuota_por_cliente.destroy
     respond_to do |format|
-      format.html { redirect_to cuotas_por_cliente_url, notice: 'CuotaPorCliente was successfully destroyed.' }
+      format.html { redirect_to proyecto_cuotas_por_cliente_url, notice: 'CuotaPorCliente was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,11 +79,12 @@ class CuotasPorClienteController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cuota_por_cliente
-      @cuota_por_cliente = CuotaPorCliente.find(params[:id])
+      @proyecto = Proyecto.find(params[:proyecto_id])
+    @cuota_por_cliente = @proyecto.cuotas_por_cliente.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cuota_por_cliente_params
-      params.require(:cuota_por_cliente).permit(:concepto_de_pago_id, :montoTotal, :montoAcreditado, :estado)
+      params.require(:cuota_por_cliente).permit(:concepto_de_pago_id, :montoTotal, :montoAcreditado, :estado, :proyecto_id, :contrato_id)
     end
 end

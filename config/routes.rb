@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   resources :tipos_de_pago
   
   resources :estados
-  resources :cuotas_por_cliente
   resources :pagos
   resources :conceptos_de_pago
   resources :eventos
@@ -30,7 +29,9 @@ Rails.application.routes.draw do
   resources :areas
   resources :actividades
   resources :etapas
-  resources :proyectos
+  resources :proyectos do
+    resources :cuotas_por_cliente
+  end
   resources :miembros_equipo
   resources :tipo_documentos
   resources :ciudades

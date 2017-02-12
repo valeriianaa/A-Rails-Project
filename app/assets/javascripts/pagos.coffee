@@ -6,3 +6,7 @@
 
 $(document).ready ->
   $("#pago_miembro_equipo_id").chained("#pago_proyecto_id")
+  # $('#pago_persona_id').change(->
+  # 	persona = $('#pago_persona_id :selected').val()
+  # 	alert(persona)
+  # 	)

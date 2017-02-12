@@ -49,8 +49,9 @@ gem 'cancan'
 gem 'bcrypt'
 
 gem "audited", "~> 4.0"
-
 gem 'audited-activerecord', '~> 4.2'
+
+gem 'twitter_bootstrap_wizard_rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
