@@ -1,0 +1,12 @@
+= form_for @vencimiento do |f|
+  - if @vencimiento.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@vencimiento.errors.count, "error")} prohibited this vencimiento from being saved:"
+      ul
+        - @vencimiento.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :fecha
+    = f.date_select :fecha
+  .actions = f.submit

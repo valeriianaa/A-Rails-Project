@@ -4,9 +4,20 @@
 
 //= require jquery.chained
 
+renovarIdProyecto = (numero) -> 
+  elegirProyecto = $('#pago_proyecto_id').change ->
+      numero = $('#pago_proyecto_id :selected').val()
+      gon.proyecto = numero
+      console.log(gon.proyecto)
+      console.log(gon.cuotas)
+
+gon.watch('proyecto', interval: 1000, renovarIdProyecto)
+
 $(document).ready ->
-  $("#pago_miembro_equipo_id").chained("#pago_proyecto_id")
-  # $('#pago_persona_id').change(->
-  # 	persona = $('#pago_persona_id :selected').val()
-  # 	alert(persona)
-  # 	)
+  console.log(gon.proyecto)
+  # $('#tabla_cuotas').hide()
+  # elegirProyecto = $('#pago_proyecto_id').change ->
+  #   proyecto = $('#pago_proyecto_id :selected').val()
+    # console.log(proyecto)
+  # if gon.proyecto != 1 
+  #   $('#tabla_cuotas').show()

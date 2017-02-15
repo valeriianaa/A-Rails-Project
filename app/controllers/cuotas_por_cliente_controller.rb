@@ -5,7 +5,7 @@ class CuotasPorClienteController < ApplicationController
   # GET /contratos.json
   def index
     @proyecto = Proyecto.find(params[:proyecto_id])
-    @cuotas_por_cliente = @proyecto_cuotas_por_cliente.all
+    @cuotas_por_cliente = @proyecto.cuotas_por_cliente.all
   end
 
   # GET /contratos/1

@@ -22,16 +22,11 @@ p#notice = notice
               td = @concepto_de_pago.monto
             tr
               td
-                strong Inicio de plazo de pago
-              td = @concepto_de_pago.fechaVencimiento.strftime("%a, %e de %B de %Y")
-            tr
-              td
-                strong Fecha de vencimiento
-              td = @concepto_de_pago.fechaVencimiento.strftime("%a, %e de %B de %Y")
-            tr
-              td
-                strong Fecha de recordatorio
-              td = @concepto_de_pago.plazoRecordatorio.strftime("%a, %e de %B de %Y")
+                strong Vencimientos
+              td 
+                ul
+                  - @concepto_de_pago.vencimientos.each do |vencimiento|
+                    li = I18n.localize(vencimiento.fecha, :format => :long)
           
 .row
   .col-xs-1 style="padding-right:40px;"

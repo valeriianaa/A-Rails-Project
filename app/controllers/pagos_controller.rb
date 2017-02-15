@@ -15,7 +15,10 @@ class PagosController < ApplicationController
   # GET /pagos_realizados/new
   def new
     @pago = Pago.new
-    @cuotas = CuotaPorCliente.all
+    @proyecto = Proyecto.find(1)
+    gon.watch.proyecto = @proyecto
+    @cuotas = CuotaPorCliente.where(proyecto_id: gon.proyecto, estado: false)
+    gon.cuotas = @cuotas
   end
 
   # GET /pagos_realizados/1/edit

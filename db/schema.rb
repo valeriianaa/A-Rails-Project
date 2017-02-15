@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207033921) do
+ActiveRecord::Schema.define(version: 20170214004235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,11 +92,8 @@ ActiveRecord::Schema.define(version: 20170207033921) do
     t.string   "nombre"
     t.text     "descripcion"
     t.float    "monto"
-    t.datetime "fechaInicioDePago"
-    t.datetime "fechaVencimiento"
-    t.datetime "plazoRecordatorio"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "configuraciones", force: :cascade do |t|
@@ -147,7 +144,7 @@ ActiveRecord::Schema.define(version: 20170207033921) do
   create_table "cuotas_por_cliente", force: :cascade do |t|
     t.float    "montoTotal"
     t.float    "montoAcreditado"
-    t.string   "estado"
+    t.boolean  "estado"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "concepto_de_pago_id"
@@ -425,6 +422,17 @@ ActiveRecord::Schema.define(version: 20170207033921) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["rol_id"], name: "index_users_on_rol_id", using: :btree
 
+  create_table "vencimientos", force: :cascade do |t|
+    t.date     "fecha"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "concepto_de_pago_id"
+    t.integer  "interes_id"
+  end
+
+  add_index "vencimientos", ["concepto_de_pago_id"], name: "index_vencimientos_on_concepto_de_pago_id", using: :btree
+  add_index "vencimientos", ["interes_id"], name: "index_vencimientos_on_interes_id", using: :btree
+
   add_foreign_key "actividades", "etapas"
   add_foreign_key "actividades_proyectos", "actividades"
   add_foreign_key "actividades_proyectos", "estados"
@@ -473,4 +481,6 @@ ActiveRecord::Schema.define(version: 20170207033921) do
   add_foreign_key "roles_de_empleados", "departamentos"
   add_foreign_key "users", "personas"
   add_foreign_key "users", "roles"
+  add_foreign_key "vencimientos", "conceptos_de_pago"
+  add_foreign_key "vencimientos", "intereses"
 end

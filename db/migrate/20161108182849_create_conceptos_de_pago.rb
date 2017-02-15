@@ -4,9 +4,6 @@ class CreateConceptosDePago < ActiveRecord::Migration
       t.string :nombre
       t.text :descripcion
       t.float :monto
-      t.datetime :fechaInicioDePago
-      t.datetime :fechaVencimiento
-      t.datetime :plazoRecordatorio
 
       t.timestamps null: false
     end

@@ -5,25 +5,12 @@
       ul
         - @contrato.errors.full_messages.each do |message|
           li = message
-            /   .field
-            /     = f.label :proyecto_id, 'Proyecto: (*)'
-            /     br
-            /       select#ciudad_pais_id.form-control.select2 name="ciudad[pais_id]"
-            /         - Proyecto.all.each do |proyecto|
-            /           option value=(proyecto.id) =proyecto.nombre
-            /   .field
-            /     = f.label :persona_id, 'Persona Responsable: (*)'
-            /     br
-            /       select#ciudad_provincia_id.form-control.select2 name="ciudad[provincia_id]"
-            /         - MiembroEquipo.all.each do |persona|
-            /           option class=(MiembroEquipo.where(PersonaProyecto.where(proyecto_id: ).pluck(:persona_id))
-            / ) value=(persona.id) =persona.nombre
   .field
-    = f.label :proyecto_id, 'Tipo de Documento: (*)'
-    = f.collection_select :proyecto_id, Proyecto.all, :id, :nombre, {:prompt => "Seleccione un Proyecto"}, {:class => 'form-control'}
+    = f.label :proyecto_id, 'Proyecto: (*)'
+    = f.collection_select :proyecto_id, Proyecto.all, :id, :nombre, {:prompt => "Seleccione un proyecto"}, {:id => 'proyecto_id', :class =>'form-control'}
   .field
-    = f.label :persona_id, 'Tipo de Documento: (*)'
-    = f.collection_select :persona_id, MiembroEquipo.all, :id, :nombre, {:prompt => "Seleccione una persona"}, {:class => 'form-control'}
+    = f.label :persona_id, 'Responsable del contrato: (*)', :id => 'persona_label'
+    = f.grouped_collection_select :persona_id, Proyecto.all, :personas, :nombre, :id, :nombre_y_apellido, {:selected => @contrato.persona_id}, {:id => 'persona_id', :class =>'form-control'}
   .field
     = f.label :fechaInicio
     = f.date_select :fechaInicio

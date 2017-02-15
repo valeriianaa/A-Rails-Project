@@ -15,6 +15,7 @@ class ConceptosDePagoController < ApplicationController
   # GET /conceptos_de_pago/new
   def new
     @concepto_de_pago = ConceptoDePago.new
+    @concepto_de_pago.vencimientos.build
   end
 
   # GET /conceptos_de_pago/1/edit
@@ -26,7 +27,7 @@ class ConceptosDePagoController < ApplicationController
   def create
     @concepto_de_pago = ConceptoDePago.new(concepto_de_pago_params)
     #@plazo = @concepto_de_pago.diferencia 
-    @concepto_de_pago.plazoRecordatorio = Chronic.parse(@concepto_de_pago.diferencia, :now => @concepto_de_pago.fechaVencimiento)
+    # @concepto_de_pago.plazoRecordatorio = Chronic.parse(@concepto_de_pago.diferencia, :now => @concepto_de_pago.fechaVencimiento)
 
     respond_to do |format|
       if @concepto_de_pago.save
@@ -77,6 +78,14 @@ class ConceptosDePagoController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def concepto_de_pago_params
-      params.require(:concepto_de_pago).permit(:nombre, :descripcion, :monto, :fechaInicioDePago, :fechaVencimiento, :plazoRecordatorio, :diferencia)
+      params.require(:concepto_de_pago).permit(
+        :nombre, 
+        :descripcion, 
+        :monto, 
+        :fechaInicioDePago, 
+        :fechaVencimiento, 
+        :plazoRecordatorio, 
+        :diferencia, 
+        :vencimientos_attributes => [ :id, :fecha, :concepto_de_pago_id, :interes_id, :_destroy ])
     end
 end

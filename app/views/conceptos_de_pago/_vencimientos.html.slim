@@ -1,0 +1,7 @@
+fieldset
+  = f.label :fecha, "Fecha de vencimiento: (*)  " 
+  = f.date_select :fecha 
+  = f.label :interes_id, 'Interes:  '
+  = f.collection_select :interes_id, Interes.all, :id, :nombre, {:prompt => "Seleccione un tipo de interes"}, {:id => 'interes_id'}
+  = f.hidden_field :_destroy
+  = link_to "Remover", "#", class: "remove_fields"

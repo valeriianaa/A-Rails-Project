@@ -16,12 +16,6 @@
         .field
           = f.label :concepto_de_pago_id, "Concepto de pago: (*)", :class => "control-label"
           = f.collection_select :concepto_de_pago_id, ConceptoDePago.all, :id, :nombre,{:prompt => "Seleccione un Concepto de pago"}, {:class => 'form-control'}
-        .field
-          = f.label :interes_id, "Interes:", :class => "control-label"
-          = f.collection_select :interes_id, Interes.all, :id, :nombre,{:prompt => "Interes"}, {:class => 'form-control'}
-        .field
-          = f.label :descuento_id, "Descuento:", :class => "control-label"
-          = f.collection_select :descuento_id, Descuento.all, :id, :nombre,{:prompt => "Descuento"}, {:class => 'form-control'}
       .box-footer
         p#foot = "(*) Campo Obligatorio"  
     

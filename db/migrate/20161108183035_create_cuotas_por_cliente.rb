@@ -3,7 +3,7 @@ class CreateCuotasPorCliente < ActiveRecord::Migration
     create_table :cuotas_por_cliente do |t|
       t.float :montoTotal
       t.float :montoAcreditado
-      t.string :estado
+      t.boolean :estado
 
       t.timestamps null: false
     end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :vencimientos
   resources :contratos
   resources :configuraciones
   resources :roles

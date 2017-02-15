@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Fecha:
+  = @vencimiento.fecha
+
+= link_to 'Edit', edit_vencimiento_path(@vencimiento)
+'|
+= link_to 'Back', vencimientos_path

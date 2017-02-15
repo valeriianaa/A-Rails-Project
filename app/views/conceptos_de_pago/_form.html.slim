@@ -18,40 +18,41 @@
       .field
         = f.label :monto, "Monto: (*)", :class => "control-label"
         = f.text_field :monto, {:class => "form-control", :style => "width:100%"}
-      .field
-        = f.label :fechaInicioDePago, "Fecha de inicio:", :class => "control-label"
-        = f.date_select :fechaInicioDePago, id: "fechavencimiento" , :class => "input-group date"
-      .field
-        = f.label :fechaVencimiento, "Fecha de vencimiento:", :class => "control-label"
-        = f.date_select :fechaVencimiento, id: "fechavencimiento" , :class => "input-group date"
-      .field class="form-inline"
-        = f.label :plazoRecordatorio, "Plazo de recordatorio:", :class => "control-label"
-        br
-        input type="number" id="numero" min="1" value="1" class="form-control"
-        select id="tiempo" class="form-control"
-          option  value='days' días
-          option  value='weeks' semanas
-          option  value='months' meses
-          option  value='years' años
-        /= f.date_select :plazoRecordatorio
-        = f.hidden_field :diferencia, id: 'dif_num'
-        /= f.hidden_field :diferencia_tiempo, id: 'dif_tmp'
-        /= f.hidden_field :plazoRecordatorio, :value => @concepto_de_pago.set_diferencia
-      /button onclick="myFunction()" verString 
+
+      = f.fields_for :vencimientos do |builder|
+        = render 'vencimientos', :f => builder
+
+      p
+        = link_to_add_fields "Añadir nuevo vencimiento", f, :vencimientos
+
     .box-footer
       p#foot = "(*) Campo Obligatorio"
-  .actions = f.submit onclick:"myFunction()" 
+  .actions = f.submit 
 
 
-javascript:
-  function myFunction() {
-    var numero = document.getElementById("numero").value;
-    var tiempo = document.getElementById("tiempo").value;
-    var retorno = String(numero) + ' ' + String(tiempo) + ' ago';
-    document.getElementById("dif_num").value = retorno; 
-    console.log(document.getElementById("dif_num").value);             
-  }
-
-  
+// javascript:
+//   function myFunction() {
+//     var numero = document.getElementById("numero").value;
+//     var tiempo = document.getElementById("tiempo").value;
+//     var retorno = String(numero) + ' ' + String(tiempo) + ' ago';
+//     document.getElementById("dif_num").value = retorno; 
+//     console.log(document.getElementById("dif_num").value);             
+//   }
 
   
+
+  
+      / .field class="form-inline"
+      /   = f.label :plazoRecordatorio, "Plazo de recordatorio:", :class => "control-label"
+      /   br
+      /   input type="number" id="numero" min="1" value="1" class="form-control"
+      /   select id="tiempo" class="form-control"
+      /     option  value='days' días
+      /     option  value='weeks' semanas
+      /     option  value='months' meses
+      /     option  value='years' años
+      /   /= f.date_select :plazoRecordatorio
+      /   = f.hidden_field :diferencia, id: 'dif_num'
+      /   /= f.hidden_field :diferencia_tiempo, id: 'dif_tmp'
+      /   /= f.hidden_field :plazoRecordatorio, :value => @concepto_de_pago.set_diferencia
+      / /button onclick="myFunction()" verString 

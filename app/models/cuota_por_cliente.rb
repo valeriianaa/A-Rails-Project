@@ -1,5 +1,6 @@
 class CuotaPorCliente < ActiveRecord::Base
 	belongs_to :proyecto
+	belongs_to :contrato
 	belongs_to :concepto_de_pago
 	belongs_to :interes
 	belongs_to :descuento

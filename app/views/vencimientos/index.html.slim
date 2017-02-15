@@ -1,0 +1,21 @@
+h1 Listing vencimientos
+
+table
+  thead
+    tr
+      th Fecha
+      th
+      th
+      th
+
+  tbody
+    - @vencimientos.each do |vencimiento|
+      tr
+        td = vencimiento.fecha
+        td = link_to 'Show', vencimiento
+        td = link_to 'Edit', edit_vencimiento_path(vencimiento)
+        td = link_to 'Destroy', vencimiento, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Vencimiento', new_vencimiento_path
