@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170214004235) do
+ActiveRecord::Schema.define(version: 20170215215300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,15 @@ ActiveRecord::Schema.define(version: 20170214004235) do
   add_index "contratos", ["persona_proyecto_id"], name: "index_contratos_on_persona_proyecto_id", using: :btree
   add_index "contratos", ["proyecto_id"], name: "index_contratos_on_proyecto_id", using: :btree
 
+  create_table "cuentas", force: :cascade do |t|
+    t.float    "saldo"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "proyecto_id"
+  end
+
+  add_index "cuentas", ["proyecto_id"], name: "index_cuentas_on_proyecto_id", using: :btree
+
   create_table "cuotas_por_cliente", force: :cascade do |t|
     t.float    "montoTotal"
     t.float    "montoAcreditado"
@@ -150,10 +159,12 @@ ActiveRecord::Schema.define(version: 20170214004235) do
     t.integer  "concepto_de_pago_id"
     t.integer  "proyecto_id"
     t.integer  "contrato_id"
+    t.integer  "pago_id"
   end
 
   add_index "cuotas_por_cliente", ["concepto_de_pago_id"], name: "index_cuotas_por_cliente_on_concepto_de_pago_id", using: :btree
   add_index "cuotas_por_cliente", ["contrato_id"], name: "index_cuotas_por_cliente_on_contrato_id", using: :btree
+  add_index "cuotas_por_cliente", ["pago_id"], name: "index_cuotas_por_cliente_on_pago_id", using: :btree
   add_index "cuotas_por_cliente", ["proyecto_id"], name: "index_cuotas_por_cliente_on_proyecto_id", using: :btree
 
   create_table "departamentos", force: :cascade do |t|
@@ -259,18 +270,29 @@ ActiveRecord::Schema.define(version: 20170214004235) do
     t.date     "fecha"
     t.float    "montoAcreditado"
     t.float    "montoAPagar"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "tipo_de_pago_id"
-    t.integer  "cuota_por_cliente_id"
     t.integer  "proyecto_id"
     t.integer  "persona_id"
+    t.integer  "cuenta_id"
   end
 
-  add_index "pagos", ["cuota_por_cliente_id"], name: "index_pagos_on_cuota_por_cliente_id", using: :btree
+  add_index "pagos", ["cuenta_id"], name: "index_pagos_on_cuenta_id", using: :btree
   add_index "pagos", ["persona_id"], name: "index_pagos_on_persona_id", using: :btree
   add_index "pagos", ["proyecto_id"], name: "index_pagos_on_proyecto_id", using: :btree
   add_index "pagos", ["tipo_de_pago_id"], name: "index_pagos_on_tipo_de_pago_id", using: :btree
+
+  create_table "pagos_metodos", force: :cascade do |t|
+    t.float    "monto"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "pago_id"
+    t.integer  "tipo_de_pago_id"
+  end
+
+  add_index "pagos_metodos", ["pago_id"], name: "index_pagos_metodos_on_pago_id", using: :btree
+  add_index "pagos_metodos", ["tipo_de_pago_id"], name: "index_pagos_metodos_on_tipo_de_pago_id", using: :btree
 
   create_table "paises", force: :cascade do |t|
     t.string   "nombre"
@@ -446,8 +468,10 @@ ActiveRecord::Schema.define(version: 20170214004235) do
   add_foreign_key "contratos", "personas"
   add_foreign_key "contratos", "personas_proyectos"
   add_foreign_key "contratos", "proyectos"
+  add_foreign_key "cuentas", "proyectos"
   add_foreign_key "cuotas_por_cliente", "conceptos_de_pago"
   add_foreign_key "cuotas_por_cliente", "contratos"
+  add_foreign_key "cuotas_por_cliente", "pagos"
   add_foreign_key "cuotas_por_cliente", "proyectos"
   add_foreign_key "eventos", "contactos"
   add_foreign_key "eventos", "personas"
@@ -456,10 +480,12 @@ ActiveRecord::Schema.define(version: 20170214004235) do
   add_foreign_key "historiales", "actividades_proyectos"
   add_foreign_key "historiales", "estados"
   add_foreign_key "historiales", "proyectos"
-  add_foreign_key "pagos", "cuotas_por_cliente"
+  add_foreign_key "pagos", "cuentas"
   add_foreign_key "pagos", "personas"
   add_foreign_key "pagos", "proyectos"
   add_foreign_key "pagos", "tipos_de_pago"
+  add_foreign_key "pagos_metodos", "pagos"
+  add_foreign_key "pagos_metodos", "tipos_de_pago"
   add_foreign_key "permisos", "acciones"
   add_foreign_key "permisos", "modelos"
   add_foreign_key "personas", "areas"

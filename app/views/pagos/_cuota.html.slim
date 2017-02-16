@@ -5,13 +5,58 @@
         th Concepto de Pago
         th Monto Total
         th Estado
+        th Vencimientos
+        th Intereses
+        th Descuento
         th Seleccionar
 
     tbody
-      - CuotaPorCliente.where(proyecto_id: , estado: false).each do |cuota_por_cliente|
+      - @cuotas.each_with_index do |cuota_por_cliente, index|
         tr
           td = cuota_por_cliente.concepto_de_pago.nombre
           td = cuota_por_cliente.montoTotal
           td = cuota_por_cliente.estado
+          td
+            ul 
+              - cuota_por_cliente.concepto_de_pago.vencimientos.each do |vencimiento|
+                li = I18n.localize(vencimiento.fecha)
+          td
+            ul
+              - cuota_por_cliente.concepto_de_pago.vencimientos.each do |vencimiento|
+                li = "#{vencimiento.interes.nombre}, " + "#{vencimiento.interes.porcentaje}"
+          td
           td 
-            input type="checkbox"
+            input type="checkbox" name="pago[cuota_por_cliente_ids][]" value=(cuota_por_cliente.id)
+
+          / td
+          /   select#descuentos name="pago[descuento_id]"
+          /     option value=""  text="elegir descuento"
+          /     - Descuento.all.each do |descuento|
+          /       option value=(descuento.id) = "#{descuento.nombre}, " + "#{descuento.porcentaje}"
+// javascript:
+//   $('#tabla_cuotas').DataTable({
+//       "language": {
+//         "sProcessing":     "Procesando...",
+//         "sLengthMenu":     "Mostrar _MENU_ registros",
+//         "sZeroRecords":    "No se encontraron resultados",
+//         "sEmptyTable":     "Ningún dato disponible en esta tabla",
+//         "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+//         "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+//         "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+//         "sInfoPostFix":    "",
+//         "sSearch":         "Buscar:",
+//         "sUrl":            "",
+//         "sInfoThousands":  ",",
+//         "sLoadingRecords": "Cargando...",
+//         "oPaginate": {
+//             "sFirst":    "Primero",
+//             "sLast":     "Último",
+//             "sNext":     "Siguiente",
+//             "sPrevious": "Anterior"
+//         },
+//         "oAria": {
+//             "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+//             "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+//         }
+//       }
+//     });

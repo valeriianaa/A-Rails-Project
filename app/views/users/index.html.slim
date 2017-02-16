@@ -28,7 +28,7 @@ table id="datatable" class="table table-bordered table-striped"
           - if can? :update, User              
             a href=(edit_user_path(usuario))
               i.fa.fa-pencil
-          - if can? :destroy, User and usuario.id = current_user.id unless (usuario.rol.nombre == "super_admin")
+          - if can? :destroy, User and usuario.id != current_user.id 
             a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(user_path(usuario)) 
               i.fa.fa-trash
 br

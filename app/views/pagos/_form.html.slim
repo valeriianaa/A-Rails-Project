@@ -12,14 +12,24 @@
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"  
       .field
         = f.label :proyecto_id, "Proyecto: (*)", :class => "control-label"
-        = f.collection_select :proyecto_id, Proyecto.all, :id, :nombre,{:prompt => "Seleccione un Proyecto"}, {:class => 'form-control'}
+        = f.collection_select :proyecto_id, Proyecto.all, :id, :nombre,{:prompt => "Seleccione un Proyecto"}, {:class => 'form-control', :style => "width: 50%"}
+        a#bt-filtrar.btn.btn-success
+          | Filtrar
         br
-        /= render partial: "cuota"  
+        br
+        h2 Cantidad a pagar
+        #cuotas-tabla
+      br
+      #metodos-de-pago
+        = f.fields_for :pagos_metodos do |builder|
+          = render 'pagos_metodos', :f => builder
+        p
+        = link_to_add_fields "Añadir otra forma de pago", f, :pagos_metodos
 
 
 
 
-
+  = f.submit
 
 
 

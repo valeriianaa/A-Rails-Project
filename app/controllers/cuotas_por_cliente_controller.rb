@@ -85,6 +85,6 @@ class CuotasPorClienteController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cuota_por_cliente_params
-      params.require(:cuota_por_cliente).permit(:concepto_de_pago_id, :montoTotal, :montoAcreditado, :estado, :proyecto_id, :contrato_id)
+      params.require(:cuota_por_cliente).permit(:concepto_de_pago_id, :montoTotal, :montoAcreditado, :estado, :proyecto_id, :contrato_id, :descuento_id)
     end
 end

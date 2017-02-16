@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :cuentas
   resources :vencimientos
   resources :contratos
   resources :configuraciones
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   
   resources :estados
   resources :pagos
+  post "pagos/ajax_table_cuotas" => "pagos#ajax_table_cuotas"
   resources :conceptos_de_pago
   resources :eventos
   resources :especialidades_de_contacto

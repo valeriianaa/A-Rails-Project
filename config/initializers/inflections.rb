@@ -50,4 +50,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'permiso', 'permisos'
 	inflect.irregular 'rol', 'roles'
 	inflect.irregular 'configuracion','configuraciones'
+	inflect.irregular 'PagoMetodo','PagosMetodos'
+	inflect.irregular 'pago_metodo','pagos_metodos'
+	inflect.irregular 'cuenta', 'cuentas'
 end

@@ -1,0 +1,12 @@
+= form_for @cuenta do |f|
+  - if @cuenta.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@cuenta.errors.count, "error")} prohibited this cuenta from being saved:"
+      ul
+        - @cuenta.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :saldo
+    = f.text_field :saldo
+  .actions = f.submit

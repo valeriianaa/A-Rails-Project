@@ -1,0 +1,21 @@
+h1 Listing cuentas
+
+table
+  thead
+    tr
+      th Saldo
+      th
+      th
+      th
+
+  tbody
+    - @cuentas.each do |cuenta|
+      tr
+        td = cuenta.saldo
+        td = link_to 'Show', cuenta
+        td = link_to 'Edit', edit_cuenta_path(cuenta)
+        td = link_to 'Destroy', cuenta, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Cuenta', new_cuenta_path

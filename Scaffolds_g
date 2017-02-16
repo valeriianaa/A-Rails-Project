@@ -69,14 +69,17 @@ rails g scaffold Interes nombre:string descripcion:text porcentaje:float
 rails g scaffold Descuento nombre:string descripcion:text porcentaje:float
 
 rails g scaffold Vencimiento fecha:date
+rails g scaffold Cuenta saldo:decimal
 
+rails g Model PagosMetodos
 
 rails g migration AddConceptoDePagoRefToContrato concepto_de_pago:references
 rails g migration AddPersonaRefToContrato persona:references
 rails g migration AddProyectoRefToContrato proyecto:references
 rails g migration AddProyectoRefToContrato proyecto:references
 
-rails g migration AddCuotaPorClienteRefToPago cuota_por_cliente:references
+rails g migration AddPagoRefToCuotaPorCliente pago:references
+
 rails g migration AddTipoDePagoToPago tipo_de_pago:references
 rails g migration AddProyectoRefToPago proyecto:references
 rails g migration AddPersonaRefToPago persona:references
@@ -87,6 +90,12 @@ rails g migration AddContratoRefToCuotaPorCliente contrato:references
 
 rails g migration AddConceptoDePagoRefToVencimiento concepto_de_pago:references
 rails g migration AddInteresRefToVencimiento interes:references
+
+rails g migration AddProyectoRefToCuenta proyecto:references
+rails g migration AddCuentaRefToPago cuenta:references
+rails g migration AddPagoRefToPagoMetodo pago:references
+rails g migration AddTipoDePagoRefToPagoMetodo tipo_de_pago:references
+
 
 --Outsourcing y Eventos
 rails g scaffold Contacto

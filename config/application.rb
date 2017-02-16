@@ -19,6 +19,17 @@ module Incubadora
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
+    # config.after_initialize do
+    #   @cuotas_existentes = CuotaPorCliente.all
+    #   @cuotas_existentes.each do |cuota|
+    #     puts 'cuota: ', cuota.montoTotal
+    #     cuota.update(montoTotal: cuota.calcular_monto)
+    #   end
+    #   @cuotas_existentes.each do |cuota|
+    #     puts 'cuota: ', cuota.montoTotal
+    #   end
+    # end
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :es
@@ -32,3 +43,4 @@ module Incubadora
     end
   end
 end
+
