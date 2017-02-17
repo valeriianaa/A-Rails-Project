@@ -15,3 +15,8 @@ $(document).ready ->
         $("#cuotas-tabla").empty()
         $("#cuotas-tabla").append data
         $("#metodos-de-pago").show()
+        $.post( "/pagos/ajax_gon_variables", $("form").serialize())
+          .done (gon)->
+            document.getElementById("proyecto-titulo").innerHTML = "Proyecto: " + String(gon.proyecto)
+            document.getElementById("responsable-titulo").innerHTML = "Responsable del contrato: " + String(gon.responsable)
+            document.getElementById("saldo-titulo").innerHTML = "Saldo de la cuenta: " + String(gon.saldo)

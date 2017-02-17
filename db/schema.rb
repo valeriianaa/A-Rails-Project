@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215215300) do
+ActiveRecord::Schema.define(version: 20170217035106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,7 +152,6 @@ ActiveRecord::Schema.define(version: 20170215215300) do
 
   create_table "cuotas_por_cliente", force: :cascade do |t|
     t.float    "montoTotal"
-    t.float    "montoAcreditado"
     t.boolean  "estado"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -160,10 +159,12 @@ ActiveRecord::Schema.define(version: 20170215215300) do
     t.integer  "proyecto_id"
     t.integer  "contrato_id"
     t.integer  "pago_id"
+    t.integer  "descuento_id"
   end
 
   add_index "cuotas_por_cliente", ["concepto_de_pago_id"], name: "index_cuotas_por_cliente_on_concepto_de_pago_id", using: :btree
   add_index "cuotas_por_cliente", ["contrato_id"], name: "index_cuotas_por_cliente_on_contrato_id", using: :btree
+  add_index "cuotas_por_cliente", ["descuento_id"], name: "index_cuotas_por_cliente_on_descuento_id", using: :btree
   add_index "cuotas_por_cliente", ["pago_id"], name: "index_cuotas_por_cliente_on_pago_id", using: :btree
   add_index "cuotas_por_cliente", ["proyecto_id"], name: "index_cuotas_por_cliente_on_proyecto_id", using: :btree
 
@@ -268,8 +269,7 @@ ActiveRecord::Schema.define(version: 20170215215300) do
 
   create_table "pagos", force: :cascade do |t|
     t.date     "fecha"
-    t.float    "montoAcreditado"
-    t.float    "montoAPagar"
+    t.float    "monto"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "tipo_de_pago_id"
@@ -471,6 +471,7 @@ ActiveRecord::Schema.define(version: 20170215215300) do
   add_foreign_key "cuentas", "proyectos"
   add_foreign_key "cuotas_por_cliente", "conceptos_de_pago"
   add_foreign_key "cuotas_por_cliente", "contratos"
+  add_foreign_key "cuotas_por_cliente", "descuentos"
   add_foreign_key "cuotas_por_cliente", "pagos"
   add_foreign_key "cuotas_por_cliente", "proyectos"
   add_foreign_key "eventos", "contactos"

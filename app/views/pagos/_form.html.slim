@@ -1,4 +1,4 @@
-= form_for @pago, remote: true do |f|
+= form_for @pago, :remote => true do |f|
   - if @pago.errors.any?
     #error_explanation
       h2 = "#{pluralize(@pago.errors.count, "error")} #{pluralize_without_count(@pago.errors.count, "prohibe", "prohiben")} almacenar este Pago:"
@@ -17,102 +17,20 @@
           | Filtrar
         br
         br
-        h2 Cantidad a pagar
-        #cuotas-tabla
-      br
       #metodos-de-pago
+        h4#proyecto-titulo a
+        h4#responsable-titulo a
+        h4#cantidad-a-pagar-titulo 
+        h4#saldo-titulo a
+        #cuotas-tabla
+        br
         = f.fields_for :pagos_metodos do |builder|
           = render 'pagos_metodos', :f => builder
         p
-        = link_to_add_fields "Añadir otra forma de pago", f, :pagos_metodos
-
-
+        = link_to_add_fields "Añadir forma de pago", f, :pagos_metodos
 
 
   = f.submit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  / .span11
-  /   a name="demo" 
-  /   h2 Demo
-  /   p Basic Demo Example.
-  /   #rootwizard
-  /     .navbar
-  /       .navbar-inner
-  /         .container
-  /           ul.nav.nav-pills
-  /             li
-  /               a aria-expanded="false" data-toggle="tab" href="#tab1"  First
-  /             li
-  /               a aria-expanded="false" data-toggle="tab" href="#tab2"  Second
-  /             li
-  /               a aria-expanded="false" data-toggle="tab" href="#tab3"  Third
-  /             li
-  /               a aria-expanded="false" data-toggle="tab" href="#tab4"  Forth
-  /             li
-  /               a aria-expanded="false" data-toggle="tab" href="#tab5"  Fifth
-  /             li.active
-  /               a aria-expanded="true" data-toggle="tab" href="#tab6"  Sixth
-  /             li
-  /               a aria-expanded="false" data-toggle="tab" href="#tab7"  Seventh
-  /     #bar.progress.progress-striped.active
-  /       .bar style=("width: 85.7143%;") 
-  /     .tab-content
-  /       #tab1.tab-pane
-  /         | 1
-              select#pago_persona_id.form-control.select2 name="pago[persona_id]"
-                - MiembroEquipo.all.each do |persona|
-                    option selected='' value=(persona.id) = persona.nombre_y_apellido
-              p#una_persona Algo
-              = render partial: "cuota"           
-  /       #tab2.tab-pane
-  /         | 2
-  /       #tab3.tab-pane
-  /         | 3
-  /       #tab4.tab-pane
-  /         | 4
-  /       #tab5.tab-pane
-  /         | 5
-  /       #tab6.tab-pane.active
-  /         | 6
-  /       #tab7.tab-pane
-  /         | 7
-  /       ul.pager.wizard
-  /         li.previous.first style="display:none;" 
-  /           a href="javascript:;"  First
-  /         li.previous
-  /           a href="javascript:;"  Previous
-  /         li.next.last style="display:none;" 
-  /           a href="javascript:;"  Last
-  /         li.next
-  /           a href="javascript:;"  Next
-  
-  / .actions = f.submit
-
 
 
 

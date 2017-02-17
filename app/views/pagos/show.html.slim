@@ -1,29 +1,5 @@
 p#notice = notice
 
-/ p
-/   strong Proyecto:
-/   = @pago.proyecto.nombre
-/ p
-/   strong Cliente:
-/   = @pago.persona.nombre_y_apellido
-/ p
-/   strong Concepto de Pago:
-/   = @pago.cuota_por_cliente.concepto_de_pago.nombre
-/ p
-/   strong Fecha:
-/   = @pago.fecha  
-/ p
-/   strong Monto:
-/   = @pago.montoAPagar
-/ / p
-/ /   strong Forma de pago:
-/ /   = @pago.fecha
-
-/ = link_to 'Edit', edit_pago_path(@pago)
-/ '|
-/ = link_to 'Back', pagos_path
-
-
 .row
   .col-md-8
     .box.box-info
@@ -34,30 +10,51 @@ p#notice = notice
           tbody
             tr
               td
+                strong Fecha
+              td 
+            tr
+              td
                 strong Proyecto
               td = @pago.proyecto.nombre
             tr
               td
-                strong Cliente
-              td = @pago.persona.nombre_y_apellido
+                strong Responsable
+              td = Persona.find(Contrato.where(proyecto_id: @pago.proyecto_id).pluck(:persona_id)[0].to_i).nombre_y_apellido
             tr
               td
                 strong Concepto de pago
-              td = @pago.cuota_por_cliente.concepto_de_pago.nombre
+              td 
+                table.table.table-bordered
+                  - @pago.cuotas_por_cliente.each do |cuota|
+                    tr
+                      td = cuota.concepto_de_pago.nombre
+                      td = cuota.concepto_de_pago.monto
             tr
               td
-                strong Monto
-              td = @pago.montoAPagar
+                strong Monto Pagado
+              td = @pago.monto
             tr
               td
-                strong Forma de pago
-              td = @pago.fecha
+                strong Metodos de pago
+              td 
+                table.table.table-bordered
+                  - @pago.pagos_metodos.each do |pm|
+                    tr
+                      td = pm.tipo_de_pago.nombre
+                      td = pm.monto
+            tr
+              td
+                strong Saldo de la cuenta
+              td = Cuenta.where(proyecto_id: @pago.proyecto_id).pluck(:saldo)[0]
             
 
 .row
   .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-success href=(edit_pago_path(@pago)) style="width:70px;" id="editar_pago"
       |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+  .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-default href=(pagos_path) style="width:70px;" id="volver_pago"
       |Volver
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-primary href="/pagos/#{@pago.id}.pdf" style="width:120px;" id="volver_pago"
+      |Imprimir Recibo

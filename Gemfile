@@ -54,6 +54,11 @@ gem 'audited-activerecord', '~> 4.2'
 gem 'twitter_bootstrap_wizard_rails'
 
 gem 'gon'
+
+gem 'client_side_validations'
+
+gem 'prawn'
+gem 'prawn-table'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

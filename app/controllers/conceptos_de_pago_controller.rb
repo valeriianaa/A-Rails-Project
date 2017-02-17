@@ -43,7 +43,6 @@ class ConceptosDePagoController < ApplicationController
   # PATCH/PUT /conceptos_de_pago/1
   # PATCH/PUT /conceptos_de_pago/1.json
   def update
-    @concepto_de_pago.plazoRecordatorio = Chronic.parse(@concepto_de_pago.diferencia, :now => @concepto_de_pago.fechaVencimiento)
     respond_to do |format|
       if @concepto_de_pago.update(concepto_de_pago_params)
         format.html { redirect_to @concepto_de_pago, notice: 'Concepto de pago was successfully updated.' }

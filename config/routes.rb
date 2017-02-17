@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :estados
   resources :pagos
   post "pagos/ajax_table_cuotas" => "pagos#ajax_table_cuotas"
+  post "pagos/ajax_gon_variables" => "pagos#ajax_gon_variables"
   resources :conceptos_de_pago
   resources :eventos
   resources :especialidades_de_contacto

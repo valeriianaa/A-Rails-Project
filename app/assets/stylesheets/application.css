@@ -67,6 +67,12 @@ table.table-bordered.table-striped{
 	background-color: #FFFFFF;
 }
 
+#contenido-show{
+	border-style: solid; 
+	border-color: #000000;
+	border-width:1px;
+}
+
 fieldset{
 	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 14px;

@@ -26,19 +26,6 @@ TipoDocumento.create!([
   {nombre: "Libreta de Enrolamiento"}
 ])
 
-# Persona.create!([
-#   {nombre: "Ana ", apellido: "Canteros", nroIdentificacion: "36063076", fechaNacimiento: "1991-11-05", calle: "176", nroDomicilio: "7141", piso: "", dpto: "", telefono: "4401604", email: "valeriianaa@gmail.com", type: "Empleado", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1}
-# ])
-
-# Empleado.create!([
-#   {nombre: "Ana", apellido: "Canteros", nroIdentificacion: "36063076", fechaNacimiento: "1991-11-05", calle: "176", nroDomicilio: "7141", piso: "", dpto: "", telefono: "4401604", email: "valeriianaa@gmail.com", type: "Empleado", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1}
-# ])
-
-
-# MiembroEquipo.create!([
-#   {nombre: "Daniela", apellido: "Schneider", nroIdentificacion: "33976521", fechaNacimiento: "1987-12-19", calle: "Av. Sarmiento", nroDomicilio: "8076", piso: "3", dpto: "7", telefono: "426924", email: "danischneider@gmail.com", type: "MiembroEquipo", pais_id: 1, provincia_id: 1, ciudad_id: 2, tipo_documento_id: 2}
-# ])
-
 Departamento.create!([
   {nombre: "Finanzas"},
   {nombre: "Recursos Humanos"},
@@ -133,6 +120,10 @@ Interes.create!([
   {nombre: "Interes 20%", descripcion: "-", porcentaje: 20.0}
 ])
 
+TipoDePago.create!([
+  {nombre: "Efectivo"}
+])
+
 ConceptoDePago.create!([
   {nombre: "Cuota de Enero", descripcion: "Enero 2017", monto: 200.0},
   {nombre: "Cuota de Febrero", descripcion: "Febrero 2017", monto: 200.0},
@@ -180,14 +171,20 @@ Contrato.create!([
   {fechaInicio: "2017-02-01", fechaFin: "2017-04-30", persona_proyecto_id: nil, persona_id: 6, proyecto_id: 1},
   {fechaInicio: "2017-02-01", fechaFin: "2017-05-31", persona_proyecto_id: nil, persona_id: 2, proyecto_id: 2}
 ])
+
+Cuenta.create!([
+  {saldo: 0.0, proyecto_id: 1},
+  {saldo: 0.0, proyecto_id: 2}
+])
+
 CuotaPorCliente.create!([
-  {montoTotal: "200.0", montoAcreditado: "0.0", estado: false, concepto_de_pago_id: 2, proyecto_id: 1, contrato_id: 1, pago_id: nil},
-  {montoTotal: "200.0", montoAcreditado: "0.0", estado: false, concepto_de_pago_id: 3, proyecto_id: 1, contrato_id: 1, pago_id: nil},
-  {montoTotal: "200.0", montoAcreditado: "0.0", estado: false, concepto_de_pago_id: 4, proyecto_id: 1, contrato_id: 1, pago_id: nil},
-  {montoTotal: "200.0", montoAcreditado: "0.0", estado: false, concepto_de_pago_id: 2, proyecto_id: 2, contrato_id: 2, pago_id: nil},
-  {montoTotal: "200.0", montoAcreditado: "0.0", estado: false, concepto_de_pago_id: 3, proyecto_id: 2, contrato_id: 2, pago_id: nil},
-  {montoTotal: "200.0", montoAcreditado: "0.0", estado: false, concepto_de_pago_id: 4, proyecto_id: 2, contrato_id: 2, pago_id: nil},
-  {montoTotal: "200.0", montoAcreditado: "0.0", estado: false, concepto_de_pago_id: 5, proyecto_id: 2, contrato_id: 2, pago_id: nil}
+  {montoTotal: "200.0", estado: false, concepto_de_pago_id: 2, proyecto_id: 1, contrato_id: 1, pago_id: nil},
+  {montoTotal: "200.0", estado: false, concepto_de_pago_id: 3, proyecto_id: 1, contrato_id: 1, pago_id: nil},
+  {montoTotal: "200.0", estado: false, concepto_de_pago_id: 4, proyecto_id: 1, contrato_id: 1, pago_id: nil},
+  {montoTotal: "200.0", estado: false, concepto_de_pago_id: 2, proyecto_id: 2, contrato_id: 2, pago_id: nil},
+  {montoTotal: "200.0", estado: false, concepto_de_pago_id: 3, proyecto_id: 2, contrato_id: 2, pago_id: nil},
+  {montoTotal: "200.0", estado: false, concepto_de_pago_id: 4, proyecto_id: 2, contrato_id: 2, pago_id: nil},
+  {montoTotal: "200.0", estado: false, concepto_de_pago_id: 5, proyecto_id: 2, contrato_id: 2, pago_id: nil}
 ])
 
 Accion.create!([
@@ -218,8 +215,39 @@ User.create!([
   {email: "valeriianaa@gmail.com", password: "12345678", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 1, rol_id: 2}
 ])
 
+Audited::Adapters::ActiveRecord::Audit.create!([
+  {auditable_id: 1, auditable_type: "Proyecto", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"proyecto 1", "descripcion"=>"Soy el proyecto 1", "calle"=>"176", "nroDomicilio"=>"7141", "piso"=>"", "dpto"=>"", "telefono"=>"", "email"=>"", "pagWeb"=>"", "pais_id"=>1, "provincia_id"=>1, "ciudad_id"=>1, "etapa_id"=>1, "area_id"=>1}, version: 1, comment: nil, remote_address: nil, request_uuid: "55b991c3-9e64-4a12-9bf0-875203b32fef"},
+  {auditable_id: 2, auditable_type: "Proyecto", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Trip -Drop, Turismo Solidario", "descripcion"=>"Plataforma web de gestión de ayuda a distintos colectivos (colegios, orfanatos, comedores, residencias, tribus, comunidades, ONG, etc.) a través de viajeros con destino principal en países desfavorecidos. Busca conseguir que la ayuda directa que proporcionan los viajeros sea la adecuada y que llegue íntegra a quien la necesita. Sin aduanas, sin impuestos, sin intermediarios. Se intenta promover la sensibilización colectiva desde la experiencia individual.", "calle"=>"Av. San Martin", "nroDomicilio"=>"3141", "piso"=>"", "dpto"=>"", "telefono"=>"3758 423099", "email"=>"tripdrop@gmail.com", "pagWeb"=>"tripdrop.com", "pais_id"=>1, "provincia_id"=>1, "ciudad_id"=>2, "etapa_id"=>1, "area_id"=>1}, version: 1, comment: nil, remote_address: nil, request_uuid: "b1d81fda-4021-406b-9239-9d55e1670d24"},
+  {auditable_id: 1, auditable_type: "ActividadProyecto", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"fechaVencimiento"=>nil, "proyecto_id"=>1, "actividad_id"=>1, "estado_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "76bcdc94-ab1e-4405-91eb-dd16d2e5e161"},
+  {auditable_id: 2, auditable_type: "ActividadProyecto", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"fechaVencimiento"=>nil, "proyecto_id"=>1, "actividad_id"=>2, "estado_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "fc8458ee-36d2-42d0-97dc-f049e33087c1"},
+  {auditable_id: 3, auditable_type: "ActividadProyecto", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"fechaVencimiento"=>nil, "proyecto_id"=>1, "actividad_id"=>3, "estado_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "61aeede5-8fb8-450f-b316-a2260684c093"},
+  {auditable_id: 4, auditable_type: "ActividadProyecto", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"fechaVencimiento"=>nil, "proyecto_id"=>2, "actividad_id"=>1, "estado_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "b632ddee-fc17-4a65-bfb2-bd1802a2c4f2"},
+  {auditable_id: 5, auditable_type: "ActividadProyecto", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"fechaVencimiento"=>nil, "proyecto_id"=>2, "actividad_id"=>2, "estado_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "5b1cb35e-f1fb-4264-98d4-23adff79557f"},
+  {auditable_id: 6, auditable_type: "ActividadProyecto", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"fechaVencimiento"=>nil, "proyecto_id"=>2, "actividad_id"=>3, "estado_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "4cb7bc8e-7941-4897-98a3-e1c8e208c6e4"},
+  {auditable_id: 1, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Enero", "descripcion"=>"Enero 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "f629f1b0-1453-4edf-99a3-5942eb56f31c"},
+  {auditable_id: 2, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Febrero", "descripcion"=>"Febrero 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "6ea6fed2-fe85-4f05-b82b-5f9071c7ebf6"},
+  {auditable_id: 3, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Marzo", "descripcion"=>"Marzo 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "26411f5d-c30c-492a-8017-120371819788"},
+  {auditable_id: 4, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Abril", "descripcion"=>"Abril 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "df85c928-7d51-44da-9ad2-706d4e089b84"},
+  {auditable_id: 5, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Mayo", "descripcion"=>"Mayo 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "c20502f3-90c7-4163-a3c1-8f818c245f9c"},
+  {auditable_id: 6, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Junio", "descripcion"=>"Junio 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "21cba0ea-c6f0-4d8e-b0af-7e0308efec65"},
+  {auditable_id: 7, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Julio", "descripcion"=>"Julio 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "9d9d2438-267c-4dda-b876-f93e43d84796"},
+  {auditable_id: 8, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Agosto", "descripcion"=>"Agosto 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "364b92f3-d146-4634-ba64-b364a56d50f9"},
+  {auditable_id: 9, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Septiembre", "descripcion"=>"Septiembre 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "815da732-8a26-4081-99fc-657fe4e8437b"},
+  {auditable_id: 10, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Octubre", "descripcion"=>"Octubre 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "2432e33c-52eb-405a-9fb4-4bb6224244a8"},
+  {auditable_id: 11, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Noviembre", "descripcion"=>"Noviembre 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "513423ca-62bf-4794-8187-b6bbc1be3f2c"},
+  {auditable_id: 12, auditable_type: "ConceptoDePago", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"nombre"=>"Cuota de Diciembre", "descripcion"=>"Diciembre 2017", "monto"=>200.0}, version: 1, comment: nil, remote_address: nil, request_uuid: "86aa9bb4-52ea-4d59-99ec-0eb34ad25991"},
+  {auditable_id: 1, auditable_type: "Contrato", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"fechaInicio"=>"Wed, 01 Feb 2017", "fechaFin"=>"Sun, 30 Apr 2017", "persona_proyecto_id"=>nil, "persona_id"=>6, "proyecto_id"=>1}, version: 1, comment: nil, remote_address: nil, request_uuid: "128e0594-24c4-4fe2-8331-33c10187b0ed"},
+  {auditable_id: 2, auditable_type: "Contrato", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"fechaInicio"=>"Wed, 01 Feb 2017", "fechaFin"=>"Wed, 31 May 2017", "persona_proyecto_id"=>nil, "persona_id"=>2, "proyecto_id"=>2}, version: 1, comment: nil, remote_address: nil, request_uuid: "91916063-3a4b-4b96-8445-fbb0aa0ac36b"},
+  {auditable_id: 1, auditable_type: "CuotaPorCliente", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"montoTotal"=>200.0, "estado"=>false, "concepto_de_pago_id"=>2, "proyecto_id"=>1, "contrato_id"=>1, "pago_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "8b596dd0-b00a-4b0e-8cdb-92ffeccca2f9"},
+  {auditable_id: 2, auditable_type: "CuotaPorCliente", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"montoTotal"=>200.0, "estado"=>false, "concepto_de_pago_id"=>3, "proyecto_id"=>1, "contrato_id"=>1, "pago_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "9435595b-45d4-443d-b751-a2afca2ad7a0"},
+  {auditable_id: 3, auditable_type: "CuotaPorCliente", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"montoTotal"=>200.0, "estado"=>false, "concepto_de_pago_id"=>4, "proyecto_id"=>1, "contrato_id"=>1, "pago_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "2f3e4e29-7d27-4eb5-b73a-208ac7e7267f"},
+  {auditable_id: 4, auditable_type: "CuotaPorCliente", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"montoTotal"=>200.0, "estado"=>false, "concepto_de_pago_id"=>2, "proyecto_id"=>2, "contrato_id"=>2, "pago_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "ad2f7f01-03a6-4c39-8a2b-ac0a17566186"},
+  {auditable_id: 5, auditable_type: "CuotaPorCliente", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"montoTotal"=>200.0, "estado"=>false, "concepto_de_pago_id"=>3, "proyecto_id"=>2, "contrato_id"=>2, "pago_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "75e46324-2333-4abc-acb9-c222c60a2dae"},
+  {auditable_id: 6, auditable_type: "CuotaPorCliente", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"montoTotal"=>200.0, "estado"=>false, "concepto_de_pago_id"=>4, "proyecto_id"=>2, "contrato_id"=>2, "pago_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "af289f06-8b78-4db9-88e6-7f2cc1366b8c"},
+  {auditable_id: 7, auditable_type: "CuotaPorCliente", associated_id: nil, associated_type: nil, user_id: nil, user_type: nil, username: nil, action: "create", audited_changes: {"montoTotal"=>200.0, "estado"=>false, "concepto_de_pago_id"=>5, "proyecto_id"=>2, "contrato_id"=>2, "pago_id"=>nil}, version: 1, comment: nil, remote_address: nil, request_uuid: "27744d67-e9bc-4067-a5ee-14f2c55a2629"}
+])
+
 
 
 #--------------------------------------------------------
-
 

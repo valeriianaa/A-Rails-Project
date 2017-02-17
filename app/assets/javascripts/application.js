@@ -16,6 +16,7 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require jquery.bootstrap.wizard
 //= require prettify
+//= require rails.validations
 //= require jquery-ui
 //= require jquery_ujs	
 //= require turbolinks

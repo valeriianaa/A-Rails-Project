@@ -69,6 +69,6 @@ class CuentasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cuenta_params
-      params.require(:cuenta).permit(:saldo)
+      params.require(:cuenta).permit(:saldo, :proyecto_id)
     end
 end

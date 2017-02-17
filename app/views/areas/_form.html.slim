@@ -1,4 +1,4 @@
-= form_for @area do |f|
+= form_for @area, validate: true do |f|
   - if @area.errors.any?
     #error_explanation
       h2 = "#{pluralize(@area.errors.count, "error")} #{pluralize_without_count(@area.errors.count, "prohibe", "prohiben")} almacenar esta Área:"
@@ -17,3 +17,5 @@
       p#foot = "(*) Campo Obligatorio"
   
   .actions = f.submit
+
+

@@ -1,21 +1,27 @@
-h1 Listing cuentas
-
-table
+.index-header
+  h1 
+    | Cuentas  
+    - if can? :create, Cuenta
+      a.btn.btn-info href=(new_cuenta_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
+br
+table class="table table-bordered table-striped" 
   thead
     tr
+      th Proyecto
       th Saldo
-      th
-      th
-      th
+      th colspan="3" Acciones
 
   tbody
     - @cuentas.each do |cuenta|
       tr
+        td = cuenta.proyecto.nombre
         td = cuenta.saldo
-        td = link_to 'Show', cuenta
-        td = link_to 'Edit', edit_cuenta_path(cuenta)
-        td = link_to 'Destroy', cuenta, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
-= link_to 'New Cuenta', new_cuenta_path
+        td style="padding: 3px;"
+          - if can? :show, Cuenta
+            a href=(cuenta_path(cuenta))
+              i.fa.fa-search
+          - if can? :destroy, Cuenta
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(cuenta_path(cuenta)) 
+              i.fa.fa-trash

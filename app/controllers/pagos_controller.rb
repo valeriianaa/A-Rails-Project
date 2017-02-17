@@ -10,6 +10,13 @@ class PagosController < ApplicationController
   # GET /pagos_realizados/1
   # GET /pagos_realizados/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = PagoPdf.new(@pago)
+        send_data pdf.render, filename: "pago_#{@pago.id}.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end 
   end
 
   # GET /pagos_realizados/new
@@ -24,31 +31,47 @@ class PagosController < ApplicationController
   # POST /pagos_realizados
   # POST /pagos_realizados.json
   def create
+
+    if params[:pago].key?(:cuota_por_cliente_ids)
+      # filtrar cuotas_por_clientes
+      ctas_ids = params[:pago][:cuota_por_cliente_ids]
+      params[:pago][:cuotas_por_cliente_attributes].reject! {|cuota| not ctas_ids.include?(cuota['id'].to_i) }
+    else
+      params[:pago].delete(:cuotas_por_cliente_attributes) # delete      
+    end
+    
     @pago = Pago.new(pago_params)
+    # @pago.cuotas_por_cliente
     @cuotas_por_cliente = CuotaPorCliente.find(params[:pago][:cuota_por_cliente_ids])
-    #@cuenta = Cuenta.find(params[:pago][:cuenta_id])
+    @cuenta = Cuenta.where(:proyecto => params[:pago][:proyecto_id])
+    cuenta_id = @cuenta.pluck(:id)[0].to_i
+    cuenta_saldo = @cuenta.pluck(:saldo)[0].to_f
+
 
     @pago.monto = 0
     montoAcreditado = 0
+
     @cuotas_por_cliente.each do |cuota|
-      puts "pago, conceptos", cuota
-      #@pago.monto = @pago.monto + cuota.montoTotal
+      @pago.monto = @pago.monto + cuota.montoTotal
     end
-    puts "@pago", @pago
-    #puts "@pago_metodos", @pagos_metodos
+
+    puts 'pago monto', @pago.monto
+
     @pago.pagos_metodos.each do |pm|
       montoAcreditado = montoAcreditado + pm.monto
     end
-    if @cuenta.saldo > 0
-      @pago.monto = @pago.monto -  @cuenta.saldo
+    if cuenta_saldo > 0
+      @pago.monto = @pago.monto - cuenta_saldo
       if montoAcreditado > @pago.monto
-         @cuenta.saldo = montoAcreditado - @pago.monto
+        Cuenta.update(cuenta_id, saldo: (montoAcreditado - @pago.monto))
       end
-    elsif  @cuenta.saldo == 0
+    elsif cuenta_saldo == 0
       if montoAcreditado > @pago.monto
-         @cuenta.saldo = montoAcreditado - @pago.monto
+        Cuenta.update(cuenta_id, saldo: (montoAcreditado - @pago.monto))
       end
     end
+
+    puts @pago.validate
 
     respond_to do |format|
       # if @pago.save
@@ -84,6 +107,7 @@ class PagosController < ApplicationController
   # DELETE /pagos_realizados/1
   # DELETE /pagos_realizados/1.json
   def destroy
+    @cuenta = Cuenta.find(params[:pago][:cuenta_id])
     pm_monto = 0
     cuotas_monto = 0
     @pago_metodos.each do |pm|
@@ -93,7 +117,7 @@ class PagosController < ApplicationController
       cuotas_monto = cuotas_monto + c.montoTotal
       cuota.update(estado: false)
     end
-    saldo = saldo - pago.monto
+    @cuenta.saldo = @cuenta.saldo - pago.monto
     @pago.destroy
     respond_to do |format|
       format.html { redirect_to pagos_url, notice: 'Pago was successfully destroyed.' }
@@ -104,7 +128,26 @@ class PagosController < ApplicationController
   def ajax_table_cuotas
     @proyecto = Proyecto.find(params[:pago][:proyecto_id])
     @cuotas = CuotaPorCliente.where(proyecto_id: @proyecto.id, estado: false)
+
+    @contrato = Contrato.where(:proyecto_id => @proyecto.id)
+    #gon variables
+    gon.proyecto = @proyecto.nombre
+    gon.saldo = Cuenta.where(:proyecto_id => @proyecto.id).pluck(:saldo)
+    gon.responsable = Persona.find(@contrato.pluck(:persona_id)[0].to_i).nombre_y_apellido
+
     render :partial => "cuota.html"
+    
+  end
+
+  def ajax_gon_variables
+    @proyecto = Proyecto.find(params[:pago][:proyecto_id])
+    @contrato = Contrato.where(:proyecto_id => @proyecto.id)
+
+    render json: {
+      proyecto: @proyecto.nombre,
+      saldo: Cuenta.where(:proyecto_id => @proyecto.id).pluck(:saldo),
+      responsable: Persona.find(@contrato.pluck(:persona_id)[0].to_i).nombre_y_apellido
+    }
   end
 
   private
@@ -116,17 +159,16 @@ class PagosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pago_params
       params.require(:pago).permit(
-        :cuota_por_cliente_id, 
         :fecha, 
         :montoAcreditado, 
         :proyecto_id, 
         :persona_id, 
         :cuenta_id,
-        :montoAPagar, 
+        :monto, 
         :tipo_de_pago_id,
         :cuota_por_cliente_ids => [],
         :cuotas_por_cliente_attributes => [:id, :descuento_id],
-        :pagos_metodos_attributes => [ :id, :monto, :pago_id, :tipo_de_pago_id, :_destroy ] 
+        :pagos_metodos_attributes => [ :id, :monto, :pago_id, :tipo_de_pago_id, :_destroy ]
       )
     end
 end
