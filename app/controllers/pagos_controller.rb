@@ -31,61 +31,29 @@ class PagosController < ApplicationController
   # POST /pagos_realizados
   # POST /pagos_realizados.json
   def create
-
     if params[:pago].key?(:cuota_por_cliente_ids)
       # filtrar cuotas_por_clientes
       ctas_ids = params[:pago][:cuota_por_cliente_ids]
       params[:pago][:cuotas_por_cliente_attributes].reject! {|cuota| not ctas_ids.include?(cuota['id'].to_i) }
+      
+      
+      
     else
-      params[:pago].delete(:cuotas_por_cliente_attributes) # delete      
+      params[:pago].delete(:cuotas_por_cliente_attributes) # delete
     end
-    
     @pago = Pago.new(pago_params)
-    # @pago.cuotas_por_cliente
-    @cuotas_por_cliente = CuotaPorCliente.find(params[:pago][:cuota_por_cliente_ids])
-    @cuenta = Cuenta.where(:proyecto => params[:pago][:proyecto_id])
-    cuenta_id = @cuenta.pluck(:id)[0].to_i
-    cuenta_saldo = @cuenta.pluck(:saldo)[0].to_f
-
-
-    @pago.monto = 0
-    montoAcreditado = 0
-
-    @cuotas_por_cliente.each do |cuota|
-      @pago.monto = @pago.monto + cuota.montoTotal
-    end
-
-    puts 'pago monto', @pago.monto
-
-    @pago.pagos_metodos.each do |pm|
-      montoAcreditado = montoAcreditado + pm.monto
-    end
-    if cuenta_saldo > 0
-      @pago.monto = @pago.monto - cuenta_saldo
-      if montoAcreditado > @pago.monto
-        Cuenta.update(cuenta_id, saldo: (montoAcreditado - @pago.monto))
-      end
-    elsif cuenta_saldo == 0
-      if montoAcreditado > @pago.monto
-        Cuenta.update(cuenta_id, saldo: (montoAcreditado - @pago.monto))
-      end
-    end
-
-    puts @pago.validate
-
     respond_to do |format|
-      # if @pago.save
-      if false
-        @cuotas_por_cliente.each do |cuota|
-          cuota.update(estado: true, pago_id: @pago.id)
-        end
+      if @pago.save
         format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
         format.json { render :show, status: :created, location: @pago }
       else
+        puts @pago
+        puts @pago.errors.each { |e| puts e }
         format.html { render :new }
         format.json { render json: @pago.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # PATCH/PUT /pagos_realizados/1
@@ -93,7 +61,7 @@ class PagosController < ApplicationController
   def update
     respond_to do |format|
       if @pago.update(pago_params)
-        CuotaPorCliente.update(@pago.cuota_por_cliente.id, montoAcreditado: @pago.cuota_por_cliente.setear_monto_acreditado(@pago.cuota_por_cliente))
+        # CuotaPorCliente.update(@pago.cuota_por_cliente.id, montoAcreditado: @pago.cuota_por_cliente.setear_monto_acreditado(@pago.cuota_por_cliente))
         #@pago.cuota_por_cliente.montoAcreditado = @pago.cuota_por_cliente.setear_monto_acreditado(@pago.cuota_por_cliente)
         format.html { redirect_to @pago, notice: 'Pago  was successfully updated.' }
         format.json { render :show, status: :ok, location: @pago }
@@ -129,24 +97,22 @@ class PagosController < ApplicationController
     @proyecto = Proyecto.find(params[:pago][:proyecto_id])
     @cuotas = CuotaPorCliente.where(proyecto_id: @proyecto.id, estado: false)
 
-    @contrato = Contrato.where(:proyecto_id => @proyecto.id)
-    #gon variables
-    gon.proyecto = @proyecto.nombre
-    gon.saldo = Cuenta.where(:proyecto_id => @proyecto.id).pluck(:saldo)
-    gon.responsable = Persona.find(@contrato.pluck(:persona_id)[0].to_i).nombre_y_apellido
-
     render :partial => "cuota.html"
     
   end
 
   def ajax_gon_variables
     @proyecto = Proyecto.find(params[:pago][:proyecto_id])
-    @contrato = Contrato.where(:proyecto_id => @proyecto.id)
+    @contrato = Contrato.where('fecha_inicio < ? AND fecha_fin > ? AND proyecto_id = ?', Date.today, Date.today, @proyecto.id).first
+    @cuenta = Cuenta.where(proyecto_id: @proyecto.id).first
+    @responsable = Persona.find(@contrato.persona_id)
 
     render json: {
       proyecto: @proyecto.nombre,
-      saldo: Cuenta.where(:proyecto_id => @proyecto.id).pluck(:saldo),
-      responsable: Persona.find(@contrato.pluck(:persona_id)[0].to_i).nombre_y_apellido
+      saldo: @cuenta.try(:saldo),
+      responsable: @responsable.nombre_y_apellido,
+      responsable_id: @contrato.try(:persona_id),
+      cuenta_id: @cuenta.try(:id)
     }
   end
 

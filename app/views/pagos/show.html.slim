@@ -11,7 +11,7 @@ p#notice = notice
             tr
               td
                 strong Fecha
-              td 
+              td = l @pago.fecha
             tr
               td
                 strong Proyecto
@@ -19,7 +19,7 @@ p#notice = notice
             tr
               td
                 strong Responsable
-              td = Persona.find(Contrato.where(proyecto_id: @pago.proyecto_id).pluck(:persona_id)[0].to_i).nombre_y_apellido
+              td = @pago.persona.nombre_y_apellido
             tr
               td
                 strong Concepto de pago
@@ -28,11 +28,11 @@ p#notice = notice
                   - @pago.cuotas_por_cliente.each do |cuota|
                     tr
                       td = cuota.concepto_de_pago.nombre
-                      td = cuota.concepto_de_pago.monto
+                      td = cuota.montoTotal.round
             tr
               td
                 strong Monto Pagado
-              td = @pago.monto
+              td = @pago.monto.round
             tr
               td
                 strong Metodos de pago
@@ -41,20 +41,17 @@ p#notice = notice
                   - @pago.pagos_metodos.each do |pm|
                     tr
                       td = pm.tipo_de_pago.nombre
-                      td = pm.monto
+                      td = pm.monto.round
             tr
               td
                 strong Saldo de la cuenta
-              td = Cuenta.where(proyecto_id: @pago.proyecto_id).pluck(:saldo)[0]
+              td = @pago.cuenta.saldo.round
             
 
 .row
   .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_pago_path(@pago)) style="width:70px;" id="editar_pago"
-      |Editar
-  .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-default href=(pagos_path) style="width:70px;" id="volver_pago"
       |Volver
   .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-primary href="/pagos/#{@pago.id}.pdf" style="width:120px;" id="volver_pago"
+    a.btn.btn-block.btn-success href="/pagos/#{@pago.id}.pdf" style="width:120px;" id="volver_pago"
       |Imprimir Recibo

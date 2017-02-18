@@ -20,3 +20,5 @@ $(document).ready ->
             document.getElementById("proyecto-titulo").innerHTML = "Proyecto: " + String(gon.proyecto)
             document.getElementById("responsable-titulo").innerHTML = "Responsable del contrato: " + String(gon.responsable)
             document.getElementById("saldo-titulo").innerHTML = "Saldo de la cuenta: " + String(gon.saldo)
+            $("#pago_persona_id").val(gon.responsable_id)
+            $("#pago_cuenta_id").val(gon.cuenta_id)

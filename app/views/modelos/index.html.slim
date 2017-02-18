@@ -27,9 +27,4 @@ table id="datatable" class="table table-bordered table-striped"
               a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(modelo_path(modelo)) 
                 i.fa.fa-trash
 
-br
 
-/= link_to 'New Modelo', new_modelo_path
-        / td = link_to 'Show', modelo
-        / td = link_to 'Edit', edit_modelo_path(modelo)
-        / td = link_to 'Destroy', modelo, data: { confirm: 'Are you sure?' }, method: :delete

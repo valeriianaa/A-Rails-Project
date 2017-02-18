@@ -41,12 +41,12 @@ class ContratosController < ApplicationController
   # PATCH/PUT /contratos/1
   # PATCH/PUT /contratos/1.json
   def update
-    f_inicio_vieja = @contrato.fechaInicio
-    f_fin_vieja = @contrato.fechaFin
+    f_inicio_vieja = @contrato.fecha_inicio
+    f_fin_vieja = @contrato.fecha_fin
     respond_to do |format|
       if @contrato.update(contrato_params)
-        f_inicio_nueva = @contrato.fechaInicio
-        f_fin_nueva = @contrato.fechaFin
+        f_inicio_nueva = @contrato.fecha_inicio
+        f_fin_nueva = @contrato.fecha_fin
         if f_inicio_nueva < f_inicio_vieja
           @contrato.anadir_conceptosdepago(f_inicio_nueva, f_inicio_vieja)
         elsif f_fin_nueva > f_fin_vieja
@@ -84,6 +84,6 @@ class ContratosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contrato_params
-      params.require(:contrato).permit(:fechaInicio, :fechaFin, :proyecto_id, :persona_id)
+      params.require(:contrato).permit(:fecha_inicio, :fecha_fin, :proyecto_id, :persona_id)
     end
 end

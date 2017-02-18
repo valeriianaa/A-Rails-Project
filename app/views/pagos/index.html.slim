@@ -1,35 +1,37 @@
-h1 Pagos
+.index-header
+  h1 
+    | Pagos  
+    - if can? :create, Pago
+      a.btn.btn-info href=(new_pago_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
+br
+table id="datatable" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Fecha
+      th Proyecto
+      th Responsable del contrato
+      th Concepto de pago
+      th Monto pagado
+      th.no-print Acciones
 
-.box
-  table class="table table-bordered"
-    thead
+  tbody
+    - @pagos.each do |pago|
       tr
-        th Proyecto
-        th Cliente
-        th Concepto de pago
-        th Fecha
-        th Monto
-        th Forma de pago
-        th colspan="3" Acciones
-
-    tbody
-      - @pagos.each do |pago|
-        tr
-          td = pago.proyecto.nombre
-          td = pago.persona.nombre_y_apellido
-          td = pago.cuota_por_cliente.concepto_de_pago.nombre
-          td = pago.fecha
-          td = pago.montoAPagar
-          td = pago.tipo_de_pago.nombre
-          td style="padding: 3px;"
+        td = pago.fecha
+        td = pago.proyecto.nombre
+        td = pago.persona.nombre_y_apellido
+        td 
+          - pago.cuotas_por_cliente.each do |c|
+            li = "#{c.concepto_de_pago.nombre}: #{c.montoTotal.round}"
+        td = pago.monto.round
+        td.no-print style="padding: 3px;"
+          - if can? :show, Pago
             a href=(pago_path(pago))
               i.fa.fa-search
-            a href=(edit_pago_path(pago))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(pago_path(pago)) 
+          - if can? :destroy, Pago
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(pago_path(pago))  
               i.fa.fa-trash
-br
 
-br
 
-= link_to 'Nuevo Pago', new_pago_path

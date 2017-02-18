@@ -10,6 +10,8 @@ class Proyecto < ActiveRecord::Base
 	belongs_to :persona
 	has_many :pagos
 
+	has_one :cuenta
+
 	has_many :cuotas_por_cliente, dependent: :destroy
 
 	has_many :personas_proyectos, dependent: :destroy

@@ -1,10 +1,14 @@
-= form_for @pago, :remote => true do |f|
+= form_for @pago do |f|
+  
   - if @pago.errors.any?
     #error_explanation
       h2 = "#{pluralize(@pago.errors.count, "error")} #{pluralize_without_count(@pago.errors.count, "prohibe", "prohiben")} almacenar este Pago:"
       ul
         - @pago.errors.full_messages.each do |message|
           li = message
+
+  = f.hidden_field :persona_id
+  = f.hidden_field :cuenta_id
 
   .box.box-info style="width:100%"
     .box-header.with-border
@@ -18,10 +22,10 @@
         br
         br
       #metodos-de-pago
-        h4#proyecto-titulo a
-        h4#responsable-titulo a
+        h4#proyecto-titulo -
+        h4#responsable-titulo -
         h4#cantidad-a-pagar-titulo 
-        h4#saldo-titulo a
+        h4#saldo-titulo -
         #cuotas-tabla
         br
         = f.fields_for :pagos_metodos do |builder|
@@ -33,15 +37,4 @@
   = f.submit
 
 
-
-// javascript:
-//   $('#tabla_cuotas').hide();
-//   $('#pago_persona_id').change(function() {
-//     var proyecto = $('#pago_proyecto_id :selected').val();
-//     if ((proyecto == 6) || (proyecto == 8)){
-//       $('#tabla_cuotas').show();
-//     }else{
-//       $('#tabla_cuotas').hide();
-//     }
-//   });
 
