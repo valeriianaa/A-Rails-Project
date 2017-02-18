@@ -20,6 +20,8 @@
 //= require jquery-ui
 //= require jquery_ujs	
 //= require turbolinks
+//= require raphael
+//= require morris
 //= require_tree .
 
 // jQuery(function() {

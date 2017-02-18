@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217035106) do
+ActiveRecord::Schema.define(version: 20170218172754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,6 +167,11 @@ ActiveRecord::Schema.define(version: 20170217035106) do
   add_index "cuotas_por_cliente", ["descuento_id"], name: "index_cuotas_por_cliente_on_descuento_id", using: :btree
   add_index "cuotas_por_cliente", ["pago_id"], name: "index_cuotas_por_cliente_on_pago_id", using: :btree
   add_index "cuotas_por_cliente", ["proyecto_id"], name: "index_cuotas_por_cliente_on_proyecto_id", using: :btree
+
+  create_table "db_backups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "departamentos", force: :cascade do |t|
     t.string   "nombre"

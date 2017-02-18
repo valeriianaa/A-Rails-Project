@@ -83,6 +83,15 @@ class ProyectosController < ApplicationController
     end
   end
 
+  def estadisticas
+    @proyecto = Proyecto.find(params[:id])
+
+    respond_to do |format|
+      format.html { render 'estadistica.html.slim' }
+      format.json { render json: @proyecto }
+    end
+  end
+
   def audited
     audited = Audited::Adapters::ActiveRecord::Audit
     @auditoria = audited.where auditable_type: "Proyecto"

@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   match 'proyectos/:id/actividades_proyectos' => 'proyectos#actividadesProyecto',  :via => [:get], as: :actividades_del_proyecto
 
+  match 'proyectos/:id/estadisticas'=> 'proyectos#estadisticas', :via => [:get], as: :proyecto_estadisticas
   #resources :users
   devise_for :users, :path => 'user', :controllers => {:registrations => "registrations"}
   #devise_for :users, :path_prefix => 'd'
@@ -65,6 +66,9 @@ Rails.application.routes.draw do
   match 'eventos_audited' => 'eventos#audited', :via => [:get], as: :eventos_audited
   match 'eventos_proyectos_audited' => 'eventos_proyectos#audited', :via => [:get], as: :eventos_proyectos_audited
   match 'proyectos_audited' => 'proyectos#audited', :via => [:get], as: :proyectos_audited
+
+
+  match 'backup/new' => 'db_backups#new', :via => [:get], as: :new_backup
   #match 'pagos_audited' => 'pagos#audited', :via => [:get], as: :pagos_audited
   #devise_for :installs
   #match 'proyectos/:proyecto_id/actividades_proyectos/:id/historial' => 'actividades_proyectos#historial',  :via => [:get], as: :historial

@@ -59,6 +59,9 @@ gem 'client_side_validations'
 
 gem 'prawn'
 gem 'prawn-table'
+
+gem 'morrisjs-rails'
+gem 'raphael-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

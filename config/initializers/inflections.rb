@@ -53,4 +53,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'PagoMetodo','PagosMetodos'
 	inflect.irregular 'pago_metodo','pagos_metodos'
 	inflect.irregular 'cuenta', 'cuentas'
+	inflect.irregular 'db_backup', 'db_backups'
+	inflect.irregular 'DbBackup', 'DbBackups'
+	inflect.irregular 'estadistica', 'estadisticas'
 end
