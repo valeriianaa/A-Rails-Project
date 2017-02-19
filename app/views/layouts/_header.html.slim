@@ -9,37 +9,46 @@ a.logo href="index2.html"
     b> Incubadora
     | App
 nav class="navbar navbar-static-top"
-	a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button"
-		span.sr-only Toggle
-	div.navbar-custom-menu
-		ul class="nav navbar-nav"
-			li class="dropdown messages-menu"
-			li class="dropdown notifications-menu"
-			li class="dropdown tasks-menu"
-			li class="dropdown user user-menu"
-			  a.dropdown-toggle data-toggle="dropdown" href="#" 
-			    img.user-image src="/assets/default_avatar.png" 
-			    span.hidden-xs 
-			    = current_user.persona.nombre_y_apellido
-			  ul.dropdown-menu
-			    li.user-header
-			      img.img-circle src="/assets/default_avatar.png" 
-			      p
-			        = current_user.persona.nombre_y_apellido
-			        small
-			       	= current_user.email
-			    li.user-body
-			      .row
-			        .col-xs-4.text-center
-			          a href="#"  
-			        .col-xs-4.text-center
-			          a href="#"  
-			        .col-xs-4.text-center
-			          a href="#"  
-			    li.user-footer
-			      .pull-left
-			        a.btn.btn-default.btn-flat href="#"  Perfil
-			      .pull-right
-			        a.btn.btn-default.btn-flat data-method="delete" href=(destroy_user_session_path) Cerrar Sesión
+  a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button"
+    span.sr-only Toggle
+  div.navbar-custom-menu
+    ul class="nav navbar-nav"
+      li class="dropdown messages-menu"
+      li class="dropdown notifications-menu"
+      li class="dropdown tasks-menu"
+      li class="dropdown user user-menu"
+        a.dropdown-toggle data-toggle="dropdown" href="#" 
+          img.user-image src="/assets/default_avatar.png" 
+          span.hidden-xs 
+          = current_user.persona.nombre_y_apellido
+        ul.dropdown-menu
+          li.user-header
+            img.img-circle src="/assets/default_avatar.png" 
+            p
+              = current_user.persona.nombre_y_apellido
+              small
+              = current_user.email
+          li.user-body
+            .row
+              .col-xs-4.text-center
+                a href="#"  
+              .col-xs-4.text-center
+                a href="#"  
+              .col-xs-4.text-center
+                a href="#"  
+          li.user-footer
+            .pull-left
+              a.btn.btn-default.btn-flat href="#"  Perfil
+            .pull-right
+              a.btn.btn-default.btn-flat data-method="delete" href=(destroy_user_session_path) Cerrar Sesión
 
+      - if can? :manage, Systemsetting
+        - if Systemsetting.count > 0
+          li
+            a data-toggle="control-sidebar" href=(edit_configuracion_path(Systemsetting.last))
+              i.fa.fa-gears
+        - else
+          li
+            a data-toggle="control-sidebar" href=(new_configuracion_path)
+              i.fa.fa-gears
 

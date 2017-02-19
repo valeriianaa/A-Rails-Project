@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Tipo pago saldo:
+  = @systemsetting.tipo_de_pago.nombre
+
+= link_to 'Edit', edit_systemsetting_path(@systemsetting)
+'|
+= link_to 'Back', systemsettings_path

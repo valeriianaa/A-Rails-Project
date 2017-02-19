@@ -1,8 +1,10 @@
-.row
-	fieldset
-	  = f.label :tipo_de_pago_id, 'Interes:  '
-	  = f.collection_select :tipo_de_pago_id, TipoDePago.all, :id, :nombre, {:prompt => "Forma de Pago"}, {:id => 'tipo_de_pago_id', :class => 'form-control', :style => 'width:25%'}
-	  = f.label :monto, 'Cantidad:  '
-	  = f.text_field :monto
-	  = f.hidden_field :_destroy
-	  = link_to "Remover", "#", class: "remove_fields"
+tr
+  td
+    = f.collection_select :tipo_de_pago_id, TipoDePago.all, :id, :nombre, {}, {:id => 'tipo_de_pago_id', :class => 'form-control'}
+  td
+    .input-group
+      span.input-group-addon $
+      = f.text_field :monto, class: "form-control"
+      = f.hidden_field :_destroy
+  td
+    = link_to "[-] Remover", "#", class: "btn btn-xs btn-danger remove_fields_pagos"

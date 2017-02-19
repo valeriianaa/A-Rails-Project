@@ -1,0 +1,1 @@
+json.partial! "systemsettings/systemsetting", systemsetting: @systemsetting

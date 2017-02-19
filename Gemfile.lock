@@ -112,7 +112,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
-    libv8 (3.16.14.15)
+    libv8 (3.16.14.15-x86_64-linux)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -283,4 +283,4 @@ DEPENDENCIES
   workflow
 
 BUNDLED WITH
-   1.10.6
+   1.14.4

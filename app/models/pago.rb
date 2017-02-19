@@ -86,10 +86,17 @@ class Pago < ActiveRecord::Base
   end
 
   HUMANIZED_ATTRIBUTES = {
-    :cuota_por_cliente_ids => "Cuotas: "
+    :cuota_por_cliente_ids => "Cuotas: ",
+    :proyecto_id => "Proyecto: ",
+    :persona_id => "Responsable: ",
+    :"pagos_metodos.monto" => "Metodo de Pago [Monto]: ",
+    :"pagos_metodos.tipo_de_pago_id" => "Metodo de Pago [Tipo de Pago]: ",
+    :pagos_metodos => "Metodo de Pago: "
   }
 
   def self.human_attribute_name(*args)
+    puts "self.human_attribute_name"
+    puts "[args[0]]", args[0]
     HUMANIZED_ATTRIBUTES[args[0]] || super
   end
 

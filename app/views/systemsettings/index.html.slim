@@ -1,0 +1,21 @@
+h1 Listing systemsettings
+
+table
+  thead
+    tr
+      th Tipo pago saldo
+      th
+      th
+      th
+
+  tbody
+    - @systemsettings.each do |systemsetting|
+      tr
+        td = systemsetting.tipo_pago_saldo
+        td = link_to 'Show', systemsetting
+        td = link_to 'Edit', edit_systemsetting_path(systemsetting)
+        td = link_to 'Destroy', systemsetting, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Systemsetting', new_systemsetting_path

@@ -22,3 +22,15 @@ $(document).ready ->
             document.getElementById("saldo-titulo").innerHTML = "Saldo de la cuenta: " + String(gon.saldo)
             $("#pago_persona_id").val(gon.responsable_id)
             $("#pago_cuenta_id").val(gon.cuenta_id)
+
+  $('form').on 'click', '.remove_fields_pagos', (event) ->
+    $trfieldset = $(this).parent().parent()
+    $trfieldset.find('input[type=hidden]').val('1')
+    $trfieldset.hide()
+    event.preventDefault()
+
+  $('form').on 'click', '.add_fields_pagos', (event) ->
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $("#pagos-table > tbody").append($(this).data('fields').replace(regexp, time))
+    event.preventDefault()

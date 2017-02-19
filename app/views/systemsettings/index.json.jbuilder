@@ -1,0 +1,1 @@
+json.array! @systemsettings, partial: 'systemsettings/systemsetting', as: :systemsetting

@@ -30,7 +30,7 @@
               - Descuento.all.each do |descuento|
                 option value=(descuento.id) = "#{descuento.nombre}, " + "#{descuento.porcentaje}"
           td 
-            input type="text" name="pago[cuotas_por_cliente_attributes][#{index}][id]" value=(cuota_por_cliente.id)
+            input type="hidden" name="pago[cuotas_por_cliente_attributes][#{index}][id]" value=(cuota_por_cliente.id)
             input type="checkbox" name="pago[cuota_por_cliente_ids][]" value=(cuota_por_cliente.id)
 
 // javascript:

@@ -22,6 +22,7 @@ class PagosController < ApplicationController
   # GET /pagos_realizados/new
   def new
     @pago = Pago.new
+    @pago.pagos_metodos.build
   end
 
   # GET /pagos_realizados/1/edit
@@ -34,15 +35,11 @@ class PagosController < ApplicationController
     @pago = Pago.new(pago_params)
     @pago.update_descuentos_cuotas(cuotas_params)
 
-    # puts @pago.validate
-
     respond_to do |format|
       if @pago.save
         format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
         format.json { render :show, status: :created, location: @pago }
       else
-        puts @pago
-        puts @pago.errors.each { |e| puts e }
         format.html { render :new }
         format.json { render json: @pago.errors, status: :unprocessable_entity }
       end
@@ -89,7 +86,7 @@ class PagosController < ApplicationController
   def ajax_table_cuotas
     @proyecto = Proyecto.find(params[:pago][:proyecto_id])
     @cuotas = CuotaPorCliente.where(proyecto_id: @proyecto.id, estado: false)
-
+    
     render :partial => "cuota.html"
     
   end

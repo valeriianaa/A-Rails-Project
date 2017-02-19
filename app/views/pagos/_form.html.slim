@@ -27,11 +27,18 @@
         h4#cantidad-a-pagar-titulo 
         h4#saldo-titulo -
         #cuotas-tabla
-        br
+        
         = f.fields_for :pagos_metodos do |builder|
-          = render 'pagos_metodos', :f => builder
-        p
-        = link_to_add_fields "Añadir forma de pago", f, :pagos_metodos
+          table#pagos-table.table.table-bordered
+            thead
+              tr
+                th Tipo de Pago
+                th Monto
+                th Acciones
+            tbody
+              = render 'pagos_metodos', :f => builder
+          .pull-right
+            = link_to_add_fields_pagos "[+] Añadir forma de pago", f, :pagos_metodos
 
 
   = f.submit

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218172754) do
+ActiveRecord::Schema.define(version: 20170219065311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -415,6 +415,14 @@ ActiveRecord::Schema.define(version: 20170218172754) do
 
   add_index "roles_de_empleados", ["departamento_id"], name: "index_roles_de_empleados_on_departamento_id", using: :btree
 
+  create_table "systemsettings", force: :cascade do |t|
+    t.integer  "tipo_de_pago_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "systemsettings", ["tipo_de_pago_id"], name: "index_systemsettings_on_tipo_de_pago_id", using: :btree
+
   create_table "tipo_documentos", force: :cascade do |t|
     t.string   "nombre"
     t.datetime "created_at", null: false
@@ -511,6 +519,7 @@ ActiveRecord::Schema.define(version: 20170218172754) do
   add_foreign_key "proyectos", "paises"
   add_foreign_key "proyectos", "provincias"
   add_foreign_key "roles_de_empleados", "departamentos"
+  add_foreign_key "systemsettings", "tipos_de_pago"
   add_foreign_key "users", "personas"
   add_foreign_key "users", "roles"
   add_foreign_key "vencimientos", "conceptos_de_pago"

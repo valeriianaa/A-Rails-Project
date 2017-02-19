@@ -1,0 +1,45 @@
+p#notice = notice
+
+.box.box-info style="width:100%"
+.box-header.with-border
+  h3 Configuraciones Generales del Sistema
+
+= form_for @systemsetting, html: {class: "form-horizontal"} do |f|
+  - if @systemsetting.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@systemsetting.errors.count, "error")} prohibited this systemsetting from being saved:"
+      ul
+        - @systemsetting.errors.full_messages.each do |message|
+          li = message
+
+  .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+    .form-group
+      = f.label :tipo_pago_saldo, 'Seleccione el Tipo de Pago "Saldo"? ', class: "col-sm-4 control-label"
+      .col-sm-8
+        = f.collection_select :tipo_de_pago_id, TipoDePago.all, :id, :nombre
+
+  .box-footer.center
+    = f.submit "Guardar", class: "btn btn-primary"
+
+  / .actions 
+
+      / .box-body
+      /   .form-group
+      /     label.col-sm-2.control-label for="inputEmail3"  Email
+      /     .col-sm-10
+      /       input#inputEmail3.form-control placeholder="Email" type="email" /
+      /   .form-group
+      /     label.col-sm-2.control-label for="inputPassword3"  Password
+      /     .col-sm-10
+      /       input#inputPassword3.form-control placeholder="Password" type="password" /
+      /   .form-group
+      /     .col-sm-offset-2.col-sm-10
+      /       .checkbox
+      /         label
+      /           input type="checkbox" /
+      /           | Remember me
+      / /! /.box-body
+      / .box-footer
+      /   button.btn.btn-default type="submit"  Cancel
+      /   button.btn.btn-info.pull-right type="submit"  Sign in
+      / /! /.box-footer
