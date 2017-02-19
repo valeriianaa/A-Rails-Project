@@ -1,5 +1,13 @@
-div#area-example
-/div#acumulacion
+h1 Estadisticas
 
-= content_tag :div, "", id: "acumulacion", data: {proyecto: acumulacion_data}
+h2 Acumulativo
+
+= content_tag :div, "", id: "acumulativo", data: {fechas: @proyecto.acumulativo[0], actividades: @proyecto.acumulativo[1], labels: @proyecto.acumulativo[2]}
+
+br
+h2 Velocidad
+br
+
+
+= content_tag :div, "", id: "velocidad", data: {fechas: @proyecto.velocidad[0], estados: @proyecto.velocidad[1], labels: @proyecto.velocidad[2]}
 
