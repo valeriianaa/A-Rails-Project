@@ -2,6 +2,7 @@ class Estado < ActiveRecord::Base
 	validates_uniqueness_of :ultimo, if: :ultimo
 	validates :nombre, presence: true
 	validates :nombre, uniqueness: { case_sensitive: false }
+	has_many :historiales
 	#validates :previous, presence: true, :if => (Estado.exists?)
 
 	# def colores

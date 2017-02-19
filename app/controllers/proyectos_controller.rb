@@ -76,9 +76,8 @@ class ProyectosController < ApplicationController
   def actividadesProyecto
     #add_breadcrumb 'Pedidos'
     @proyecto = Proyecto.find(params[:id])
-
     respond_to do |format|
-      format.html { render 'actividades_del_proyecto.html.slim' }
+      format.html
       format.json { render json: @proyecto }
     end
   end
