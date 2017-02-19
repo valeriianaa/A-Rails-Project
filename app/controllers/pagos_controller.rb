@@ -31,17 +31,11 @@ class PagosController < ApplicationController
   # POST /pagos_realizados
   # POST /pagos_realizados.json
   def create
-    if params[:pago].key?(:cuota_por_cliente_ids)
-      # filtrar cuotas_por_clientes
-      ctas_ids = params[:pago][:cuota_por_cliente_ids]
-      params[:pago][:cuotas_por_cliente_attributes].reject! {|cuota| not ctas_ids.include?(cuota['id'].to_i) }
-      
-      
-      
-    else
-      params[:pago].delete(:cuotas_por_cliente_attributes) # delete
-    end
     @pago = Pago.new(pago_params)
+    @pago.update_descuentos_cuotas(cuotas_params)
+
+    # puts @pago.validate
+
     respond_to do |format|
       if @pago.save
         format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
@@ -53,7 +47,6 @@ class PagosController < ApplicationController
         format.json { render json: @pago.errors, status: :unprocessable_entity }
       end
     end
-    
   end
 
   # PATCH/PUT /pagos_realizados/1
@@ -124,7 +117,7 @@ class PagosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pago_params
-      params.require(:pago).permit(
+      parametros = params.require(:pago).permit(
         :fecha, 
         :montoAcreditado, 
         :proyecto_id, 
@@ -133,8 +126,19 @@ class PagosController < ApplicationController
         :monto, 
         :tipo_de_pago_id,
         :cuota_por_cliente_ids => [],
-        :cuotas_por_cliente_attributes => [:id, :descuento_id],
         :pagos_metodos_attributes => [ :id, :monto, :pago_id, :tipo_de_pago_id, :_destroy ]
       )
+    end
+
+    def cuotas_params
+      if params[:pago].key?(:cuota_por_cliente_ids)
+        ctas_ids = params.require(:pago).require(:cuota_por_cliente_ids)
+        parametros = params.require(:pago).require(:cuotas_por_cliente_attributes).select do |index, cuota| 
+          ctas_ids.include?(cuota[:id])
+        end
+        return parametros.to_a.map{|e| e[1]}  
+      else
+        return []
+      end
     end
 end
