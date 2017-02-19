@@ -21,10 +21,9 @@ class Pago < ActiveRecord::Base
   validates_presence_of :pagos_metodos
   validates_associated :pagos_metodos
 
-  after_initialize :setear_monto
   before_validation :set_today
   
-  before_create :setear_monto_de_acuerdo_a_saldo
+  before_create :setear_monto
 
   after_create :actualizar_estados
 
@@ -36,31 +35,32 @@ class Pago < ActiveRecord::Base
     if self.new_record?
       monto_a_pagar = 0
       self.cuotas_por_cliente.each do |cuota|
-        puts 'cuota', cuota
-        puts 'descuento', cuota.to_json
-        if cuota.descuento_id != nil
-          puts 'descuento', cuota.descuento
-          cuota.montoTotal = cuota.montoTotal - (cuota.montoTotal * (1 + (cuota.descuento.porcentaje/100)))
+        if cuota.has_descuento?
+          cuota.montoTotal = cuota.montoTotal * (1 - (cuota.descuento.porcentaje/100))
         end
         monto_a_pagar = monto_a_pagar + cuota.montoTotal
       end
       self.monto = monto_a_pagar
     end  
+    setear_monto_de_acuerdo_a_saldo()
   end
 
   def actualizar_estados
     self.transaction do
       self.cuotas_por_cliente.each do |cuota|
-        cuota.update( estado: true, pago: self, descuento_id: cuota.descuento_id )
+        cuota.update( estado: true, pago: self )
+      end
+
+      if cuenta.changed?
+        cuenta.save!
       end
     end
   end
 
   def setear_monto_de_acuerdo_a_saldo
     montoAcreditado = 0
-    self.pagos_metodos.each do |pm|
-      montoAcreditado = montoAcreditado + pm.monto
-    end
+    self.pagos_metodos.each {|pm| montoAcreditado += pm.monto }
+    
     if cuenta.saldo > 0
       if cuenta.saldo > self.monto
         cuenta.saldo = cuenta.saldo - self.monto
@@ -69,12 +69,19 @@ class Pago < ActiveRecord::Base
         self.monto = self.monto - cuenta.saldo
       end
       if montoAcreditado > self.monto
-        Cuenta.update(cuenta_id, saldo: (montoAcreditado - self.monto))
+        cuenta.saldo = (montoAcreditado - self.monto)
       end
     elsif cuenta.saldo == 0
       if montoAcreditado > self.monto
-        Cuenta.update(cuenta_id, saldo: (montoAcreditado - self.monto))
+        cuenta.saldo = (montoAcreditado - self.monto)
       end
+    end
+  end
+
+  def update_descuentos_cuotas(cuotas_descuento_param)
+    cuotas_por_cliente.each do |cuota|
+      c = cuotas_descuento_param.select {|c| c['id'].to_i == cuota.id }[0]
+      cuota.descuento_id = c['descuento_id']
     end
   end
 

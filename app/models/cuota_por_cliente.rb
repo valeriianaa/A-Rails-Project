@@ -22,4 +22,8 @@ class CuotaPorCliente < ActiveRecord::Base
 		return monto_retorno
 	end
 
+	def has_descuento?
+		not descuento_id == nil
+	end
+
 end
