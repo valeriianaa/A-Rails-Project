@@ -7,12 +7,12 @@
           li = message
 
   .field
-    = f.label :nombre
-    = f.text_field :nombre
-  .row-fluid
-    .col-sm-12
+    = f.label :nombre, 'Nombre: (*)', {:class => "control-label"}
+    = f.text_field :nombre, {:class => "form-control"}
+  .row-fluid 
+    .col-sm-12 style="background-color: #00c0ef; color: #ffffff;"
       h4 Permisos
-    .tabbable
+    .nav-tabs-custom
       ul#myTab.nav.nav-tabs
         - Modelo.all.each_with_index do |modelo, index|
           - if index == 0
@@ -34,7 +34,7 @@
                   | Estos Permisos son de riesgo para el funcionamiento del Sistema, deben utilizarlos unicamente los Administradores del Sistema.
                   br/
 
-              table.table.table-striped.table-bordered.table-hover style="width:600px"
+              table.table.table-striped.table-bordered.table-hover style="width:600px; margin:auto;"
                 thead
                   th Nombre
                   th Autorizado?
@@ -55,12 +55,12 @@
                   | Estos Permisos son de riesgo para el funcionamiento del Sistema, deben utilizarlos unicamente los Administradores del Sistema.
                   br/
 
-              table.table.table-striped.table-bordered.table-hover style="width:600px"
+              table.table.table-striped.table-bordered.table-hover style="width:600px; margin:auto;"
                 thead
                   th Nombre
                   th Autorizado?
                 tbody
-                  - modelo.permissions.each do |perm|
+                  - modelo.permisos.each do |perm|
                     tr
                       td = perm.accion.nombre
                       td

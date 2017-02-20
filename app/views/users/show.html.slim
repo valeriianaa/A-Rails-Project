@@ -12,6 +12,14 @@ p#notice = notice
               td
                 strong Nombre
               td = @user.persona.nombre_y_apellido
+            tr
+              td
+                strong Email
+              td = @user.email
+            tr
+              td
+                strong Rol
+              td = @user.rol.nombre
             
 
 .row

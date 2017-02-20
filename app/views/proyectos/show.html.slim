@@ -12,6 +12,10 @@ p#notice = notice
             tr
               td
                 strong Nombre
+              td = @proyecto.codigo
+            tr
+              td
+                strong Nombre
               td = @proyecto.nombre
             tr
               td
@@ -49,59 +53,74 @@ p#notice = notice
               td
                 strong Número
               td = @proyecto.nroDomicilio
-            tr
-              td
-                strong Piso
-              td = @proyecto.piso
-            tr
-              td
-                strong Dpto
-              td = @proyecto.dpto
+            -if @proyecto.piso?
+              tr
+                td
+                  strong Piso
+                td = @proyecto.piso
+            -if @proyecto.piso?
+              tr
+                td
+                  strong Dpto
+                td = @proyecto.dpto
             tr
               td
                 strong Area
               td = @proyecto.area.nombre
             tr
               td
+                strong Etapa
+              td = @proyecto.etapa.nombre
+            tr
+              td
                 strong Equipo
               td 
                 ul
-                  -PersonaProyecto.where(:proyecto_id => @proyecto.id).each do |pp|
-                    - Persona.where(:type => 'MiembroEquipo',:id => pp.persona_id ).each do |me|
-                        li = me.nombre_y_apellido
+                  -@proyecto.miembros_equipo.each do |e|
+                    li = e.nombre_y_apellido 
             tr
               td
                 strong Empleado a cargo
-              td 
+              td
+                ul
+                  -@proyecto.empleados.each do |e|
+                    li = e.nombre_y_apellido 
   .col-md-4
     .box#menu
       .box-header.with-border
         h3.widget-user-username Menu
       .box-footer.no-padding
         ul.nav.nav-stacked
-          li
-            a href=(actividades_del_proyecto_path(@proyecto))
-              | Actividades de Este Proyecto
+          -if can? :index, ActividadProyecto
+            li
+              a href=(actividades_del_proyecto_path(@proyecto))
+                | Actividades de Este Proyecto
               /span.pull-right.badge.bg-blue 31
-          li
-            a href=(proyecto_estadisticas_path(@proyecto)) 
-              | Estadísticas
+          -if can? :estadistica, Proyecto
+            li
+              a href=(proyecto_estadisticas_path(@proyecto)) 
+                | Estadísticas
               /span.pull-right.badge.bg-aqua 5
-          li
-            a href="#" 
-              | Contrato
+          -if can? :by_persona_type, Contrato
+            li
+              a href=(proyecto_contratos_path(@proyecto))
+                | Contrato
               /span.pull-right.badge.bg-yellow 12
-          li
-            a href="#"
-              | Cuotas
+          -if can? :by_persona_type, CuotaPorCliente
+            -if @proyecto.contratos.exists?
+              li
+                a href=(proyecto_cuotas_por_cliente_path(@proyecto))
+                  | Cuotas
               /span.pull-right.badge.bg-red 842
-          li
-            a href="#" 
-              | Pagos
+          -if can? :by_persona_type, Pago
+            li
+              a href=(proyecto_pagos_path(@proyecto)) 
+                | Pagos
               /span.pull-right.badge.bg-red 842
-          li
-            a href="#" 
-              | Eventos
+          -if can? :by_persona_type, Evento
+            li
+              a href=(proyecto_eventos_path(@proyecto)) 
+                | Eventos
               /span.pull-right.badge.bg-red 842
           
 .row

@@ -25,7 +25,7 @@ class Proyecto < ActiveRecord::Base
 	has_many :eventos_proyectos, dependent: :destroy
 	has_many :eventos , :through => :eventos_proyectos
 
-	validates :nombre, :descripcion, :calle, :nroDomicilio, :pais_id, :provincia_id, :ciudad_id, :etapa_id, presence: true
+	validates :codigo, :nombre, :descripcion, :calle, :nroDomicilio, :pais_id, :provincia_id, :ciudad_id, :etapa_id, presence: true
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :email?
 	validates :dpto, presence: true, if: :piso?
 
@@ -38,6 +38,18 @@ class Proyecto < ActiveRecord::Base
       ap.actividad_id = act.id
       ap.save
     end
+	end
+
+	def contactos
+		return personas.where(type: 'Contacto')
+	end
+
+	def empleados
+		return personas.where(type: 'Empleado')
+	end
+
+	def miembros_equipo
+		return personas.where(type: 'MiembroEquipo')
 	end
 
 	def acumulativo
@@ -79,11 +91,11 @@ class Proyecto < ActiveRecord::Base
 	    retorno << contenido
 	    fecha = fecha + 1.week
 	  	array_semana << hash_semana
-	  end
-	  Estado.all.each do |e|
-	    labels << e.nombre
-	  end
-	  return [array_semana , retorno, labels]
+	end
+	Estado.all.each do |e|
+	  labels << e.nombre
+	end
+	return [array_semana , retorno, labels]
   end
 
 end

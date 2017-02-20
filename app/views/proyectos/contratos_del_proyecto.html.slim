@@ -1,10 +1,7 @@
 .index-header
   h1 
-    | Contratos  
-    - if can? :create, Contrato
-      a.btn.btn-info href=(new_contrato_path)
-        i.ace-icon.fa.fa-plus.bigger-110
-        |  Nuevo
+    | Contratos del proyecto: 
+    = @proyecto.nombre
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead
@@ -14,7 +11,7 @@ table id="datatable" class="table table-bordered table-striped"
       th.no-print Acciones
 
   tbody
-    - @contratos.each do |contrato|
+    - @proyecto.contratos.each do |contrato|
       tr
         td = contrato.fecha_inicio
         td = contrato.fecha_fin
@@ -28,10 +25,3 @@ table id="datatable" class="table table-bordered table-striped"
           - if can? :destroy, Contrato              
             a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(contrato_path(contrato)) 
               i.fa.fa-trash
-
-br
-
-/ = link_to 'New Contrato', new_contrato_path
-/         td = link_to 'Show', contrato
-/         td = link_to 'Edit', edit_contrato_path(contrato)
-/         td = link_to 'Destroy', contrato, data: { confirm: 'Are you sure?' }, method: :delete

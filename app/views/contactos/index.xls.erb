@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">Apellido</Data></Cell>
+        <Cell><Data ss:Type="String">Tipo de Documento</Data></Cell>
+        <Cell><Data ss:Type="String">Numero de Identificacion</Data></Cell>
+        <Cell><Data ss:Type="String">Fecha de Nacimiento</Data></Cell>
+        <Cell><Data ss:Type="String">Pais</Data></Cell>
+        <Cell><Data ss:Type="String">Provincia</Data></Cell>
+        <Cell><Data ss:Type="String">Ciudad</Data></Cell>
+        <Cell><Data ss:Type="String">Calle</Data></Cell>
+        <Cell><Data ss:Type="String">Numero</Data></Cell>
+        <Cell><Data ss:Type="String">Piso</Data></Cell>
+        <Cell><Data ss:Type="String">Departamento</Data></Cell>
+        <Cell><Data ss:Type="String">Telefono</Data></Cell>
+        <Cell><Data ss:Type="String">Correo Electronico</Data></Cell>
+      </Row>
+    <% @contactos.each do |contacto| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= contacto.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.apellido %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.nroIdentificacion %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= miembro_equipo.tipo_documento.nombre %></Data></Cell>
+        <Cell><Data ss:Type="Data"><%= contacto.fechaNacimiento %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.pais.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.provincia.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.ciudad.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.calle %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.nroDomicilio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.piso %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.dpto %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.telefono %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.email %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

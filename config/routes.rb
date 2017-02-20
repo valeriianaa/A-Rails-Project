@@ -45,8 +45,10 @@ Rails.application.routes.draw do
   resources :personas
   resources :empleados
 
-  match 'proyectos/:id/actividades_proyectos' => 'proyectos#actividadesProyecto',  :via => [:get], as: :actividades_del_proyecto
-
+  match 'proyectos/:id/actividades_del_proyecto' => 'proyectos#actividadesProyecto',  :via => [:get], as: :actividades_del_proyecto
+  match 'proyectos/:id/contratos'=> 'proyectos#contratosProyecto', :via => [:get], as: :proyecto_contratos
+  match 'proyectos/:id/pagos'=> 'proyectos#pagosProyecto', :via => [:get], as: :proyecto_pagos
+  match 'proyectos/:id/eventos'=> 'proyectos#eventosProyecto', :via => [:get], as: :proyecto_eventos
   match 'proyectos/:id/estadisticas'=> 'proyectos#estadisticas', :via => [:get], as: :proyecto_estadisticas
   #resources :users
   devise_for :users, :path => 'user', :controllers => {:registrations => "registrations"}

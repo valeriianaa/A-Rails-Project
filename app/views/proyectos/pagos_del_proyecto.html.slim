@@ -1,0 +1,30 @@
+.index-header
+  h1 
+    | Pagos realizados por: 
+    = @proyecto.nombre
+
+table id="datatable" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Fecha
+      th Responsable del contrato
+      th Concepto de pago
+      th Monto pagado
+      th.no-print Acciones
+
+  tbody
+    - @proyecto.pagos.each do |pago|
+      tr
+        td = pago.fecha
+        td = pago.persona.nombre_y_apellido
+        td 
+          - pago.cuotas_por_cliente.each do |c|
+            li = "#{c.concepto_de_pago.nombre}: #{c.montoTotal.round}"
+        td = pago.monto.round
+        td.no-print style="padding: 3px;"
+          - if can? :show, Pago
+            a href=(pago_path(pago))
+              i.fa.fa-search
+          - if can? :destroy, Pago
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(pago_path(pago))  
+              i.fa.fa-trash

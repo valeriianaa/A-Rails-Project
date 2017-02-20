@@ -1,139 +1,202 @@
 div class="user panel"  
 ul.sidebar-menu
-  li
-    a href=(users_path)
-      i.fa.fa-group
-      | Usuarios
-  - if can? :read, Empleado
-  	li
-      a href=(empleados_path)
-        i.fa.fa-group
-        | Empleados
-    ul
-      li
-        a href=(departamentos_path)
-          i.fa.fa-circle-o
-          | Departamentos
-      li
-        a href=(roles_de_empleados_path)
-          i.fa.fa-circle-o
-          | Roles del Empleado
-  - if can? :read, Etapa
+  - if can? :index, Empleado or can? :index, Departamento or can? :index, RolDeEmpleado
+    li.treeview#lista-cabecera
+      a href=""
+        i.fa.fa-black-tie
+        | Gestión de Empleados
+        i.fa.fa-angle-down.pull-right
+      ul.treeview-menu#submenu
+        - if can? :index, Empleado      
+          li#tree
+            a href=(empleados_path)
+              i.fa.fa-angle-double-right
+              | Empleados
+        - if can? :index, Departamento      
+          li#tree
+            a href=(departamentos_path)
+              i.fa.fa-angle-double-right
+              | Departamentos
+        - if can? :index, RolDeEmpleado      
+          li#tree
+            a href=(roles_de_empleados_path)
+              i.fa.fa-angle-double-right
+              | Roles de Empleados
+  - if can? :index, Etapa
     li
       a href=(etapas_path) 
         i.fa.fa-th-large
         | Etapas
-  - if can? :read, Actividad        
+  - if can? :index, Actividad        
     li
       a href=(actividades_path)
         i.fa.fa-tasks
         | Actividades
-  - if can? :read, Proyecto        
-    li
-      a href=(proyectos_path)
+  - if can? :index, Proyecto or can? :index, MiembroEquipo or can? :index, Contrato
+    li.treeview#lista-cabecera
+      a href=''
         i.fa.fa-lightbulb-o
-        | Proyectos
-  - if can? :read, MiembroEquipo        
-    li
-      a href=(miembros_equipo_path)
-        i.fa.fa-group
-        | Miembros de Equipo
-
+        | Gestión de Proyectos
+        i.fa.fa-angle-down.pull-right
+      ul.treeview-menu#submenu
+        - if can? :index, Proyecto
+          li#tree
+            a href=(proyectos_path)
+              i.fa.fa-angle-double-right
+              | Proyectos
+        - if can? :index, MiembroEquipo
+          li#tree
+            a href=(miembros_equipo_path)
+              i.fa.fa-angle-double-right
+              | Miembros de Equipo
+        - if can? :index, Contrato
+          li#tree
+            a href=(contratos_path)
+              i.fa.fa-angle-double-right
+              | Contrato
+  - if can? :index, ConceptoDePago or can? :index, Cuenta or can? :index, TipoDePago or can? :index, Interes or can? :index, Descuento or can? :index, Pago
     li.treeview#lista-cabecera
       a href=''
         i.fa.fa-money
         | Finanzas
         i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu
-      - if can? :read, ConceptoDePago
-        li#tree
-          a href=(conceptos_de_pago_path)
-            i.fa.fa-angle-double-right
-            | Conceptos de pago
-      - if can? :read, TipoDePago
-        li#tree
-          a href=(tipos_de_pago_path)
-            i.fa.fa-angle-double-right
-            | Tipos de pago
-      - if can? :read, Interes
-        li#tree
-          a href=(intereses_path)
-            i.fa.fa-angle-double-right
-            | Intereses
-      - if can? :read, Descuento
-        li#tree
-          a href=(descuentos_path)
-            i.fa.fa-angle-double-right
-            | Descuentos
-      - if can? :read, Pago            
-        li#tree
-          a href=(pagos_path)
-            i.fa.fa-angle-double-right
-            | Pagos
+        - if can? :index, ConceptoDePago
+          li#tree
+            a href=(conceptos_de_pago_path)
+              i.fa.fa-angle-double-right
+              | Conceptos de pago
+        - if can? :index, Cuenta
+          li#tree
+            a href=(cuentas_path)
+              i.fa.fa-angle-double-right
+              | Cuentas
+        - if can? :index, TipoDePago
+          li#tree
+            a href=(tipos_de_pago_path)
+              i.fa.fa-angle-double-right
+              | Tipos de pago
+        - if can? :index, Interes
+          li#tree
+            a href=(intereses_path)
+              i.fa.fa-angle-double-right
+              | Intereses
+        - if can? :index, Descuento
+          li#tree
+            a href=(descuentos_path)
+              i.fa.fa-angle-double-right
+              | Descuentos
+        - if can? :index, Pago            
+          li#tree
+            a href=(pagos_path)
+              i.fa.fa-angle-double-right
+              | Pagos
+        - if can? :index, Pago            
+          li#tree
+            a href=""
+              i.fa.fa-angle-double-right
+              | Ver Ingresos
+  - if can? :index, Contacto or can? :index, EspecialidadDeContacto or can? :index, Evento or can? :index, EventoProyecto
     li.treeview#lista-cabecera
       a href=''
         i.fa.fa-cloud
         | Outsourcing
         i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu
-        - if can? :read, Contacto      
+        - if can? :index, Contacto      
           li#tree
             a href=(contactos_path)
               i.fa.fa-angle-double-right
               | Contactos
-        - if can? :read, EspecialidadDeContacto        
+        - if can? :index, EspecialidadDeContacto        
           li#tree
             a href=(especialidades_de_contacto_path)
               i.fa.fa-angle-double-right
               | Especilidades del Contacto
-        - if can? :read, Evento        
+        - if can? :index, Evento        
           li#tree
             a href=(eventos_path)
               i.fa.fa-angle-double-right
               | Eventos
-        - if can? :read, EventoProyecto        
+        - if can? :index, EventoProyecto        
           li#tree
             a href=(eventos_proyectos_path)
               i.fa.fa-angle-double-right
               | Proyectos asociados 
               br
               | a eventos
+  - if can? :index, User or can? :index, Modelo or can? :index, Accion or can? :index, Rol
+    li.treeview#lista-cabecera
+      a href=""
+        i.fa.fa-group
+        | Control de acceso
+        i.fa.fa-angle-down.pull-right
+      ul.treeview-menu#submenu
+        - if can? :index, User      
+          li#tree
+            a href=(users_path)
+              i.fa.fa-angle-double-right
+              | Usuarios
+        - if can? :index, Modelo      
+          li#tree
+            a href=(modelos_path)
+              i.fa.fa-angle-double-right
+              | Modelos
+        - if can? :index, Accion      
+          li#tree
+            a href=(acciones_path)
+              i.fa.fa-angle-double-right
+              | Acciones
+        - if can? :index, Rol      
+          li#tree
+            a href=(roles_path)
+              i.fa.fa-angle-double-right
+              | Roles
+  - if can? :index, Pais or can? :index, Provincia or can? :index, Ciudad or can? :index, Area
+    li.treeview#lista-cabecera
+      a href=""
+        i.fa.fa-flag
+        | Ubicaciones
+        i.fa.fa-angle-down.pull-right
+      ul.treeview-menu#submenu
+        - if can? :index, Pais      
+          li#tree
+            a href=(paises_path)
+              i.fa.fa-angle-double-right
+              | Países
+        - if can? :index, Provincia            
+          li#tree
+            a href=(provincias_path)
+              i.fa.fa-angle-double-right
+              | Provincias
+        - if can? :index, Ciudad            
+          li#tree
+            a href=(ciudades_path)
+              i.fa.fa-angle-double-right
+              | Ciudades
+        - if can? :index, Area            
+          li#tree
+            a href=(areas_path)
+              i.fa.fa-angle-double-right
+              | Áreas
+  - if can? :index, TipoDocumento or can? :index, Estado
     li.treeview#lista-cabecera
       a href=""
         i.fa.fa-gear
         | Parámetros
         i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu
-        - if can? :read, Pais      
-          li#tree
-            a href=(paises_path)
-              i.fa.fa-angle-double-right
-              | Países
-        - if can? :read, Provincia            
-          li#tree
-            a href=(provincias_path)
-              i.fa.fa-angle-double-right
-              | Provincias
-        - if can? :read, Ciudad            
-          li#tree
-            a href=(ciudades_path)
-              i.fa.fa-angle-double-right
-              | Ciudades
-        - if can? :read, Area            
-          li#tree
-            a href=(areas_path)
-              i.fa.fa-angle-double-right
-              | Áreas
-        - if can? :read, TipoDocumento        
+        - if can? :index, TipoDocumento        
           li#tree
             a href=(tipo_documentos_path)
               i.fa.fa-angle-double-right
               | Tipos de Documento
-        - if can? :read, Estado        
+        - if can? :index, Estado        
           li#tree
             a href=(estados_path)
               i.fa.fa-angle-double-right
               | Estados
+  - if can? :new, DbBackup
     li
       a href=(new_backup_path)
         i.fa.fa-database

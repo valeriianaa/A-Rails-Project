@@ -10,12 +10,17 @@ table id="datatable" class="table table-bordered table-striped"
   thead
     tr
       th Nombre
+      th Acciones del Modelo
       th.no-print Acciones
 
   tbody
     - @modelos.each do |modelo|
       tr
         td = modelo.nombre
+        td 
+          - modelo.acciones.each do |accion|
+            span.label.label-warning style="margin: 2px;"
+              |  #{accion.nombre}
         td.no-print style="padding: 3px;"
             - if can? :show, Modelo
               a href=(modelo_path(modelo))

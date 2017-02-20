@@ -1,8 +1,10 @@
 class Contrato < ActiveRecord::Base
 	belongs_to :proyecto
 	belongs_to :persona
+  
+  has_many :cuotas_por_cliente, dependent: :destroy
 
-    audited
+  audited
 	def anadir_conceptosdepago(fecha1, fecha2)
       vencimientos_conceptos = Vencimiento.where(fecha: fecha1..fecha2).uniq.pluck(:concepto_de_pago_id)
       vencimientos_conceptos.each do |concepto_id|
@@ -18,4 +20,9 @@ class Contrato < ActiveRecord::Base
       end
 	end
 
+  def contrato_descipcion
+    return "#{I18n.localize(self.fecha_inicio, :format => :mes_anio)} - #{I18n.localize(self.fecha_fin, :format => :mes_anio)}"
+  end
+
 end
+          

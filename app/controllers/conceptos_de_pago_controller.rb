@@ -5,6 +5,11 @@ class ConceptosDePagoController < ApplicationController
   # GET /conceptos_de_pago.json
   def index
     @conceptos_de_pago = ConceptoDePago.all
+    respond_to do |format|
+      format.html
+      #format.csv { send_data @contactos.to_csv, filename: "contactos-#{Date.today}.csv" }
+      format.xls
+    end
   end
 
   # GET /conceptos_de_pago/1

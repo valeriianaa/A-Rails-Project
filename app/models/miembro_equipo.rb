@@ -4,4 +4,7 @@ class MiembroEquipo < Persona
 	belongs_to :provincia
 	belongs_to :area
 	belongs_to :proyecto
+
+	# def array_proyectos
+	# end
 end
