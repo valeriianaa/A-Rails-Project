@@ -23,7 +23,7 @@ class PagosController < ApplicationController
   # GET /pagos_realizados/new
   def new
     @pago = Pago.new
-    # No sirve, es solo para que funcione los botones de agregar y remover
+    # Es solo para que funcione los botones de agregar y remover NO SACAR
     @pago.pagos_metodos.build
   end
 
@@ -42,6 +42,10 @@ class PagosController < ApplicationController
         format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
         format.json { render :show, status: :created, location: @pago }
       else
+        # Es solo para que funcione los botones de agregar y remover NO SACAR
+        if not params[:pago].key?(:pagos_metodos_attributes)
+          @pago.pagos_metodos.build
+        end
         format.html { render :new }
         format.json { render json: @pago.errors, status: :unprocessable_entity }
       end

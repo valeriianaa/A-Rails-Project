@@ -11,6 +11,37 @@ get_tp_ids = ->
   ).map (index, value)->
     $(value).val()
 
+calcularTotales = ->
+  total_cuotas = 0
+  total_descuentos = 0
+  total_a_pagar = 0
+    
+  $cuotas = $("#tabla_cuotas tr")
+  $cuotas.slice(1, ($cuotas.size() - 1) ).each (index, value)->
+      if $(value).find("input[type='checkbox']").is(":checked")
+        # Obtengo el costo de la cuota
+        cuota = parseInt($(value).data("montoTotal"))
+        # Obtengo el porcentaje de descuento
+        porcentaje_str = $(value).find('select[name$="[descuento_id]"] option:checked').data("porcentaje")
+        # Me aseguro en caso de no seleccionar ninguna cuota
+        porcentaje = 0
+        if porcentaje_str != undefined
+          porcentaje = parseInt(porcentaje_str)
+        
+        # Obtengo costo de la cuota con el descuento seleccionado
+        cuota_con_descuento = cuota * (1 -  porcentaje/100)
+
+        total_cuotas += cuota
+        total_a_pagar += cuota_con_descuento
+        total_descuentos += cuota - cuota_con_descuento
+  [total_cuotas, total_descuentos, total_a_pagar]
+
+setearTotales = ->
+  [total_cuotas, total_descuentos, total_a_pagar] = calcularTotales()
+  $("#total-cuotas").text("$ " + total_cuotas)
+  $("#total-descuentos").text("$ " + total_descuentos)
+  $("#total-a-pagar").text("$ " + total_a_pagar)
+
 $(document).ready ->
   $("#metodos-de-pago").hide()
   $("#bt-filtrar").click ->
@@ -87,3 +118,30 @@ $(document).ready ->
             .val( "0" )
             .prop('readonly', false)
         
+  click = false
+  $("form").on("mousedown", "input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']", (event)->
+    last_indice = $("input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']:checked:last").data("indice")
+    if last_indice == undefined
+      last_indice = -1
+
+    if last_indice == ($(this).data("indice") - 1)
+      click = true
+    else if last_indice == $(this).data("indice") and $(this).is(':checked')
+      click = true
+    else
+      click = false
+  ).on "click", "input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']", (event) ->
+    if click == false
+      alert("No puede selecionar una cuota que no sea consecutiva.")
+      event.preventDefault()
+    else
+      setearTotales()
+
+
+  $("form").on "change", 'select[name$="[descuento_id]"]', (event)-> 
+    setearTotales()
+
+  # $("form").submit (event)->
+    # Validar que haya seleccionado, alguna cuota
+    
+    # event.preventDefault()
