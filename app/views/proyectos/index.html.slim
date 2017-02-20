@@ -1,5 +1,13 @@
 - breadcrumb :proyectos
 
+
+/CANCAN no se lleva bien con los else
+-if can? :by_persona_type, Proyecto
+  - @index_proyectos = current_user.persona.proyectos
+
+-if current_user.rol? :super_admin
+  - @index_proyectos = Proyecto.all
+  
 .index-header
   h1 
     | Proyectos  
@@ -11,6 +19,7 @@ br
 table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
+      th Código
       th Nombre
       th Equipo que lo compone
       th Telefono
@@ -19,14 +28,10 @@ table id="datatable" class="table table-bordered table-striped"
       th.no-print Acciones
 
   tbody
-    - @proyectos.each do |proyecto|
+    - @index_proyectos.each do |proyecto|
       tr
+        td = proyecto.codigo
         td = proyecto.nombre
-        / td
-        /   -PersonaProyecto.where(:proyecto_id => proyecto.id).each do |pp|
-        /     - Persona.where(:type => 'MiembroEquipo',:id => pp.persona_id ).each do |me|
-        /       ul
-        /         li = me.nombre_y_apellido
         td
           ul 
             - proyecto.personas.where(type: 'MiembroEquipo').each do |p|

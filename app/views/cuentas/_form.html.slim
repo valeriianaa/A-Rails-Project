@@ -8,7 +8,7 @@
 
   .field
     = f.label :proyecto_id, 'Proyecto: (*)'
-    = f.collection_select :proyecto_id, Proyecto.all, :id, :nombre ,{:prompt => "Seleccione un proyecto"}, {:class => 'form-control'}
+    = f.collection_select :proyecto_id, Proyecto.all, :id, :codigo ,{:prompt => "Seleccione un proyecto"}, {:class => 'form-control'}
   
     = f.hidden_field :saldo, value: 0
   .actions = f.submit

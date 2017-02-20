@@ -1,7 +1,7 @@
 = form_for [@cuota_por_cliente.proyecto, @cuota_por_cliente] do |f|
   - if @cuota_por_cliente.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@cuota_por_cliente.errors.count, "error")} #{pluralize_without_count(@cuota_por_cliente.errors.count, "prohibe", "prohiben")} asociar el concepto de pago al cliente:"
+      h2 = "#{pluralize(@cuota_por_cliente.errors.count, "error")} #{pluralize_without_count(@cuota_por_cliente.errors.count, "prohibe", "prohiben")} asociar el concepto de pago al proyecto:"
       ul
         - @cuota_por_cliente.errors.full_messages.each do |message|
           li = message
@@ -11,11 +11,15 @@
         h3 Datos Generales
       .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
         .field
-          = f.label :proyecto_id, "Proyecto: (*)", :class => "control-label"
-          = f.collection_select :proyecto_id, Proyecto.all, :id, :nombre,{:prompt => "Seleccione un Proyecto"}, {:class => 'form-control'}
+          = f.label :proyecto_id, "Proyecto: #{@cuota_por_cliente.proyecto.codigo}", {:class => "control-label"}
+          = f.hidden_field :proyecto_id, :value => @cuota_por_cliente.proyecto.id
+        .field
+          = f.label :contrato_id, "Contrato: (*)", :class => "control-label"
+          = f.collection_select :contrato_id, @cuota_por_cliente.proyecto.contratos.all, :id, :contrato_descipcion,{:prompt => "Seleccione un contrato..."}, {:class => 'form-control'}
         .field
           = f.label :concepto_de_pago_id, "Concepto de pago: (*)", :class => "control-label"
-          = f.collection_select :concepto_de_pago_id, ConceptoDePago.all, :id, :nombre,{:prompt => "Seleccione un Concepto de pago"}, {:class => 'form-control'}
+          = f.collection_select :concepto_de_pago_id, ConceptoDePago.all, :id, :nombre,{:prompt => "Seleccione un concepto de pago..."}, {:class => 'form-control'}
+          = f.hidden_field :estado, value: false
       .box-footer
         p#foot = "(*) Campo Obligatorio"  
     

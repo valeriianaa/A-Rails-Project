@@ -20,7 +20,6 @@ class ActividadesProyectosController < ApplicationController
   # GET /actividades_proyectos/1/edit
   def edit
     h = Historial.new
-    puts 'hola soy un historial'
   end
 
   # POST /actividades_proyectos
@@ -49,11 +48,7 @@ class ActividadesProyectosController < ApplicationController
     h = Historial.new(estado_id: params[:actividad_proyecto][:unEstado], fechaHora: una_fecha_aux, actividad_proyecto_id: @actividad_proyecto.id, proyecto_id: @actividad_proyecto.proyecto_id)
     #@h.actividad_proyecto_id = @actividad_proyecto.id
     #h.estado_id = nil
-    puts 'historial estado'
-    puts h.estado_id 
     #@h.fechaHora = @actividad_proyecto.unaFecha
-    puts 'historial fecha'
-    puts h.fechaHora 
     @actividad_proyecto.estado_id = h.estado_id
 
     respond_to do |format|
@@ -115,31 +110,6 @@ class ActividadesProyectosController < ApplicationController
     audited = Audited::Adapters::ActiveRecord::Audit
     @auditoria = audited.where auditable_type: "ActividadProyecto"
   end
-  # def estado_ultimo_y_obligatorio
-  #   retorno = false
-  #   h = Historial.where(actividad_proyecto_id: @actividad_proyecto.id).last
-  #   if h.estado.ultimo == true
-  #     a = Actividad.find(@actividad_proyecto.actividad_id)
-  #     if a.obligatorio == true
-  #       retorno = true
-  #     end
-  #   end
-  #   return retorno
-  # end
-
-  # def transicion_sig_etapa
-  #   cant_obligatorias = Actividad.where(etapa_id: @actividad_proyecto.proyecto.etapa_id, obligatorio: true).count
-  #   obl_y_comp = 0
-  #   etapa_actual = Etapa.find(@actividad_proyecto.proyecto.etapa_id)
-  #   ActividadProyecto.where(proyecto_id: @actividad_proyecto.proyecto_id, actividad_id: Actividad.where(etapa_id: @actividad_proyecto.proyecto.etapa_id)).each do |act|
-  #         if act.estado_ultimo_y_obligatorio == true
-  #           obl_y_comp =+ 1
-  #         end     
-  #   end
-  #   if cant_obligatorias == obl_y_comp
-  #     Proyecto.update(@actividad_proyecto.proyecto_id, etapa_id: Etapa.where(etapaAnterior: etapa_actual))
-  #   end
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -149,7 +119,7 @@ class ActividadesProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def actividad_proyecto_params
-      params.require(:actividad_proyecto).permit(:proyecto_id, :actividad_id, :unaFecha, :unEstado,:estado_id,{:historiales =>[:id, :estado_id, :actividad_proyecto_id, :fechaHora]}) 
+      params.require(:actividad_proyecto).permit(:proyecto_id, :actividad_id, :fechaVencimiento, :unEstado, :unaFecha, :estado_id,{:historiales =>[:id, :estado_id, :actividad_proyecto_id, :fechaHora]}) 
         #{:historiales => [:id, :estado_id, :actividad_proyecto_id, :fechaHora]})
       #, historiales_attributes: [:id, :estado_id, :actividad_proyecto_id, :fechaHora]
       #params.require(:actividad_proyecto).permit(:fechaInicio, :fechaFin)

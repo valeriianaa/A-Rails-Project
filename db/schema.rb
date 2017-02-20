@@ -376,6 +376,7 @@ ActiveRecord::Schema.define(version: 20170219065311) do
   add_index "provincias", ["pais_id"], name: "index_provincias_on_pais_id", using: :btree
 
   create_table "proyectos", force: :cascade do |t|
+    t.string   "codigo"
     t.string   "nombre"
     t.text     "descripcion"
     t.string   "calle"

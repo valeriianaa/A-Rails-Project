@@ -18,9 +18,9 @@ class Ability
           # can permission.action.to_sym, permission.subject_class.to_sym
         # else
         # Esto permite navegar en el Menu Principal
-        # if ["index"].include? permission.accion.key_name
-        #   can :nav, permission.modelo.nombre.constantize  
-        # end
+        if ["index"].include? permiso.accion.key_name
+          can :read, permiso.modelo.nombre.constantize  
+        end
         can permiso.accion.key_name.to_sym, permiso.modelo.nombre.constantize
       end
     end

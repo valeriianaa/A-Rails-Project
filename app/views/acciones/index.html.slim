@@ -20,7 +20,11 @@ table id="datatable" class="table table-bordered table-striped"
       tr
         td = accion.nombre
         td = accion.key_name
-        td  
+        td 
+          ul.list-group
+            - accion.modelos.each_with_index do |modelo, index|
+              li.list-group-item.col-xs-3.center style="padding:5px;"
+                |  #{modelo.nombre}
         td.no-print style="padding: 3px;"
           - if can? :show, Accion
             a href=(accion_path(accion))

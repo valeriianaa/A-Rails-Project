@@ -77,7 +77,34 @@ class ProyectosController < ApplicationController
     #add_breadcrumb 'Pedidos'
     @proyecto = Proyecto.find(params[:id])
     respond_to do |format|
-      format.html
+      format.html { render 'actividades_del_proyecto.html.slim' }
+      format.json { render json: @proyecto }
+    end
+  end
+
+  def contratosProyecto
+    #add_breadcrumb 'Pedidos'
+    @proyecto = Proyecto.find(params[:id])
+    respond_to do |format|
+      format.html { render 'contratos_del_proyecto.html.slim' }
+      format.json { render json: @proyecto }
+    end
+  end
+
+  def pagosProyecto
+    #add_breadcrumb 'Pedidos'
+    @proyecto = Proyecto.find(params[:id])
+    respond_to do |format|
+      format.html { render 'pagos_del_proyecto.html.slim' }
+      format.json { render json: @proyecto }
+    end
+  end
+
+  def eventosProyecto
+    #add_breadcrumb 'Pedidos'
+    @proyecto = Proyecto.find(params[:id])
+    respond_to do |format|
+      format.html { render 'eventos_del_proyecto.html.slim' }
       format.json { render json: @proyecto }
     end
   end
@@ -104,7 +131,7 @@ class ProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
-      params.require(:proyecto).permit(:nombre, :descripcion, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :pagWeb, {:persona_ids => []}, :etapa_id, :pais_id, :provincia_id, :ciudad_id, :area_id)
+      params.require(:proyecto).permit(:codigo, :nombre, :descripcion, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :pagWeb, {:persona_ids => []}, :etapa_id, :pais_id, :provincia_id, :ciudad_id, :area_id)
       #{:persona_ids => []}
     end
 end

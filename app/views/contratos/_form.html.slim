@@ -7,14 +7,14 @@
           li = message
   .field
     = f.label :proyecto_id, 'Proyecto: (*)'
-    = f.collection_select :proyecto_id, Proyecto.all, :id, :nombre, {:prompt => "Seleccione un proyecto"}, {:id => 'proyecto_id', :class =>'form-control'}
+    = f.collection_select :proyecto_id, Proyecto.all, :id, :codigo, {:prompt => "Seleccione un proyecto"}, {:id => 'proyecto_id', :class =>'form-control'}
   .field
     = f.label :persona_id, 'Responsable del contrato: (*)', :id => 'persona_label'
-    = f.grouped_collection_select :persona_id, Proyecto.all, :personas, :nombre, :id, :nombre_y_apellido, {:selected => @contrato.persona_id}, {:id => 'persona_id', :class =>'form-control'}
+    = f.grouped_collection_select :persona_id, Proyecto.all, :miembros_equipo, :codigo, :id, :nombre_y_apellido, {:selected => @contrato.persona_id}, {:id => 'persona_id', :class =>'form-control'}
   .field
-    = f.label :fechaInicio
-    = f.date_select :fechaInicio
+    = f.label :fecha_inicio
+    = f.date_select :fecha_inicio
   .field
-    = f.label :fechaFin
-    = f.date_select :fechaFin
+    = f.label :fecha_fin
+    = f.date_select :fecha_fin
   .actions = f.submit

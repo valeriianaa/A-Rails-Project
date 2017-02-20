@@ -10,6 +10,8 @@ class CuotaPorCliente < ActiveRecord::Base
 
 	audited
 
+    after_create :calcular_monto
+    
 	def calcular_monto
 		concepto = ConceptoDePago.find(self.concepto_de_pago_id)
 		monto_inicial = concepto.monto
