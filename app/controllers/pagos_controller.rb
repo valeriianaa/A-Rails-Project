@@ -40,14 +40,14 @@ class PagosController < ApplicationController
     respond_to do |format|
       if @pago.save
         format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
-        format.json { render :show, status: :created, location: @pago }
+        format.json { render json: pagos_path, status: :created, location: @pago }
       else
         # Es solo para que funcione los botones de agregar y remover NO SACAR
         if not params[:pago].key?(:pagos_metodos_attributes)
           @pago.pagos_metodos.build
         end
         format.html { render :new }
-        format.json { render json: @pago.errors, status: :unprocessable_entity }
+        format.json { render json: @pago.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end

@@ -141,7 +141,31 @@ $(document).ready ->
   $("form").on "change", 'select[name$="[descuento_id]"]', (event)-> 
     setearTotales()
 
-  # $("form").submit (event)->
-    # Validar que haya seleccionado, alguna cuota
-    
-    # event.preventDefault()
+  $("form").submit (event)->
+    event.preventDefault()
+    $.post( $(this).prop("action") + ".json", $("form").serialize())
+      .fail (data)->
+        console.log data
+        if data.status == 422
+          errores_html = '<div id="error_explanation">\
+          <h2>COUNT error/es prohiben almacenar este Pago:</h2>\
+          <ul>\
+          ERRORES_DESCRIPCION\
+          </ul>\
+          </div>'
+          error_html = '<li>DESCRIPCION</li>'
+          errores_html = errores_html.replace(new RegExp('COUNT', 'g'), data.responseJSON.length)
+          errores_descripcion_html = ''
+
+          for error_descripcion in data.responseJSON
+            errores_descripcion_html += error_html.replace(new RegExp('DESCRIPCION', 'g'), error_descripcion)
+
+          errores_html = errores_html.replace(new RegExp('ERRORES_DESCRIPCION', 'g'), errores_descripcion_html)
+          $("#messages").empty()
+          $("#messages").append(errores_html)
+
+          $('html, body').animate({
+            scrollTop: $('section').offset().top
+          }, 400);
+        else if data.status == 201
+          location.href = "/pagos";
