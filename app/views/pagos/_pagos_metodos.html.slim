@@ -1,10 +1,12 @@
 tr
   td
-    = f.collection_select :tipo_de_pago_id, TipoDePago.all, :id, :nombre, {}, {:id => 'tipo_de_pago_id', :class => 'form-control'}
+    = f.select :tipo_de_pago_id, options_for_select(TipoDePago.all.map {|tp| [tp.nombre, tp.id, {'data-id-tip' => tp.id }]}), 
+    	{}, class: 'form-control select-tipos-de-pagos'
+
   td
     .input-group
       span.input-group-addon $
-      = f.text_field :monto, class: "form-control"
+      = f.text_field :monto, {value: 0, class: "form-control"}
       = f.hidden_field :_destroy
   td
     = link_to "[-] Remover", "#", class: "btn btn-xs btn-danger remove_fields_pagos"

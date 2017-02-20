@@ -1,5 +1,6 @@
 class PagosController < ApplicationController
   before_action :set_pago, only: [:show, :edit, :update, :destroy]
+  before_action :set_systems_config, only: [:new]
 
   # GET /pagos_realizados
   # GET /pagos_realizados.json
@@ -22,6 +23,7 @@ class PagosController < ApplicationController
   # GET /pagos_realizados/new
   def new
     @pago = Pago.new
+    # Es solo para que funcione los botones de agregar y remover NO SACAR
     @pago.pagos_metodos.build
   end
 
@@ -40,6 +42,10 @@ class PagosController < ApplicationController
         format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
         format.json { render :show, status: :created, location: @pago }
       else
+        # Es solo para que funcione los botones de agregar y remover NO SACAR
+        if not params[:pago].key?(:pagos_metodos_attributes)
+          @pago.pagos_metodos.build
+        end
         format.html { render :new }
         format.json { render json: @pago.errors, status: :unprocessable_entity }
       end
@@ -110,6 +116,10 @@ class PagosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_pago
       @pago = Pago.find(params[:id])
+    end
+
+    def set_systems_config
+      @configuracion = Systemsetting.count > 0 ? Systemsetting.last : {}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

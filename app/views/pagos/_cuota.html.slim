@@ -12,7 +12,7 @@
 
     tbody
       - @cuotas.each_with_index do |cuota_por_cliente, index|
-        tr
+        = content_tag "tr", data: {monto_total: cuota_por_cliente.montoTotal } do|a|
           td = cuota_por_cliente.concepto_de_pago.nombre
           td = cuota_por_cliente.montoTotal
           td = cuota_por_cliente.estado
@@ -25,13 +25,23 @@
               - cuota_por_cliente.concepto_de_pago.vencimientos.each do |vencimiento|
                 li = "#{vencimiento.interes.nombre}, " + "#{vencimiento.interes.porcentaje}"
           td
-            select#descuentos name="pago[cuotas_por_cliente_attributes][#{index}][descuento_id]" 
+            select#descuentos.form-control name="pago[cuotas_por_cliente_attributes][#{index}][descuento_id]" 
               option value=""  text="elegir descuento"
               - Descuento.all.each do |descuento|
-                option value=(descuento.id) = "#{descuento.nombre}, " + "#{descuento.porcentaje}"
+                option data-porcentaje=(descuento.porcentaje) value=(descuento.id) = "#{descuento.nombre}, " + "#{descuento.porcentaje}"
           td 
             input type="hidden" name="pago[cuotas_por_cliente_attributes][#{index}][id]" value=(cuota_por_cliente.id)
-            input type="checkbox" name="pago[cuota_por_cliente_ids][]" value=(cuota_por_cliente.id)
+            input type="checkbox" name="pago[cuota_por_cliente_ids][]" value=(cuota_por_cliente.id) data-indice=(index)
+
+      tr
+        td Subtotal
+        td#total-cuotas $ 0
+      tr
+        td Descuentos
+        td#total-descuentos $ 0
+      tr
+        td Total a Pagar
+        td#total-a-pagar $ 0
 
 // javascript:
 //   $('#tabla_cuotas').DataTable({

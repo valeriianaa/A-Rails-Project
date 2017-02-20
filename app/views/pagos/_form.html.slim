@@ -1,3 +1,6 @@
+= hidden_field_tag :tipo_de_pago_id, @configuracion.try(:tipo_de_pago).try(:id)
+= hidden_field_tag "tipo_de_pago_size", TipoDePago.count
+
 = form_for @pago do |f|
   
   - if @pago.errors.any?
@@ -27,7 +30,7 @@
         h4#cantidad-a-pagar-titulo 
         h4#saldo-titulo -
         #cuotas-tabla
-        
+
         = f.fields_for :pagos_metodos do |builder|
           table#pagos-table.table.table-bordered
             thead
@@ -39,7 +42,8 @@
               = render 'pagos_metodos', :f => builder
           .pull-right
             = link_to_add_fields_pagos "[+] Añadir forma de pago", f, :pagos_metodos
-
+          br
+          br
 
   = f.submit
 
