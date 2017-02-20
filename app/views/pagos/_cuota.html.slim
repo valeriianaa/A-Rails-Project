@@ -25,7 +25,7 @@
               - cuota_por_cliente.concepto_de_pago.vencimientos.each do |vencimiento|
                 li = "#{vencimiento.interes.nombre}, " + "#{vencimiento.interes.porcentaje}"
           td
-            select#descuentos name="pago[cuotas_por_cliente_attributes][#{index}][descuento_id]" 
+            select#descuentos.form-control name="pago[cuotas_por_cliente_attributes][#{index}][descuento_id]" 
               option value=""  text="elegir descuento"
               - Descuento.all.each do |descuento|
                 option value=(descuento.id) = "#{descuento.nombre}, " + "#{descuento.porcentaje}"

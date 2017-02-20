@@ -1,5 +1,6 @@
 class PagosController < ApplicationController
   before_action :set_pago, only: [:show, :edit, :update, :destroy]
+  before_action :set_systems_config, only: [:new]
 
   # GET /pagos_realizados
   # GET /pagos_realizados.json
@@ -22,6 +23,7 @@ class PagosController < ApplicationController
   # GET /pagos_realizados/new
   def new
     @pago = Pago.new
+    # No sirve, es solo para que funcione los botones de agregar y remover
     @pago.pagos_metodos.build
   end
 
@@ -110,6 +112,10 @@ class PagosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_pago
       @pago = Pago.find(params[:id])
+    end
+
+    def set_systems_config
+      @configuracion = Systemsetting.count > 0 ? Systemsetting.last : {}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

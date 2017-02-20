@@ -1,3 +1,6 @@
+= hidden_field_tag :tipo_de_pago_id, @configuracion.try(:tipo_de_pago).try(:id)
+= hidden_field_tag "tipo_de_pago_size", TipoDePago.count
+
 = form_for @pago do |f|
   
   - if @pago.errors.any?
