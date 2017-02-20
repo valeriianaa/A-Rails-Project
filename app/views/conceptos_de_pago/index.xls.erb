@@ -7,24 +7,23 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
+        <Cell><Data ss:Type="String">N°</Data></Cell>
         <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">Nombre</Data></Cell>
         <Cell><Data ss:Type="String">Descipción</Data></Cell>
         <Cell><Data ss:Type="String">Monto</Data></Cell>
-        <Cell><Data ss:Type="String">Vencimiento</Data></Cell>
         <Cell><Data ss:Type="String">Vencimiento Fecha</Data></Cell>
         <Cell><Data ss:Type="String">Interes</Data></Cell>
       </Row>
-    <% @conceptos_de_pago.each do |cp| %>
+    <% Vencimiento.all.each do |v, i| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= cp.id.to_s %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= cp.nombre %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= cp.descripcion %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= cp.monto %></Data></Cell>
-        <% @conceptos_de_pago.vencimientos.each do |cp| %>
-          <Cell><Data ss:Type="String"><%=  %></Data></Cell>
-          <Cell><Data ss:Type="Data"><%=  %></Data></Cell>
-          <Cell><Data ss:Type="String"><%=  %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= v.id.to_s %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= v.concepto_de_pago.id.to_s %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= v.concepto_de_pago.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= v.concepto_de_pago.descripcion %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= v.concepto_de_pago.monto %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= v.fecha %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= v.interes.porcentaje %></Data></Cell>
       </Row>
     <% end %>
     </Table>

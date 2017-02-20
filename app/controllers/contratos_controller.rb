@@ -28,7 +28,7 @@ class ContratosController < ApplicationController
 
     respond_to do |format|
       if @contrato.save
-        @contrato.anadir_conceptosdepago(@contrato.fechaInicio, @contrato.fechaFin)
+        @contrato.anadir_conceptosdepago(@contrato.fecha_inicio, @contrato.fecha_fin)
         format.html { redirect_to @contrato, notice: 'Contrato was successfully created.' }
         format.json { render :show, status: :created, location: @contrato }
       else

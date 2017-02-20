@@ -15,6 +15,11 @@ class EventosController < ApplicationController
   # GET /eventos/new
   def new
     @evento = Evento.new
+    respond_to do |format|
+      format.html
+      #format.csv { send_data @contactos.to_csv, filename: "contactos-#{Date.today}.csv" }
+      format.xls
+    end
   end
 
   # GET /eventos/1/edit

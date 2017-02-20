@@ -11,7 +11,6 @@ class Contrato < ActiveRecord::Base
         cp = ConceptoDePago.find(concepto_id)
         cuota_por_cliente = CuotaPorCliente.new
         cuota_por_cliente.montoTotal= cp.monto
-        cuota_por_cliente.montoAcreditado = 0
         cuota_por_cliente.estado = false
         cuota_por_cliente.concepto_de_pago_id = concepto_id
         cuota_por_cliente.proyecto_id = self.proyecto_id
