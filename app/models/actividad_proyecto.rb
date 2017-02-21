@@ -1,18 +1,24 @@
 class ActividadProyecto < ActiveRecord::Base
+	include ActiveModel::Validations
+	
 	belongs_to :actividad
 	belongs_to :proyecto
 	belongs_to :estado
-	has_many :historiales
-	attr_accessor :unEstado, :unaFecha  
+	has_many :historiales, dependent: :destroy
+
+	after_update :crear_historial
+	validates_with EstadoValidator, on: :update
+	validates_with AntecedenteValidator, on: :update
 
 	audited
-	# validate :antecedentes_completados
 
-	# def antecedentes_completados
-	# 	if self.estado.ultimo == true
-	# 		errors.add(:base, "la actividad no puede actualizar a este estado")
-	# 	end
-	# end
+	def crear_historial
+		h = Historial.new
+		h.fechaHora = Time.now
+		h.estado_id = self.estado_id
+		h.actividad_proyecto_id = self.id
+		h.save
+	end
 
 	def estado_ultimo_y_obligatorio
 		if (self.actividad.obligatorio == true) and (self.estado.ultimo == true)
@@ -44,5 +50,4 @@ class ActividadProyecto < ActiveRecord::Base
 		end
 	end
 
-	
 end

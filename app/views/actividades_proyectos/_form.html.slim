@@ -13,22 +13,8 @@
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"  
       .field
         = f.label :fechaVencimiento, 'Fecha de Vencimiento: '
-        =f.date_select :fechaVencimiento
+        = f.date_field :fechaVencimiento
       .field
-        = f.label :unEstado, 'Estado: '
-        = f.collection_select :unEstado, Estado.all, :id, :nombre,{:prompt => "Estado de la Actividad"}, {:class => 'form-control'}
-      .field
-        = f.label 'Es esta la fecha correcta?' 
-        div#select-fecha
-          =f.datetime_select :unaFecha
+        = f.label :estado_id, 'Estado: '
+        = f.collection_select :estado_id, Estado.all, :id, :nombre,{:prompt => "Estado de la Actividad"}, {:class => 'form-control'}
   .actions = f.submit
-
-/ javascript:
-
-/   $(document).ready(function(){
-/     $('#select-fecha').hide();
-/       $("#fecha").click(function(){
-/           $('#select-fecha').show();
-/           $('#pfecha').hide();
-/       });
-/   });

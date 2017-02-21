@@ -33,14 +33,6 @@ class ProyectosController < ApplicationController
 
     respond_to do |format|
       if @proyecto.save
-        if @proyecto.etapa_id != nil
-          Actividad.where(:etapa_id => @proyecto.etapa_id).each do |act|
-            ap = ActividadProyecto.new
-            ap.proyecto_id= @proyecto.id 
-            ap.actividad_id = act.id
-            ap.save
-          end
-        end
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully created.' }
         format.json { render :show, status: :created, location: @proyecto }
       else
@@ -53,12 +45,8 @@ class ProyectosController < ApplicationController
   # PATCH/PUT /proyectos/1
   # PATCH/PUT /proyectos/1.json
   def update
-    etapaId_vieja = @proyecto.etapa_id
     respond_to do |format|
       if @proyecto.update(proyecto_params)
-        if @proyecto.etapa_id != etapaId_vieja
-          @proyecto.anadir_actividades
-        end
         format.html { redirect_to @proyecto, notice: 'Proyecto was successfully updated.' }
         format.json { render :show, status: :ok, location: @proyecto }
       else

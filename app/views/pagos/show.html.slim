@@ -28,7 +28,24 @@ p#notice = notice
                   - @pago.cuotas_por_cliente.each do |cuota|
                     tr
                       td = cuota.concepto_de_pago.nombre
-                      td = cuota.montoTotal.round
+                      td = cuota.concepto_de_pago.monto.round
+            tr
+              td
+                strong Intereses
+              td 
+                - @pago.cuotas_por_cliente.each do |cuota|
+                  -if cuota.tiene_vencimientos == true
+                    table.table.table-bordered
+                      - cuota.concepto_de_pago.vencimientos.each do |v|
+                        tr
+                          td = v.interes.nombre
+                          td = v.interes.porcentaje.round
+                  -else
+                    td
+            tr
+              td
+                strong Descuentos
+              td = @pago.monto.round
             tr
               td
                 strong Monto Pagado

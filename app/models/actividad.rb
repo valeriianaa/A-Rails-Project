@@ -19,4 +19,16 @@ class Actividad < ActiveRecord::Base
 			end
 		end
 	end
+
+	def tiene_antecedentes
+		if self.actividadesAntecedentes != nil
+			if self.actividadesAntecedentes != []
+				return true
+			else
+				return false
+			end
+		else
+			return false
+		end
+	end
 end

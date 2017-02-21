@@ -29,16 +29,21 @@ class Proyecto < ActiveRecord::Base
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :email?
 	validates :dpto, presence: true, if: :piso?
 
+	validates_with ProyectoEtapaValidator, on: :update
+
+	after_create :anadir_actividades
+
 	audited
 	
 	def anadir_actividades
-    Actividad.where(:etapa_id => self.etapa_id).each do |act|
-      ap = ActividadProyecto.new
-      ap.proyecto_id= self.id 
-      ap.actividad_id = act.id
-      ap.save
-    end
+	    Actividad.where(:etapa_id => self.etapa_id).each do |act|
+	      ap = ActividadProyecto.new
+	      ap.proyecto_id= self.id 
+	      ap.actividad_id = act.id
+	      ap.save
+	    end
 	end
+
 
 	def contactos
 		return personas.where(type: 'Contacto')
@@ -91,11 +96,11 @@ class Proyecto < ActiveRecord::Base
 	    retorno << contenido
 	    fecha = fecha + 1.week
 	  	array_semana << hash_semana
-	end
-	Estado.all.each do |e|
-	  labels << e.nombre
-	end
-	return [array_semana , retorno, labels]
+		end
+		Estado.all.each do |e|
+		  labels << e.nombre
+		end
+		return [array_semana , retorno, labels]
   end
 
 end

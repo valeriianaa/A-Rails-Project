@@ -24,7 +24,7 @@ table id="datatable" class="table table-bordered table-striped"
         td = pago.persona.nombre_y_apellido
         td 
           - pago.cuotas_por_cliente.each do |c|
-            li = "#{c.concepto_de_pago.nombre}: #{c.montoTotal.round}"
+            li = "#{c.concepto_de_pago.nombre}"
         td = pago.monto.round
         td.no-print style="padding: 3px;"
           - if can? :show, Pago

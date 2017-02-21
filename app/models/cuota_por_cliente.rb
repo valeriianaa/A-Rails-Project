@@ -24,6 +24,14 @@ class CuotaPorCliente < ActiveRecord::Base
 		return monto_retorno
 	end
 
+	def tiene_vencimientos
+		if self.concepto_de_pago.vencimientos.exists?
+			return true
+		else
+			return false
+		end
+	end
+
 	def has_descuento?
 		not descuento_id == nil
 	end

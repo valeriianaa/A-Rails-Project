@@ -20,7 +20,7 @@
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"  
       .field
         = f.label :proyecto_id, "Proyecto: (*)", :class => "control-label"
-        = f.collection_select :proyecto_id, Proyecto.all, :id, :nombre,{:prompt => "Seleccione un Proyecto"}, {:class => 'form-control', :style => "width: 50%"}
+        = f.collection_select :proyecto_id, Proyecto.all, :id, :codigo,{:prompt => "Seleccione un Proyecto"}, {:class => 'form-control', :style => "width: 50%"}
         a#bt-filtrar.btn.btn-success
           | Filtrar
         br

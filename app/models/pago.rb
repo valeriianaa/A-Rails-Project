@@ -20,12 +20,15 @@ class Pago < ActiveRecord::Base
   
   validates_presence_of :pagos_metodos
   validates_associated :pagos_metodos
+  #validates_with CantidadAPagarValidator, on: :create
 
   before_validation :set_today
   
   before_create :setear_monto
 
   after_create :actualizar_estados
+  
+
 
   def set_today 
     self.fecha = Date.today
