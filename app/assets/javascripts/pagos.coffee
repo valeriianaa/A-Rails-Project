@@ -64,13 +64,13 @@ $(document).ready ->
 
             $("#pagos-table > tbody").empty()
 
-  $('form').on 'click', '.remove_fields_pagos', (event) ->
+  $("form[id*='pago']").on 'click', '.remove_fields_pagos', (event) ->
     $trfieldset = $(this).parent().parent()
     $trfieldset.find('input[type=hidden]').val('1')
     $trfieldset.hide()
     event.preventDefault()
 
-  $('form').on 'click', '.add_fields_pagos', (event) ->
+  $("form[id*='pago']").on 'click', '.add_fields_pagos', (event) ->
     if parseInt( $("#tipo_de_pago_size").val() ) > get_tp_ids().size()
       tp_ids = get_tp_ids()
 
@@ -97,7 +97,7 @@ $(document).ready ->
 
   tp_ids = []
 
-  $("form").on("mousedown", ".select-tipos-de-pagos", (event) ->
+  $("form[id*='pago']").on("mousedown", ".select-tipos-de-pagos", (event) ->
     $(this).data 'value', $(this).val()
     tp_ids = get_tp_ids()
 
@@ -119,7 +119,7 @@ $(document).ready ->
             .prop('readonly', false)
         
   click = false
-  $("form").on("mousedown", "input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']", (event)->
+  $("form[id*='pago']").on("mousedown", "input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']", (event)->
     last_indice = $("input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']:checked:last").data("indice")
     if last_indice == undefined
       last_indice = -1
@@ -138,10 +138,10 @@ $(document).ready ->
       setearTotales()
 
 
-  $("form").on "change", 'select[name$="[descuento_id]"]', (event)-> 
+  $("form[id*='pago']").on "change", 'select[name$="[descuento_id]"]', (event)-> 
     setearTotales()
 
-  $("form").submit (event)->
+  $("form[id*='pago']").submit (event)->
     event.preventDefault()
     $.post( $(this).prop("action") + ".json", $("form").serialize())
       .fail (data)->
