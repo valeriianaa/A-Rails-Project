@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">Descipción</Data></Cell>
+        <Cell><Data ss:Type="String">Dia</Data></Cell>
+        <Cell><Data ss:Type="String">Hora</Data></Cell>
+      </Row>
+    <% @eventos.each do |evento| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= evento.id.to_s %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= evento.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= evento.descripcion %></Data></Cell>
+        <Cell><Data ss:Type="Data"><%= evento.dia %></Data></Cell>
+        <Cell><Data ss:Type="Data"><%= evento.hora %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+        

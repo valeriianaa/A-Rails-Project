@@ -5,6 +5,11 @@ class ProyectosController < ApplicationController
   # GET /proyectos.json
   def index
     @proyectos = Proyecto.all
+    respond_to do |format|
+      format.html
+      #format.csv { send_data @contactos.to_csv, filename: "contactos-#{Date.today}.csv" }
+      format.xls
+    end
   end
 
   # GET /proyectos/1

@@ -9,6 +9,8 @@ br
 table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
+      th Código - Proyecto
+      th Responsable del Contrato
       th Fechainicio
       th Fechafin
       th.no-print Acciones
@@ -16,6 +18,8 @@ table id="datatable" class="table table-bordered table-striped"
   tbody
     - @contratos.each do |contrato|
       tr
+        td = contrato.proyecto.codigo
+        td = contrato.persona.nombre_y_apellido
         td = contrato.fecha_inicio
         td = contrato.fecha_fin
         td.no-print style="padding: 3px;"

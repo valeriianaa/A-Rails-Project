@@ -27,7 +27,7 @@ class PagoPdf < Prawn::Document
 		end
 
 		move_down 5
-		table([["Proyecto" , "#{@pago.proyecto.nombre}"]]) do |t|
+		table([["Proyecto" , "#{@pago.proyecto.codigo} #{@pago.proyecto.nombre}"]]) do |t|
 			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
 			t.width = bounds.width
 			t.column(0).font_style = :bold

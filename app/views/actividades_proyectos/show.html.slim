@@ -20,7 +20,11 @@ p
               tr
                 td = h.fechaHora.strftime('%d-%m-%y %H:%M hs')
                 td = h.estado.nombre 
-                td 
+                -if h.user_id != nil
+                  td = h.user.persona.nombre_y_apellido
+                -else
+                  td
+
 
 = link_to 'Editar', edit_actividad_proyecto_path(@actividad_proyecto)
 '|
