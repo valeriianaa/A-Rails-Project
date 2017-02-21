@@ -146,7 +146,7 @@ PersonaProyecto.create!([
   {proyecto_id: 10, persona_id: 26},
 ])
 
-##ATENCION!!! fecha de vencimiento es nil, y esta bien cuando se crea la act proy. pero despues el usuario actualiza y el valor se debe reflejar!!!
+#Actividades Proyecto para PR-001 a PR-010 con historial y fecha de vencimiento en blanco
 ActividadProyecto.create!([
   {fechaVencimiento: nil, proyecto_id: 1, actividad_id: 1, estado_id: nil},
   {fechaVencimiento: nil, proyecto_id: 1, actividad_id: 2, estado_id: nil},
@@ -179,136 +179,6 @@ ActividadProyecto.create!([
   {fechaVencimiento: nil, proyecto_id: 10, actividad_id: 2, estado_id: nil},
   {fechaVencimiento: nil, proyecto_id: 10, actividad_id: 3, estado_id: nil}
 ])
-
-Estado.create!([
-  {nombre: "To do", ultimo: false, previous: nil},
-  {nombre: "Doing", ultimo: false, previous: 1},
-  {nombre: "Done", ultimo: true, previous: 2}
-])
-
-Descuento.create!([
-   {nombre: "Descuento 10%", descripcion: "-", porcentaje: 10.0}
-])
-
-Interes.create!([
-  {nombre: "Interes 20%", descripcion: "-", porcentaje: 20.0}
-])
-
-TipoDePago.create!([
-  {nombre: "Efectivo"}
-])
-
-ConceptoDePago.create!([
-  {nombre: "Cuota de Enero", descripcion: "Enero 2017", monto: 200.0},
-  {nombre: "Cuota de Febrero", descripcion: "Febrero 2017", monto: 200.0},
-  {nombre: "Cuota de Marzo", descripcion: "Marzo 2017", monto: 200.0},
-  {nombre: "Cuota de Abril", descripcion: "Abril 2017", monto: 200.0},
-  {nombre: "Cuota de Mayo", descripcion: "Mayo 2017", monto: 200.0},
-  {nombre: "Cuota de Junio", descripcion: "Junio 2017", monto: 200.0},
-  {nombre: "Cuota de Julio", descripcion: "Julio 2017", monto: 200.0},
-  {nombre: "Cuota de Agosto", descripcion: "Agosto 2017", monto: 200.0},
-  {nombre: "Cuota de Septiembre", descripcion: "Septiembre 2017", monto: 200.0},
-  {nombre: "Cuota de Octubre", descripcion: "Octubre 2017", monto: 200.0},
-  {nombre: "Cuota de Noviembre", descripcion: "Noviembre 2017", monto: 200.0},
-  {nombre: "Cuota de Diciembre", descripcion: "Diciembre 2017", monto: 200.0}
-])
-
-Vencimiento.create!([
-  {fecha: "2017-01-10", concepto_de_pago_id: 1, interes_id: 1},
-  {fecha: "2017-01-20", concepto_de_pago_id: 1, interes_id: 1},
-  {fecha: "2017-02-10", concepto_de_pago_id: 2, interes_id: 1},
-  {fecha: "2017-02-20", concepto_de_pago_id: 2, interes_id: 1},
-  {fecha: "2017-03-10", concepto_de_pago_id: 3, interes_id: 1},
-  {fecha: "2017-03-20", concepto_de_pago_id: 3, interes_id: 1},
-  {fecha: "2017-04-10", concepto_de_pago_id: 4, interes_id: 1},
-  {fecha: "2017-04-20", concepto_de_pago_id: 4, interes_id: 1},
-  {fecha: "2017-05-10", concepto_de_pago_id: 5, interes_id: 1},
-  {fecha: "2017-05-20", concepto_de_pago_id: 5, interes_id: 1},
-  {fecha: "2017-06-10", concepto_de_pago_id: 6, interes_id: 1},
-  {fecha: "2017-06-20", concepto_de_pago_id: 6, interes_id: 1},
-  {fecha: "2017-07-10", concepto_de_pago_id: 7, interes_id: 1},
-  {fecha: "2017-07-10", concepto_de_pago_id: 7, interes_id: 1},
-  {fecha: "2017-08-10", concepto_de_pago_id: 8, interes_id: 1},
-  {fecha: "2017-08-10", concepto_de_pago_id: 8, interes_id: 1},
-  {fecha: "2017-09-10", concepto_de_pago_id: 9, interes_id: 1},
-  {fecha: "2017-09-20", concepto_de_pago_id: 9, interes_id: 1},
-  {fecha: "2017-10-10", concepto_de_pago_id: 10, interes_id: 1},
-  {fecha: "2017-10-20", concepto_de_pago_id: 10, interes_id: 1},
-  {fecha: "2017-11-10", concepto_de_pago_id: 11, interes_id: 1},
-  {fecha: "2017-11-20", concepto_de_pago_id: 11, interes_id: 1},
-  {fecha: "2017-12-10", concepto_de_pago_id: 12, interes_id: 1},
-  {fecha: "2017-12-10", concepto_de_pago_id: 12, interes_id: 1}
-])
-
-Contrato.create!([
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 7, proyecto_id: 1},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 8, proyecto_id: 2},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 10, proyecto_id: 3},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 12, proyecto_id: 4},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 14, proyecto_id: 5},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 19, proyecto_id: 6},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 18, proyecto_id: 7},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 21, proyecto_id: 8},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 23, proyecto_id: 9},
-  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 25, proyecto_id: 10}
-])
-
-CuotaPorCliente.create!([
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil}
-])
-
-Cuenta.create!([
-  {saldo: 0.0, proyecto_id: 1},
-  {saldo: 0.0, proyecto_id: 2},
-  {saldo: 0.0, proyecto_id: 3},
-  {saldo: 0.0, proyecto_id: 4},
-  {saldo: 0.0, proyecto_id: 5},
-  {saldo: 0.0, proyecto_id: 6},
-  {saldo: 0.0, proyecto_id: 7},
-  {saldo: 0.0, proyecto_id: 8},
-  {saldo: 0.0, proyecto_id: 9},
-  {saldo: 0.0, proyecto_id: 10}
-])
-
 Accion.create!([
   {nombre: "Crear", key_name: "create"},
   {nombre: "Eliminar", key_name: "destroy"},
@@ -521,9 +391,259 @@ Rol::HABTM_Permisos.create!([
 
 User.create!([
   {email: "valeriianaa@gmail.com", password: "12345678", encrypted_password: "$2a$11$IOIqTifJSSss5Ux4qvnwyet8eVOAXbLnDdygO/WWLL3gpl8eW7Bhu", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 4, current_sign_in_at: "2017-02-20 02:52:46", last_sign_in_at: "2017-02-20 02:33:53", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", persona_id: 1, rol_id: 2},
-  {email: "luiscastro@gmail.com", password: "12345678", encrypted_password: "$2a$11$uFat0oc4vonnYiRH71Egde1ZjZ7jIQdFNyb9vLL0jOTtZfNhEJEFq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 4, current_sign_in_at: "2017-02-20 02:59:21", last_sign_in_at: "2017-02-20 02:22:18", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", persona_id: 11, rol_id: 3},
+  {email: "luiscastro@gmail.com", password: "12345678", encrypted_password: "$2a$11$uFat0oc4vonnYiRH71Egde1ZjZ7jIQdFNyb9vLL0jOTtZfNhEJEFq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 4, current_sign_in_at: "2017-02-20 02:59:21", last_sign_in_at: "2017-02-20 02:22:18", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", persona_id: 6, rol_id: 3},
   {email: "mq@gmail.com", password: "12345678", encrypted_password: "$2a$11$ozq2DVoT.jkbDsKalmbklOAtl6RElAHDuglwK0D/RVIinX/hIa2.m", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 2, current_sign_in_at: "2017-02-20 03:07:00", last_sign_in_at: "2017-02-20 02:53:38", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", persona_id: 2, rol_id: 1}
 ])
+
+Estado.create!([
+  {nombre: "To do", ultimo: false, previous: nil},
+  {nombre: "Doing", ultimo: false, previous: 1},
+  {nombre: "Done", ultimo: true, previous: 2}
+])
+
+# Actividades Proyectos para proyectos PR-001 al PR-010
+# ActividadProyecto.create!([
+#   {fechaVencimiento: nil, proyecto_id: 1, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 1, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 1, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 2, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 2, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 2, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 3, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 3, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 3, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 4, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 4, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 4, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 5, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 5, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 5, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 6, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 6, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 6, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 7, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 7, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 7, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 8, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 8, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 8, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 9, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 9, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 9, actividad_id: 3, estado_id: 2},
+#   {fechaVencimiento: nil, proyecto_id: 10, actividad_id: 1, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 10, actividad_id: 2, estado_id: 3},
+#   {fechaVencimiento: nil, proyecto_id: 10, actividad_id: 3, estado_id: 2}
+# ])
+
+# Historiales para proyectos PR-001 al PR-010
+# Historial.create!([
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 1, estado_id: 1, proyecto_id: 1, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 2, estado_id: 1, proyecto_id: 1, user_id: 3},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 3, estado_id: 1, proyecto_id: 1, user_id: 3},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 1, estado_id: 2, proyecto_id: 1, user_id: 3},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 2, estado_id: 2, proyecto_id: 1, user_id: 3},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 3, estado_id: 2, proyecto_id: 1, user_id: 3},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 1, estado_id: 3, proyecto_id: 1, user_id: 3},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 2, estado_id: 3, proyecto_id: 1, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 4, estado_id: 1, proyecto_id: 2, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 5, estado_id: 1, proyecto_id: 2, user_id: 3},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 6, estado_id: 1, proyecto_id: 2, user_id: 3},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 4, estado_id: 2, proyecto_id: 2, user_id: 3},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 5, estado_id: 2, proyecto_id: 2, user_id: 3},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 6, estado_id: 2, proyecto_id: 2, user_id: 3},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 4, estado_id: 3, proyecto_id: 2, user_id: 3},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 5, estado_id: 3, proyecto_id: 2, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 7, estado_id: 1, proyecto_id: 3, user_id: 2},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 8, estado_id: 1, proyecto_id: 3, user_id: 2},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 9, estado_id: 1, proyecto_id: 3, user_id: 2},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 7, estado_id: 2, proyecto_id: 3, user_id: 2},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 8, estado_id: 2, proyecto_id: 3, user_id: 2},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 9, estado_id: 2, proyecto_id: 3, user_id: 2},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 7, estado_id: 3, proyecto_id: 3, user_id: 2},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 8, estado_id: 3, proyecto_id: 3, user_id: 2},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 10, estado_id: 1, proyecto_id: 4, user_id: 2},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 11, estado_id: 1, proyecto_id: 4, user_id: 2},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 12, estado_id: 1, proyecto_id: 4, user_id: 2},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 10, estado_id: 2, proyecto_id: 4, user_id: 2},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 11, estado_id: 2, proyecto_id: 4, user_id: 2},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 12, estado_id: 2, proyecto_id: 4, user_id: 2},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 10, estado_id: 3, proyecto_id: 4, user_id: 2},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 11, estado_id: 3, proyecto_id: 4, user_id: 2},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 13, estado_id: 1, proyecto_id: 5, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 14, estado_id: 1, proyecto_id: 5, user_id: 3},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 15, estado_id: 1, proyecto_id: 5, user_id: 3},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 13, estado_id: 2, proyecto_id: 5, user_id: 3},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 14, estado_id: 2, proyecto_id: 5, user_id: 3},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 15, estado_id: 2, proyecto_id: 5, user_id: 3},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 13, estado_id: 3, proyecto_id: 5, user_id: 3},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 14, estado_id: 3, proyecto_id: 5, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 16, estado_id: 1, proyecto_id: 6, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 17, estado_id: 1, proyecto_id: 6, user_id: 3},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 18, estado_id: 1, proyecto_id: 6, user_id: 3},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 16, estado_id: 2, proyecto_id: 6, user_id: 3},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 17, estado_id: 2, proyecto_id: 6, user_id: 3},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 18, estado_id: 2, proyecto_id: 6, user_id: 3},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 16, estado_id: 3, proyecto_id: 6, user_id: 3},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 17, estado_id: 3, proyecto_id: 6, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 19, estado_id: 1, proyecto_id: 7, user_id: 2},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 20, estado_id: 1, proyecto_id: 7, user_id: 2},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 21, estado_id: 1, proyecto_id: 7, user_id: 2},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 19, estado_id: 2, proyecto_id: 7, user_id: 2},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 20, estado_id: 2, proyecto_id: 7, user_id: 2},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 21, estado_id: 2, proyecto_id: 7, user_id: 2},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 19, estado_id: 3, proyecto_id: 7, user_id: 2},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 20, estado_id: 3, proyecto_id: 7, user_id: 2},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 22, estado_id: 1, proyecto_id: 8, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 23, estado_id: 1, proyecto_id: 8, user_id: 3},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 24, estado_id: 1, proyecto_id: 8, user_id: 3},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 22, estado_id: 2, proyecto_id: 8, user_id: 3},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 23, estado_id: 2, proyecto_id: 8, user_id: 3},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 24, estado_id: 2, proyecto_id: 8, user_id: 3},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 22, estado_id: 3, proyecto_id: 8, user_id: 3},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 23, estado_id: 3, proyecto_id: 8, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 25, estado_id: 1, proyecto_id: 9, user_id: 2},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 26, estado_id: 1, proyecto_id: 9, user_id: 2},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 27, estado_id: 1, proyecto_id: 9, user_id: 2},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 25, estado_id: 2, proyecto_id: 9, user_id: 2},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 26, estado_id: 2, proyecto_id: 9, user_id: 2},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 27, estado_id: 2, proyecto_id: 9, user_id: 2},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 25, estado_id: 3, proyecto_id: 9, user_id: 2},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 26, estado_id: 3, proyecto_id: 9, user_id: 2},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 28, estado_id: 1, proyecto_id: 10, user_id: 3},
+#   {fechaHora: "2017-01-01 08:20:00", actividad_proyecto_id: 29, estado_id: 1, proyecto_id: 10, user_id: 3},
+#   {fechaHora: "2017-01-01 08:21:00", actividad_proyecto_id: 30, estado_id: 1, proyecto_id: 10, user_id: 3},
+#   {fechaHora: "2017-01-01 08:22:00", actividad_proyecto_id: 28, estado_id: 2, proyecto_id: 10, user_id: 3},
+#   {fechaHora: "2017-01-02 08:22:00", actividad_proyecto_id: 29, estado_id: 2, proyecto_id: 10, user_id: 3},
+#   {fechaHora: "2017-01-08 08:23:00", actividad_proyecto_id: 30, estado_id: 2, proyecto_id: 10, user_id: 3},
+#   {fechaHora: "2017-01-01 08:23:00", actividad_proyecto_id: 28, estado_id: 3, proyecto_id: 10, user_id: 3},
+#   {fechaHora: "2017-01-06 08:24:00", actividad_proyecto_id: 29, estado_id: 3, proyecto_id: 10, user_id: 3}
+# ])
+
+
+Descuento.create!([
+   {nombre: "Descuento 10%", descripcion: "-", porcentaje: 10.0}
+])
+
+Interes.create!([
+  {nombre: "Interes 20%", descripcion: "-", porcentaje: 20.0}
+])
+
+TipoDePago.create!([
+  {nombre: "Efectivo"}
+])
+
+ConceptoDePago.create!([
+  {nombre: "Cuota de Enero", descripcion: "Enero 2017", monto: 200.0},
+  {nombre: "Cuota de Febrero", descripcion: "Febrero 2017", monto: 200.0},
+  {nombre: "Cuota de Marzo", descripcion: "Marzo 2017", monto: 200.0},
+  {nombre: "Cuota de Abril", descripcion: "Abril 2017", monto: 200.0},
+  {nombre: "Cuota de Mayo", descripcion: "Mayo 2017", monto: 200.0},
+  {nombre: "Cuota de Junio", descripcion: "Junio 2017", monto: 200.0},
+  {nombre: "Cuota de Julio", descripcion: "Julio 2017", monto: 200.0},
+  {nombre: "Cuota de Agosto", descripcion: "Agosto 2017", monto: 200.0},
+  {nombre: "Cuota de Septiembre", descripcion: "Septiembre 2017", monto: 200.0},
+  {nombre: "Cuota de Octubre", descripcion: "Octubre 2017", monto: 200.0},
+  {nombre: "Cuota de Noviembre", descripcion: "Noviembre 2017", monto: 200.0},
+  {nombre: "Cuota de Diciembre", descripcion: "Diciembre 2017", monto: 200.0}
+])
+
+Vencimiento.create!([
+  {fecha: "2017-01-10", concepto_de_pago_id: 1, interes_id: 1},
+  {fecha: "2017-01-20", concepto_de_pago_id: 1, interes_id: 1},
+  {fecha: "2017-02-10", concepto_de_pago_id: 2, interes_id: 1},
+  {fecha: "2017-02-20", concepto_de_pago_id: 2, interes_id: 1},
+  {fecha: "2017-03-10", concepto_de_pago_id: 3, interes_id: 1},
+  {fecha: "2017-03-20", concepto_de_pago_id: 3, interes_id: 1},
+  {fecha: "2017-04-10", concepto_de_pago_id: 4, interes_id: 1},
+  {fecha: "2017-04-20", concepto_de_pago_id: 4, interes_id: 1},
+  {fecha: "2017-05-10", concepto_de_pago_id: 5, interes_id: 1},
+  {fecha: "2017-05-20", concepto_de_pago_id: 5, interes_id: 1},
+  {fecha: "2017-06-10", concepto_de_pago_id: 6, interes_id: 1},
+  {fecha: "2017-06-20", concepto_de_pago_id: 6, interes_id: 1},
+  {fecha: "2017-07-10", concepto_de_pago_id: 7, interes_id: 1},
+  {fecha: "2017-07-10", concepto_de_pago_id: 7, interes_id: 1},
+  {fecha: "2017-08-10", concepto_de_pago_id: 8, interes_id: 1},
+  {fecha: "2017-08-10", concepto_de_pago_id: 8, interes_id: 1},
+  {fecha: "2017-09-10", concepto_de_pago_id: 9, interes_id: 1},
+  {fecha: "2017-09-20", concepto_de_pago_id: 9, interes_id: 1},
+  {fecha: "2017-10-10", concepto_de_pago_id: 10, interes_id: 1},
+  {fecha: "2017-10-20", concepto_de_pago_id: 10, interes_id: 1},
+  {fecha: "2017-11-10", concepto_de_pago_id: 11, interes_id: 1},
+  {fecha: "2017-11-20", concepto_de_pago_id: 11, interes_id: 1},
+  {fecha: "2017-12-10", concepto_de_pago_id: 12, interes_id: 1},
+  {fecha: "2017-12-10", concepto_de_pago_id: 12, interes_id: 1}
+])
+
+Contrato.create!([
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 7, proyecto_id: 1},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 8, proyecto_id: 2},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 10, proyecto_id: 3},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 12, proyecto_id: 4},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 14, proyecto_id: 5},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 19, proyecto_id: 6},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 18, proyecto_id: 7},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 21, proyecto_id: 8},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 23, proyecto_id: 9},
+  {fecha_inicio: "2017-01-01", fecha_fin: "2017-04-30", persona_proyecto_id: nil, persona_id: 25, proyecto_id: 10}
+])
+
+CuotaPorCliente.create!([
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil}
+])
+
+Cuenta.create!([
+  {saldo: 0.0, proyecto_id: 1},
+  {saldo: 0.0, proyecto_id: 2},
+  {saldo: 0.0, proyecto_id: 3},
+  {saldo: 0.0, proyecto_id: 4},
+  {saldo: 0.0, proyecto_id: 5},
+  {saldo: 0.0, proyecto_id: 6},
+  {saldo: 0.0, proyecto_id: 7},
+  {saldo: 0.0, proyecto_id: 8},
+  {saldo: 0.0, proyecto_id: 9},
+  {saldo: 0.0, proyecto_id: 10}
+])
+
+
 
 
 #--------------------------------------------------------

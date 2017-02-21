@@ -120,9 +120,6 @@ class ActividadesProyectosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def actividad_proyecto_params
       params.require(:actividad_proyecto).permit(:proyecto_id, :actividad_id, :fechaVencimiento, :unEstado, :unaFecha, :estado_id,{:historiales =>[:id, :estado_id, :actividad_proyecto_id, :fechaHora]}) 
-        #{:historiales => [:id, :estado_id, :actividad_proyecto_id, :fechaHora]})
-      #, historiales_attributes: [:id, :estado_id, :actividad_proyecto_id, :fechaHora]
-      #params.require(:actividad_proyecto).permit(:fechaInicio, :fechaFin)
     end
 
     #def hist_params
