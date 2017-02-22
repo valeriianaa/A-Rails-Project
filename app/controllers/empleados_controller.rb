@@ -9,6 +9,10 @@ class EmpleadosController < ApplicationController
       format.html
       format.csv { send_data @empleados.to_csv, filename: "empleados-#{Date.today}.csv" }
       format.xls # { send_data @products.to_csv(col_sep: "\t") }
+      format.pdf do
+        pdf = EmpleadosPdf.new(@empleados)
+        send_data pdf.render, filename: "empleados#{@empleados}.pdf", type: "application/pdf", disposition: "inline"
+      end
     end
   end
 

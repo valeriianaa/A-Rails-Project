@@ -1,12 +1,26 @@
 p#notice = notice
 
-p
-  strong Nombre:
-  = @accion.nombre
-p
-  strong Key name:
-  = @accion.key_name
-
-= link_to 'Edit', edit_accion_path(@accion)
-'|
-= link_to 'Back', acciones_path
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos de la acción
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @accion.nombre
+            tr
+              td
+                strong Nombre
+              td = @accion.nombre
+            
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_accion_path(@accion)) style="width:70px;" id="editar_accion"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(acciones_path) style="width:70px;" id="volver_accion"
+      |Volver

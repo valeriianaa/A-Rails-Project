@@ -18,10 +18,10 @@ class PagoPdf < Prawn::Document
 
 	def detalle_items
 		move_down 20
-		table([["IncubadorApp",pago_numero]]) do |t|
+		table([ [empresa_detalles, pago_numero]]) do |t|
 			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
 			t.width = bounds.width
-			t.row(0).font_size = 30, 
+			t.row(0).font_size = 30
 			t.row(0).font_style = :bold
 			t.row(0).padding = 50
 		end
@@ -36,7 +36,7 @@ class PagoPdf < Prawn::Document
 		end
 
 		move_down 5
-		table([["Responsable del Contrato" , "#{Persona.find(Contrato.where(proyecto_id: @pago.proyecto_id).pluck(:persona_id)[0].to_i).nombre_y_apellido}"]]) do |t|
+		table([["Responsable del Contrato" , "#{@pago.persona.nombre_y_apellido}"]]) do |t|
 			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
 			t.width = bounds.width
 			t.column(0).font_style = :bold
@@ -69,7 +69,7 @@ class PagoPdf < Prawn::Document
 		end
 		
 		move_down 20
-		table([["Son $: ", "#{@pago.monto}" ],["Saldo actual en la cuenta del responsable: ", "+ #{Cuenta.where(proyecto_id: @pago.proyecto_id).pluck(:saldo)[0]}"]]) do |t|
+		table([["Son $: ", "#{@pago.monto}" ],["Saldo actual en la cuenta del responsable: ", "+ #{@pago.cuenta.saldo}"]]) do |t|
 			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
 			t.width = bounds.width
 			t.column(0).font_style = :bold
@@ -79,10 +79,18 @@ class PagoPdf < Prawn::Document
 	end
 
 	def pago_numero
-		"Pago N°: \##{@pago.id}"
-		#, size: 30, style: :bold
+		[ ["Fecha: #{@pago.fecha}"], ["Recibo N°: #{@pago.id}"], ["..."] ]
 	end
 
+	def empresa_detalles
+		if Configuracion.count > 0
+			c = Configuracion.last
+			return [ ["#{c.nombre}"], ["#{c.condicion_iva.capitalize}"], [{:image => c.logo, :scale => 0.5}] ]
+		else
+			return [["##--##"],["##--##"],["##--##"]]
+		end
+		
+	end
 
 	def cuotas_items_rows
 		[[{:content => "Concepto de pago", :colspan => 2}],["Detalle", "Importe"]] +

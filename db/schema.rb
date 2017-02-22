@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220221623) do
+ActiveRecord::Schema.define(version: 20170221123343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,19 +102,22 @@ ActiveRecord::Schema.define(version: 20170220221623) do
     t.string   "eslogan"
     t.string   "cuit"
     t.string   "condicion_iva"
-    t.datetime "plazo_abandono"
+    t.integer  "numero_abandono"
+    t.string   "tiempo_abandono"
     t.string   "calle"
-    t.string   "nroDomicilio"
+    t.string   "nro_domicilio"
     t.string   "piso"
     t.string   "dpto"
     t.string   "telefono"
     t.string   "email"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "pag_web"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "pais_id"
     t.integer  "provincia_id"
     t.integer  "ciudad_id"
     t.integer  "area_id"
+    t.string   "logotipo"
   end
 
   add_index "configuraciones", ["area_id"], name: "index_configuraciones_on_area_id", using: :btree

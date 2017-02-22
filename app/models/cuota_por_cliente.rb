@@ -10,19 +10,38 @@ class CuotaPorCliente < ActiveRecord::Base
 
 	audited
 
-    after_create :calcular_monto
+	after_initialize :calcular_monto
+    after_save :calcular_monto
     
 	def calcular_monto
-		concepto = ConceptoDePago.find(self.concepto_de_pago_id)
-		monto_inicial = concepto.monto
-		monto_retorno = monto_inicial
-		concepto.vencimientos.each do |vencimiento|
-			if vencimiento.fecha < Date.today
-				monto_retorno = monto_inicial * (1 + (vencimiento.interes.porcentaje/100))
+		if estado == false
+			if montoTotal != concepto_de_pago.concepto_con_vencimiento
+				self.update(montoTotal: self.concepto_de_pago.concepto_con_vencimiento)
 			end
 		end
-		return monto_retorno
 	end
+
+	def cuotas_atrasadas
+		retorno = false
+		if self.concepto_de_pago.vencimientos.exists?
+			self.concepto_de_pago.vencimientos.each do |v|
+				if v.fecha < Date.today
+					retorno = true
+				end
+			end
+		end
+		return retorno
+	end
+
+	def self.getAtrasadas
+    	cuotas = Array.new
+		self.all.each do |c|
+      		if c.cuotas_atrasadas == true
+        		cuotas << c
+      		end
+      	end
+      	cuotas
+    end
 
 	def tiene_vencimientos
 		if self.concepto_de_pago.vencimientos.exists?

@@ -50,4 +50,5 @@ class ActividadProyecto < ActiveRecord::Base
 		end
 	end
 
+
 end

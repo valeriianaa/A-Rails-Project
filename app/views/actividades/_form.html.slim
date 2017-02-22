@@ -22,26 +22,8 @@
       .field
         = f.label :etapa_id, 'Etapa a la que pertenece: (*)'
         = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {:prompt => "Seleccione una etapa"}, {:id => 'etapa_id', :class =>'form-control'}
-        / br
-        /   select#actividad_etapa_id.form-control name="actividad[etapa_id]"
-        /     - Etapa.all.each do |etapa|
-        /         - if @actividad.etapa == etapa
-        /           option selected='' value=(etapa.id) = etapa.nombre
-        /         - else
-        /           option value=(etapa.id) = etapa.nombre
-      / .field
-      /   = f.label :etapa_id, 'Etapa a la que pertenece:'
-      /   = f.collection_select :etapa_id, Etapa.all, :id, :nombre
       .field
         = f.label :actividadesAntecedentes, 'Actividades Antecedentes: (**)', :id => 'antecedente_label'
-        / br
-        /   select#actividad_antecedente_id.form-control name="actividad[actividad_id]" multiple="true"
-        /     - Actividad.all.each do |actividad|
-        /         - if @actividad.actividadesAntecedentes == actividad
-        /           option selected='' class=(actividad.etapa_id) value=(actividad.id) =actividad.nombre
-        /         - else
-        /           option class=(actividad.etapa_id) value=(actividad.id) =actividad.nombre
-        / = f.label :actividadesAntecedentes, 'Actividades antecedentes:'
         = f.grouped_collection_select :actividadesAntecedentes, Etapa.all, :actividades, :nombre, :id, :nombre, {:selected => @actividad.actividadesAntecedentes}, {:multiple => true, :id => 'actividad_antecedente_id', :class =>'form-control'}
     .box-footer
       p#foot = "(*) Campo Obligatorio"

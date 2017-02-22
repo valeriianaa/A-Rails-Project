@@ -1,5 +1,16 @@
 div class="user panel"  
 ul.sidebar-menu
+  - if can? :manage, Configuracion
+    - if Configuracion.count > 0
+      li
+        a href=(edit_configuracion_path(Configuracion.last)) 
+          i.fa.fa-gear
+          | Datos de la compañía
+    - else
+      li
+        a href=(new_configuracion_path) 
+          i.fa.fa-gear
+          | Datos de la compañía
   - if can? :index, Empleado or can? :index, Departamento or can? :index, RolDeEmpleado
     li.treeview#lista-cabecera
       a href=""
@@ -155,7 +166,7 @@ ul.sidebar-menu
   - if can? :index, Pais or can? :index, Provincia or can? :index, Ciudad or can? :index, Area
     li.treeview#lista-cabecera
       a href=""
-        i.fa.fa-flag
+        i.fa.fa-globe
         | Ubicaciones
         i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu
@@ -182,7 +193,7 @@ ul.sidebar-menu
   - if can? :index, TipoDocumento or can? :index, Estado
     li.treeview#lista-cabecera
       a href=""
-        i.fa.fa-gear
+        i.fa.fa-caret-square-o-right
         | Parámetros
         i.fa.fa-angle-down.pull-right
       ul.treeview-menu#submenu

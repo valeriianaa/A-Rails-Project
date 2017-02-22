@@ -62,6 +62,8 @@ gem 'prawn-table'
 
 gem 'morrisjs-rails'
 gem 'raphael-rails'
+
+gem 'carrierwave'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

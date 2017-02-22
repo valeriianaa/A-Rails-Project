@@ -53,6 +53,10 @@ GEM
     builder (3.2.2)
     byebug (9.0.6)
     cancan (1.6.10)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     chained-rails (0.1.0)
     chronic (0.10.2)
     client_side_validations (4.2.12)
@@ -248,6 +252,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.5)
   byebug
   cancan
+  carrierwave
   chained-rails
   chronic
   client_side_validations

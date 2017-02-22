@@ -12,4 +12,16 @@ class ConceptoDePago < ActiveRecord::Base
 
 	audited
 
+	def concepto_con_vencimiento
+		retorno = monto
+		if vencimientos.exists?
+			vencimientos.each do |v|
+				if v.fecha < Date.today
+					retorno = retorno * (1 + (v.interes.porcentaje/100))
+				end
+			end
+		end
+		return retorno
+	end
+
 end

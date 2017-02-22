@@ -40,7 +40,7 @@ class PagosController < ApplicationController
     respond_to do |format|
       if @pago.save
         format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
-        format.json { render json: pagos_path, status: :created, location: @pago }
+        format.json { render json: pago_path(@pago), status: :created, location: @pago }
       else
         # Es solo para que funcione los botones de agregar y remover NO SACAR
         if not params[:pago].key?(:pagos_metodos_attributes)
@@ -71,17 +71,7 @@ class PagosController < ApplicationController
   # DELETE /pagos_realizados/1
   # DELETE /pagos_realizados/1.json
   def destroy
-    @cuenta = Cuenta.find(params[:pago][:cuenta_id])
-    pm_monto = 0
-    cuotas_monto = 0
-    @pago_metodos.each do |pm|
-      pm_monto = pm_monto + pm.monto
-    end
-    @pago.cuotas_por_cliente.each do |c|
-      cuotas_monto = cuotas_monto + c.montoTotal
-      cuota.update(estado: false)
-    end
-    @cuenta.saldo = @cuenta.saldo - pago.monto
+    @pago.restaurar_saldos
     @pago.destroy
     respond_to do |format|
       format.html { redirect_to pagos_url, notice: 'Pago was successfully destroyed.' }
@@ -112,6 +102,11 @@ class PagosController < ApplicationController
     }
   end
 
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Pago"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pago
@@ -131,7 +126,6 @@ class PagosController < ApplicationController
         :persona_id, 
         :cuenta_id,
         :monto, 
-        :tipo_de_pago_id,
         :cuota_por_cliente_ids => [],
         :pagos_metodos_attributes => [ :id, :monto, :pago_id, :tipo_de_pago_id, :_destroy ]
       )

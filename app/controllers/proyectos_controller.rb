@@ -102,6 +102,20 @@ class ProyectosController < ApplicationController
     end
   end
 
+  def proyectos_abandonados
+    @proyectos = Array.new
+    Proyecto.all.each do |p|
+      if p.abandonado == true
+        @proyectos << p
+      end
+    end
+
+    respond_to do |format|
+      format.html { render "proyectos_abandonados.html.slim"}
+      format.json { render json: @productos }
+    end
+  end
+
   def estadisticas
     @proyecto = Proyecto.find(params[:id])
 

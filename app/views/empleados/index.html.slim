@@ -8,9 +8,11 @@
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
-        a.btn.btn-default.btn-sm href=(empleados_path(format: "csv"))
-          | Descargar CSV
-        a.btn.btn-default.btn-sm href=(empleados_path(format: "xls"))
+        a.btn.bg-navy.margin href=(empleados_path(format: "pdf"))
+          i.ace-icon.fa.fa-file-pdf-o
+          | Ver PDF
+        a.btn.bg-navy.margin href=(empleados_path(format: "xls"))
+          i.ace-icon.fa.fa-excel-o
           | Descargar Excel
 
 br
@@ -41,15 +43,3 @@ table id="datatable" class="table table-bordered table-striped"
               i.fa.fa-trash
 
 br
-
-/= link_to 'Nuevo Empleado', new_empleado_path
-
-// javascript:
-//   $(document).ready(function() {
-//     $('.dataTable').dataTable();
-//   } );
-
-/= link_to 'Show', empleado
-/= link_to 'Edit', edit_empleado_path(empleado)
-/= link_to 'Destroy', empleado, data: {:confirm => 'Are you sure?'}, :method => :delete
-          /th colspan="3" Acciones

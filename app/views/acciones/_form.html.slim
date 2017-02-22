@@ -1,18 +1,26 @@
 = form_for @accion do |f|
   - if @accion.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@accion.errors.count, "error")} prohibited this accion from being saved:"
+      h2 = "#{pluralize(@accion.errors.count, "error")} #{pluralize_without_count(@accion.errors.count, "prohibe", "prohiben")} almacenar esta Acción:"
       ul
         - @accion.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :nombre
-    = f.text_field :nombre
-  .field
-    = f.label :key_name
-    = f.text_field :key_name
-  .field
-        = f.label :modelo_ids, 'Modelo: (*)'
+
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :nombre, 'Nombre: (*)'
+        = f.text_field :nombre, :class => "form-control"
+        .field
+          = f.label :key_name, 'Palabra Clave: (*)'
+          = f.text_field :key_name
+        .field
+        = f.label :modelo_ids, 'Modelos: (*)'
         = f.collection_select :modelo_ids, Modelo.all, :id, :nombre, {:prompt => "Seleccione uno o varios modelos"}, {:multiple => true, :id => 'modelo_ids', :class =>'form-control'}
+    .box-footer
+      p#foot = "(*) Campo Obligatorio"
+  
   .actions = f.submit

@@ -56,4 +56,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'db_backup', 'db_backups'
 	inflect.irregular 'DbBackup', 'DbBackups'
 	inflect.irregular 'estadistica', 'estadisticas'
+	inflect.irregular 'notificacion', 'notificaciones'
+	inflect.irregular 'abandonado', 'abandonados'
 end

@@ -168,4 +168,4 @@ $(document).ready ->
             scrollTop: $('section').offset().top
           }, 400);
         else if data.status == 201
-          location.href = "/pagos";
+          location.href = data.responseText

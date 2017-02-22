@@ -1,19 +1,14 @@
-- breadcrumb :proyectos
 
-/CANCAN no se lleva bien con los else
+/ CANCAN no se lleva bien con los else
 -if can? :by_persona_type, Proyecto
-  - @index_proyectos = current_user.persona.proyectos
+  - @index_proyectos = current_user.persona.proyectos.getAbandonados
 
 -if current_user.rol? :super_admin
-  - @index_proyectos = Proyecto.all
+  - @index_proyectos = Proyecto.getAbandonados
   
 .index-header
   h1 
-    | Proyectos  
-    - if can? :create, Proyecto
-      a.btn.btn-info href=(new_proyecto_path)
-        i.ace-icon.fa.fa-plus.bigger-110
-        |  Nuevo
+    | Proyectos en estado de abandono
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead
@@ -27,7 +22,7 @@ table id="datatable" class="table table-bordered table-striped"
       th.no-print Acciones
 
   tbody
-    - @index_proyectos.each do |proyecto|
+    - @proyectos.each do |proyecto|
       tr
         td = proyecto.codigo
         td = proyecto.nombre
@@ -50,5 +45,3 @@ table id="datatable" class="table table-bordered table-striped"
               i.fa.fa-trash
 
 br
-
-/= link_to 'Nuevo Proyecto', new_proyecto_path

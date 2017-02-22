@@ -1,4 +1,5 @@
 class Pago < ActiveRecord::Base
+  audited
 
   belongs_to :tipo_de_pago
   belongs_to :proyecto
@@ -20,7 +21,7 @@ class Pago < ActiveRecord::Base
   
   validates_presence_of :pagos_metodos
   validates_associated :pagos_metodos
-  #validates_with CantidadAPagarValidator, on: :create
+  validates_with CantidadAPagarValidator
 
   before_validation :set_today
   
@@ -28,7 +29,25 @@ class Pago < ActiveRecord::Base
 
   after_create :actualizar_estados
   
+  before_destroy :restaurar_cuotas
 
+  def restaurar_saldos
+    saldo_a_actualizar = 0
+    saldo_a_actualizar = cuenta.saldo + self.monto
+    self.pagos_metodos.each do |pm|
+        if pm.tipo_de_pago.systemsetting == nil
+            saldo_a_actualizar = saldo_a_actualizar - pm.monto
+          end
+      end
+    cuenta.update(saldo: saldo_a_actualizar)
+  end
+
+  def restaurar_cuotas
+    cuotas_por_cliente.each do |cuota|
+      cuota.update(estado:false, descuento_id:nil, pago_id: nil)
+      #cuota.update(montoTotal: cuota.calcular_monto)
+    end
+  end
 
   def set_today 
     self.fecha = Date.today
@@ -67,7 +86,6 @@ class Pago < ActiveRecord::Base
     if cuenta.saldo > 0
       if cuenta.saldo > self.monto
         cuenta.saldo = cuenta.saldo - self.monto
-        self.monto = 0
       else
         self.monto = self.monto - cuenta.saldo
       end

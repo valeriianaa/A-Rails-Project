@@ -1,19 +1,5 @@
 p#notice = notice
 
-/ p
-/   strong Nombre:
-/   = @actividad.nombre
-/ p
-/   strong Descripcion:
-/   = @actividad.descripcion
-/ p
-/   strong Obligatorio:
-/   = @actividad.obligatorio
-
-/ = link_to 'Edit', edit_actividad_path(@actividad)
-/ '|
-/ = link_to 'Back', actividades_path
-
 .row
   .col-md-8
     .box.box-info
@@ -51,13 +37,11 @@ p#notice = notice
               		  -@actividad.actividadesAntecedentes.each do |act|
               		  	li = Actividad.find(act.to_i).nombre              			
 
-          tfoot
-            tr
-              td colspan="2"
-                .row
-                  .col-xs-1 style="padding-right:40px;"
-                    a.btn.btn-block.btn-success href=(edit_actividad_path(@actividad)) style="width:70px;" id="editar_actividad"
-                      |Editar
-                  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-                    a.btn.btn-block.btn-default href=(actividades_path) style="width:70px;" id="volver_actividad"
-                      |Volver
+
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_actividad_path(@actividad)) style="width:70px;" id="editar_actividad"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(actividades_path) style="width:70px;" id="volver_actividad"
+      |Volver

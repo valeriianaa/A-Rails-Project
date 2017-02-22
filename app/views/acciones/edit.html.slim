@@ -1,8 +1,12 @@
-h1 Editing accion
+h1 Editar acción
 
 == render 'form'
 
-= link_to 'Show', @accion
-'|
-= link_to 'Back', acciones_path
-
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(accion_path(@accion)) style="width:70px;" id="editar_accion"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(acciones_path) style="width:70px;" id="volver_accion"
+      |Volver

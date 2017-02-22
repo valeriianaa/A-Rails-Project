@@ -31,7 +31,7 @@ class Proyecto < ActiveRecord::Base
 
 	validates_with ProyectoEtapaValidator, on: :update
 
-	after_create :anadir_actividades
+	#after_create :anadir_actividades
 
 	audited
 	
@@ -56,6 +56,40 @@ class Proyecto < ActiveRecord::Base
 	def miembros_equipo
 		return personas.where(type: 'MiembroEquipo')
 	end
+
+	def ultima_actividad_actualizada
+		ultimo_actualizado = actividades_proyectos.first.updated_at
+		actividades_proyectos.each do |ap|
+			if ap.updated_at > ultimo_actualizado
+				ultimo_actualizado = ap.updated_at
+			end
+		end
+		return ultimo_actualizado
+	end
+
+	def abandonado
+		c = Configuracion.last
+		if (self.ultima_actividad_actualizada + c.numero_tiempo) < Date.today
+			return true
+		end
+	end
+
+	def self.getAbandonados
+		proyectos = Array.new
+		self.all.each do |p|
+      		if p.abandonado == true
+        		proyectos << p
+      		end
+      	end
+      	proyectos
+    end
+				
+	# def self.alguno_abandonado
+	# 	c = Configuracion.last
+	# 	if (ultima_actividad_actualizada + numero_tiempo) < Date.today
+	# 		return true
+	# 	end
+	# end
 
 	def acumulativo
     fecha = self.contratos.first.fecha_inicio

@@ -1,0 +1,39 @@
+.page-header
+  h1
+    | Auditoria de Pagos
+
+table.table.table-striped.table-bordered.table-hover.dataTeableSpc
+  thead
+    tr
+      th Accion
+      th Usuario que realizo la acción
+      th Cambios
+      th Antes
+      th Despues
+      th Fecha
+  tbody
+    - @auditoria.each do |audit|
+      tr
+        td = audit.action
+        td = audit.user.persona.nombre_y_apellido
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              li = k
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              - if v.kind_of? Array
+                li = v[0]
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              - if audit.action == "update"
+                li = v[1]
+              - else
+                li = v
+          / ul
+            /   - audit.audited_changes.each do |k,v|
+            /     li = v
+
+        td = I18n.l audit.created_at, format: :short
