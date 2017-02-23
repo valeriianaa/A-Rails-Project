@@ -94,3 +94,10 @@ div.index-header a#etapa{
 	background-color: #605ca8;
 	border-color: #555299;
 }
+
+a.btn#pdf, a.btn#excel{
+	/*background-color: #001F3F;
+	border-color: #001F3F;*/
+	color: #000000;
+	margin-left: 10px;
+}

@@ -2,7 +2,12 @@ h1 Editar proyecto
 
 == render 'form'
 
-= link_to 'Mostrar', @proyecto
-'|
-= link_to 'Volver', proyectos_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(proyecto_path(@proyecto)) style="width:70px;" id="mostrar_proyecto"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(proyectos_path) style="width:70px;" id="volver_proyecto"
+      |Volver
 

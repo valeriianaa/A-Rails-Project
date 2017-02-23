@@ -1,9 +1,30 @@
+- breadcrumb :modelo, @modelo
 p#notice = notice
 
-p
-  strong Nombre:
-  = @modelo.nombre
-
-= link_to 'Edit', edit_modelo_path(@modelo)
-'|
-= link_to 'Back', modelos_path
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Modelo
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @modelo.nombre
+            tr
+              td
+                strong Acciones 
+              td 
+		          - @modelo.acciones.each do |accion|
+		            span.label.label-warning style="margin: 2px;"
+		              |  #{accion.nombre}
+           
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_modelo_path(@modelo)) style="width:70px;" id="editar_modelo"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(modelos_path) style="width:70px;" id="volver_modelo"
+      |Volver

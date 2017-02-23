@@ -7,7 +7,7 @@ class Persona < ActiveRecord::Base
 	has_many :personas_proyectos, dependent: :destroy
 	has_many :proyectos , :through => :personas_proyectos, dependent: :nullify
 	
-	validates :nombre, :apellido, :nroIdentificacion, presence: true
+	validates :codigo, :nombre, :apellido, :nroIdentificacion, presence: true
 	validates :tipo_documento_id, presence: true
 	validates :pais_id, :provincia_id, :ciudad_id, presence: true
 	validates :calle, :nroDomicilio, presence: true
@@ -16,7 +16,7 @@ class Persona < ActiveRecord::Base
 	validates :dpto, presence: true, if: :piso?
 	  
 	validates :nroIdentificacion, uniqueness: { scope: :tipo_documento_id, message: "El numero de documento ya existe para este tipo de documento" }
-
+	validates :codigo, uniqueness: true
 	#no es direccion lo que va. A que nivel habria que validar? calle, numero, piso dpto? todos?
     #validates :direccion, uniqueness: { scope: :ciudad_id, message: "la direccion ingresada ya existe para esta ciudad" }
 

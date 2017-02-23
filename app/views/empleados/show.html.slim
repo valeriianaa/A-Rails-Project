@@ -12,6 +12,10 @@ p#notice = notice
           tbody
             tr
               td
+                strong Codigo
+              td = @empleado.codigo
+            tr
+              td
                 strong Departamento
               td = @empleado.departamento.nombre
             tr
@@ -83,8 +87,7 @@ p#notice = notice
               td
                 strong Area
               td = @empleado.area.nombre
-            /tr
-              /td colspan="2"
+              
 .row
   .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-success href=(edit_empleado_path(@empleado)) style="width:70px;" id="editar_empleado"

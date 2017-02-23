@@ -1,15 +1,21 @@
 = form_for @modelo do |f|
   - if @modelo.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@modelo.errors.count, "error")} prohibited this modelo from being saved:"
+      h2 = "#{pluralize(@modelo.errors.count, "error")} #{pluralize_without_count(@modelo.errors.count, "prohibe", "prohiben")} almacenar este Modelo:"
       ul
         - @modelo.errors.full_messages.each do |message|
           li = message
-
-  .field
-    = f.label :nombre
-    = f.text_field :nombre
-  .field
+  
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :nombre, 'Nombre: (*)'
+        = f.text_field :nombre, :class => "form-control"
+      .field
         = f.label :accion_ids, 'Acción: (*)'
         = f.collection_select :accion_ids, Accion.all, :id, :nombre, {:prompt => "Seleccione una accion"}, {:multiple => true, :id => 'accion_ids', :class =>'form-control'}
-  .actions = f.submit
+    .box-footer
+      p#foot = "(*) Campo Obligatorio" 
+  

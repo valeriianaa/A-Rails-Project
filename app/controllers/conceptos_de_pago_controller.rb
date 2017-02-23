@@ -83,6 +83,7 @@ class ConceptosDePagoController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def concepto_de_pago_params
       params.require(:concepto_de_pago).permit(
+        :codigo,
         :nombre, 
         :descripcion, 
         :monto, 

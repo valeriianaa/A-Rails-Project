@@ -1,8 +1,15 @@
+- breadcrumb :ciudad_edit, @ciudad
+
 h1 Editar ciudad
 
 == render 'form'
 
-= link_to 'Mostrar', @ciudad
-'|
-= link_to 'Volver', ciudades_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(ciudad_path(@ciudad)) style="width:70px;" id="mostrar_ciudad"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(ciudades_path) style="width:70px;" id="volver_ciudad"
+      |Volver
 

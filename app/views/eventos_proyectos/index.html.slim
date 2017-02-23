@@ -1,24 +1,3 @@
-
-
-/ table
-/   thead
-/     tr
-/       th
-/       th
-/       th
-
-/   tbody
-/     - @eventos_proyectos.each do |evento_proyecto|
-/       tr
-/         td = link_to 'Show', evento_proyecto
-/         td = link_to 'Edit', edit_evento_proyecto_path(evento_proyecto)
-/         td = link_to 'Destroy', evento_proyecto, data: { confirm: 'Are you sure?' }, method: :delete
-
-/ br
-
-/ = link_to 'New Evento proyecto', new_evento_proyecto_path
-
-
 .index-header
   h1 
     | Eventos asociados a proyectos  
@@ -52,4 +31,3 @@ table id="datatable" class="table table-bordered table-striped"
 
 br
 
-/= link_to 'Asociar nuevo evento a proyecto', new_evento_proyecto_path

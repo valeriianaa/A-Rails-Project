@@ -6,7 +6,7 @@
         - @etapa.errors.full_messages.each do |message|
           li = message
 
-  .box.box-primary style="width:100%"
+  .box.box-info style="width:100%"
     .box-header.with-border
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
@@ -21,11 +21,5 @@
         = f.collection_select :etapaAnterior, Etapa.all, :id, :nombre,{:prompt => "Etapa"}, {:class => 'form-control'}
     .box-footer
       p#foot = "(*) Campo Obligatorio" 
-      / .field
-      /   = f.label 'color'
-      /   = f.select :descripcion, options_for_select([['Masculino', {class: 'opt1'}],['Femenino', {class: 'opt2'}]]) ,:prompt => 'Seleccione Color...'
-      / .field
-      /   = f.label 'color'
-      /   = f.select :descripcion, options_for_select([['Masculino', {class: 'ion-arrow-left-a'}],['Femenino', {class: 'ion-arrow-right-a'}]]) ,:prompt => 'Seleccione Color...'
   
   .actions = f.submit

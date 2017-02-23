@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :tipo_documentos
+
+.index-header 
   h1 
     | Tipos de documentos  
     - if can? :create, TipoDocumento
@@ -29,4 +31,4 @@ table id="datatable" class="table table-bordered table-striped"
 
 br
 
-/= link_to 'Nuevo Tipo de documento', new_tipo_documento_path
+

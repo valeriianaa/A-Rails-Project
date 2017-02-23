@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :miembros_equipo
+
+.index-header 
   h1 
     | Miembros de equipo  
     - if can? :create, MiembroEquipo
@@ -9,6 +11,7 @@ br
 table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
+      th Código
       th Nombre y Apellido
       th Tipo y Número de Documento
       th Teléfono
@@ -18,6 +21,7 @@ table id="datatable" class="table table-bordered table-striped"
   tbody
     - @miembros_equipo.each do |miembro_equipo|
       tr
+        td = miembro_equipo.codigo
         td = miembro_equipo.nombre_y_apellido
         td = miembro_equipo.tipo_y_nro_documento
         td = miembro_equipo.telefono
@@ -38,4 +42,4 @@ table id="datatable" class="table table-bordered table-striped"
               i.fa.fa-trash
 br
 
-/= link_to 'Nuevo Miembro de Equipo', new_miembro_equipo_path
+

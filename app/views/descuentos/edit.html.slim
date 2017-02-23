@@ -1,8 +1,16 @@
+- breadcrumb :descuento_edit, @descuento
+
 h1 Editar descuento
 
 == render 'form'
 
-= link_to 'Mostrar', @descuento
-'|
-= link_to 'Volver', descuentos_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(descuento_path(@descuento)) style="width:70px;" id="mostrar_descuento"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(descuentos_path) style="width:70px;" id="volver_descuento"
+      |Volver
+
 

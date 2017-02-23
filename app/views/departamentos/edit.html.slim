@@ -1,8 +1,15 @@
+- breadcrumb :departamento_edit, @departamento
+
 h1 Editar departamento
 
 == render 'form'
 
-= link_to 'Mostrar', @departamento
-'|
-= link_to 'Volver', departamentos_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(departamento_path(@departamento)) style="width:70px;" id="mostrar_departamento"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(departamentos_path) style="width:70px;" id="volver_departamento"
+      |Volver
 

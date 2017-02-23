@@ -1,5 +1,10 @@
+- breadcrumb :especialidad_de_contacto_new
 h1 Nueva especialidad 
 
 == render 'form'
 
-= link_to 'Volver', especialidades_de_contacto_path
+br
+.row
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(especialidades_de_contacto_path) style="width:70px;" id="volver_especialidad_de_contacto"
+      |Volver

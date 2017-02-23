@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :eventos
+
+.index-header 
   h1 
     | Eventos  
     - if can? :create, Evento
@@ -9,6 +11,7 @@ br
 table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
+      th Código
       th Nombre
       th Descripción
       th Día
@@ -19,6 +22,7 @@ table id="datatable" class="table table-bordered table-striped"
   tbody
     - @eventos.each do |evento|
       tr
+        td = evento.codigo
         td = evento.nombre
         td = evento.descripcion
         td = evento.dia.strftime('%d-%m-%y')
@@ -37,4 +41,3 @@ table id="datatable" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Evento', new_evento_path

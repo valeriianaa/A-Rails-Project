@@ -1,5 +1,10 @@
+- breadcrumb :estado_new
 h1 Nuevo estado
 
 == render 'form'
 
-= link_to 'Volver', estados_path
+br
+.row
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(estados_path) style="width:70px;" id="volver_estado"
+      |Volver

@@ -3,7 +3,7 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :persona_id, 'FRUTAAAAAAAAAAAAAA: (*)'
+        = f.label :persona_id, 'Empleado: (*)'
         = f.collection_select :persona_id, Empleado.all, :id, :nombre_y_apellido, {:prompt => "Seleccione un Empleado"}, {:class => 'form-control'}
       .field
         = f.label :email, 'Correo electrónico: (*)'

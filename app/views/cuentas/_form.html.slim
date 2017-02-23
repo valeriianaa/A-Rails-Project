@@ -1,14 +1,21 @@
 = form_for @cuenta do |f|
   - if @cuenta.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@cuenta.errors.count, "error")} prohibited this cuenta from being saved:"
+      h2 = "#{pluralize(@cuenta.errors.count, "error")} #{pluralize_without_count(@cuenta.errors.count, "prohibe", "prohiben")} almacenar esta Cuenta:"
       ul
         - @cuenta.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :proyecto_id, 'Proyecto: (*)'
-    = f.collection_select :proyecto_id, Proyecto.all, :id, :codigo ,{:prompt => "Seleccione un proyecto"}, {:class => 'form-control'}
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :proyecto_id, 'Proyecto: (*)'
+        = f.collection_select :proyecto_id, Proyecto.all, :id, :codigo ,{:prompt => "Seleccione un proyecto"}, {:class => 'form-control'}
   
-    = f.hidden_field :saldo, value: 0
+        = f.hidden_field :saldo, value: 0
+    .box-footer
+      p#foot = "(*) Campo Obligatorio"  
+      
   .actions = f.submit

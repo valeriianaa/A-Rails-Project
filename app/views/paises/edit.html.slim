@@ -1,8 +1,15 @@
+- breadcrumb :pais_edit, @pais
+
 h1 Editar país
 
 == render 'form'
 
-= link_to 'Mostrar', @pais
-'|
-= link_to 'Volver', paises_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(pais_path(@pais)) style="width:70px;" id="mostrar_pais"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(paises_path) style="width:70px;" id="volver_pais"
+      |Volver
 

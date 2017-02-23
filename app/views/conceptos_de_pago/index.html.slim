@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :conceptos_de_pago
+
+.index-header 
   h1 
     | Conceptos de Pago  
     - if can? :create, ConceptoDePago
@@ -9,6 +11,7 @@ br
 table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
+      th Código
       th Nombre
       th Descripcion
       th Monto
@@ -18,6 +21,7 @@ table id="datatable" class="table table-bordered table-striped"
   tbody
     - @conceptos_de_pago.each do |concepto_de_pago|
       tr
+        td = concepto_de_pago.codigo
         td = concepto_de_pago.nombre
         td = concepto_de_pago.descripcion
         td = concepto_de_pago.monto
@@ -38,11 +42,3 @@ table id="datatable" class="table table-bordered table-striped"
 
 br
 
-/= link_to 'Nuevo Concepto de pago', new_concepto_de_pago_path
-          td style="padding: 3px;"
-            a href=(concepto_de_pago_path(concepto_de_pago))
-              i.fa.fa-search
-            a href=(edit_concepto_de_pago_path(concepto_de_pago))
-              i.fa.fa-pencil
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(concepto_de_pago_path(concepto_de_pago)) 
-              i.fa.fa-trash

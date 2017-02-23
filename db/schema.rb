@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170221123343) do
   add_index "ciudades", ["provincia_id"], name: "index_ciudades_on_provincia_id", using: :btree
 
   create_table "conceptos_de_pago", force: :cascade do |t|
+    t.string   "codigo"
     t.string   "nombre"
     t.text     "descripcion"
     t.float    "monto"
@@ -220,6 +221,7 @@ ActiveRecord::Schema.define(version: 20170221123343) do
   end
 
   create_table "eventos", force: :cascade do |t|
+    t.string   "codigo"
     t.string   "nombre"
     t.text     "descripcion"
     t.date     "dia"
@@ -329,6 +331,7 @@ ActiveRecord::Schema.define(version: 20170221123343) do
   add_index "permisos_roles", ["rol_id"], name: "index_permisos_roles_on_rol_id", using: :btree
 
   create_table "personas", force: :cascade do |t|
+    t.string   "codigo"
     t.string   "nombre"
     t.string   "apellido"
     t.string   "nroIdentificacion"

@@ -1,5 +1,10 @@
+- breadcrumb :rol_de_empleado_new
 h1 Nuevo rol de empleado
 
 == render 'form'
 
-= link_to 'Volver', roles_de_empleados_path
+br
+.row
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(roles_de_empleados_path) style="width:70px;" id="volver_rol_de_empleado"
+      |Volver

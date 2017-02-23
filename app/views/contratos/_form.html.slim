@@ -1,20 +1,27 @@
 = form_for @contrato do |f|
   - if @contrato.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@contrato.errors.count, "error")} prohibited this contrato from being saved:"
+      h2 = "#{pluralize(@contrato.errors.count, "error")} #{pluralize_without_count(@contrato.errors.count, "prohibe", "prohiben")} almacenar este Contrato:"
       ul
         - @contrato.errors.full_messages.each do |message|
           li = message
-  .field
-    = f.label :proyecto_id, 'Proyecto: (*)'
-    = f.collection_select :proyecto_id, Proyecto.all, :id, :codigo, {:prompt => "Seleccione un proyecto"}, {:id => 'proyecto_id', :class =>'form-control'}
-  .field
-    = f.label :persona_id, 'Responsable del contrato: (*)', :id => 'persona_label'
-    = f.grouped_collection_select :persona_id, Proyecto.all, :miembros_equipo, :codigo, :id, :nombre_y_apellido, {:selected => @contrato.persona_id}, {:id => 'persona_id', :class =>'form-control'}
-  .field
-    = f.label :fecha_inicio
-    = f.date_select :fecha_inicio
-  .field
-    = f.label :fecha_fin
-    = f.date_select :fecha_fin
+
+  .box.box-info style="width:100%"
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      .field
+        = f.label :proyecto_id, 'Proyecto: (*)'
+        = f.collection_select :proyecto_id, Proyecto.all, :id, :codigo, {:prompt => "Seleccione un proyecto"}, {:id => 'proyecto_id', :class =>'form-control'}
+      .field
+        = f.label :persona_id, 'Responsable del contrato: (*)', :id => 'persona_label'
+        = f.grouped_collection_select :persona_id, Proyecto.all, :miembros_equipo, :codigo, :id, :nombre_y_apellido, {:selected => @contrato.persona_id}, {:id => 'persona_id', :class =>'form-control'}
+      .field
+        = f.label :fecha_inicio, 'Fecha de inicio del contrato: (*)'
+        = f.date_field :fecha_inicio, {:class =>'form-control'}
+      .field
+        = f.label :fecha_fin, 'Fecha de finalización del contrato: (*)'
+        = f.date_field :fecha_fin, {:class =>'form-control'}
+    .box-footer
+        p#foot = "(*) Campo Obligatorio"   
   .actions = f.submit

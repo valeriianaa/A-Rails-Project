@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :contratos
+
+.index-header 
   h1 
     | Contratos  
     - if can? :create, Contrato
@@ -34,8 +36,3 @@ table id="datatable" class="table table-bordered table-striped"
               i.fa.fa-trash
 
 br
-
-/ = link_to 'New Contrato', new_contrato_path
-/         td = link_to 'Show', contrato
-/         td = link_to 'Edit', edit_contrato_path(contrato)
-/         td = link_to 'Destroy', contrato, data: { confirm: 'Are you sure?' }, method: :delete

@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :roles
+
+.index-header 
   h1 
     | Roles  
     - if can? :create, Rol
@@ -29,4 +31,3 @@ table id="datatable" class="table table-bordered table-striped"
 
 br
 
-/= link_to 'New Rol', new_rol_path

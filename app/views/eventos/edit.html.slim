@@ -1,8 +1,16 @@
+- breadcrumb :evento_edit, @evento
+
 h1 Editar evento
 
 == render 'form'
 
-= link_to 'Mostrar', @evento
-'|
-= link_to 'Volver', eventos_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(evento_path(@evento)) style="width:70px;" id="mostrar_evento"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(eventos_path) style="width:70px;" id="volver_evento"
+      |Volver
+
 

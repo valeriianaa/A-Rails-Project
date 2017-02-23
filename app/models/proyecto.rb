@@ -28,7 +28,8 @@ class Proyecto < ActiveRecord::Base
 	validates :codigo, :nombre, :descripcion, :calle, :nroDomicilio, :pais_id, :provincia_id, :ciudad_id, :etapa_id, :area_id, presence: true
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :email?
 	validates :dpto, presence: true, if: :piso?
-
+	validates :codigo, uniqueness: true
+	
 	validates_with ProyectoEtapaValidator, on: :update
 
 	#after_create :anadir_actividades

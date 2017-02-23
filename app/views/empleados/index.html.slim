@@ -5,20 +5,19 @@
     | Empleados  
     - if can? :create, Empleado
       a.btn.btn-info href=(new_empleado_path)
-        i.ace-icon.fa.fa-plus.bigger-110
+        i.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
-        a.btn.bg-navy.margin href=(empleados_path(format: "pdf"))
-          i.ace-icon.fa.fa-file-pdf-o
-          | Ver PDF
-        a.btn.bg-navy.margin href=(empleados_path(format: "xls"))
-          i.ace-icon.fa.fa-excel-o
-          | Descargar Excel
+        a.btn.btn-default#pdf href=(empleados_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(empleados_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
+      th Código
       th Nombre y Apellido
       th Tipo y Número de Documento
       th Departamento
@@ -27,6 +26,7 @@ table id="datatable" class="table table-bordered table-striped"
   tbody
     - @empleados.each do |empleado|
       tr
+        td = empleado.codigo
         td = empleado.nombre_y_apellido
         td = empleado.tipo_y_nro_documento
         td = empleado.departamento.nombre

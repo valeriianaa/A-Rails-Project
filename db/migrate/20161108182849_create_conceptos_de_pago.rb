@@ -1,6 +1,7 @@
 class CreateConceptosDePago < ActiveRecord::Migration
   def change
     create_table :conceptos_de_pago do |t|
+      t.string :codigo
       t.string :nombre
       t.text :descripcion
       t.float :monto

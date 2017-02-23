@@ -1,12 +1,36 @@
+- breadcrumb :contrato, @contrato
 p#notice = notice
 
-p
-  strong Fechainicio:
-  = @contrato.fecha_inicio
-p
-  strong Fechafin:
-  = @contrato.fecha_fin
 
-= link_to 'Edit', edit_contrato_path(@contrato)
-'|
-= link_to 'Back', contratos_path
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Contrato
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Proyecto
+              td = "#{@contrato.proyecto.codigo}: #{@contrato.proyecto.nombre}"
+            tr
+              td
+                strong Responsable del contrato
+              td = @contrato.persona.nombre_y_apellido
+            tr
+              td
+                strong Fecha de inicio
+              td = @contrato.fecha_inicio
+            tr
+              td
+                strong Fecha de finalización
+              td = @contrato.fecha_fin
+
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_contrato_path(@contrato)) style="width:70px;" id="editar_contrato"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(contratos_path) style="width:70px;" id="volver_contrato"
+      |Volver

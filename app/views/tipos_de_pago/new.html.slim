@@ -1,5 +1,10 @@
+- breadcrumb :tipo_de_pago_new
 h1 Nuevo tipo de pago
 
 == render 'form'
 
-= link_to 'Volver', tipos_de_pago_path
+br
+.row
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(tipos_de_pago_path) style="width:70px;" id="volver_tipo_de_pago"
+      |Volver

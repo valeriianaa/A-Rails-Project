@@ -1,8 +1,14 @@
+- breadcrumb :area_edit, @area
+
 h1 Editar area
 
 == render 'form'
 
-= link_to 'Mostrar', @area
-'|
-= link_to 'Volver', areas_path
-
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(area_path(@area)) style="width:70px;" id="mostrar_area"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(areas_path) style="width:70px;" id="volver_area"
+      |Volver

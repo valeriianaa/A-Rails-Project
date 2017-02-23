@@ -1,8 +1,15 @@
+- breadcrumb :miembro_equipo_edit, @miembro_equipo
+
 h1 Editar miembro de equipo
 
 == render 'form'
 
-= link_to 'Mostrar', @miembro_equipo
-'|
-= link_to 'Volver', miembros_equipo_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(miembro_equipo_path(@miembro_equipo)) style="width:70px;" id="mostrar_miembro_equipo"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(miembros_equipo_path) style="width:70px;" id="volver_miembro_equipo"
+      |Volver
 

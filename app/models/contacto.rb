@@ -5,5 +5,6 @@ class Contacto < Persona
 	belongs_to :area
 	belongs_to :especialidad_de_contacto
 	
-	validates :especialidad_de_contacto_id , presence: true
+	validates :codigo, :especialidad_de_contacto_id , presence: true
+	validates :codigo, uniqueness: true
 end

@@ -1,8 +1,15 @@
+- breadcrumb :modelo_edit, @modelo
+
 h1 Editing modelo
 
 == render 'form'
 
-= link_to 'Show', @modelo
-'|
-= link_to 'Back', modelos_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(modelo_path(@modelo)) style="width:70px;" id="mostrar_modelo"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(modelos_path) style="width:70px;" id="volver_modelo"
+      |Volver
 

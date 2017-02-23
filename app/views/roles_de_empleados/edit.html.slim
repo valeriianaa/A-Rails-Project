@@ -1,8 +1,15 @@
+- breadcrumb :rol_de_empleado_edit, @rol_de_empleado
+
 h1 Editar rol de empleado
 
 == render 'form'
 
-= link_to 'Mostrar', @rol_de_empleado
-'|
-= link_to 'Volver', roles_de_empleados_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(rol_de_empleado_path(@rol_de_empleado)) style="width:70px;" id="mostrar_rol_de_empleado"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(roles_de_empleados_path) style="width:70px;" id="volver_rol_de_empleado"
+      |Volver
 

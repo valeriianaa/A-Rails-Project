@@ -9,7 +9,10 @@
   .box.box-info style="width:100%"
     .box-header.with-border
       h3 Datos Generales
-    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"
+      .field
+        = f.label :codigo, 'Nombre: (*)'
+        = f.text_field :codigo, :class => "form-control" 
       .field
         = f.label :nombre, 'Nombre: (*)'
         = f.text_field :nombre, :class => "form-control"

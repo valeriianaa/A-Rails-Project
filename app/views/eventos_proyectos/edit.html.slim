@@ -2,7 +2,13 @@ h1 Editing evento_proyecto
 
 == render 'form'
 
-= link_to 'Show', @evento_proyecto
-'|
-= link_to 'Back', eventos_proyectos_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(evento_proyecto_path(@evento_proyecto)) style="width:70px;" id="mostrar_evento_proyecto"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(eventos_proyectos_path) style="width:70px;" id="volver_evento_proyecto"
+      |Volver
+
 

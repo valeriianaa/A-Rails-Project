@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :descuentos
+
+.index-header 
   h1 
     | Descuentos  
     - if can? :create, Descuento
@@ -32,5 +34,3 @@ table id="datatable" class="table table-bordered table-striped"
               i.fa.fa-trash
 
 br
-
-/= link_to 'Nuevo Descuento', new_descuento_path

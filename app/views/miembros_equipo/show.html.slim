@@ -1,3 +1,4 @@
+- breadcrumb :miembro_equipo, @miembro_equipo
 p#notice = notice
 
 
@@ -9,6 +10,10 @@ p#notice = notice
       .box-body
         table.table.table-bordered
           tbody
+            tr
+              td
+                strong Codigo
+              td = @miembro_equipo.codigo
             tr
               td
                 strong Nombre y Apellido

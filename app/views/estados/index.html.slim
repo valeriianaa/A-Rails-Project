@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :estados
+
+.index-header 
   h1 
     | Estados  
     - if can? :create, Estado
@@ -41,4 +43,3 @@ table id="datatable" class="table table-bordered table-striped"
 
 br
 
-= link_to 'Nuevo Estado', new_estado_path

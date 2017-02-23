@@ -1,8 +1,15 @@
+- breadcrumb :tipo_de_pago_edit, @tipo_de_pago
+
 h1 Editar tipo de pago
 
 == render 'form'
 
-= link_to 'Mostrar', @tipo_de_pago
-'|
-= link_to 'Volver', tipos_de_pago_path
+br
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(tipo_de_pago_path(@tipo_de_pago)) style="width:70px;" id="mostrar_tipo_de_pago"
+      |Mostrar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(tipos_de_pago_path) style="width:70px;" id="volver_tipo_de_pago"
+      |Volver
 

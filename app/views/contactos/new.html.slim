@@ -1,5 +1,10 @@
+- breadcrumb :contacto_new
 h1 Nuevo contacto
 
 == render 'form'
 
-= link_to 'Volver', contactos_path
+br
+.row
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(contactos_path) style="width:70px;" id="volver_contacto"
+      |Volver

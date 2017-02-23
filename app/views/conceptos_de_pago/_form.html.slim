@@ -10,6 +10,9 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"          
       .field
+        = f.label :codigo, "Nombre: (*)", :class => "control-label"
+        = f.text_field :codigo, {:class => "form-control", :style => "width:100%"}
+      .field
         = f.label :nombre, "Nombre: (*)", :class => "control-label"
         = f.text_field :nombre, {:class => "form-control", :style => "width:100%"}
       .field
@@ -29,30 +32,3 @@
       p#foot = "(*) Campo Obligatorio"
   .actions = f.submit 
 
-
-// javascript:
-//   function myFunction() {
-//     var numero = document.getElementById("numero").value;
-//     var tiempo = document.getElementById("tiempo").value;
-//     var retorno = String(numero) + ' ' + String(tiempo) + ' ago';
-//     document.getElementById("dif_num").value = retorno; 
-//     console.log(document.getElementById("dif_num").value);             
-//   }
-
-  
-
-  
-      / .field class="form-inline"
-      /   = f.label :plazoRecordatorio, "Plazo de recordatorio:", :class => "control-label"
-      /   br
-      /   input type="number" id="numero" min="1" value="1" class="form-control"
-      /   select id="tiempo" class="form-control"
-      /     option  value='days' días
-      /     option  value='weeks' semanas
-      /     option  value='months' meses
-      /     option  value='years' años
-      /   /= f.date_select :plazoRecordatorio
-      /   = f.hidden_field :diferencia, id: 'dif_num'
-      /   /= f.hidden_field :diferencia_tiempo, id: 'dif_tmp'
-      /   /= f.hidden_field :plazoRecordatorio, :value => @concepto_de_pago.set_diferencia
-      / /button onclick="myFunction()" verString 

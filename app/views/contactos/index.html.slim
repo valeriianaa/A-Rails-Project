@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :contactos
+
+.index-header 
   h1 
     | Contactos  
     - if can? :create, Contacto
@@ -9,6 +11,7 @@ br
 table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
+      th Código
       th Nombre
       th Especialidad
       th.no-print Acciones
@@ -16,6 +19,7 @@ table id="datatable" class="table table-bordered table-striped"
   tbody
     - @contactos.each do |contacto|
       tr
+        td = contacto.codigo
         td = contacto.nombre_y_apellido
         td = contacto.especialidad_de_contacto.nombre
         td.no-print style="padding: 3px;"
@@ -30,5 +34,3 @@ table id="datatable" class="table table-bordered table-striped"
               i.fa.fa-trash
 
 br
-
-= link_to 'Nuevo Contacto', new_contacto_path

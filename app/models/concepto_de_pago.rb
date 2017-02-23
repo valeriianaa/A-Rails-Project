@@ -7,8 +7,9 @@ class ConceptoDePago < ActiveRecord::Base
 	# accepts_nested_attributes_for :vencimientos, reject_if: :all_blank, :allow_destroy => true
 	has_many :cuotas_por_cliente, dependent: :restrict_with_error
 
-	validates :nombre, :monto, presence: true
+	validates :codigo, :nombre, :monto, presence: true
 	validates :nombre, uniqueness: { case_sensitive: false }
+	validates :codigo, uniqueness: true
 
 	audited
 

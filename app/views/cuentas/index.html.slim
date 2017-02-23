@@ -1,4 +1,6 @@
-.index-header
+- breadcrumb :cuentas
+
+.index-header 
   h1 
     | Cuentas  
     - if can? :create, Cuenta
@@ -11,14 +13,14 @@ table class="table table-bordered table-striped"
     tr
       th Código - Proyecto
       th Saldo
-      th colspan="3" Acciones
+      th.no-print Acciones
 
   tbody
     - @cuentas.each do |cuenta|
       tr
         td = cuenta.proyecto.codigo
         td = cuenta.saldo
-        td style="padding: 3px;"
+        td.no-print style="padding: 3px;"
           - if can? :show, Cuenta
             a href=(cuenta_path(cuenta))
               i.fa.fa-search
