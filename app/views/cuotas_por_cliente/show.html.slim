@@ -1,3 +1,4 @@
+- breadcrumb :cuota, @cuota_por_cliente
 p#notice = notice
 
 
@@ -21,16 +22,16 @@ p#notice = notice
               td
                 strong Subtotal
               td = @cuota_por_cliente.concepto_de_pago.monto
-            -if @cuota_por_cliente.interes_id != nil
-              tr
-                td
-                  strong Interés
-                td = @cuota_por_cliente.interes.nombre
-            - if @cuota_por_cliente.descuento_id != nil
-              tr
-                td
-                  strong Descuento
-                td = @cuota_por_cliente.descuento.nombre
+            / -if @cuota_por_cliente.interes_id != nil
+            /   tr
+            /     td
+            /       strong Interés
+            /     td = @cuota_por_cliente.interes.nombre
+            / - if @cuota_por_cliente.descuento_id != nil
+            /   tr
+            /     td
+            /       strong Descuento
+            /     td = @cuota_por_cliente.descuento.nombre
             tr
               td
                 strong Monto Total

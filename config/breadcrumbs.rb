@@ -139,6 +139,17 @@ crumb :contratos do
   link "Contratos", contratos_path
 end
 
+# crumb :contrato do |contrato|
+#   if contrato.parent == contrato.proyecto
+#     link "Contrato", contrato
+#     parent :proyectos_contratos, contrato.proyecto
+#   else
+#     link contrato.proyecto.codigo, contrato
+#     parent :contratos
+#   end
+#   #parent :contratos
+# end
+
 crumb :contrato do |contrato|
   link contrato.proyecto.codigo, contrato
   parent :contratos
@@ -320,12 +331,7 @@ crumb :eventos_proyectos do
 end
 
 crumb :evento_proyecto do |evento_proyecto|
-  link evento_proyecto.codigo, evento_proyecto
-  parent :eventos_proyectos
-end
-
-crumb :evento_proyecto_edit do |evento_proyecto|
-  link "Editar", evento_proyecto
+  link evento_proyecto.evento.codigo, evento_proyecto
   parent :eventos_proyectos
 end
 
@@ -400,7 +406,7 @@ crumb :pagos do
 end
 
 crumb :pago do |pago|
-  link pago.nombre, pago
+  link pago.id, pago
   parent :pagos
 end
 
@@ -461,19 +467,56 @@ crumb :proyecto do |proyecto|
 end
 
 crumb :actividades_proyectos do |proyecto|
-  link "Actividades del proyecto", actividades_del_proyecto_path
+  link "Actividades del proyecto", actividades_del_proyecto_path(proyecto)
   parent :proyecto, proyecto
 end
 
-crumb :actividad_proyecto do |proyecto|
-  link "Actividad", actividad_proyecto_path(proyecto)
-  parent :actividades_proyectos, proyecto
+crumb :actividad_proyecto do |actividad_proyecto|
+  link "Actividad", actividad_proyecto_path(actividad_proyecto)
+  parent :actividades_proyectos, actividad_proyecto.proyecto
 end
 
-crumb :actividad_proyecto_editar do |proyecto|
-  link "Editar", edit_actividad_proyecto_path(proyecto)
-  parent :actividad_proyecto, proyecto
+crumb :actividad_proyecto_editar do |actividad_proyecto|
+  link "Editar", edit_actividad_proyecto_path(actividad_proyecto)
+  parent :actividad_proyecto, actividad_proyecto
 end
+
+crumb :proyectos_estadisticas do |proyecto|
+  link "Contratos del proyecto", proyecto_estadisticas_path(proyecto)
+  parent :proyecto, proyecto
+end
+
+crumb :proyectos_contratos do |proyecto|
+  link "Contratos del proyecto", proyecto_contratos_path(proyecto)
+  parent :proyecto, proyecto
+end
+
+crumb :proyectos_pagos do |proyecto|
+  link "Contratos del proyecto", proyecto_pagos_path(proyecto)
+  parent :proyecto, proyecto
+end
+
+crumb :proyectos_eventos do |proyecto|
+  link "Contratos del proyecto", proyecto_eventos_path(proyecto)
+  parent :proyecto, proyecto
+end
+
+#cuotas-------------
+crumb :proyectos_cuotas do |proyecto|
+  link "Cuotas del proyecto", proyecto_cuotas_por_cliente_path(proyecto)
+  parent :proyecto, proyecto
+end
+
+crumb :cuota do |cuota|
+  link cuota.concepto_de_pago.codigo, proyecto_cuota_por_cliente_path(cuota.proyecto, cuota)
+  parent :proyectos_cuotas, cuota.proyecto
+end
+
+# crumb :cuota do 
+#   link "Nuevo"
+#   parent :proyectos_cuotas, cuota.proyecto
+# end
+
 
 #Roles--------------------------------------------
 crumb :roles do

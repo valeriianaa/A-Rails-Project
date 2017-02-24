@@ -14,13 +14,18 @@
       .field
         = f.label :nombre, 'Nombre: (*)'
         = f.text_field :nombre, :class => "form-control"
-        .field
-          = f.label :key_name, 'Palabra Clave: (*)'
-          = f.text_field :key_name
-        .field
-        = f.label :modelo_ids, 'Modelos: (*)'
-        = f.collection_select :modelo_ids, Modelo.all, :id, :nombre, {:prompt => "Seleccione uno o varios modelos"}, {:multiple => true, :id => 'modelo_ids', :class =>'form-control'}
+      .field
+        = f.label :key_name, 'Palabra Clave: (*)'
+        = f.text_field :key_name, :class => "form-control"
+      .field
+      = f.label :modelo_ids, 'Modelos: (*)'
+      = f.collection_select :modelo_ids, Modelo.all, :id, :nombre, {}, {:multiple => true, :id => 'modelo_ids', :class =>'form-control'}
     .box-footer
       p#foot = "(*) Campo Obligatorio"
   
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(acciones_path)
+      | Volver
