@@ -5,6 +5,14 @@ class ContratosController < ApplicationController
   # GET /contratos.json
   def index
     @contratos = Contrato.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ContratosPdf.new(@contratos)
+        send_data pdf.render, filename: "contratos#{@contratos}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /contratos/1
@@ -29,7 +37,7 @@ class ContratosController < ApplicationController
     respond_to do |format|
       if @contrato.save
         @contrato.anadir_conceptosdepago(@contrato.fecha_inicio, @contrato.fecha_fin)
-        format.html { redirect_to @contrato, notice: 'Contrato was successfully created.' }
+        format.html { redirect_to @contrato, notice: 'Contrato fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @contrato }
       else
         format.html { render :new }
@@ -52,7 +60,7 @@ class ContratosController < ApplicationController
         elsif f_fin_nueva > f_fin_vieja
           @contrato.anadir_conceptosdepago(f_fin_vieja, f_fin_nueva)
         end
-        format.html { redirect_to @contrato, notice: 'Contrato was successfully updated.' }
+        format.html { redirect_to @contrato, notice: 'Contrato fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @contrato }
       else
         format.html { render :edit }
@@ -64,10 +72,14 @@ class ContratosController < ApplicationController
   # DELETE /contratos/1
   # DELETE /contratos/1.json
   def destroy
-    @contrato.destroy
     respond_to do |format|
-      format.html { redirect_to contratos_url, notice: 'Contrato was successfully destroyed.' }
-      format.json { head :no_content }
+      if @contrato.destroy
+        format.html { redirect_to contratos_url, notice: 'Contrato fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Contrato no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
   end
 

@@ -3,6 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-  $('#acciones_table').dataTable()
-  $('#modelo_ids').select2()
+  $('#modelo_ids').select2
   	placeholder: "Seleccione uno o varios modelos..."

@@ -7,7 +7,10 @@ class ContactosController < ApplicationController
     @contactos = Contacto.all
     respond_to do |format|
       format.html
-      #format.csv { send_data @contactos.to_csv, filename: "contactos-#{Date.today}.csv" }
+      format.pdf do
+        pdf = ContactosPdf.new(@contactos)
+        send_data pdf.render, filename: "contactos#{@contactos}.pdf", type: "application/pdf", disposition: "inline"
+      end
       format.xls
     end
   end
@@ -33,7 +36,7 @@ class ContactosController < ApplicationController
 
     respond_to do |format|
       if @contacto.save
-        format.html { redirect_to @contacto, notice: 'Contacto was successfully created.' }
+        format.html { redirect_to @contacto, notice: 'Contacto fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @contacto }
       else
         format.html { render :new }
@@ -47,7 +50,7 @@ class ContactosController < ApplicationController
   def update
     respond_to do |format|
       if @contacto.update(contacto_params)
-        format.html { redirect_to @contacto, notice: 'Contacto was successfully updated.' }
+        format.html { redirect_to @contacto, notice: 'Contacto fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @contacto }
       else
         format.html { render :edit }
@@ -59,11 +62,20 @@ class ContactosController < ApplicationController
   # DELETE /contactos/1
   # DELETE /contactos/1.json
   def destroy
-    @contacto.destroy
     respond_to do |format|
-      format.html { redirect_to contactos_url, notice: 'Contacto was successfully destroyed.' }
-      format.json { head :no_content }
+      if @contacto.destroy
+        format.html { redirect_to contactos_url, notice: 'Contacto fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Contacto no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Contacto"
   end
 
   private

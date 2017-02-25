@@ -128,6 +128,9 @@ es:
       not_an_integer: debe ser un entero
       odd: debe ser impar
       required: debe existir
+      restrict_dependent_destroy:
+        one: No se puede eliminar el registro porque existe un %{record} dependiente a este/a %{model}.
+        many: No se puede eliminar el registro porque existen %{record} dependientes a este/a %{model}.
       taken: ya está en uso
       too_long:
         one: "es demasiado largo (1 carácter máximo)"

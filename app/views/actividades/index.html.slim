@@ -7,6 +7,14 @@
       a.btn.btn-info href=(new_actividad_path)
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
+    .pull-right
+        a.btn.btn-default#pdf href=(actividades_audited_path)
+          | Auditorías
+        a.btn.btn-default#pdf href=(actividades_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(actividades_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
+
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead
@@ -17,7 +25,7 @@ table id="datatable" class="table table-bordered table-striped"
       th.no-print Acciones
 
   tbody
-    - @actividades.each do |actividad|
+    - @actividades.order(:id).each do |actividad|
       tr
         td = actividad.nombre
         td 

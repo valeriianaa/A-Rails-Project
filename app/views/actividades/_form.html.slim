@@ -16,16 +16,25 @@
       .field
         = f.label :descripcion, 'Descripción:'
         = f.text_area :descripcion, :class => "form-control"
+      br  
       .field
-        = f.label :obligatorio, 'Indicar si es Obligatorio: '
-        = f.check_box :obligatorio
+        = f.label :obligatorio, 'Indicar si es Obligatorio:  '
+        = f.check_box :obligatorio, :style => "margin-left: 10px;"
+      br
       .field
         = f.label :etapa_id, 'Etapa a la que pertenece: (*)'
         = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {:prompt => "Seleccione una etapa"}, {:id => 'etapa_id', :class =>'form-control'}
       .field
-        = f.label :actividadesAntecedentes, 'Actividades Antecedentes: (**)', :id => 'antecedente_label'
-        = f.grouped_collection_select :actividadesAntecedentes, Etapa.all, :actividades, :nombre, :id, :nombre, {:selected => @actividad.actividadesAntecedentes}, {:multiple => true, :id => 'actividad_antecedente_id', :class =>'form-control'}
+        = f.label :actividades_antecedentes, 'Actividades Antecedentes: (**)', :id => 'antecedente_label'
+        = f.grouped_collection_select :actividades_antecedentes, Etapa.all, :actividades, :nombre, :id, :nombre, {:selected => @actividad.actividades_antecedentes}, {:multiple => true, :id => 'actividad_antecedente_id', :class =>'form-control'}
     .box-footer
       p#foot = "(*) Campo Obligatorio"
       p#foot = "(**) Las actividades antecedentes deben pertenecer a la misma etapa"
-  .actions = f.submit
+  
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(actividades_path)
+      | Volver
+

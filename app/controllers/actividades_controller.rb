@@ -7,7 +7,10 @@ class ActividadesController < ApplicationController
     @actividades = Actividad.all
     respond_to do |format|
       format.html
-      #format.csv { send_data @contactos.to_csv, filename: "contactos-#{Date.today}.csv" }
+      format.pdf do
+        pdf = ActividadesPdf.new(@actividades)
+        send_data pdf.render, filename: "actividades#{@actividades}.pdf", type: "application/pdf", disposition: "inline"
+      end
       format.xls
     end
   end
@@ -33,7 +36,7 @@ class ActividadesController < ApplicationController
 
     respond_to do |format|
       if @actividad.save
-        format.html { redirect_to @actividad, notice: 'Actividad was successfully created.' }
+        format.html { redirect_to @actividad, notice: 'Actividad fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @actividad }
       else
         format.html { render :new }
@@ -47,7 +50,7 @@ class ActividadesController < ApplicationController
   def update
     respond_to do |format|
       if @actividad.update(actividad_params)
-        format.html { redirect_to @actividad, notice: 'Actividad was successfully updated.' }
+        format.html { redirect_to @actividad, notice: 'Actividad fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @actividad }
       else
         format.html { render :edit }
@@ -58,12 +61,29 @@ class ActividadesController < ApplicationController
 
   # DELETE /actividades/1
   # DELETE /actividades/1.json
+  # def destroy
+  #   @actividad.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to actividades_url, notice: 'Actividad fue destruida exitosamente.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
   def destroy
-    @actividad.destroy
     respond_to do |format|
-      format.html { redirect_to actividades_url, notice: 'Actividad was successfully destroyed.' }
-      format.json { head :no_content }
+      if @actividad.destroy
+        format.html { redirect_to actividades_url, notice: 'Actividad fue eliminada exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'La Actividad no pudo ser eliminada.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Actividad"
   end
 
   private
@@ -74,6 +94,6 @@ class ActividadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def actividad_params
-      params.require(:actividad).permit(:nombre, :descripcion, :obligatorio, :fechaEstimada, :fechaActual, :etapa_id, :actividadesAntecedentes => [])
+      params.require(:actividad).permit(:nombre, :descripcion, :obligatorio, :etapa_id, :actividades_antecedentes => [])
     end
 end

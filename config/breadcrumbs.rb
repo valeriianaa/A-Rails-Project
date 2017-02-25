@@ -42,6 +42,11 @@ crumb :actividad_new do
   parent :actividades
 end
 
+crumb :actividad_auditorias do 
+  link "Auditorías"
+  parent :actividades
+end
+
 #Areas--------------------------------------------
 crumb :areas do
   link "Areas", areas_path
@@ -84,7 +89,7 @@ end
 
 #Condeptos de pago--------------------------------------------
 crumb :conceptos_de_pago do
-  link "Condeptos de pago", conceptos_de_pago_path
+  link "Conceptos de pago", conceptos_de_pago_path
 end
 
 crumb :concepto_de_pago do |concepto_de_pago|
@@ -99,6 +104,11 @@ end
 
 crumb :concepto_de_pago_new do 
   link "Nuevo"
+  parent :conceptos_de_pago
+end
+
+crumb :conceptos_auditorias do 
+  link "Auditorías"
   parent :conceptos_de_pago
 end
 
@@ -134,21 +144,15 @@ crumb :contacto_new do
   parent :contactos
 end
 
+crumb :contacto_auditorias do 
+  link "Auditorías"
+  parent :contactos
+end
+
 #Contratos--------------------------------------------
 crumb :contratos do
   link "Contratos", contratos_path
 end
-
-# crumb :contrato do |contrato|
-#   if contrato.parent == contrato.proyecto
-#     link "Contrato", contrato
-#     parent :proyectos_contratos, contrato.proyecto
-#   else
-#     link contrato.proyecto.codigo, contrato
-#     parent :contratos
-#   end
-#   #parent :contratos
-# end
 
 crumb :contrato do |contrato|
   link contrato.proyecto.codigo, contrato
@@ -165,6 +169,10 @@ crumb :contrato_new do
   parent :contratos
 end
 
+crumb :contrato_auditorias do 
+  link "Auditorías"
+  parent :contratos
+end
 #Cuentas--------------------------------------------
 crumb :cuentas do
   link "Cuentas", cuentas_path

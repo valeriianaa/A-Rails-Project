@@ -25,11 +25,11 @@
       </Row>
     <% @contactos.each do |contacto| %>
       <Row>
-        <Cell><Data ss:Type="Number"><%= contacto.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= contacto.nombre %></Data></Cell>
         <Cell><Data ss:Type="String"><%= contacto.apellido %></Data></Cell>
         <Cell><Data ss:Type="String"><%= contacto.nroIdentificacion %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= miembro_equipo.tipo_documento.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= contacto.tipo_documento.nombre %></Data></Cell>
         <Cell><Data ss:Type="Data"><%= contacto.fechaNacimiento %></Data></Cell>
         <Cell><Data ss:Type="String"><%= contacto.pais.nombre %></Data></Cell>
         <Cell><Data ss:Type="String"><%= contacto.provincia.nombre %></Data></Cell>

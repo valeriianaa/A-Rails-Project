@@ -1,12 +1,19 @@
 - breadcrumb :contactos
 
-.index-header 
+.index-header
   h1 
     | Contactos  
     - if can? :create, Contacto
       a.btn.btn-info href=(new_contacto_path)
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
+    .pull-right
+        a.btn.btn-default#pdf href=(contactos_audited_path)
+          | Auditorías
+        a.btn.btn-default#pdf href=(contactos_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(contactos_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead

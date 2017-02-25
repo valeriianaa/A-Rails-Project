@@ -4,7 +4,7 @@ class AntecedenteValidator < ActiveModel::Validator
   	if record.estado.ultimo?
   		actividad = Actividad.find(record.actividad_id)
   		if actividad.tiene_antecedentes == true
-  			actividad.actividadesAntecedentes.each do |a|
+  			actividad.actividades_antecedentes.each do |a|
   				antecedente = Actividad.find(a)
   				if antecedente.obligatorio == true
   					ap_antecedente = ActividadProyecto.where(actividad_id: antecedente.id, proyecto_id: record.proyecto.id).first

@@ -7,26 +7,35 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">N°</Data></Cell>
         <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">Nombre</Data></Cell>
-        <Cell><Data ss:Type="String">Descipción</Data></Cell>
+        <Cell><Data ss:Type="String">Descipcion</Data></Cell>
         <Cell><Data ss:Type="String">Monto</Data></Cell>
-        <Cell><Data ss:Type="String">Vencimiento Fecha</Data></Cell>
-        <Cell><Data ss:Type="String">Interes</Data></Cell>
+        <% max_count = 0 %>
+        <% ConceptoDePago.all.each do |c| %>
+          <% if c.vencimientos.count > max_count%>
+            <%  max_count = c.vencimientos.count %>
+          <% end %>
+        <% end %>
+        <% for index in 1..max_count %>
+          <Cell><Data ss:Type="String">Vencimiento <%=index.to_s%> Fecha</Data></Cell>
+          <Cell><Data ss:Type="String">Vencimiento <%=index.to_s%> Porcentaje Interes</Data></Cell>
+        <% end %>
       </Row>
-    <% Vencimiento.all.each do |v, i| %>
+    <% @conceptos_de_pago.each do |concepto| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= v.id.to_s %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= v.concepto_de_pago.id.to_s %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= v.concepto_de_pago.nombre %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= v.concepto_de_pago.descripcion %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= v.concepto_de_pago.monto %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= v.fecha %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= v.interes.porcentaje %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= concepto.id.to_s %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= concepto.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= concepto.descripcion %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= concepto.monto %></Data></Cell>
+        <% concepto.vencimientos.each do |v| %>
+          <Cell><Data ss:Type="String"><%= v.fecha %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= v.interes.porcentaje %></Data></Cell>
+        <% end %>
       </Row>
     <% end %>
     </Table>
   </Worksheet>
 </Workbook>
         
+

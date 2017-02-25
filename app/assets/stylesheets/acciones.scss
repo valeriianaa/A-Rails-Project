@@ -1,3 +1,22 @@
 // Place all the styles related to the Acciones controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul#modelo-list{
+	list-style-type: none;
+    column-count: 3;
+    column-gap: 20px;
+}
+
+ul#modelo-list li{
+	padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
+    background-color: #3d9970;
+    color: #ffffff;
+}
+
+
+th.no-print{
+	width: 117px;	
+} 

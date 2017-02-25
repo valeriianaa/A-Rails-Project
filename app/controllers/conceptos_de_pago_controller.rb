@@ -7,7 +7,10 @@ class ConceptosDePagoController < ApplicationController
     @conceptos_de_pago = ConceptoDePago.all
     respond_to do |format|
       format.html
-      #format.csv { send_data @contactos.to_csv, filename: "contactos-#{Date.today}.csv" }
+      format.pdf do
+        pdf = ConceptosDePagoPdf.new(@conceptos_de_pago)
+        send_data pdf.render, filename: "conceptos_de_pago#{@conceptos_de_pago}.pdf", type: "application/pdf", disposition: "inline"
+      end
       format.xls
     end
   end
@@ -36,7 +39,7 @@ class ConceptosDePagoController < ApplicationController
 
     respond_to do |format|
       if @concepto_de_pago.save
-        format.html { redirect_to @concepto_de_pago, notice: 'Concepto de pago was successfully created.' }
+        format.html { redirect_to @concepto_de_pago, notice: 'Concepto de pago fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @concepto_de_pago }
       else
         format.html { render :new }
@@ -50,7 +53,7 @@ class ConceptosDePagoController < ApplicationController
   def update
     respond_to do |format|
       if @concepto_de_pago.update(concepto_de_pago_params)
-        format.html { redirect_to @concepto_de_pago, notice: 'Concepto de pago was successfully updated.' }
+        format.html { redirect_to @concepto_de_pago, notice: 'Concepto de pago fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @concepto_de_pago }
       else
         format.html { render :edit }
@@ -62,10 +65,14 @@ class ConceptosDePagoController < ApplicationController
   # DELETE /conceptos_de_pago/1
   # DELETE /conceptos_de_pago/1.json
   def destroy
-    @concepto_de_pago.destroy
     respond_to do |format|
-      format.html { redirect_to conceptos_de_pago_url, notice: 'Concepto de pago was successfully destroyed.' }
-      format.json { head :no_content }
+      if @concepto_de_pago.destroy
+        format.html { redirect_to conceptos_de_pago_url, notice: 'Concepto de pago fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Concepto de pago no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
   end
 

@@ -1,12 +1,19 @@
 - breadcrumb :conceptos_de_pago
 
-.index-header 
+.index-header
   h1 
     | Conceptos de Pago  
     - if can? :create, ConceptoDePago
       a.btn.btn-info href=(new_concepto_de_pago_path)
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
+    .pull-right
+        a.btn.btn-default#pdf href=(conceptos_de_pago_audited_path)
+          | Auditorías
+        a.btn.btn-default#pdf href=(conceptos_de_pago_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(conceptos_de_pago_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead

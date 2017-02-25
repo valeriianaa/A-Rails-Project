@@ -1,4 +1,12 @@
 - breadcrumb :accion, @accion
+- if @accion.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@accion.errors.count, "error")} #{pluralize_without_count(@accion.errors.count, "prohibe", "prohiben")} eliminar esta Acción:"
+    ul
+      - @accion.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
 .row
@@ -15,13 +23,24 @@ p#notice = notice
               td = @accion.nombre
             tr
               td
-                strong Nombre
-              td = @accion.nombre
+                strong Palabra clave
+              td = @accion.key_name
+            tr
+              td
+                strong Modelos 
+              td 
+                ul#modelo-list
+                  - @accion.modelos.each do |modelo|
+                      li = modelo.nombre
             
 .row
-  .col-xs-1 style="padding-right:40px;"
+  .col-xs-1
     a.btn.btn-block.btn-success href=(edit_accion_path(@accion)) style="width:70px;" id="editar_accion"
       |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+  .col-xs-1 
     a.btn.btn-block.btn-default href=(acciones_path) style="width:70px;" id="volver_accion"
       |Volver
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-primary href="/acciones/#{@accion.id}.pdf" style="width:120px;" id="pdf_accion"
+      i.fa.fa-file-pdf-o
+      |  Ver PDF

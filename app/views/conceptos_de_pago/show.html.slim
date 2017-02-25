@@ -1,4 +1,12 @@
 - breadcrumb :concepto_de_pago, @concepto_de_pago
+- if @concepto_de_pago.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@concepto_de_pago.errors.count, "error")} #{pluralize_without_count(@concepto_de_pago.errors.count, "prohibe", "prohiben")} eliminar este Concepto de pago:"
+    ul
+      - @concepto_de_pago.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
 .row
@@ -25,13 +33,18 @@ p#notice = notice
               td
                 strong Monto
               td = @concepto_de_pago.monto
+        br
+        table.table.table-bordered
+          tbody
             tr
-              td
-                strong Vencimientos
-              td 
-                ul
-                  - @concepto_de_pago.vencimientos.each do |vencimiento|
-                    li = I18n.localize(vencimiento.fecha, :format => :long)
+              th colspan="2" Vencimientos
+            tr
+              th Fecha
+              th Porcentaje de Interés
+            - @concepto_de_pago.vencimientos.each do |vencimiento|
+              tr 
+                td = I18n.localize(vencimiento.fecha, :format => :long)
+                td = vencimiento.interes.porcentaje
           
 .row
   .col-xs-1 style="padding-right:40px;"

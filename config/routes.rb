@@ -63,8 +63,10 @@ Rails.application.routes.draw do
 
 
   #Audited
-  match 'actividades_proyectos_audited' => 'actividades_proyectos#audited', :via => [:get], as: :actividades_proyectos_audited
+  match 'actividades_audited' => 'actividades#audited', :via => [:get], as: :actividades_audited
+  match 'proyectos/:id/actividades_del_proyecto_audited' => 'actividades_proyectos#audited', :via => [:get], as: :actividades_proyectos_audited
   match 'conceptos_de_pago_audited' => 'conceptos_de_pago#audited', :via => [:get], as: :conceptos_de_pago_audited
+  match 'contactos_audited' => 'contactos#audited', :via => [:get], as: :contactos_audited
   match 'contratos_audited' => 'contratos#audited', :via => [:get], as: :contratos_audited
   match 'cuotas_por_cliente_audited' => 'cuotas_por_cliente#audited', :via => [:get], as: :cuotas_por_cliente_audited
   match 'eventos_audited' => 'eventos#audited', :via => [:get], as: :eventos_audited

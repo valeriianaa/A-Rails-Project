@@ -6,7 +6,9 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc
   thead
     tr
       th Accion
-      th Usuario que realizo la acción
+      th Usuario
+      th Id de Proyecto
+      th Codigo de proyecto
       th Cambios
       th Antes
       th Despues
@@ -15,7 +17,9 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc
     - @auditoria.each do |audit|
       tr
         td = audit.action
-        td = audit.user.persona.nombre_y_apellido
+        td = User.find(audit.user_id).persona.nombre_y_apellido
+        td = audit.auditable.try(:id)
+        td = audit.auditable.try(:codigo)
         td
           ul
             - audit.audited_changes.each do |k,v|
@@ -31,7 +35,7 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc
               - if audit.action == "update"
                 li = v[1]
               - else
-                li = v
+                li = (v.to_s).truncate(27)
           / ul
             /   - audit.audited_changes.each do |k,v|
             /     li = v

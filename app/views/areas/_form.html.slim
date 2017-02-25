@@ -1,4 +1,4 @@
-= form_for @area, validate: true do |f|
+= form_for @area do |f|
   - if @area.errors.any?
     #error_explanation
       h2 = "#{pluralize(@area.errors.count, "error")} #{pluralize_without_count(@area.errors.count, "prohibe", "prohiben")} almacenar esta Área:"
@@ -16,6 +16,12 @@
     .box-footer
       p#foot = "(*) Campo Obligatorio"
   
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(areas_path)
+      | Volver
+
 
 

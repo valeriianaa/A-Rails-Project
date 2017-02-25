@@ -1,23 +1,27 @@
 - breadcrumb :actividad_proyecto, @actividad_proyecto
 p#notice = notice
 
-p
-  strong Fechafin:
-  /= @actividad_proyecto.fechaFin
-
 .row
   .col-md-8
     .box.box-info
       .box-header.with-border
-        h3 Historial
+        h3 Proyecto: #{@actividad_proyecto.proyecto.codigo}, Actividad: #{@actividad_proyecto.actividad.nombre}
       .box-body
         table.table.table-bordered
-	        tr
+          tr
+            td
+              strong Fecha de Vencimiento
+            td = @actividad_proyecto.fechaVencimiento
+        br
+        table.table.table-bordered
+          tr
+            th colspan="3" Historial
+          tr
 	          th Fecha y hora
 	          th Estado
 	          th Usuario que realizó la acción
+          tr
             - Historial.where(actividad_proyecto_id: @actividad_proyecto.id).each do |h|
-              tr
                 td = h.fechaHora.strftime('%d-%m-%y %H:%M hs')
                 td = h.estado.nombre 
                 -if h.user_id != nil
@@ -26,6 +30,10 @@ p
                   td
 
 
-= link_to 'Editar', edit_actividad_proyecto_path(@actividad_proyecto)
-'|
-= link_to 'Volver', actividades_del_proyecto_path(Proyecto.find(@actividad_proyecto.proyecto_id))
+.row
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-success href=(edit_actividad_proyecto_path(@actividad_proyecto)) style="width:70px;" id="editar_actividad"
+      |Editar
+  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+    a.btn.btn-block.btn-default href=(actividades_del_proyecto_path(@actividad_proyecto.proyecto)) style="width:70px;" id="volver_actividad"
+      |Volver

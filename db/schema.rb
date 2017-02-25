@@ -27,9 +27,9 @@ ActiveRecord::Schema.define(version: 20170221123343) do
     t.string   "nombre"
     t.text     "descripcion"
     t.boolean  "obligatorio"
-    t.text     "actividadesAntecedentes"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.text     "actividades_antecedentes"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "etapa_id"
   end
 

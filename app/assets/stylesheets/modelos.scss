@@ -1,3 +1,18 @@
 // Place all the styles related to the Modelos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul#accion-list{
+	list-style-type: none;
+}
+
+ul#accion-list li{
+	padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
+    background-color: #3d9970;
+    color: #ffffff;
+    font-size: 12px;
+	font-weight: bold;
+	width: 270px;
+}

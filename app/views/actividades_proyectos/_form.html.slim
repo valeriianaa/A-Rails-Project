@@ -17,4 +17,10 @@
       .field
         = f.label :estado_id, 'Estado: '
         = f.collection_select :estado_id, Estado.all, :id, :nombre,{:prompt => "Estado de la Actividad"}, {:class => 'form-control'}
-  .actions = f.submit
+  
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(actividades_del_proyecto_path(@actividad_proyecto.proyecto))
+      | Volver

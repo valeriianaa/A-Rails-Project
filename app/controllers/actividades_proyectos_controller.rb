@@ -1,5 +1,5 @@
 class ActividadesProyectosController < ApplicationController
-  before_action :set_actividad_proyecto, only: [:show, :edit, :update, :destroy]
+  before_action :set_actividad_proyecto, only: [:show, :edit, :update, :destroy, :audited]
 
   # GET /actividades_proyectos
   # GET /actividades_proyectos.json
@@ -90,7 +90,7 @@ class ActividadesProyectosController < ApplicationController
       if @actividad_proyecto.update(actividad_proyecto_params)
         h = Historial.where(actividad_proyecto_id: @actividad_proyecto.id).last
         h.update(user_id: current_user.id)
-        format.html { redirect_to @actividad_proyecto, notice: 'Actividad proyecto was successfully updated.' }
+        format.html { redirect_to @actividad_proyecto, notice: 'Actividad fue acualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @actividad_proyecto }
       else
         format.html { render :edit }
@@ -122,7 +122,8 @@ class ActividadesProyectosController < ApplicationController
   
   def audited
     audited = Audited::Adapters::ActiveRecord::Audit
-    @auditoria = audited.where auditable_type: "ActividadProyecto"
+    @auditoria = audited.where(:auditable_type => "ActividadProyecto")
+    #@auditoria = audited.where("auditable_type = ? AND auditable_changes[:proyecto_id] = ?" "ActividadProyecto", 1 )
   end
 
   private

@@ -15,11 +15,11 @@ p#notice = notice
               td = @modelo.nombre
             tr
               td
-                strong Acciones 
+                strong Modelos 
               td 
-		          - @modelo.acciones.each do |accion|
-		            span.label.label-warning style="margin: 2px;"
-		              |  #{accion.nombre}
+                ul#accion-list
+                  - @modelo.acciones.each do |accion|
+                      li = accion.nombre
            
 .row
   .col-xs-1 style="padding-right:40px;"

@@ -18,7 +18,7 @@ table id="datatable" class="table table-bordered table-striped"
       th.no-print Acciones
 
   tbody
-    - @acciones.each do |accion|
+    - @acciones.order(:id).each do |accion|
       tr
         td = accion.nombre
         td = accion.key_name

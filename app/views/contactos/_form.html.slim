@@ -11,7 +11,7 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :codigo, 'Nombre: (*)'
+        = f.label :codigo, 'Código: (*)'
         = f.text_field :codigo, :class => "form-control"
       .field
         = f.label :nombre, 'Nombre: (*)'
@@ -27,10 +27,10 @@
         = f.text_field :nroIdentificacion, :class => "form-control"
       .field
         = f.label :fechaNacimiento, 'Fecha de Nacimiento: (*)'
-        = f.date_select :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
+        = f.date_field :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
       .field
         = f.label :especialidad_de_contacto_id, 'Especialidad:'
-        = f.collection_select :especialidad_de_contacto_id, EspecialidadDeContacto.all, :id, :nombre, {:prompt => "Seleccione una Especialidad"}, {:class => 'form-control'}
+        = f.collection_select :especialidad_de_contacto_id, EspecialidadDeContacto.all, :id, :nombre, {:prompt => "Seleccione una Especialidad"}, {:class => 'form-control', :id => "especialidades_fields"}
       .field
         = f.label :telefono, 'Teléfono:'
         = f.text_field :telefono, :class => "form-control"
@@ -88,4 +88,9 @@
     .box-footer
       p#foot = "(*) Campo Obligatorio"    
   
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(contactos_path)
+      | Volver

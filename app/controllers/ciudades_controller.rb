@@ -28,7 +28,7 @@ class CiudadesController < ApplicationController
 
     respond_to do |format|
       if @ciudad.save
-        format.html { redirect_to @ciudad, notice: 'Ciudad was successfully created.' }
+        format.html { redirect_to @ciudad, notice: 'Ciudad fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @ciudad }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class CiudadesController < ApplicationController
   def update
     respond_to do |format|
       if @ciudad.update(ciudad_params)
-        format.html { redirect_to @ciudad, notice: 'Ciudad was successfully updated.' }
+        format.html { redirect_to @ciudad, notice: 'Ciudad fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @ciudad }
       else
         format.html { render :edit }
@@ -54,10 +54,14 @@ class CiudadesController < ApplicationController
   # DELETE /ciudades/1
   # DELETE /ciudades/1.json
   def destroy
-    @ciudad.destroy
     respond_to do |format|
-      format.html { redirect_to ciudades_url, notice: 'Ciudad was successfully destroyed.' }
-      format.json { head :no_content }
+      if @ciudad.destroy
+        format.html { redirect_to ciudades_url, notice: 'Ciudad fue eliminada exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'La Ciudad no pudo ser eliminada.' }
+        format.json { head :no_content }
+      end
     end
   end
 

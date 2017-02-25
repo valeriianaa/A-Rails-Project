@@ -1,6 +1,15 @@
 -breadcrumb :actividades_proyectos, @proyecto
-h1 Actividades del Proyecto
 
+.index-header
+  h1 
+    | Actividades del Proyecto 
+    .pull-right
+        / a.btn.btn-default#pdf href=(actividades_del_proyecto_audited_path(@proyecto))
+        /   | Auditorías
+        a.btn.btn-default#pdf href=(actividades_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(actividades_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 .box
   table class="table table-bordered"
     thead

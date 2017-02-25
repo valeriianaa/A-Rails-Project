@@ -4,7 +4,7 @@ class CreateActividades < ActiveRecord::Migration
       t.string :nombre
       t.text :descripcion
       t.boolean :obligatorio
-      t.text :actividadesAntecedentes
+      t.text :actividades_antecedentes
 
       t.timestamps null: false
     end
