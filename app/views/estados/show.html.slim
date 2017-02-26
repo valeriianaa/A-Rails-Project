@@ -1,4 +1,12 @@
 - breadcrumb :estado, @estado
+- if @estado.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@estado.errors.count, "error")} #{pluralize_without_count(@estado.errors.count, "prohibe", "prohiben")} eliminar este Estado:"
+    ul
+      - @estado.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
 

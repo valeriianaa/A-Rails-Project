@@ -7,7 +7,7 @@ class Accion < ActiveRecord::Base
   validates :nombre, uniqueness: { case_sensitive: false}
   validates :key_name, uniqueness: { case_sensitive: false}
 
-  #validates :modelo_ids, presence: true, :if => :modelo?
+  validates :modelo_ids, presence: true, :if => :modelo?
 
   def modelo?
   	if Modelo.exists?

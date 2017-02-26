@@ -28,7 +28,7 @@ class EventosProyectosController < ApplicationController
 
     respond_to do |format|
       if @evento_proyecto.save
-        format.html { redirect_to @evento_proyecto, notice: 'Evento proyecto was successfully created.' }
+        format.html { redirect_to @evento_proyecto, notice: 'Evento y Proyecto fueron asociados exitosamente.' }
         format.json { render :show, status: :created, location: @evento_proyecto }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class EventosProyectosController < ApplicationController
   def update
     respond_to do |format|
       if @evento_proyecto.update(evento_proyecto_params)
-        format.html { redirect_to @evento_proyecto, notice: 'Evento proyecto was successfully updated.' }
+        format.html { redirect_to @evento_proyecto, notice: 'Evento y Proyecto fueron actualizados exitosamente.' }
         format.json { render :show, status: :ok, location: @evento_proyecto }
       else
         format.html { render :edit }

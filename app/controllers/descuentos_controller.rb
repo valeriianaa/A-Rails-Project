@@ -5,6 +5,14 @@ class DescuentosController < ApplicationController
   # GET /descuentos.json
   def index
     @descuentos = Descuento.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = DescuentosPdf.new(@descuentos)
+        send_data pdf.render, filename: "descuentos#{@descuentos}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /descuentos/1
@@ -28,7 +36,7 @@ class DescuentosController < ApplicationController
 
     respond_to do |format|
       if @descuento.save
-        format.html { redirect_to @descuento, notice: 'Descuento was successfully created.' }
+        format.html { redirect_to @descuento, notice: 'Descuento fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @descuento }
       else
         format.html { render :new }
@@ -42,7 +50,7 @@ class DescuentosController < ApplicationController
   def update
     respond_to do |format|
       if @descuento.update(descuento_params)
-        format.html { redirect_to @descuento, notice: 'Descuento was successfully updated.' }
+        format.html { redirect_to @descuento, notice: 'Descuento fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @descuento }
       else
         format.html { render :edit }
@@ -54,12 +62,22 @@ class DescuentosController < ApplicationController
   # DELETE /descuentos/1
   # DELETE /descuentos/1.json
   def destroy
-    @descuento.destroy
     respond_to do |format|
-      format.html { redirect_to descuentos_url, notice: 'Descuento was successfully destroyed.' }
-      format.json { head :no_content }
+      if @descuento.destroy
+        format.html { redirect_to descuentos_url, notice: 'Descuento fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Descuento no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
   end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Descuento"
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

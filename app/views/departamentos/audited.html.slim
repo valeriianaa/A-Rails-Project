@@ -1,0 +1,44 @@
+- breadcrumb :departamento_auditorias
+.page-header
+  h1
+    | Auditoria de Departamentos
+
+table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
+  thead
+    tr
+      th Accion
+      th Usuario
+      th Departamento Id
+      th Departamento Nombre
+      th Cambios
+      th Antes
+      th Despues
+      th Fecha
+  tbody
+    - @auditoria.each do |audit|
+      tr
+        td = audit.action
+        td = User.find(audit.user_id).persona.nombre_y_apellido
+        td = a.auditable.try(:id)
+        td = Departamento.find(audit.auditable.try(:id)).nombre
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              li = k
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              - if v.kind_of? Array
+                li = v[0]
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              - if audit.action == "update"
+                li = v[1]
+              - else
+                li = v
+          / ul
+            /   - audit.audited_changes.each do |k,v|
+            /     li = v
+
+        td = I18n.l audit.created_at, format: :short

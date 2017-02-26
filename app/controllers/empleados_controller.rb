@@ -7,7 +7,6 @@ class EmpleadosController < ApplicationController
     @empleados = Empleado.all
     respond_to do |format|
       format.html
-      format.csv { send_data @empleados.to_csv, filename: "empleados-#{Date.today}.csv" }
       format.xls # { send_data @products.to_csv(col_sep: "\t") }
       format.pdf do
         pdf = EmpleadosPdf.new(@empleados)
@@ -19,6 +18,14 @@ class EmpleadosController < ApplicationController
   # GET /empleados/1
   # GET /empleados/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+      format.pdf do
+        pdf = EmpleadoPdf.new(@empleado)
+        send_data pdf.render, filename: "empleado#{@empleado}.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   # GET /empleados/new
@@ -37,7 +44,7 @@ class EmpleadosController < ApplicationController
 
     respond_to do |format|
       if @empleado.save
-        format.html { redirect_to @empleado, notice: 'Empleado was successfully created.' }
+        format.html { redirect_to @empleado, notice: 'Empleado fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @empleado }
       else
         format.html { render :new }
@@ -51,7 +58,7 @@ class EmpleadosController < ApplicationController
   def update
     respond_to do |format|
       if @empleado.update(empleado_params)
-        format.html { redirect_to @empleado, notice: 'Empleado was successfully updated.' }
+        format.html { redirect_to @empleado, notice: 'Empleado fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @empleado }
       else
         format.html { render :edit }
@@ -63,11 +70,20 @@ class EmpleadosController < ApplicationController
   # DELETE /empleados/1
   # DELETE /empleados/1.json
   def destroy
-    @empleado.destroy
     respond_to do |format|
-      format.html { redirect_to empleados_url, notice: 'Empleado was successfully destroyed.' }
-      format.json { head :no_content }
+      if @empleado.destroy
+        format.html { redirect_to empleados_url, notice: 'Empleado fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Empleado no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Empleado"
   end
 
   private

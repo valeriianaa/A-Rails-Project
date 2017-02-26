@@ -1,5 +1,18 @@
 -breadcrumb :proyectos_cuotas, @proyecto
-h1 Cuotas por Cliente
+.index-header
+  h1 
+    | Cuotas del proyecto  
+    - if can? :create, CuotaPorCliente
+      a.btn.btn-info href=(new_proyecto_cuota_por_cliente_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo
+    .pull-right
+        / a.btn.btn-default#pdf href=(cuotas_por_cliente_audited_path)
+        /   | Auditorías
+        a.btn.btn-default#pdf href=(proyecto_cuotas_por_cliente_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(proyecto_cuotas_por_cliente_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 
 .box
   table class="table table-bordered"
@@ -29,20 +42,3 @@ h1 Cuotas por Cliente
 
 
 br
-
-= link_to 'Asignar nueva cuota a cliente', new_proyecto_cuota_por_cliente_path
-          
-
-          / th Subtotal
-          / th Interes
-          / th Descuento
-              
-              / td = cuota_por_cliente.concepto_de_pago.monto
-              / -if cuota_por_cliente.interes_id != nil
-              /   td = cuota_por_cliente.interes.nombre
-              / -else
-              /   td
-              / -if cuota_por_cliente.descuento_id != nil
-              /   td = cuota_por_cliente.descuento.nombre
-              / -else
-              /   td

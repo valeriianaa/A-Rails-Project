@@ -1,7 +1,27 @@
 - breadcrumb :empleado, @empleado
+- if @empleado.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@empleado.errors.count, "error")} #{pluralize_without_count(@empleado.errors.count, "prohibe", "prohiben")} eliminar este Empleado:"
+    ul
+      - @empleado.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
 
+-if @empleado.proyectos.exists?
+  .row
+    .col-xs-1 style="padding-right:40px; margin-right:130px;"
+      a.btn.btn-block.btn-primary href="/empleados/#{@empleado.id}.pdf" style="width:200px;" id="pdf_empleado"
+        i.fa.fa-file-pdf-o
+        |  Ver Proyectos del Empleado
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-primary href="/empleados/#{@empleado.id}.xls" style="width:230px;" id="excel_empleado"
+        i.fa.fa-file-excel-o
+        |  Proyectos del Empleado - Excel
+
+br
 .row
   .col-md-8
     .box.box-info
@@ -92,6 +112,6 @@ p#notice = notice
   .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-success href=(edit_empleado_path(@empleado)) style="width:70px;" id="editar_empleado"
       |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+  .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-default href=(empleados_path) style="width:70px;" id="volver_empleado"
       |Volver

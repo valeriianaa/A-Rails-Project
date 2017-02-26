@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Etapa Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Codigo</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Pais</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Provincia</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Ciudad</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Calle</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Numero</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Piso</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Departamento</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Telefono</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Correo Electronico</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto Pagina web</Data></Cell>
+      </Row>
+    <% @etapa.proyectos.each do |proyecto| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= @etapa.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.codigo %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.pais.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.provincia.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.ciudad.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.calle %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.nroDomicilio %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.piso %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.dpto %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.telefono %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= proyecto.pagWeb %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

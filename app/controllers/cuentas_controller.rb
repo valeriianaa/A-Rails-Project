@@ -5,6 +5,14 @@ class CuentasController < ApplicationController
   # GET /cuentas.json
   def index
     @cuentas = Cuenta.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = CuentasPdf.new(@cuentas)
+        send_data pdf.render, filename: "cuentas#{@cuentas}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /cuentas/1
@@ -28,7 +36,7 @@ class CuentasController < ApplicationController
 
     respond_to do |format|
       if @cuenta.save
-        format.html { redirect_to @cuenta, notice: 'Cuenta was successfully created.' }
+        format.html { redirect_to @cuenta, notice: 'Cuenta fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @cuenta }
       else
         format.html { render :new }
@@ -42,7 +50,7 @@ class CuentasController < ApplicationController
   def update
     respond_to do |format|
       if @cuenta.update(cuenta_params)
-        format.html { redirect_to @cuenta, notice: 'Cuenta was successfully updated.' }
+        format.html { redirect_to @cuenta, notice: 'Cuenta fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @cuenta }
       else
         format.html { render :edit }
@@ -54,11 +62,20 @@ class CuentasController < ApplicationController
   # DELETE /cuentas/1
   # DELETE /cuentas/1.json
   def destroy
-    @cuenta.destroy
     respond_to do |format|
-      format.html { redirect_to cuentas_url, notice: 'Cuenta was successfully destroyed.' }
-      format.json { head :no_content }
+      if @cuenta.destroy
+        format.html { redirect_to cuentas_url, notice: 'Cuenta fue eliminada exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'La Cuenta no pudo ser eliminada.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Cuenta"
   end
 
   private

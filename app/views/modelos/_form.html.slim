@@ -18,4 +18,10 @@
         = f.collection_select :accion_ids, Accion.all, :id, :nombre, {:prompt => "Seleccione una accion"}, {:multiple => true, :id => 'accion_ids', :class =>'form-control'}
     .box-footer
       p#foot = "(*) Campo Obligatorio" 
-  
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(modelos_path)
+      | Volver
+

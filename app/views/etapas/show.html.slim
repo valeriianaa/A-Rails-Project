@@ -1,7 +1,25 @@
 - breadcrumb :etapa, @etapa
+- if @etapa.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@etapa.errors.count, "error")} #{pluralize_without_count(@etapa.errors.count, "prohibe", "prohiben")} eliminar esta Etapa:"
+    ul
+      - @etapa.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
-
+-if @etapa.proyectos.exists?
+  .row
+    .col-xs-1 style="padding-right:40px; margin-right:130px;"
+      a.btn.btn-block.btn-primary href="/etapas/#{@etapa.id}.pdf" style="width:200px;" id="pdf_etapa"
+        i.fa.fa-file-pdf-o
+        |  Ver Proyectos de la Etapa
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-primary href="/etapas/#{@etapa.id}.xls" style="width:230px;" id="excel_etapa"
+        i.fa.fa-file-excel-o
+        |  Proyectos de la Etapa - Excel
+br
 .row
   .col-md-8
     .box.box-info
@@ -18,6 +36,13 @@ p#notice = notice
               td
                 strong Descripción
               td = @etapa.descripcion
+            tr
+              td
+                strong Etapa Anterior
+              -if @etapa.etapaAnterior != nil
+                td = Etapa.find(@etapa.etapaAnterior).nombre
+              -else
+                td
             
            
 .row

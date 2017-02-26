@@ -118,7 +118,13 @@
       
     
     br
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(proyectos_path)
+      | Volver
+
 
 //El siguiente código es para filtrar del select de miembros de equipo aquellas personas que ya forman parte de un proyecto
 / - if @proyecto.new_record?

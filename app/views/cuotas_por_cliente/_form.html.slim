@@ -11,11 +11,17 @@
         h3 Datos Generales
       .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
         .field
-          = f.label :proyecto_id, "Proyecto: #{@cuota_por_cliente.proyecto.codigo}", {:class => "control-label"}
-          = f.hidden_field :proyecto_id, :value => @cuota_por_cliente.proyecto.id
+          = f.label :proyecto_id, 'Proyecto: (*)'
+          br
+            select#cuota_por_cliente_proyecto_id.form-control.select2 name="cuota_por_cliente[proyecto_id]"
+              - Proyecto.all.each do |proyecto|
+                option value=(proyecto.id) =proyecto.codigo
         .field
-          = f.label :contrato_id, "Contrato: (*)", :class => "control-label"
-          = f.collection_select :contrato_id, @cuota_por_cliente.proyecto.contratos.all, :id, :contrato_descipcion,{:prompt => "Seleccione un contrato..."}, {:class => 'form-control'}
+          = f.label :contrato_id, 'Contrato: (*)'
+          br
+            select#cuota_por_cliente_contrato_id.form-control.select2 name="cuota_por_cliente[contrato_id]"
+              - Contrato.all.each do |contrato|
+                option class=(contrato.proyecto_id) value=(contrato.id) =contrato.contrato_descipcion
         .field
           = f.label :concepto_de_pago_id, "Concepto de pago: (*)", :class => "control-label"
           = f.collection_select :concepto_de_pago_id, ConceptoDePago.all, :id, :nombre,{:prompt => "Seleccione un concepto de pago..."}, {:class => 'form-control'}
@@ -23,4 +29,9 @@
       .box-footer
         p#foot = "(*) Campo Obligatorio"  
     
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(proyecto_cuotas_por_cliente_path(@cuota_por_cliente.proyecto))
+      | Volver

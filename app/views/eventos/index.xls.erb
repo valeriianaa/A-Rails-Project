@@ -7,7 +7,7 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Código Evento</Data></Cell>
         <Cell><Data ss:Type="String">Nombre</Data></Cell>
         <Cell><Data ss:Type="String">Descipción</Data></Cell>
         <Cell><Data ss:Type="String">Dia</Data></Cell>
@@ -15,7 +15,7 @@
       </Row>
     <% @eventos.each do |evento| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= evento.id.to_s %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= evento.codigo %></Data></Cell>
         <Cell><Data ss:Type="String"><%= evento.nombre %></Data></Cell>
         <Cell><Data ss:Type="String"><%= evento.descripcion %></Data></Cell>
         <Cell><Data ss:Type="Data"><%= evento.dia %></Data></Cell>

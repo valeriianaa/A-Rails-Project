@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell><Data ss:Type="String">Descripción</Data></Cell>
+         <Cell><Data ss:Type="String">Etapa Anterior</Data></Cell>
+      </Row>
+    <% @etapas.each do |etapa| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= etapa.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= etapa.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= etapa.descripcion %></Data></Cell>
+        <% if etapa.etapaAnterior != nil%>
+          <Cell><Data ss:Type="String"><%= Etapa.find(etapa.etapaAnterior).nombre %></Data></Cell>
+        <% else %>
+          <Cell><Data ss:Type="String"> </Data></Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

@@ -5,6 +5,14 @@ class EspecialidadesDeContactoController < ApplicationController
   # GET /especialidades_de_contacto.json
   def index
     @especialidades_de_contacto = EspecialidadDeContacto.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = EspecialidadesDeContactoPdf.new(@especialidades_de_contacto)
+        send_data pdf.render, filename: "especialidades_de_contacto#{@especialidades_de_contacto}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /especialidades_de_contacto/1
@@ -28,7 +36,7 @@ class EspecialidadesDeContactoController < ApplicationController
 
     respond_to do |format|
       if @especialidad_de_contacto.save
-        format.html { redirect_to @especialidad_de_contacto, notice: 'Especialidad de contacto was successfully created.' }
+        format.html { redirect_to @especialidad_de_contacto, notice: 'Especialidad de contacto fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @especialidad_de_contacto }
       else
         format.html { render :new }
@@ -42,7 +50,7 @@ class EspecialidadesDeContactoController < ApplicationController
   def update
     respond_to do |format|
       if @especialidad_de_contacto.update(especialidad_de_contacto_params)
-        format.html { redirect_to @especialidad_de_contacto, notice: 'Especialidad de contacto was successfully updated.' }
+        format.html { redirect_to @especialidad_de_contacto, notice: 'Especialidad de contacto fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @especialidad_de_contacto }
       else
         format.html { render :edit }
@@ -54,11 +62,20 @@ class EspecialidadesDeContactoController < ApplicationController
   # DELETE /especialidades_de_contacto/1
   # DELETE /especialidades_de_contacto/1.json
   def destroy
-    @especialidad_de_contacto.destroy
     respond_to do |format|
-      format.html { redirect_to especialidades_de_contacto_url, notice: 'Especialidad de contacto was successfully destroyed.' }
-      format.json { head :no_content }
+      if @especialidad_de_contacto.destroy
+        format.html { redirect_to especialidades_de_contacto_url, notice: 'Especialidad de contacto fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'Especialidad de contacto no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "EspecialidadDeContacto"
   end
 
   private

@@ -1,7 +1,7 @@
 class Evento < ActiveRecord::Base
 	belongs_to :persona
 
-	has_many :eventos_proyectos, dependent: :destroy
+	has_many :eventos_proyectos, dependent: :restrict_with_error
 	has_many :proyectos , :through => :eventos_proyectos
 
 	validates :codigo, :nombre, :dia, :hora, :persona_id, presence: true

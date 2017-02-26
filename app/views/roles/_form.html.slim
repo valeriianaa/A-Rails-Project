@@ -68,4 +68,10 @@
                           = check_box_tag "rol[permiso_ids][]", perm.id,
                             @rol.can?(modelo, perm.accion)
                           span.lbl
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(roles_path)
+      | Volver
+

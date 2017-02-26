@@ -85,4 +85,10 @@
     .box-footer
       p#foot = "(*) Campo Obligatorio" 
       
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(miemros_equipo_path)
+      | Volver
+

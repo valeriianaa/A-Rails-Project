@@ -5,6 +5,14 @@ class EstadosController < ApplicationController
   # GET /estados.json
   def index
     @estados = Estado.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = EstadosPdf.new(@estados)
+        send_data pdf.render, filename: "estados#{@estados}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /estados/1
@@ -28,7 +36,7 @@ class EstadosController < ApplicationController
 
     respond_to do |format|
       if @estado.save
-        format.html { redirect_to @estado, notice: 'Estado was successfully created.' }
+        format.html { redirect_to @estado, notice: 'Estado fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @estado }
       else
         format.html { render :new }
@@ -42,7 +50,7 @@ class EstadosController < ApplicationController
   def update
     respond_to do |format|
       if @estado.update(estado_params)
-        format.html { redirect_to @estado, notice: 'Estado was successfully updated.' }
+        format.html { redirect_to @estado, notice: 'Estado fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @estado }
       else
         format.html { render :edit }
@@ -54,11 +62,20 @@ class EstadosController < ApplicationController
   # DELETE /estados/1
   # DELETE /estados/1.json
   def destroy
-    @estado.destroy
     respond_to do |format|
-      format.html { redirect_to estados_url, notice: 'Estado was successfully destroyed.' }
-      format.json { head :no_content }
+      if @estado.destroy
+        format.html { redirect_to estados_url, notice: 'Estado fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Estado no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Estado"
   end
 
   private

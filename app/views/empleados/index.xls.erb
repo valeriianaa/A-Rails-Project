@@ -21,6 +21,8 @@
         <Cell><Data ss:Type="String">Departamento</Data></Cell>
         <Cell><Data ss:Type="String">Telefono</Data></Cell>
         <Cell><Data ss:Type="String">Correo Electronico</Data></Cell>
+        <Cell><Data ss:Type="String">Dpto. Compañia</Data></Cell>
+        <Cell><Data ss:Type="String">Rol. Compañia</Data></Cell>
       </Row>
     <% @empleados.each do |empleado| %>
       <Row>
@@ -38,6 +40,8 @@
         <Cell><Data ss:Type="String"><%= empleado.dpto %></Data></Cell>
         <Cell><Data ss:Type="String"><%= empleado.telefono %></Data></Cell>
         <Cell><Data ss:Type="String"><%= empleado.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= empleado.departamento.nombre %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= empleado.rol_de_empleado.nombre %></Data></Cell>
       </Row>
     <% end %>
     </Table>

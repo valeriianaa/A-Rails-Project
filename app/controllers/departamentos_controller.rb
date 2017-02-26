@@ -5,6 +5,14 @@ class DepartamentosController < ApplicationController
   # GET /departamentos.json
   def index
     @departamentos = Departamento.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = DepartamentosPdf.new(@departamentos)
+        send_data pdf.render, filename: "departamentos#{@departamentos}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /departamentos/1
@@ -28,7 +36,7 @@ class DepartamentosController < ApplicationController
 
     respond_to do |format|
       if @departamento.save
-        format.html { redirect_to @departamento, notice: 'Departamento was successfully created.' }
+        format.html { redirect_to @departamento, notice: 'Departamento fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @departamento }
       else
         format.html { render :new }
@@ -42,7 +50,7 @@ class DepartamentosController < ApplicationController
   def update
     respond_to do |format|
       if @departamento.update(departamento_params)
-        format.html { redirect_to @departamento, notice: 'Departamento was successfully updated.' }
+        format.html { redirect_to @departamento, notice: 'Departamento fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @departamento }
       else
         format.html { render :edit }
@@ -54,11 +62,20 @@ class DepartamentosController < ApplicationController
   # DELETE /departamentos/1
   # DELETE /departamentos/1.json
   def destroy
-    @departamento.destroy
     respond_to do |format|
-      format.html { redirect_to departamentos_url, notice: 'Departamento was successfully destroyed.' }
-      format.json { head :no_content }
+      if @departamento.destroy
+        format.html { redirect_to departamentos_url, notice: 'Departamento fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Departamento no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Departamento"
   end
 
   private

@@ -1,5 +1,5 @@
 class CuotasPorClienteController < ApplicationController
-  before_action :set_cuota_por_cliente, only: [:show, :destroy]
+  before_action :set_cuota_por_cliente, only: [:show, :destroy, :audited]
   #before_action :set_cuota_por_cliente, only: [:show, :edit, :update, :destroy]
 
   # GET /contratos
@@ -7,6 +7,14 @@ class CuotasPorClienteController < ApplicationController
   def index
     @proyecto = Proyecto.find(params[:proyecto_id])
     @cuotas_por_cliente = @proyecto.cuotas_por_cliente.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = CuotasPorClientePdf.new(@cuotas_por_cliente)
+        send_data pdf.render, filename: "cuotas_por_cliente#{@cuotas_por_cliente}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /contratos/1
@@ -32,7 +40,7 @@ class CuotasPorClienteController < ApplicationController
 
     respond_to do |format|
       if @cuota_por_cliente.save
-        format.html { redirect_to [@cuota_por_cliente.proyecto, @cuota_por_cliente], notice: 'CuotaPorCliente was successfully created.' }
+        format.html { redirect_to [@cuota_por_cliente.proyecto, @cuota_por_cliente], notice: 'Cuota fue añadida exitosamente.' }
         format.json { render :show, status: :created, location: @cuota_por_cliente }
       else
         format.html { render :new }
@@ -65,7 +73,7 @@ class CuotasPorClienteController < ApplicationController
     @cuota_por_cliente = @proyecto.cuotas_por_cliente.find(params[:id])
     @cuota_por_cliente.destroy
     respond_to do |format|
-      format.html { redirect_to proyecto_cuotas_por_cliente_url, notice: 'CuotaPorCliente was successfully destroyed.' }
+      format.html { redirect_to proyecto_cuotas_por_cliente_url, notice: 'Cuota fue destruida exitosamente.' }
       format.json { head :no_content }
     end
   end

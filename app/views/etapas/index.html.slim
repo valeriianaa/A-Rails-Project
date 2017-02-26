@@ -2,11 +2,18 @@
 
 .index-header 
   h1 
-    | Etapas  
+    | Etapas 
     - if can? :create, Etapa
-      a.btn.btn-info#etapa href=(new_etapa_path)
-        i.ace-icon.fa.fa-plus.bigger-110
+      a.btn.btn-info href=(new_etapa_path)
+        i.fa.fa-plus.bigger-110
         |  Nuevo
+    .pull-right
+        a.btn.btn-default#pdf href=(etapas_audited_path)
+          | Auditorías
+        a.btn.btn-default#pdf href=(etapas_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(etapas_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 br
 - @colors = ['aqua', 'green', 'yellow', 'red']
 

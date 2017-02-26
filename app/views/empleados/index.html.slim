@@ -8,6 +8,8 @@
         i.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
+        a.btn.btn-default#pdf href=(empleados_audited_path)
+          | Auditorías
         a.btn.btn-default#pdf href=(empleados_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
         a.btn.btn-default#excel href=(empleados_path(format: "xls")) title="Descargar Excel"

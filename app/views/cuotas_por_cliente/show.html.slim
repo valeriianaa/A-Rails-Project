@@ -22,16 +22,22 @@ p#notice = notice
               td
                 strong Subtotal
               td = @cuota_por_cliente.concepto_de_pago.monto
-            / -if @cuota_por_cliente.interes_id != nil
-            /   tr
-            /     td
-            /       strong Interés
-            /     td = @cuota_por_cliente.interes.nombre
-            / - if @cuota_por_cliente.descuento_id != nil
-            /   tr
-            /     td
-            /       strong Descuento
-            /     td = @cuota_por_cliente.descuento.nombre
+            tr
+        br
+        table.table.table-bordered
+          tbody
+            tr
+              th colspan="2" Vencimientos
+            tr
+              th Fecha
+              th Porcentaje de Interés
+            - @cuota_por_cliente.concepto_de_pago.vencimientos.each do |vencimiento|
+              tr 
+                td = I18n.localize(vencimiento.fecha, :format => :long)
+                td = vencimiento.interes.porcentaje
+        br
+        table.table.table-bordered
+          tbody
             tr
               td
                 strong Monto Total

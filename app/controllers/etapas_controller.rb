@@ -5,11 +5,27 @@ class EtapasController < ApplicationController
   # GET /etapas.json
   def index
     @etapas = Etapa.all
+    respond_to do |format|
+      format.html
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+      format.pdf do
+        pdf = EtapasPdf.new(@etapas)
+        send_data pdf.render, filename: "etapas#{@etapas}.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   # GET /etapas/1
   # GET /etapas/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+      format.pdf do
+        pdf = EtapaPdf.new(@etapa)
+        send_data pdf.render, filename: "etapa#{@etapa}.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   # GET /etapas/new
@@ -28,7 +44,7 @@ class EtapasController < ApplicationController
 
     respond_to do |format|
       if @etapa.save
-        format.html { redirect_to @etapa, notice: 'Etapa was successfully created.' }
+        format.html { redirect_to @etapa, notice: 'Etapa fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @etapa }
       else
         format.html { render :new }
@@ -42,7 +58,7 @@ class EtapasController < ApplicationController
   def update
     respond_to do |format|
       if @etapa.update(etapa_params)
-        format.html { redirect_to @etapa, notice: 'Etapa was successfully updated.' }
+        format.html { redirect_to @etapa, notice: 'Etapa fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @etapa }
       else
         format.html { render :edit }
@@ -54,11 +70,20 @@ class EtapasController < ApplicationController
   # DELETE /etapas/1
   # DELETE /etapas/1.json
   def destroy
-    @etapa.destroy
     respond_to do |format|
-      format.html { redirect_to etapas_url, notice: 'Etapa was successfully destroyed.' }
-      format.json { head :no_content }
+      if @estado.destroy
+        format.html { redirect_to estados_url, notice: 'Etapa fue eliminada exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'La Etapa no pudo ser eliminada.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "Etapa"
   end
 
   private

@@ -24,11 +24,17 @@
         = f.collection_select :persona_id, Contacto.all, :id, :nombre_y_apellido ,{:prompt => "Expositor"}, {:class => 'form-control'}
       .field
         = f.label :dia, 'Día: (*)'
-        = f.date_select :dia
+        = f.date_field :dia
       .field
         = f.label :hora, 'Hora: (*)'
         = f.time_select :hora
     .box-footer
       p#foot = "(*) Campo Obligatorio"  
   
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(eventos_path)
+      | Volver
+

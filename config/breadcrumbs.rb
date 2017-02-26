@@ -193,6 +193,11 @@ crumb :cuenta_new do
   parent :cuentas
 end
 
+crumb :cuenta_auditorias do 
+  link "Auditorías"
+  parent :cuentas
+end
+
 #Departamentos--------------------------------------------
 crumb :departamentos do
   link "Departamentos", departamentos_path
@@ -210,6 +215,11 @@ end
 
 crumb :departamento_new do 
   link "Nuevo"
+  parent :departamentos
+end
+
+crumb :departamento_auditorias do 
+  link "Auditorías"
   parent :departamentos
 end
 
@@ -233,6 +243,11 @@ crumb :descuento_new do
   parent :descuentos
 end
 
+crumb :descuento_auditorias do 
+  link "Auditorías"
+  parent :descuentos
+end
+
 #Empleados-------------------------------------------
 crumb :empleados do
   link "Empleados", empleados_path
@@ -250,6 +265,11 @@ end
 
 crumb :empleado_new do 
   link "Nuevo"
+  parent :empleados
+end
+
+crumb :empleados_auditorias do 
+  link "Auditorías"
   parent :empleados
 end
 
@@ -273,6 +293,10 @@ crumb :especialidad_de_contacto_new do
   parent :especialidades_de_contacto
 end
 
+crumb :especialidad_de_contacto_auditorias do 
+  link "Auditorías"
+  parent :especialidades_de_contacto
+end
 #Estados--------------------------------------------
 crumb :estados do
   link "Estados", estados_path
@@ -290,6 +314,11 @@ end
 
 crumb :estado_new do 
   link "Nuevo"
+  parent :estados
+end
+
+crumb :estados_auditorias do 
+  link "Auditorías"
   parent :estados
 end
 
@@ -313,6 +342,11 @@ crumb :etapa_new do
   parent :etapas
 end
 
+crumb :etapas_auditorias do 
+  link "Auditorías"
+  parent :etapas
+end
+
 #Eventos--------------------------------------------
 crumb :eventos do
   link "Eventos", eventos_path
@@ -330,6 +364,11 @@ end
 
 crumb :evento_new do 
   link "Nuevo"
+  parent :eventos
+end
+
+crumb :eventos_auditorias do 
+  link "Auditorías"
   parent :eventos
 end
 
@@ -520,11 +559,15 @@ crumb :cuota do |cuota|
   parent :proyectos_cuotas, cuota.proyecto
 end
 
-# crumb :cuota do 
-#   link "Nuevo"
-#   parent :proyectos_cuotas, cuota.proyecto
-# end
+crumb :cuota_new do |proyecto|
+  link "Nuevo", new_proyecto_cuota_por_cliente_path(proyecto)
+  parent :proyectos_cuotas, proyecto
+end
 
+crumb :cuota_auditoria do |proyecto|
+  link "Auditorías", cuotas_por_cliente_audited_path(proyecto)
+  parent :proyectos_cuotas, proyecto
+end
 
 #Roles--------------------------------------------
 crumb :roles do

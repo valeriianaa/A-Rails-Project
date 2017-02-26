@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Proyecto</Data></Cell>
+        <Cell><Data ss:Type="String">Concepto</Data></Cell>
+        <Cell><Data ss:Type="String">Concepto Descripcion</Data></Cell>
+        <Cell><Data ss:Type="String">Concepto Monto</Data></Cell>
+        <% max_count = 0 %>
+        <% ConceptoDePago.all.each do |c| %>
+          <% if c.vencimientos.count > max_count%>
+            <%  max_count = c.vencimientos.count %>
+          <% end %>
+        <% end %>
+        <% for index in 1..max_count %>
+          <Cell><Data ss:Type="String">Vencimiento <%=index.to_s%> Fecha</Data></Cell>
+          <Cell><Data ss:Type="String">Vencimiento <%=index.to_s%> Porcentaje Interes</Data></Cell>
+        <% end %>
+        <Cell><Data ss:Type="String">Monto Total</Data></Cell>
+      </Row>
+    <% @cuotas_por_cliente.each do |cuota| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= cuota.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= cuota.proyecto.codigo %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= cuota.concepto_de_pago.codigo %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= cuota.concepto_de_pago.descripcion %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= cuota.concepto_de_pago.monto %></Data></Cell>
+        <% cuota.concepto_de_pago.vencimientos.each do |v| %>
+          <Cell><Data ss:Type="String"><%= v.fecha %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= v.interes.porcentaje %></Data></Cell>
+        <% end %>
+        <Cell><Data ss:Type="String"><%= cuota.montoTotal %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

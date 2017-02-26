@@ -33,7 +33,7 @@ class EventosController < ApplicationController
 
     respond_to do |format|
       if @evento.save
-        format.html { redirect_to @evento, notice: 'Evento was successfully created.' }
+        format.html { redirect_to @evento, notice: 'Evento fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @evento }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class EventosController < ApplicationController
   def update
     respond_to do |format|
       if @evento.update(evento_params)
-        format.html { redirect_to @evento, notice: 'Evento was successfully updated.' }
+        format.html { redirect_to @evento, notice: 'Evento fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @evento }
       else
         format.html { render :edit }
@@ -58,11 +58,15 @@ class EventosController < ApplicationController
 
   # DELETE /eventos/1
   # DELETE /eventos/1.json
-  def destroy
-    @evento.destroy
+   def destroy
     respond_to do |format|
-      format.html { redirect_to eventos_url, notice: 'Evento was successfully destroyed.' }
-      format.json { head :no_content }
+      if @evento.destroy
+        format.html { redirect_to eventos_url, notice: 'Evento fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Evento no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
   end
 

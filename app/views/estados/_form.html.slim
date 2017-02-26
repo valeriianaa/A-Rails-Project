@@ -24,4 +24,9 @@
       / .field
       /   = f.select :color, options_for_select(@estado.colores), {:include_blank => true}, {:class => 'form-control', :style => 'width: 50%;'}
       
-  .actions = f.submit
+  br
+    button.btn.btn-primary type="submit" 
+      | Guardar
+    ' |
+    a.btn.btn-default href=(estados_path)
+      | Volver

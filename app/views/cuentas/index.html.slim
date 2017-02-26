@@ -1,14 +1,21 @@
 - breadcrumb :cuentas
 
-.index-header 
+.index-header
   h1 
     | Cuentas  
     - if can? :create, Cuenta
       a.btn.btn-info href=(new_cuenta_path)
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
+    .pull-right
+        a.btn.btn-default#pdf href=(cuentas_audited_path)
+          | Auditorías
+        a.btn.btn-default#pdf href=(cuentas_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(cuentas_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 br
-table class="table table-bordered table-striped" 
+table class="table table-bordered table-striped" id="datatable"
   thead
     tr
       th Código - Proyecto

@@ -8,6 +8,8 @@ class Empleado < Persona
 
 	validates :departamento_id, :rol_de_empleado_id, presence: true
 
+	audited
+
 	def self.to_csv(options = {})
       CSV.generate(options) do |csv|
         csv << column_names
