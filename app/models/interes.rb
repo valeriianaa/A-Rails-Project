@@ -4,4 +4,6 @@ class Interes < ActiveRecord::Base
 	
 	validates :nombre, :porcentaje, presence: true
 	validates :nombre, uniqueness: { case_sensitive: false }
+	validates_numericality_of :porcentaje, :greater_than_or_equal_to => 0
+	audited
 end

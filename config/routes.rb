@@ -78,8 +78,12 @@ Rails.application.routes.draw do
   match 'etapas_audited' => 'etapas#audited', :via => [:get], as: :etapas_audited
   match 'eventos_audited' => 'eventos#audited', :via => [:get], as: :eventos_audited
   match 'eventos_proyectos_audited' => 'eventos_proyectos#audited', :via => [:get], as: :eventos_proyectos_audited
+  match 'intereses_audited' => 'intereses#audited', :via => [:get], as: :intereses_audited
+  match 'miembros_equipo_audited' => 'miembros_equipo#audited', :via => [:get], as: :miembros_equipo_audited
   match 'proyectos_audited' => 'proyectos#audited', :via => [:get], as: :proyectos_audited
   match 'pagos_audited' => 'pagos#audited', :via => [:get], as: :pagos_audited
+  match 'roles_de_empleados_audited' => 'roles_de_empleados#audited', :via => [:get], as: :roles_de_empleados_audited
+  match 'tipos_de_pago_audited' => 'tipos_de_pago#audited', :via => [:get], as: :tipos_de_pago_audited
 
 
   match 'backup/new' => 'db_backups#new', :via => [:get], as: :new_backup

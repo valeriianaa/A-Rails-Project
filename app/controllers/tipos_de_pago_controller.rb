@@ -5,6 +5,14 @@ class TiposDePagoController < ApplicationController
   # GET /tipos_de_pago.json
   def index
     @tipos_de_pago = TipoDePago.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = TiposDePagoPdf.new(@tipos_de_pago)
+        send_data pdf.render, filename: "tipos_de_pago#{@tipos_de_pago}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /tipos_de_pago/1
@@ -28,7 +36,7 @@ class TiposDePagoController < ApplicationController
 
     respond_to do |format|
       if @tipo_de_pago.save
-        format.html { redirect_to @tipo_de_pago, notice: 'Tipo de pago was successfully created.' }
+        format.html { redirect_to @tipo_de_pago, notice: 'Tipo de pago fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @tipo_de_pago }
       else
         format.html { render :new }
@@ -42,7 +50,7 @@ class TiposDePagoController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_de_pago.update(tipo_de_pago_params)
-        format.html { redirect_to @tipo_de_pago, notice: 'Tipo de pago was successfully updated.' }
+        format.html { redirect_to @tipo_de_pago, notice: 'Tipo de pago fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @tipo_de_pago }
       else
         format.html { render :edit }
@@ -54,11 +62,20 @@ class TiposDePagoController < ApplicationController
   # DELETE /tipos_de_pago/1
   # DELETE /tipos_de_pago/1.json
   def destroy
-    @tipo_de_pago.destroy
     respond_to do |format|
-      format.html { redirect_to tipos_de_pago_url, notice: 'Tipo de pago was successfully destroyed.' }
-      format.json { head :no_content }
+      if @tipo_de_pago.destroy
+        format.html { redirect_to tipos_de_pago_url, notice: 'Tipo de pago fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'Tipo de pago no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "TipoDePago"
   end
 
   private

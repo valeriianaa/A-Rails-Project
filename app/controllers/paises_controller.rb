@@ -28,7 +28,7 @@ class PaisesController < ApplicationController
 
     respond_to do |format|
       if @pais.save
-        format.html { redirect_to @pais, notice: 'Pais was successfully created.' }
+        format.html { redirect_to @pais, notice: 'Pais fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @pais }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PaisesController < ApplicationController
   def update
     respond_to do |format|
       if @pais.update(pais_params)
-        format.html { redirect_to @pais, notice: 'Pais was successfully updated.' }
+        format.html { redirect_to @pais, notice: 'Pais fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @pais }
       else
         format.html { render :edit }
@@ -53,13 +53,18 @@ class PaisesController < ApplicationController
 
   # DELETE /paises/1
   # DELETE /paises/1.json
-  def destroy
-    @pais.destroy
+ def destroy
     respond_to do |format|
-      format.html { redirect_to paises_url, notice: 'Pais was successfully destroyed.' }
-      format.json { head :no_content }
+      if @pais.destroy
+        format.html { redirect_to paises_url, notice: 'País fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El País no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

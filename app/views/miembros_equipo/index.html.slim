@@ -2,11 +2,18 @@
 
 .index-header 
   h1 
-    | Miembros de equipo  
+    | Miembros de Equipo 
     - if can? :create, MiembroEquipo
       a.btn.btn-info href=(new_miembro_equipo_path)
-        i.ace-icon.fa.fa-plus.bigger-110
+        i.fa.fa-plus.bigger-110
         |  Nuevo
+    .pull-right
+        a.btn.btn-default#pdf href=(miembros_equipo_audited_path)
+          | Auditorías
+        a.btn.btn-default#pdf href=(miembros_equipo_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(miembros_equipo_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead
@@ -26,10 +33,10 @@ table id="datatable" class="table table-bordered table-striped"
         td = miembro_equipo.tipo_y_nro_documento
         td = miembro_equipo.telefono
         td 
-          - if PersonaProyecto.where(persona_id: miembro_equipo.id).exists?
+          - if miembro_equipo.proyectos.exists?
             ul
-              - PersonaProyecto.where(persona_id: miembro_equipo.id).each do |pp|
-                li = Proyecto.find(pp.proyecto_id).nombre
+              - miembro_equipo.proyectos.each do |pp|
+                li = "#{pp.nombre}"
         td.no-print style="padding: 3px;"
           - if can? :show, MiembroEquipo          
             a href=(miembro_equipo_path(miembro_equipo))

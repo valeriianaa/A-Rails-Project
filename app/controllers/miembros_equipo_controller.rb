@@ -7,7 +7,10 @@ class MiembrosEquipoController < ApplicationController
     @miembros_equipo = MiembroEquipo.all
     respond_to do |format|
       format.html
-      #format.csv { send_data @miembros_equipo.to_csv, filename: "miembros_equipo-#{Date.today}.csv" }
+      format.pdf do
+        pdf = MiembrosEquipoPdf.new(@miembros_equipo)
+        send_data pdf.render, filename: "miembros_equipo#{@miembros_equipo}.pdf", type: "application/pdf", disposition: "inline"
+      end
       format.xls
     end
   end
@@ -15,6 +18,14 @@ class MiembrosEquipoController < ApplicationController
   # GET /miembros_equipo/1
   # GET /miembros_equipo/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+      format.pdf do
+        pdf = MiembroEquipoPdf.new(@miembro_equipo)
+        send_data pdf.render, filename: "miembro_equipo#{@miembro_equipo}.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   # GET /miembros_equipo/new
@@ -33,7 +44,7 @@ class MiembrosEquipoController < ApplicationController
 
     respond_to do |format|
       if @miembro_equipo.save
-        format.html { redirect_to @miembro_equipo, notice: 'Miembro equipo was successfully created.' }
+        format.html { redirect_to @miembro_equipo, notice: 'Miembro equipo fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @miembro_equipo }
       else
         format.html { render :new }
@@ -47,7 +58,7 @@ class MiembrosEquipoController < ApplicationController
   def update
     respond_to do |format|
       if @miembro_equipo.update(miembro_equipo_params)
-        format.html { redirect_to @miembro_equipo, notice: 'Miembro equipo was successfully updated.' }
+        format.html { redirect_to @miembro_equipo, notice: 'Miembro equipo fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @miembro_equipo }
       else
         format.html { render :edit }
@@ -58,12 +69,21 @@ class MiembrosEquipoController < ApplicationController
 
   # DELETE /miembros_equipo/1
   # DELETE /miembros_equipo/1.json
-  def destroy
-    @miembro_equipo.destroy
+ def destroy
     respond_to do |format|
-      format.html { redirect_to miembros_equipo_url, notice: 'Miembro equipo was successfully destroyed.' }
-      format.json { head :no_content }
+      if @miembro_equipo.destroy
+        format.html { redirect_to miembros_equipo_url, notice: 'Miembro de Equipo fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'Miembro de Equipo no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "MiembroEquipo"
   end
 
   private

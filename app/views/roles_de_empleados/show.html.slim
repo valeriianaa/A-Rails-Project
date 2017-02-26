@@ -1,4 +1,12 @@
 - breadcrumb :rol_de_empleado, @rol_de_empleado
+- if @rol_de_empleado.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@rol_de_empleado.errors.count, "error")} #{pluralize_without_count(@rol_de_empleado.errors.count, "prohibe", "prohiben")} eliminar este rol_de_empleado:"
+    ul
+      - @rol_de_empleado.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
 .row

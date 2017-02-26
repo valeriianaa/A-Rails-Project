@@ -1,4 +1,12 @@
 - breadcrumb :modelo, @modelo
+- if @modelo.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@modelo.errors.count, "error")} #{pluralize_without_count(@modelo.errors.count, "prohibe", "prohiben")} eliminar este Modelo:"
+    ul
+      - @modelo.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
 .row
@@ -25,6 +33,10 @@ p#notice = notice
   .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-success href=(edit_modelo_path(@modelo)) style="width:70px;" id="editar_modelo"
       |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
+  .col-xs-1 style="padding-right:40px;"
     a.btn.btn-block.btn-default href=(modelos_path) style="width:70px;" id="volver_modelo"
       |Volver
+  .col-xs-1 style="padding-right:40px;"
+    a.btn.btn-block.btn-primary href="/modelos/#{@modelo.id}.pdf" style="width:120px;" id="pdf_modelo"
+      i.fa.fa-file-pdf-o
+      |  Ver PDF

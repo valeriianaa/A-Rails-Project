@@ -1,4 +1,12 @@
 - breadcrumb :pais, @pais
+- if @pais.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@pais.errors.count, "error")} #{pluralize_without_count(@pais.errors.count, "prohibe", "prohiben")} eliminar este País:"
+    ul
+      - @pais.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
 .row

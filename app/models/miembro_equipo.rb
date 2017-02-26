@@ -6,5 +6,5 @@ class MiembroEquipo < Persona
 	belongs_to :proyecto
 
 	# def array_proyectos
-	# end
+	audited
 end

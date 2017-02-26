@@ -5,6 +5,14 @@ class RolesDeEmpleadosController < ApplicationController
   # GET /roles_de_empleados.json
   def index
     @roles_de_empleados = RolDeEmpleado.all
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = RolesDeEmpleadosPdf.new(@roles_de_empleados)
+        send_data pdf.render, filename: "roles_de_empleados#{@roles_de_empleados}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /roles_de_empleados/1
@@ -28,7 +36,7 @@ class RolesDeEmpleadosController < ApplicationController
 
     respond_to do |format|
       if @rol_de_empleado.save
-        format.html { redirect_to @rol_de_empleado, notice: 'Rol de empleado was successfully created.' }
+        format.html { redirect_to @rol_de_empleado, notice: 'Rol de empleado due creado exitosamente.' }
         format.json { render :show, status: :created, location: @rol_de_empleado }
       else
         format.html { render :new }
@@ -42,7 +50,7 @@ class RolesDeEmpleadosController < ApplicationController
   def update
     respond_to do |format|
       if @rol_de_empleado.update(rol_de_empleado_params)
-        format.html { redirect_to @rol_de_empleado, notice: 'Rol de empleado was successfully updated.' }
+        format.html { redirect_to @rol_de_empleado, notice: 'Rol de empleado fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @rol_de_empleado }
       else
         format.html { render :edit }
@@ -54,11 +62,20 @@ class RolesDeEmpleadosController < ApplicationController
   # DELETE /roles_de_empleados/1
   # DELETE /roles_de_empleados/1.json
   def destroy
-    @rol_de_empleado.destroy
     respond_to do |format|
-      format.html { redirect_to roles_de_empleados_url, notice: 'Rol de empleado was successfully destroyed.' }
-      format.json { head :no_content }
+      if @rol_de_empleado.destroy
+        format.html { redirect_to roles_de_empleados_url, notice: 'Rol de empleado fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'Rol de empleado no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
+  end
+
+  def audited
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where auditable_type: "RolDeEmpleado"
   end
 
   private

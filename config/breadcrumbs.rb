@@ -407,6 +407,12 @@ crumb :interes_new do
   parent :intereses
 end
 
+crumb :intereses_auditorias do 
+  link "Auditorías"
+  parent :intereses
+end
+
+
 #Miembros de Equipo--------------------------------------------
 crumb :miembros_equipo do
   link "Miembros de Equipo", miembros_equipo_path
@@ -424,6 +430,11 @@ end
 
 crumb :miembro_equipo_new do 
   link "Nuevo"
+  parent :miembros_equipo
+end
+
+crumb :miembros_equipo_auditorias do 
+  link "Auditorías"
   parent :miembros_equipo
 end
 
@@ -462,6 +473,10 @@ crumb :pago_new do
   parent :pagos
 end
 
+crumb :pagos_auditorias do 
+  link "Auditorías"
+  parent :pagos
+end
 #Paises--------------------------------------------
 crumb :paises do
   link "Paises", paises_path
@@ -609,6 +624,10 @@ crumb :rol_de_empleado_new do
   parent :roles_de_empleados
 end
 
+crumb :roles_de_empleado_auditorias do 
+  link "Auditorías"
+  parent :roles_de_empleados
+end
 #Systemsettings--------------------------------------------
 
 crumb :systemsetting_edit do |systemsetting|
@@ -658,6 +677,11 @@ end
 
 crumb :tipo_de_pago_new do 
   link "Nuevo"
+  parent :tipos_de_pago
+end
+
+crumb :tipos_de_pago_auditorias do 
+  link "Auditorías"
   parent :tipos_de_pago
 end
 

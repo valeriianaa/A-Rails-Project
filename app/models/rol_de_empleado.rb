@@ -4,4 +4,5 @@ class RolDeEmpleado < ActiveRecord::Base
 
 	validates :nombre, :departamento_id, presence: true
 	validates :nombre, uniqueness: { case_sensitive: false, scope: :departamento_id, message: "El nombre del rol ya existe para este departamento" }
+	audited
 end

@@ -39,7 +39,7 @@ class PagosController < ApplicationController
 
     respond_to do |format|
       if @pago.save
-        format.html { redirect_to @pago, notice: 'Pago was successfully created.' }
+        format.html { redirect_to @pago, notice: 'Pago fue creado exitosamente.' }
         format.json { render json: pago_path(@pago), status: :created, location: @pago }
       else
         # Es solo para que funcione los botones de agregar y remover NO SACAR
@@ -59,7 +59,7 @@ class PagosController < ApplicationController
       if @pago.update(pago_params)
         # CuotaPorCliente.update(@pago.cuota_por_cliente.id, montoAcreditado: @pago.cuota_por_cliente.setear_monto_acreditado(@pago.cuota_por_cliente))
         #@pago.cuota_por_cliente.montoAcreditado = @pago.cuota_por_cliente.setear_monto_acreditado(@pago.cuota_por_cliente)
-        format.html { redirect_to @pago, notice: 'Pago  was successfully updated.' }
+        format.html { redirect_to @pago, notice: 'Pago fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @pago }
       else
         format.html { render :edit }
@@ -74,7 +74,7 @@ class PagosController < ApplicationController
     @pago.restaurar_saldos
     @pago.destroy
     respond_to do |format|
-      format.html { redirect_to pagos_url, notice: 'Pago was successfully destroyed.' }
+      format.html { redirect_to pagos_url, notice: 'Pago fue eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

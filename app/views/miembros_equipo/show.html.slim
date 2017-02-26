@@ -1,4 +1,26 @@
 - breadcrumb :miembro_equipo, @miembro_equipo
+- if @miembro_equipo.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@miembro_equipo.errors.count, "error")} #{pluralize_without_count(@miembro_equipo.errors.count, "prohibe", "prohiben")} eliminar este miembro_equipo:"
+    ul
+      - @miembro_equipo.errors.full_messages.each do |message|
+        li = message
+p#notice = notice
+
+
+-if @miembro_equipo.proyectos.exists?
+  .row
+    .col-xs-1 style="padding-right:40px; margin-right:200px;"
+      a.btn.btn-block.btn-primary href="/miembros_equipo/#{@miembro_equipo.id}.pdf" style="width:260px;" id="pdf_miembro_equipo"
+        i.fa.fa-file-pdf-o
+        |  Ver Proyectos del Miembro de Equipo
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-primary href="/miembros_equipo/#{@miembro_equipo.id}.xls" style="width:280px;" id="excel_miembro_equipo"
+        i.fa.fa-file-excel-o
+        |  Proyectos del Miembro de Equipo - Excel
+
 p#notice = notice
 
 

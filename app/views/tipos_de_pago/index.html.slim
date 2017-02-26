@@ -2,12 +2,17 @@
 
 .index-header 
   h1 
-    | Tipos de pago  
+    | Tipos de Pago
     - if can? :create, TipoDePago
       a.btn.btn-info href=(new_tipo_de_pago_path)
-        i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
-
+    .pull-right
+        a.btn.btn-default#pdf href=(tipos_de_pago_audited_path)
+          | Auditorías
+        a.btn.btn-default#pdf href=(tipos_de_pago_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(tipos_de_pago_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 
 table id="datatable" class="table table-bordered table-striped" 
   thead

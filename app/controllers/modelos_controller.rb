@@ -10,6 +10,13 @@ class ModelosController < ApplicationController
   # GET /modelos/1
   # GET /modelos/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ModeloPdf.new(@modelo)
+        send_data pdf.render, filename: "modelo_#{@modelo.id}.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   # GET /modelos/new
@@ -28,7 +35,7 @@ class ModelosController < ApplicationController
 
     respond_to do |format|
       if @modelo.save
-        format.html { redirect_to @modelo, notice: 'Modelo was successfully created.' }
+        format.html { redirect_to @modelo, notice: 'Modelo fue creado exitosamente' }
         format.json { render :show, status: :created, location: @modelo }
       else
         format.html { render :new }
@@ -42,7 +49,7 @@ class ModelosController < ApplicationController
   def update
     respond_to do |format|
       if @modelo.update(modelo_params)
-        format.html { redirect_to @modelo, notice: 'Modelo was successfully updated.' }
+        format.html { redirect_to @modelo, notice: 'Modelo fue actualizado exitosamente' }
         format.json { render :show, status: :ok, location: @modelo }
       else
         format.html { render :edit }
@@ -54,10 +61,14 @@ class ModelosController < ApplicationController
   # DELETE /modelos/1
   # DELETE /modelos/1.json
   def destroy
-    @modelo.destroy
     respond_to do |format|
-      format.html { redirect_to modelos_url, notice: 'Modelo was successfully destroyed.' }
-      format.json { head :no_content }
+      if @modelo.destroy
+        format.html { redirect_to modelos_url, notice: 'Modelo fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Modelo no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
   end
 

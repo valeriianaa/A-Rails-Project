@@ -1,14 +1,15 @@
-- breadcrumb :pagos_auditorias
+- breadcrumb :intereses_auditorias
 .page-header
   h1
-    | Auditoria de Pagos
+    | Auditoria de Intereses
 
-table.table.table-striped.table-bordered.table-hover.dataTeableSpc
+table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
   thead
     tr
       th Accion
-      th Usuario que realizo la acción
-      th Pago Id
+      th Usuario
+      th Interes Id
+      th Interes Nombre
       th Cambios
       th Antes
       th Despues
@@ -19,6 +20,7 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc
         td = audit.action
         td = User.find(audit.user_id).persona.nombre_y_apellido
         td = a.auditable.try(:id)
+        td = Interes.find(audit.auditable.try(:id)).nombre
         td
           ul
             - audit.audited_changes.each do |k,v|
