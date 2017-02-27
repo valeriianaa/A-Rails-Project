@@ -32,7 +32,7 @@ gem 'slim-rails'
 
 gem 'bootstrap-sass', '~> 3.3.5'
 
-gem "minitest-rails"
+
 
 gem 'seed_dump'
 
@@ -70,6 +70,9 @@ gem 'carrierwave'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem "minitest-rails"
+  gem 'capybara'
+  gem 'rspec-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -79,8 +82,5 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  gem 'cucumber-rails', :require => false
-  # database_cleaner is not required, but highly recommended
-  gem 'database_cleaner'
 end
 

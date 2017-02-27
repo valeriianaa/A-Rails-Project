@@ -7,7 +7,7 @@ class Accion < ActiveRecord::Base
   validates :nombre, uniqueness: { case_sensitive: false}
   validates :key_name, uniqueness: { case_sensitive: false}
 
-  validates :modelo_ids, presence: true, :if => :modelo?
+  #validates :modelo_ids, presence: true, :if => :modelo?
 
   def modelo?
   	if Modelo.exists?
@@ -23,8 +23,6 @@ class Accion < ActiveRecord::Base
   }
 
   def self.human_attribute_name(*args)
-    puts "self.human_attribute_name"
-    puts "[args[0]]", args[0]
     HUMANIZED_ATTRIBUTES[args[0]] || super
   end
 

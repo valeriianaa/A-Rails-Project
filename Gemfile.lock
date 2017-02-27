@@ -81,24 +81,6 @@ GEM
     coffee-script-source (1.10.0)
     commonjs (0.2.7)
     concurrent-ruby (1.0.2)
-    cucumber (2.4.0)
-      builder (>= 2.1.2)
-      cucumber-core (~> 1.5.0)
-      cucumber-wire (~> 0.0.1)
-      diff-lcs (>= 1.1.3)
-      gherkin (~> 4.0)
-      multi_json (>= 1.7.5, < 2.0)
-      multi_test (>= 0.1.2)
-    cucumber-core (1.5.0)
-      gherkin (~> 4.0)
-    cucumber-rails (1.4.5)
-      capybara (>= 1.1.2, < 3)
-      cucumber (>= 1.3.8, < 4)
-      mime-types (>= 1.16, < 4)
-      nokogiri (~> 1.5)
-      railties (>= 3, < 5.1)
-    cucumber-wire (0.0.1)
-    database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -110,7 +92,6 @@ GEM
     diff-lcs (1.3)
     erubis (2.7.0)
     execjs (2.7.0)
-    gherkin (4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     gon (6.1.0)
@@ -161,7 +142,6 @@ GEM
     morrisjs-rails (0.5.1.1)
       railties (> 3.1, < 6)
     multi_json (1.12.1)
-    multi_test (0.1.2)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
@@ -211,6 +191,23 @@ GEM
     request_store (1.3.2)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rspec-core (3.5.4)
+      rspec-support (~> 3.5.0)
+    rspec-expectations (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-mocks (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-rails (3.5.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
+      rspec-support (~> 3.5.0)
+    rspec-support (3.5.0)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -285,13 +282,12 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.5)
   byebug
   cancan
+  capybara
   carrierwave
   chained-rails
   chronic
   client_side_validations
   coffee-rails (~> 4.1.0)
-  cucumber-rails
-  database_cleaner
   devise
   devise-i18n
   gon
@@ -307,6 +303,7 @@ DEPENDENCIES
   prawn-table
   rails (= 4.2.1)
   raphael-rails
+  rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   seed_dump
