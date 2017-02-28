@@ -72,6 +72,10 @@ class ProyectosController < ApplicationController
     respond_to do |format|
       format.html { render 'actividades_del_proyecto.html.slim' }
       format.json { render json: @proyecto }
+      format.pdf do
+        pdf = ActividadesProyectoPdf.new(@proyecto)
+        send_data pdf.render, filename: "actividades_del_proyecto#{@proyecto}.pdf", type: "application/pdf", disposition: "inline"
+      end
     end
   end
 

@@ -28,8 +28,7 @@ class ConfiguracionesController < ApplicationController
 
     respond_to do |format|
       if @configuracion.save
-        format.html { redirect_to @configuracion, notice: 'Configuracion was successfully created.' }
-        format.json { render :show, status: :created, location: @configuracion }
+        format.html { redirect_to root_path }
       else
         format.html { render :new }
         format.json { render json: @configuracion.errors, status: :unprocessable_entity }
@@ -42,8 +41,7 @@ class ConfiguracionesController < ApplicationController
   def update
     respond_to do |format|
       if @configuracion.update(configuracion_params)
-        format.html { redirect_to @configuracion, notice: 'Configuracion was successfully updated.' }
-        format.json { render :show, status: :ok, location: @configuracion }
+        format.html { redirect_to root_path}
       else
         format.html { render :edit }
         format.json { render json: @configuracion.errors, status: :unprocessable_entity }
@@ -69,6 +67,6 @@ class ConfiguracionesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def configuracion_params
-      params.require(:configuracion).permit(:nombre,:logo, :eslogan, :cuit, :condicion_iva, :numero_abandono, :tiempo_abandono, :calle, :nro_domicilio, :piso, :dpto, :telefono, :email, :pag_web, :pais_id, :provincia_id, :ciudad_id, :area_id)
+      params.require(:configuracion).permit(:nombre,:logotipo, :eslogan, :cuit, :condicion_iva, :numero_abandono, :tiempo_abandono, :calle, :nro_domicilio, :piso, :dpto, :telefono, :email, :pag_web, :pais_id, :provincia_id, :ciudad_id, :area_id)
     end
 end

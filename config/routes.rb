@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   
   resources :estados
   resources :pagos
+  match "ingresos_por_fechas" => "pagos#ingresos_por_fechas", :via =>[:get], as: "ingresos_por_fechas"
+  post "pagos/ajax_table_por_fechas" => "pagos#ajax_table_por_fechas"
+
   post "pagos/ajax_table_cuotas" => "pagos#ajax_table_cuotas"
   post "pagos/ajax_gon_variables" => "pagos#ajax_gon_variables"
   resources :conceptos_de_pago

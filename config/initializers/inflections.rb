@@ -58,4 +58,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'estadistica', 'estadisticas'
 	inflect.irregular 'notificacion', 'notificaciones'
 	inflect.irregular 'abandonado', 'abandonados'
+	inflect.irregular 'persona_evento', 'personas_eventos'
+	inflect.irregular 'PersonaEvento', 'PersonasEventos'
 end

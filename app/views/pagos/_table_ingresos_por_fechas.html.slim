@@ -1,0 +1,19 @@
+table class="table table-bordered table-striped" id="table_ingresos_fechas"
+  thead
+    tr
+      th Fecha
+      th Proyecto
+      th Responsable del contrato
+      th Concepto de pago
+      th Monto pagado
+
+  tbody
+    - @pagos_por_fechas.each do |pago|
+      tr
+        td = pago.fecha
+        td = pago.proyecto.nombre
+        td = pago.persona.nombre_y_apellido
+        td 
+          - pago.cuotas_por_cliente.each do |c|
+            li = "#{c.concepto_de_pago.nombre}"
+        td = pago.monto.round

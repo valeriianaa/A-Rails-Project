@@ -18,28 +18,28 @@ nav class="navbar navbar-static-top"
         li class="dropdown notifications-menu"
           a.dropdown-toggle aria-expanded="true" data-toggle="dropdown" href="#" 
             i.fa.fa-bell-o
-              - suma = 0
-              - if Proyecto.getAbandonados.any? == true
-                - suma += 1
-              - if CuotaPorCliente.getAtrasadas.any? == true
-                - suma += 1
-              - if (suma) > 0
-            span.label.label-warning #{suma}
+              / - suma = 0
+              / - if Proyecto.getAbandonados.any? == true
+              /   - suma += 1
+              / - if CuotaPorCliente.getAtrasadas.any? == true
+              /   - suma += 1
+              / - if (suma) > 0
+            /span.label.label-warning #{suma}
           ul.dropdown-menu
-            li.header Tienes #{suma} notificaciones
+            /li.header Tienes #{suma} notificaciones
             li
               .slimScrollDiv style=("position: relative; overflow: hidden; width: auto; height: 200px;") 
                 ul.menu style=("overflow: hidden; width: 100%; height: 200px;") 
-                  - if Proyecto.getAbandonados.any?
-                      li
-                        a href=(proyectos_abandonados_path)
-                          i.fa.fa-lightbulb-o.text-yellow
-                          | #{pluralize_without_count(Proyecto.getAbandonados.count, "Existe", "Existen")} #{"Proyecto".pluralize} en posible estado de abandono
-                  - if CuotaPorCliente.getAtrasadas.any?
-                      li
-                        a href=(root_path)
-                          i.fa.fa-calendar-minus-o.text-yellow
-                          | #{pluralize_without_count(CuotaPorCliente.getAtrasadas.count, "Existe", "Existen")} #{"Proyecto".pluralize} con cuotas atrasadas
+                  / - if Proyecto.getAbandonados.any?
+                  /     li
+                  /       a href=(proyectos_abandonados_path)
+                  /         i.fa.fa-lightbulb-o.text-yellow
+                  /         | #{pluralize_without_count(Proyecto.getAbandonados.count, "Existe", "Existen")} #{"Proyecto".pluralize} en posible estado de abandono
+                  / - if CuotaPorCliente.getAtrasadas.any?
+                  /     li
+                  /       a href=(root_path)
+                  /         i.fa.fa-calendar-minus-o.text-yellow
+                  /         | #{pluralize_without_count(CuotaPorCliente.getAtrasadas.count, "Existe", "Existen")} #{"Proyecto".pluralize} con cuotas atrasadas
       li class="dropdown tasks-menu"
       li class="dropdown user user-menu"
         a.dropdown-toggle data-toggle="dropdown" href="#" 

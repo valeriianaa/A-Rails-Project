@@ -5,7 +5,10 @@ class Persona < ActiveRecord::Base
 	belongs_to :area
 	belongs_to :tipo_documento
 	has_many :personas_proyectos, dependent: :destroy
-	has_many :proyectos , :through => :personas_proyectos, dependent: :nullify
+	has_many :proyectos , :through => :personas_proyectos
+
+	has_many :personas_eventos, dependent: :destroy
+	has_many :eventos , :through => :personas_eventos
 	
 	validates :codigo, :nombre, :apellido, :nroIdentificacion, presence: true
 	validates :tipo_documento_id, presence: true

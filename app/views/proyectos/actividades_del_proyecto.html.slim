@@ -6,7 +6,7 @@
     .pull-right
         / a.btn.btn-default#pdf href=(actividades_del_proyecto_audited_path(@proyecto))
         /   | Auditorías
-        a.btn.btn-default#pdf href=(actividades_path(format: "pdf")) title="Ver PDF"
+        a.btn.btn-default#pdf href=(actividades_del_proyecto_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
         a.btn.btn-default#excel href=(actividades_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
@@ -16,16 +16,30 @@
       th Etapa
       th Nombre de la Actividad
       th Fecha de Vencimiento
+      th Atrasado
       th Estado de la actividad
       th Fecha última actualización
       th colspan="3" Acciones
 
     tbody
-      - @proyecto.actividades_proyectos.each do |actividad_proyecto|
+      - @proyecto.actividades_proyectos.order(:actividad_id).each do |actividad_proyecto|
         tr
           td = Etapa.find(Actividad.find(actividad_proyecto.actividad_id).etapa_id).nombre
           td = actividad_proyecto.actividad.nombre
-          td = actividad_proyecto.fechaVencimiento
+          -if actividad_proyecto.fechaVencimiento != nil
+            td = I18n.localize(actividad_proyecto.fechaVencimiento, :format => :long)
+          -else
+            td
+          td
+            - if actividad_proyecto.actividad_atrasada == true
+              span.label.label-danger style="margin: 2px;"
+                |  Atrasado
+            -elsif (actividad_proyecto.estado != nil) and (actividad_proyecto.estado.ultimo == true)
+              span.label.label-success style="margin: 2px;"
+                |  Completado
+            -else
+              span.label.label-warning style="margin: 2px;"
+                |  Pendiente
           -if actividad_proyecto.historiales.exists?
             td = Estado.find(Historial.where(actividad_proyecto_id: actividad_proyecto.id).last.estado_id).nombre
           -else

@@ -11,7 +11,7 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"
       .field
-        = f.label :codigo, 'Nombre: (*)'
+        = f.label :codigo, 'Código: (*)'
         = f.text_field :codigo, :class => "form-control" 
       .field
         = f.label :nombre, 'Nombre: (*)'
@@ -21,7 +21,7 @@
         = f.text_area :descripcion, :class => "form-control"
       .field
         = f.label :persona_id, 'Expositor: (*)'
-        = f.collection_select :persona_id, Contacto.all, :id, :nombre_y_apellido ,{:prompt => "Expositor"}, {:class => 'form-control'}
+        = f.collection_select :persona_ids, Contacto.all, :id, :codigo ,{:prompt => "Expositor"}, {:multiple => true, :class => 'form-control'}
       .field
         = f.label :dia, 'Día: (*)'
         = f.date_field :dia

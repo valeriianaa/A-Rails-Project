@@ -104,10 +104,13 @@ rails g scaffold Evento nombre:string descripcion:text dia:date hora:time
 rails g scaffold EventoProyecto
 
 rails g migration AddEspecialidadDeContactoToContacto especialidad_de_contacto:references
-rails g migration AddPersonaRefToEvento persona:references
 
 rails g migration AddProyectoRefToEventoProyecto proyecto:references
 rails g migration AddEventoRefToEventoProyecto evento:references
+
+rails g migration CreatePersonaEvento
+rails g migration AddEventoRefToPersonaEvento evento:references
+rails g migration AddPersonaRefToPersonaEvento persona:references
 
 --Historiales
 rails g migration AddActividadProyectoRefToHistorial actividad_proyecto:references

@@ -31,12 +31,16 @@ p#notice = notice
               td = @evento.descripcion
             tr
               td
-                strong Expositor
-              td = @evento.persona.nombre_y_apellido
+                strong Expositor/es
+              td 
+                ul
+                  - @evento.personas.each do |p|
+                    li = p.nombre_y_apellido
+
             tr
               td
                 strong Fecha y Hora
-              td = "#{@evento.dia.strftime('%d-%m-%y')} #{@evento.hora.strftime('%H:%M hs')}"
+              td = "#{I18n.localize(@evento.dia, :format => :long)} #{@evento.hora.strftime('%H:%M hs')}"
             
            
 .row

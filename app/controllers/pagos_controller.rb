@@ -79,12 +79,32 @@ class PagosController < ApplicationController
     end
   end
 
+  def ingresos_por_fechas
+    #add_breadcrumb 'Pedidos'
+    respond_to do |format|
+      format.html { render 'ingresos_por_fechas.html.slim' }
+      format.json { render json: @proyecto }
+    end
+  end
+
   def ajax_table_cuotas
     @proyecto = Proyecto.find(params[:pago][:proyecto_id])
     @cuotas = CuotaPorCliente.where(proyecto_id: @proyecto.id, estado: false)
     
     render :partial => "cuota.html"
     
+  end
+
+  def ajax_table_por_fechas
+    @pagos = Pago.where(fecha: fecha1..fecha2)
+    
+    render :partial => "table_ingresos_por_fechas.html" 
+  end
+
+  def ajax_table_por_proyecto
+    @pagos = Pago.where(proyecto_id: unProyecto)
+    
+    render :partial => "table_ingresos_por_proyecto.html" 
   end
 
   def ajax_gon_variables

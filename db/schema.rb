@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221123343) do
+ActiveRecord::Schema.define(version: 20170227122909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -228,11 +228,9 @@ ActiveRecord::Schema.define(version: 20170221123343) do
     t.time     "hora"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "contacto_id"
     t.integer  "persona_id"
   end
 
-  add_index "eventos", ["contacto_id"], name: "index_eventos_on_contacto_id", using: :btree
   add_index "eventos", ["persona_id"], name: "index_eventos_on_persona_id", using: :btree
 
   create_table "eventos_proyectos", force: :cascade do |t|
@@ -363,6 +361,16 @@ ActiveRecord::Schema.define(version: 20170221123343) do
   add_index "personas", ["provincia_id"], name: "index_personas_on_provincia_id", using: :btree
   add_index "personas", ["rol_de_empleado_id"], name: "index_personas_on_rol_de_empleado_id", using: :btree
   add_index "personas", ["tipo_documento_id"], name: "index_personas_on_tipo_documento_id", using: :btree
+
+  create_table "personas_eventos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "evento_id"
+    t.integer  "persona_id"
+  end
+
+  add_index "personas_eventos", ["evento_id"], name: "index_personas_eventos_on_evento_id", using: :btree
+  add_index "personas_eventos", ["persona_id"], name: "index_personas_eventos_on_persona_id", using: :btree
 
   create_table "personas_proyectos", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -496,7 +504,6 @@ ActiveRecord::Schema.define(version: 20170221123343) do
   add_foreign_key "cuotas_por_cliente", "descuentos"
   add_foreign_key "cuotas_por_cliente", "pagos"
   add_foreign_key "cuotas_por_cliente", "proyectos"
-  add_foreign_key "eventos", "contactos"
   add_foreign_key "eventos", "personas"
   add_foreign_key "eventos_proyectos", "eventos"
   add_foreign_key "eventos_proyectos", "proyectos"
@@ -520,6 +527,8 @@ ActiveRecord::Schema.define(version: 20170221123343) do
   add_foreign_key "personas", "provincias"
   add_foreign_key "personas", "roles_de_empleados"
   add_foreign_key "personas", "tipo_documentos"
+  add_foreign_key "personas_eventos", "eventos"
+  add_foreign_key "personas_eventos", "personas"
   add_foreign_key "personas_proyectos", "personas"
   add_foreign_key "personas_proyectos", "proyectos"
   add_foreign_key "provincias", "paises"

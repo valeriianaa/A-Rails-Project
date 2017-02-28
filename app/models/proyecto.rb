@@ -85,12 +85,22 @@ class Proyecto < ActiveRecord::Base
       	proyectos
     end
 				
-	# def self.alguno_abandonado
-	# 	c = Configuracion.last
-	# 	if (ultima_actividad_actualizada + numero_tiempo) < Date.today
-	# 		return true
-	# 	end
-	# end
+	def obligatorias_completadas
+		cant_obligatorias = Actividad.where(etapa_id: self.etapa_id, obligatorio: true).count
+		obl_y_comp = 0
+		ActividadProyecto.where(proyecto_id: self.id, actividad_id: Actividad.where(etapa_id: self.etapa_id)).each do |act|
+        	if act.estado_id != nil
+        		if act.estado_ultimo_y_obligatorio == true
+        			obl_y_comp = obl_y_comp + 1
+        		end   
+        	end  
+		end
+		if cant_obligatorias == obl_y_comp
+			return true
+		else
+			return false
+		end
+	end
 
 	def acumulativo
     fecha = self.contratos.first.fecha_inicio

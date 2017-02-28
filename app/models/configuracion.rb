@@ -1,5 +1,5 @@
 class Configuracion < ActiveRecord::Base
-	#mount_uploader :logo, LogotipoUploader
+	mount_uploader :logotipo, LogotipoUploader
 	belongs_to :ciudad
 	belongs_to :pais
 	belongs_to :provincia

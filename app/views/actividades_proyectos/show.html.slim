@@ -20,14 +20,15 @@ p#notice = notice
 	          th Fecha y hora
 	          th Estado
 	          th Usuario que realizó la acción
-          tr
-            - Historial.where(actividad_proyecto_id: @actividad_proyecto.id).each do |h|
-                td = h.fechaHora.strftime('%d-%m-%y %H:%M hs')
-                td = h.estado.nombre 
-                -if h.user_id != nil
-                  td = h.user.persona.nombre_y_apellido
-                -else
-                  td
+          
+          - Historial.where(actividad_proyecto_id: @actividad_proyecto.id).each do |h|
+            tr
+              td = h.fechaHora.strftime('%d-%m-%y %H:%M hs')
+              td = h.estado.nombre 
+              -if h.user_id != nil
+                td = h.user.persona.nombre_y_apellido
+              -else
+                td
 
 
 .row
