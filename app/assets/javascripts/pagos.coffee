@@ -64,13 +64,13 @@ $(document).ready ->
 
             $("#pagos-table > tbody").empty()
 
-  $("form[id*='pago']").on 'click', '.remove_fields_pagos', (event) ->
+  $("form[id*='pago'][id!='new_tipo_de_pago']").on 'click', '.remove_fields_pagos', (event) ->
     $trfieldset = $(this).parent().parent()
     $trfieldset.find('input[type=hidden]').val('1')
     $trfieldset.hide()
     event.preventDefault()
 
-  $("form[id*='pago']").on 'click', '.add_fields_pagos', (event) ->
+  $("form[id*='pago'][id!='new_tipo_de_pago']").on 'click', '.add_fields_pagos', (event) ->
     if parseInt( $("#tipo_de_pago_size").val() ) > get_tp_ids().size()
       tp_ids = get_tp_ids()
 
@@ -97,7 +97,7 @@ $(document).ready ->
 
   tp_ids = []
 
-  $("form[id*='pago']").on("mousedown", ".select-tipos-de-pagos", (event) ->
+  $("form[id*='pago'][id!='new_tipo_de_pago']").on("mousedown", ".select-tipos-de-pagos", (event) ->
     $(this).data 'value', $(this).val()
     tp_ids = get_tp_ids()
 
@@ -119,7 +119,7 @@ $(document).ready ->
             .prop('readonly', false)
         
   click = false
-  $("form[id*='pago']").on("mousedown", "input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']", (event)->
+  $("form[id*='pago'][id!='new_tipo_de_pago']").on("mousedown", "input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']", (event)->
     last_indice = $("input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']:checked:last").data("indice")
     if last_indice == undefined
       last_indice = -1
@@ -138,14 +138,13 @@ $(document).ready ->
       setearTotales()
 
 
-  $("form[id*='pago']").on "change", 'select[name$="[descuento_id]"]', (event)-> 
+  $("form[id*='pago'][id!='new_tipo_de_pago']").on "change", 'select[name$="[descuento_id]"]', (event)-> 
     setearTotales()
 
-  $("form[id*='pago']").submit (event)->
+  $("form[id*='pago'][id!='new_tipo_de_pago']").submit (event)->
     event.preventDefault()
     $.post( $(this).prop("action") + ".json", $("form").serialize())
       .fail (data)->
-        console.log data
         if data.status == 422
           errores_html = '<div id="error_explanation">\
           <h2>COUNT error/es prohiben almacenar este Pago:</h2>\
