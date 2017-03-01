@@ -4,9 +4,11 @@ class Persona < ActiveRecord::Base
 	belongs_to :provincia
 	belongs_to :area
 	belongs_to :tipo_documento
+	
 	has_many :personas_proyectos, dependent: :destroy
 	has_many :proyectos , :through => :personas_proyectos
 	has_many :users, dependent: :restrict_with_error
+	has_many :contratos, dependent: :restrict_with_error
 
 	has_many :personas_eventos, dependent: :destroy
 	has_many :eventos , :through => :personas_eventos

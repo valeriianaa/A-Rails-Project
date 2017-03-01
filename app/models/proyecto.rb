@@ -11,7 +11,7 @@ class Proyecto < ActiveRecord::Base
 	has_many :pagos
 
 	has_one :cuenta
-	has_many :contratos
+	has_many :contratos, dependent: :restrict_with_error
 	has_many :historiales
 
 	has_many :cuotas_por_cliente, dependent: :destroy

@@ -59,10 +59,14 @@ class ProyectosController < ApplicationController
   # DELETE /proyectos/1
   # DELETE /proyectos/1.json
   def destroy
-    @proyecto.destroy
     respond_to do |format|
-      format.html { redirect_to proyectos_url, notice: 'Proyecto was successfully destroyed.' }
-      format.json { head :no_content }
+      if @proyecto.destroy
+        format.html { redirect_to etapas_url, notice: 'Proyecto fue eliminada exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Proyecto no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
   end
 
