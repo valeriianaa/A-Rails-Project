@@ -5,28 +5,30 @@
 //= require jquery.chained
 
 $(document).ready ->
-  $("#proyecto_provincia_id").chained("#proyecto_pais_id")
-  $("#proyecto_ciudad_id").chained("#proyecto_pais_id, #proyecto_provincia_id")
-  $("#proyecto_rol_de_empleado_id").chained("#proyecto_departamento_id")
-  $("#proyecto_empleado_id").chained("#proyecto_departamento_id, #proyecto_rol_de_empleado_id")
-  $('#proyectos_table').dataTable()
-  $('#miembro_equipo_id').select2
-    placeholder: "Seleccione uno o varios contactos..."  
+  if $('#velocidad').data('labels') != undefined
 
-  # Morris.Area
-  #   element: 'acumulativo'
-  #   data: $('#acumulativo').data('actividades')
-  #   xkey: $('#acumulativo').data('fechas')
-  #   ykeys: ['Done', 'Doing', 'To do']
-  #   labels: ['Done', 'Doing', 'To do']
-  #   parseTime: false
+    $("#proyecto_provincia_id").chained("#proyecto_pais_id")
+    $("#proyecto_ciudad_id").chained("#proyecto_pais_id, #proyecto_provincia_id")
+    $("#proyecto_rol_de_empleado_id").chained("#proyecto_departamento_id")
+    $("#proyecto_empleado_id").chained("#proyecto_departamento_id, #proyecto_rol_de_empleado_id")
+    $('#proyectos_table').dataTable()
+    $('#miembro_equipo_id').select2
+      placeholder: "Seleccione uno o varios contactos..."  
 
-  # Morris.Line
-  #   element: 'velocidad'
-  #   data: $('#velocidad').data('estados')
-  #   xkey: $('#velocidad').data('fechas')
-  #   ykeys: ['To do', 'Doing', 'Done']
-  #   labels: $('#velocidad').data('labels')
-  #   parseTime: false
+    Morris.Area
+      element: 'acumulativo'
+      data: $('#acumulativo').data('actividades')
+      xkey: 'semana'
+      ykeys: ['To do', 'Doing', 'Done']
+      labels: $('#velocidad').data('labels')
+      parseTime: false
 
-  
+    Morris.Line
+      element: 'velocidad'
+      data: $('#velocidad').data('estados')
+      xkey: 'semana'
+      ykeys: ['To do', 'Doing', 'Done']
+      labels: $('#velocidad').data('labels')
+      parseTime: false
+
+    

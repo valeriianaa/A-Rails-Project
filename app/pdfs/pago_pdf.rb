@@ -20,10 +20,11 @@ class PagoPdf < Prawn::Document
 		move_down 20
 		table([[empresa_detalles, pago_numero]]) do |t|
 			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
+			t.cells[0,1].align = :center
+			t.cells[0,1].valign = :center
+			t.cells[0,1].size = 20
 			t.width = bounds.width
-			t.row(0).font_size = 30
 			t.row(0).font_style = :bold
-			t.row(0).padding = 50
 		end
 
 		move_down 5
@@ -56,7 +57,7 @@ class PagoPdf < Prawn::Document
 			t.row(1).align = :center
 		end
 
-		move_down 20
+		move_down 5
 		table(vencimientos_rows) do |t|
 			t.column_widths = [200,200,140]
 			t.width = bounds.width
@@ -99,13 +100,18 @@ class PagoPdf < Prawn::Document
 	# end
 
 	def pago_numero
-		"Fecha: #{@pago.fecha}\nRecibo N°: #{@pago.id}\n"
+		"Recibo N°: #{@pago.id}\nFecha: #{@pago.fecha}\n"
 	end
 
 	def empresa_detalles
 		if Configuracion.count > 0
 			c = Configuracion.last
-			return [ ["#{c.nombre}"], ["#{c.condicion_iva.capitalize}"], [{:image => c.logo, :scale => 0.5}]]
+			if c.condicion_iva = "ri"
+				retorno = "Responsable Inscripto"
+			end
+			image_path = Configuracion.last.logotipo.current_path 
+			#"#{c.nombre}\n #{retorno}"
+			return [[{:image => image_path, :scale => 0.5}],["#{c.nombre}\n #{retorno}"]]
 		else
 			return [["##--##"],["##--##"],["##--##"]]
 		end

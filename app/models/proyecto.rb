@@ -70,7 +70,7 @@ class Proyecto < ActiveRecord::Base
 
 	def abandonado
 		c = Systemsetting.last
-		if (self.ultima_actividad_actualizada + c.numero_tiempo) < Date.today
+		if (self.ultima_actividad_actualizada + c.numero_tiempo) < Time.now
 			return true
 		end
 	end
@@ -102,50 +102,87 @@ class Proyecto < ActiveRecord::Base
 		end
 	end
 
-	def acumulativo
+
+  def acumulativo
     fecha = self.contratos.first.fecha_inicio
     retorno = Array.new
+	fecha = fecha - 1.week
+	contenido = Hash.new
+  	contenido_aux = Hash.new
+	contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
+	Estado.all.each_with_index do |e, i|
+		if actividades_proyectos.exists?
+			contenido_aux[i] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+	    	contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+    	end
+    end
     labels = Array.new
-    array_semana = Array.new
     while fecha <= Date.today
-    	hash_semana = Hash.new
-	    hash_semana[:x] = fecha.beginning_of_week.strftime('%d-%m-%y')
 	    contenido = Hash.new
-	    Estado.all.each do |e|
+	    contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
+	    Estado.all.each_with_index do |e,i|
 	    	if actividades_proyectos.exists?
-	    		contenido[e.nombre.to_sym] = actividades_proyectos.where(updated_at: (fecha..fecha + 1.week), estado_id: e.id).count
+	    		contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+	    		if contenido_aux[i] < contenido[e.nombre.to_sym]
+	    			contenido_aux[i] = contenido[e.nombre.to_sym]
+	    		else
+	    			contenido[e.nombre.to_sym] = contenido[e.nombre.to_sym] + contenido_aux[i]
+	    			contenido_aux[i] = contenido[e.nombre.to_sym]
+	    		end
 	    	end
 	    end
 	    retorno << contenido
 	    fecha = fecha + 1.week
-	    array_semana << hash_semana
-	  end
-	  Estado.all.each do |e|
+	end
+	contenido = Hash.new
+	contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
+	Estado.all.each_with_index do |e,i|
+    	if actividades_proyectos.exists?
+    		contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+    		if contenido_aux[i] < contenido[e.nombre.to_sym]
+    			contenido_aux[i] = contenido[e.nombre.to_sym]
+    		else
+    			contenido[e.nombre.to_sym] = contenido[e.nombre.to_sym] + contenido_aux[i]
+    			contenido_aux[i] = contenido[e.nombre.to_sym]
+    		end
+    	end
+    end
+    retorno << contenido
+	Estado.all.each do |e|
 	    labels << e.nombre
-	  end
-	  return [array_semana , retorno, labels]
+	end
+	return [retorno, labels]
   end
 
   def velocidad
   	fecha = self.contratos.first.fecha_inicio
     retorno = Array.new
+	fecha = fecha - 1.week
+	contenido = Hash.new
+	contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
+	Estado.all.each do |e|
+    	contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+    end
     labels = Array.new
-    array_semana = Array.new
     while fecha <= Date.today
-    	hash_semana = Hash.new
-	    hash_semana[:x] = fecha.beginning_of_week.strftime('%d-%m-%y')
     	contenido = Hash.new
+	    contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
 	    Estado.all.each do |e|
-	    	contenido[e.nombre.to_sym] = historiales.where(created_at: (fecha..fecha + 1.week), estado_id: e.id).count
+	    	contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
 	    end
 	    retorno << contenido
 	    fecha = fecha + 1.week
-	  	array_semana << hash_semana
-		end
-		Estado.all.each do |e|
-		  labels << e.nombre
-		end
-		return [array_semana , retorno, labels]
+	end
+	contenido = Hash.new
+	contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
+	Estado.all.each do |e|
+    	contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+    end
+    retorno << contenido
+	Estado.all.each do |e|
+		labels << e.nombre
+	end
+	return [retorno, labels]
   end
 
 end

@@ -1,14 +1,6 @@
-
-/ CANCAN no se lleva bien con los else
--if can? :by_persona_type, Proyecto
-  - @index_proyectos = current_user.persona.proyectos.getAbandonados
-
--if current_user.rol? :super_admin
-  - @index_proyectos = Proyecto.getAbandonados
-  
 .index-header
   h1 
-    | Proyectos en estado de abandono
+    | Proyectos con cuotas abandonadas
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead
@@ -37,4 +29,5 @@ table id="datatable" class="table table-bordered table-striped"
           - if can? :show, Proyecto          
             a href=(proyecto_path(proyecto))
               i.fa.fa-search
+
 br

@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   match 'proyectos/:id/eventos'=> 'proyectos#eventosProyecto', :via => [:get], as: :proyecto_eventos
   match 'proyectos/:id/estadisticas'=> 'proyectos#estadisticas', :via => [:get], as: :proyecto_estadisticas
   match 'proyectos_abandonados'=> 'proyectos#proyectos_abandonados', :via => [:get], as: :proyectos_abandonados
+  match 'proyectos_cuotas_atrasadas'=> 'proyectos#proyectos_con_cuotas_atrasadas', :via => [:get], as: :proyectos_cuotas_atrasadas
   #resources :users
   devise_for :users, :path => 'user', :controllers => {:registrations => "registrations"}
   #devise_for :users, :path_prefix => 'd'

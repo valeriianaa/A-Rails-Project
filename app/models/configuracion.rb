@@ -5,7 +5,7 @@ class Configuracion < ActiveRecord::Base
 	belongs_to :provincia
 	belongs_to :area
 
-	validates :logo, :nombre, :cuit, :condicion_iva, :presence => true
+	validates :nombre, :cuit, :condicion_iva, :presence => true
 	validates :pais_id, :provincia_id, :ciudad_id, :area_id, :presence => true
 	validates :cuit, :uniqueness => true
 	

@@ -102,11 +102,6 @@ ul.sidebar-menu
             a href=(pagos_path)
               i.fa.fa-angle-double-right
               | Pagos
-        - if can? :index, Pago            
-          li#tree
-            a href=""
-              i.fa.fa-angle-double-right
-              | Ver Ingresos
   - if can? :index, Contacto or can? :index, EspecialidadDeContacto or can? :index, Evento or can? :index, EventoProyecto
     li.treeview#lista-cabecera
       a href=''

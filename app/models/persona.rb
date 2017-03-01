@@ -13,7 +13,7 @@ class Persona < ActiveRecord::Base
 	
 	validates :codigo, :nombre, :apellido, :nroIdentificacion, presence: true
 	validates :tipo_documento_id, presence: true
-	validates :pais_id, :provincia_id, :ciudad_id, presence: true
+	validates :pais_id, :provincia_id, :ciudad_id, :area_id, presence: true
 	validates :calle, :nroDomicilio, presence: true
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 	#validates :telefono, :numericality => { :greater_than => 0}

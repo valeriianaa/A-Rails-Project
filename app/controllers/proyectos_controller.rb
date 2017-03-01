@@ -116,7 +116,22 @@ class ProyectosController < ApplicationController
 
     respond_to do |format|
       format.html { render "proyectos_abandonados.html.slim"}
-      format.json { render json: @productos }
+      #format.json { render json: @productos }
+    end
+  end
+
+  def proyectos_con_cuotas_atrasadas
+    @proyectos = Array.new
+    aux = CuotaPorCliente.getAtrasadas.map {|e| e.proyecto_id}
+    aux = aux.uniq
+    aux.each do |i|
+      p = Proyecto.find(i)
+      @proyectos << p
+    end
+
+    respond_to do |format|
+      format.html { render "proyectos_con_cuotas_atrasadas.html.slim"}
+      #format.json { render json: @productos }
     end
   end
 

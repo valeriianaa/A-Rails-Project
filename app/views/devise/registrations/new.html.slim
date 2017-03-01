@@ -9,7 +9,7 @@ h1 Nuevo Usuario
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
-        = f.label :persona_id, 'Empleado: (*)'
+        = f.label :persona_id, 'Persona: (*)'
         = f.collection_select :persona_id, Persona.all, :id, :nombre_y_apellido, {:prompt => "Seleccione una persona"}, {:class => 'form-control'}
       .field
         = f.label :email, 'Correo electrónico: (*)'

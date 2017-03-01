@@ -538,6 +538,11 @@ crumb :proyecto_new do
   parent :proyectos
 end
 
+crumb :estadisticas do |proyecto|
+  link "Estadisticas", proyecto_estadisticas_path(proyecto)
+  parent :proyecto, proyecto
+end
+
 crumb :actividades_proyectos do |proyecto|
   link "Actividades del proyecto", actividades_del_proyecto_path(proyecto)
   parent :proyecto, proyecto
