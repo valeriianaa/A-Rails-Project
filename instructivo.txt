@@ -1,0 +1,36 @@
+#############################################################
+### Instrucciones de Instalacion para utilizar el Sistema ###
+#############################################################
+
+Requisitos:
+
+1. Postgresql 9.3
+2. Ruby 2.1
+3. Gem Bundler
+
+Instrucciones:
+
+- Instalar Ruby 2.1.
+- Instalar la gema, bundler
+- Instalar Postgresql 9.3
+
+Una ves instalados todos estos componentes, ubicarse en el directorio del proyecto
+a traves de lineas de comandos, y ejecutar el siguiente comando: 
+
+bundle install
+
+Este se encargara de instalar en su sistema todas las dependencias de este proyecto, desarrollado con Ruby on Rails v. 4.
+
+Una ves instalados todas las dependencias, es necesario configurar la Base de Datos.
+Para ello dirijase a config/database.yml y configure los datos para acceder a la base de datos que usted decida en Postgresql 9.3.
+
+Una vez configurada la conexion a la base de datos, sera necesario cargar los datos semillas (o datos iniciales) con los siguientes comandos, a traves de una consola en el directorio raiz del proyecto.
+
+Nota: Tenga en cuenta el archivo "bdsemillas.sql" que esta adjunto en el proyecto.
+
+rake db:create
+psql "nombre_base_de_datos" < bdsemillas.sql
+
+Una vez que haya realizado todas estas operaciones, podra ejecutar el servidor por defecto de rails con el siguiente comando. Esto en el directorio raiz del proyecto.
+
+rails s
