@@ -6,8 +6,6 @@ class CreateConfiguraciones < ActiveRecord::Migration
       t.string :eslogan
       t.string :cuit
       t.string :condicion_iva
-      t.integer :numero_abandono
-      t.string :tiempo_abandono
       t.string :calle
       t.string :nro_domicilio
       t.string :piso

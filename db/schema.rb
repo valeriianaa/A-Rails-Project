@@ -103,8 +103,6 @@ ActiveRecord::Schema.define(version: 20170227122909) do
     t.string   "eslogan"
     t.string   "cuit"
     t.string   "condicion_iva"
-    t.integer  "numero_abandono"
-    t.string   "tiempo_abandono"
     t.string   "calle"
     t.string   "nro_domicilio"
     t.string   "piso"
@@ -112,8 +110,8 @@ ActiveRecord::Schema.define(version: 20170227122909) do
     t.string   "telefono"
     t.string   "email"
     t.string   "pag_web"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "pais_id"
     t.integer  "provincia_id"
     t.integer  "ciudad_id"
@@ -433,6 +431,8 @@ ActiveRecord::Schema.define(version: 20170227122909) do
   add_index "roles_de_empleados", ["departamento_id"], name: "index_roles_de_empleados_on_departamento_id", using: :btree
 
   create_table "systemsettings", force: :cascade do |t|
+    t.integer  "numero_abandono"
+    t.string   "tiempo_abandono"
     t.integer  "tipo_de_pago_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false

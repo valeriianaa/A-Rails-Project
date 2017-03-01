@@ -28,8 +28,7 @@ class SystemsettingsController < ApplicationController
 
     respond_to do |format|
       if @systemsetting.save
-        format.html { redirect_to @systemsetting, notice: 'Systemsetting was successfully created.' }
-        format.json { render :show, status: :created, location: @systemsetting }
+        format.html { redirect_to root_path, notice: 'Se Creó la Configuración Correctamente.' }
       else
         format.html { render :new }
         format.json { render json: @systemsetting.errors, status: :unprocessable_entity }
@@ -43,7 +42,6 @@ class SystemsettingsController < ApplicationController
     respond_to do |format|
       if @systemsetting.update(systemsetting_params)
         format.html { redirect_to edit_systemsetting_path(@systemsetting), notice: 'Se Actualizo la Configuracion Correctamente.' }
-        format.json { render :show, status: :ok, location: @systemsetting }
       else
         format.html { render :edit }
         format.json { render json: @systemsetting.errors, status: :unprocessable_entity }
@@ -69,6 +67,6 @@ class SystemsettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def systemsetting_params
-      params.require(:systemsetting).permit(:tipo_de_pago_id)
+      params.require(:systemsetting).permit(:tipo_de_pago_id, :numero_abandono, :tiempo_abandono)
     end
 end

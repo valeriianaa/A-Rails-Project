@@ -86,7 +86,9 @@
       .field
         = f.label :etapa_id, 'Etapa a la que pertenece: (*)'
         = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {:prompt => "Seleccione una Etapa"}, {:id => 'etapa_id', :class => 'form-control'}
+      br
       .field
+        h4 Seleccione las siguientes opciones en orden para asignar un empleado al proyecto
         = f.label :departamento_id, {class: "control-label"}
         br
           select#proyecto_departamento_id.form-control.select2 name="proyecto[departamento_id]"

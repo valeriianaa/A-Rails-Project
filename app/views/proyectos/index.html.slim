@@ -7,13 +7,20 @@
 -if current_user.rol? :super_admin
   - @index_proyectos = Proyecto.all
   
-.index-header
+.index-header 
   h1 
-    | Proyectos  
+    | Proyectos
     - if can? :create, Proyecto
       a.btn.btn-info href=(new_proyecto_path)
-        i.ace-icon.fa.fa-plus.bigger-110
+        i.fa.fa-plus.bigger-110
         |  Nuevo
+    .pull-right
+        a.btn.btn-default#pdf href=(proyectos_audited_path)
+          | Auditorías
+        / a.btn.btn-default#pdf href=(miembros_equipo_path(format: "pdf")) title="Ver PDF"
+        /   i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href=(proyectos_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead
