@@ -15,7 +15,10 @@
         = content_tag "tr", data: {monto_total: cuota_por_cliente.montoTotal } do|a|
           td = cuota_por_cliente.concepto_de_pago.nombre
           td = cuota_por_cliente.montoTotal
-          td = cuota_por_cliente.estado
+          - if cuota_por_cliente.estado == false
+            td No Pagado
+          -else
+            td Pagado
           td
             ul 
               - cuota_por_cliente.concepto_de_pago.vencimientos.each do |vencimiento|

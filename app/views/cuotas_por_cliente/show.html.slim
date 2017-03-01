@@ -13,7 +13,7 @@ p#notice = notice
             tr
               td
                 strong Proyecto
-              td = @cuota_por_cliente.proyecto.nombre
+              td = @cuota_por_cliente.proyecto.codigo
             tr
               td
                 strong Concepto de pago
@@ -32,9 +32,10 @@ p#notice = notice
               th Fecha
               th Porcentaje de Interés
             - @cuota_por_cliente.concepto_de_pago.vencimientos.each do |vencimiento|
-              tr 
-                td = I18n.localize(vencimiento.fecha, :format => :long)
-                td = vencimiento.interes.porcentaje
+              -if vencimiento.fecha < Date.today
+                tr 
+                  td = I18n.localize(vencimiento.fecha, :format => :long)
+                  td = vencimiento.interes.porcentaje
         br
         table.table.table-bordered
           tbody

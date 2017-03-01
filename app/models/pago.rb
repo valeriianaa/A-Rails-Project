@@ -82,21 +82,39 @@ class Pago < ActiveRecord::Base
   def setear_monto_de_acuerdo_a_saldo
     montoAcreditado = 0
     self.pagos_metodos.each {|pm| montoAcreditado += pm.monto }
-    
-    if cuenta.saldo > 0
-      if cuenta.saldo > self.monto
-        cuenta.saldo = cuenta.saldo - self.monto
-      else
-        self.monto = self.monto - cuenta.saldo
+
+    #si un tipo de pago fue configurado como saldo para debitar, lo busca consultando a systemsetting
+    if Systemsetting.count > 0
+      s = Systemsetting.last
+      tipo_pago_saldo = TipoDePago.find(s.tipo_de_pago_id)
+      self.pagos_metodos.each do |pm|
+        if pm.tipo_de_pago == tipo_pago_saldo
+          if cuenta.saldo > self.monto
+            cuenta.saldo = cuenta.saldo - self.monto
+          elsif cuenta.saldo <= self.monto
+            cuenta.saldo = 0
+          end
+        else
+          cuenta.saldo = cuenta.saldo + (montoAcreditado - self.monto)
+        end
       end
-      if montoAcreditado > self.monto
-        cuenta.saldo = (montoAcreditado - self.monto)
-      end
-    elsif cuenta.saldo == 0
-      if montoAcreditado > self.monto
-        cuenta.saldo = (montoAcreditado - self.monto)
-      end
+    else #si nada fue configurado como saldo, trata a todos los tipos de pago de la misma manera
+      cuenta.saldo = cuenta.saldo + (montoAcreditado - self.monto)
     end
+    # if cuenta.saldo > 0
+    #   if cuenta.saldo > self.monto
+    #     cuenta.saldo = cuenta.saldo - self.monto
+    #   else
+    #     self.monto = self.monto - cuenta.saldo
+    #   end
+    #   if montoAcreditado > self.monto
+    #     cuenta.saldo = (montoAcreditado - self.monto)
+    #   end
+    # elsif cuenta.saldo == 0
+    #   if montoAcreditado > self.monto
+    #     cuenta.saldo = (montoAcreditado - self.monto)
+    #   end
+    # end
   end
 
   def update_descuentos_cuotas(cuotas_descuento_param)

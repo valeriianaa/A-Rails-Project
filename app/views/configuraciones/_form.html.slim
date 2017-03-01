@@ -81,13 +81,6 @@
       .field
         = f.label :dpto, 'Departamento:'
         = f.text_field :dpto, :class => "form-control"
-  .box#estado style="width:100%"
-    .box-header.with-border
-      h3 Periodo para notificar abandono de proyecto
-    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"     
-      .field.form-inline
-        = f.number_field :numero_abandono, {:class => "form-control", :style => "width:40%; margin-right:20px;"}
-        = f.select :tiempo_abandono, options_for_select([["Minutos","minutes"],["Horas","hours"],["Días","days"],["Semanas", "weeks"],["Meses", "months"],["Años", "years"]]), {} ,{:class => "form-control", :style => "width:40%" }
 
   br
     button.btn.btn-primary type="submit" 

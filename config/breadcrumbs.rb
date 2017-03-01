@@ -528,6 +528,16 @@ crumb :proyecto do |proyecto|
   parent :proyectos
 end
 
+crumb :proyecto_edit do |proyecto|
+  link "Editar", proyecto
+  parent :proyectos
+end
+
+crumb :proyecto_new do 
+  link "Nuevo"
+  parent :proyectos
+end
+
 crumb :actividades_proyectos do |proyecto|
   link "Actividades del proyecto", actividades_del_proyecto_path(proyecto)
   parent :proyecto, proyecto

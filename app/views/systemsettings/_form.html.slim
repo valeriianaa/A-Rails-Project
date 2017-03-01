@@ -1,8 +1,8 @@
 p#notice = notice
 
 .box.box-info style="width:100%"
-.box-header.with-border
-  h3 Configuraciones Generales del Sistema
+  .box-header.with-border
+    h3 Configuraciones Generales del Sistema
 
 = form_for @systemsetting, html: {class: "form-horizontal"} do |f|
   - if @systemsetting.errors.any?
@@ -12,17 +12,22 @@ p#notice = notice
         - @systemsetting.errors.full_messages.each do |message|
           li = message
 
-  .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
-    .form-group
-      = f.label :tipo_pago_saldo, 'Seleccione el Tipo de Pago "Saldo"? ', class: "col-sm-4 control-label"
-      .col-sm-8
-        = f.collection_select :tipo_de_pago_id, TipoDePago.all, :id, :nombre
+  .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"
+    .field
+      = f.label :tipo_pago_saldo, 'Seleccione el Tipo de Pago que debitará de la cuenta: ', class: "control-label"
+      = f.collection_select :tipo_de_pago_id, TipoDePago.all, :id, :nombre, {},{:class => "form-control", :style => "width:40%; margin-right:20px;"}
+
+    br
+    =f.label 'Periodo para notificar abandono de proyecto'
+    .field.form-inline
+      = f.number_field :numero_abandono, {:class => "form-control", :style => "width:40%; margin-right:20px;"}
+      = f.select :tiempo_abandono, options_for_select([["Minutos","minutes"],["Horas","hours"],["Días","days"],["Semanas", "weeks"],["Meses", "months"],["Años", "years"]]), {} ,{:class => "form-control", :style => "width:40%" }
 
   .box-footer.center
     = f.submit "Guardar", class: "btn btn-primary"
 
   / .actions 
-
+/
       / .box-body
       /   .form-group
       /     label.col-sm-2.control-label for="inputEmail3"  Email

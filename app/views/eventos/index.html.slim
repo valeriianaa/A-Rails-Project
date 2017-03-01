@@ -34,7 +34,10 @@ table id="datatable" class="table table-bordered table-striped"
         td = evento.descripcion
         td = evento.dia.strftime('%d-%m-%y')
         td = evento.hora.strftime('%H:%M')
-        td = evento.persona.nombre_y_apellido
+        td 
+          ul
+            - evento.personas.each do |p|
+              li = p.nombre_y_apellido
         td.no-print style="padding: 3px;"
           - if can? :show, Evento
             a href=(evento_path(evento))

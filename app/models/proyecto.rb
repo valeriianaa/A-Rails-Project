@@ -69,7 +69,7 @@ class Proyecto < ActiveRecord::Base
 	end
 
 	def abandonado
-		c = Configuracion.last
+		c = Systemsetting.last
 		if (self.ultima_actividad_actualizada + c.numero_tiempo) < Date.today
 			return true
 		end

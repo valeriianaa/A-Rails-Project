@@ -9,7 +9,9 @@ $(document).ready ->
   $("#proyecto_ciudad_id").chained("#proyecto_pais_id, #proyecto_provincia_id")
   $("#proyecto_rol_de_empleado_id").chained("#proyecto_departamento_id")
   $("#proyecto_empleado_id").chained("#proyecto_departamento_id, #proyecto_rol_de_empleado_id")
-  $('#proyectos_table').dataTable()  
+  $('#proyectos_table').dataTable()
+  $('#miembro_equipo_id').select2
+    placeholder: "Seleccione uno o varios contactos..."  
 
   # Morris.Area
   #   element: 'acumulativo'
