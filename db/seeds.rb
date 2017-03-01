@@ -733,6 +733,10 @@ TipoDePago.create!([
   {nombre: "Saldo de cuenta"}
 ])
 
+Systemsetting.create!([
+  {numero_abandono: 5, tiempo_abandono: "minutes", tipo_de_pago_id: 4}
+])
+
 ConceptoDePago.create!([
   {codigo: "CP-001", nombre: "Cuota de Enero", descripcion: "Enero 2017", monto: 200.0},
   {codigo: "CP-002", nombre: "Cuota de Febrero", descripcion: "Febrero 2017", monto: 200.0},
@@ -868,11 +872,11 @@ CuotaPorCliente.create!([
   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 18, contrato_id: 18, pago_id: nil, descuento_id: nil},
   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 18, contrato_id: 18, pago_id: nil, descuento_id: nil},
   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 18, contrato_id: 18, pago_id: nil, descuento_id: nil},
-  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 18, contrato_id: 18, pago_id: nil, descuento_id: nil}
+  {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 18, contrato_id: 18, pago_id: nil, descuento_id: nil}  
 ])
 
 Cuenta.create!([
-  {saldo: 0.0, proyecto_id: 1},
+  {saldo: 24.0, proyecto_id: 1},
   {saldo: 0.0, proyecto_id: 2},
   {saldo: 0.0, proyecto_id: 3},
   {saldo: 0.0, proyecto_id: 4},
@@ -892,6 +896,22 @@ Cuenta.create!([
   {saldo: 0.0, proyecto_id: 18}
 ])
 
+Pago.create!([
+  {fecha: "2017-03-01", monto: 288.0, tipo_de_pago_id: nil, proyecto_id: 1, persona_id: 7, cuenta_id: 1},
+  {fecha: "2017-03-01", monto: 288.0, tipo_de_pago_id: nil, proyecto_id: 1, persona_id: 7, cuenta_id: 1},
+  {fecha: "2017-03-01", monto: 200.0, tipo_de_pago_id: nil, proyecto_id: 1, persona_id: 7, cuenta_id: 1}
+])
+
+CuotaPorCliente.update(1, estado: true, pago_id: 1)
+CuotaPorCliente.update(2, estado: true, pago_id: 2)
+CuotaPorCliente.update(3, estado: true, pago_id: 3)
+
+PagoMetodo.create!([
+  {monto: 700.0, pago_id: 1, tipo_de_pago_id: 1},
+  {monto: 412.0, pago_id: 2, tipo_de_pago_id: 4},
+  {monto: 124.0, pago_id: 3, tipo_de_pago_id: 4},
+  {monto: 100.0, pago_id: 3, tipo_de_pago_id: 1}
+])
 
 Audited::Adapters::ActiveRecord::Audit.update_all(user_id: 1)
 
@@ -975,6 +995,7 @@ PersonaEvento.create!([
 # PagoMetodo.create!([
 #   {monto: 288.0, pago_id: 1, tipo_de_pago_id: 1}
 # ])
+
 
 
 

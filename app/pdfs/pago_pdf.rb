@@ -18,7 +18,7 @@ class PagoPdf < Prawn::Document
 
 	def detalle_items
 		move_down 20
-		table([ [empresa_detalles, pago_numero]]) do |t|
+		table([[empresa_detalles, pago_numero]]) do |t|
 			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
 			t.width = bounds.width
 			t.row(0).font_size = 30
@@ -55,6 +55,18 @@ class PagoPdf < Prawn::Document
 			t.column(1).align = :right
 			t.row(1).align = :center
 		end
+
+		move_down 20
+		table(vencimientos_rows) do |t|
+			t.column_widths = [200,200,140]
+			t.width = bounds.width
+			t.row(0).font_style = :bold
+			t.row(0).background_color = "f4f4f4"
+			t.row(0).align = :center
+			t.row(1).font_style = :bold
+			t.column(1).align = :right
+			t.row(1).align = :center
+		end
 		
 		move_down 5
 		table(pagos_metodos_items_rows) do |t|
@@ -69,7 +81,11 @@ class PagoPdf < Prawn::Document
 		end
 		
 		move_down 20
-		table([["Son $: ", "#{@pago.monto}" ],["Saldo actual en la cuenta del responsable: ", "+ #{@pago.cuenta.saldo}"]]) do |t|
+		retorno_saldo = 0
+		@pago.pagos_metodos.each do |pm|
+			retorno_saldo = retorno_saldo + pm.monto
+		end
+		table([["Son $: ", "#{@pago.monto}" ],["Saldo actual en la cuenta del responsable: ", "+ #{retorno_saldo - @pago.monto}"]]) do |t|
 			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
 			t.width = bounds.width
 			t.column(0).font_style = :bold
@@ -78,14 +94,18 @@ class PagoPdf < Prawn::Document
 		end
 	end
 
+	# def pago_numero
+	# 	[ ["Fecha: #{@pago.fecha}"], ["Recibo N°: #{@pago.id}"], ["..."] ]
+	# end
+
 	def pago_numero
-		[ ["Fecha: #{@pago.fecha}"], ["Recibo N°: #{@pago.id}"], ["..."] ]
+		"Fecha: #{@pago.fecha}\nRecibo N°: #{@pago.id}\n"
 	end
 
 	def empresa_detalles
 		if Configuracion.count > 0
 			c = Configuracion.last
-			return [ ["#{c.nombre}"], ["#{c.condicion_iva.capitalize}"], [{:image => c.logo, :scale => 0.5}] ]
+			return [ ["#{c.nombre}"], ["#{c.condicion_iva.capitalize}"], [{:image => c.logo, :scale => 0.5}]]
 		else
 			return [["##--##"],["##--##"],["##--##"]]
 		end
@@ -98,6 +118,21 @@ class PagoPdf < Prawn::Document
 			[cuota.concepto_de_pago.nombre, cuota.concepto_de_pago.monto]
 		end	
 	end
+
+	def vencimientos_rows
+		retorno = []
+		@pago.cuotas_por_cliente.map do |cuota|
+			cuota.concepto_de_pago.vencimientos.each_with_index do |v, i|
+				retorno[i] = [cuota.concepto_de_pago.nombre, v.fecha.strftime('%d/%m/%y'), v.interes.porcentaje]
+			end
+		end	
+		retorno_table = [[{:content => "Vencimientos", :colspan => 3}],["Concepto", "Fecha", "Porcentaje de interés"]] + 
+		retorno.each do |item|
+			[item]
+		end	
+		return retorno_table
+	end
+
 
 	def pagos_metodos_items_rows
 		[[{:content => "Forma de pago", :colspan => 2}],["Detalle", "Importe"]] +

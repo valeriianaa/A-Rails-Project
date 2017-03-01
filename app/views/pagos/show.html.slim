@@ -66,14 +66,16 @@ p#notice = notice
                 strong Metodos de pago
               td 
                 table.table.table-bordered
+                  - monto_acreditado = 0
                   - @pago.pagos_metodos.each do |pm|
                     tr
                       td = pm.tipo_de_pago.nombre
                       td = pm.monto.round(2)
+                      - monto_acreditado = monto_acreditado + pm.monto
             tr
               td
                 strong Saldo de la cuenta
-              td = @pago.cuenta.saldo.round(2)
+              td = (monto_acreditado - @pago.monto).round(2)
             
 
 .row
