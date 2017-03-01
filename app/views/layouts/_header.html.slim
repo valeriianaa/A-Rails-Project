@@ -70,10 +70,10 @@ nav class="navbar navbar-static-top"
       - if can? :manage, Systemsetting
         - if Systemsetting.count > 0
           li
-            a data-toggle="control-sidebar" href=(edit_systemsetting_path(Systemsetting.last))
+            a href=(edit_systemsetting_path(Systemsetting.last))
               i.fa.fa-gears
         - else
           li
-            a data-toggle="control-sidebar" href=(new_systemsetting_path)
+            a href=(new_systemsetting_path)
               i.fa.fa-gears
 
