@@ -2,7 +2,7 @@ class Contrato < ActiveRecord::Base
 	belongs_to :proyecto
 	belongs_to :persona
   
-  has_many :cuotas_por_cliente, dependent: :destroy
+  has_many :cuotas_por_cliente, dependent: :restrict_with_error
 
   audited
 	def anadir_conceptosdepago(fecha1, fecha2)
