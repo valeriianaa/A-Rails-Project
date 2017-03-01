@@ -71,8 +71,8 @@ class EtapasController < ApplicationController
   # DELETE /etapas/1.json
   def destroy
     respond_to do |format|
-      if @estado.destroy
-        format.html { redirect_to estados_url, notice: 'Etapa fue eliminada exitosamente.' }
+      if @etapa.destroy
+        format.html { redirect_to etapas_url, notice: 'Etapa fue eliminada exitosamente.' }
         format.json { head :no_content }
       else
         format.html { render :show, notice: 'La Etapa no pudo ser eliminada.' }
