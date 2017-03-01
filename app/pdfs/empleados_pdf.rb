@@ -8,6 +8,11 @@ class EmpleadosPdf < Prawn::Document
 	end
 
 	def renderizar_tabla
+		if Configuracion.count != 0
+			image_path = Configuracion.last.logotipo.current_path
+			table([ [{:image => image_path}]])
+		end
+		
 		move_down 5
 		table(empleados_items,{:cell_style =>{:size => 8}} ) do |t|
 			t.row(0).font_style = :bold
