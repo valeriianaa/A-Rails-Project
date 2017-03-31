@@ -9,7 +9,7 @@ class Contacto < Persona
 	validates :codigo, :especialidad_de_contacto_id , presence: true
 	validates :codigo, uniqueness: true
 
-	audited
+	#audited
 
 	HUMANIZED_ATTRIBUTES = {
     :codigo => "Código: ",

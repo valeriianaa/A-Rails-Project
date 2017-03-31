@@ -7,8 +7,8 @@
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
-        / a.btn.btn-default#pdf href=(cuotas_por_cliente_audited_path)
-        /   | Auditorías
+        a.btn.btn-default#pdf href=(cuotas_por_cliente_audited_path(@proyecto))
+          | Auditorías
         a.btn.btn-default#pdf href=(proyecto_cuotas_por_cliente_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
         a.btn.btn-default#excel href=(proyecto_cuotas_por_cliente_path(format: "xls")) title="Descargar Excel"
@@ -18,7 +18,8 @@
   table class="table table-bordered"
     thead
       tr
-        th Proyecto
+        th Código del proyecto
+        th Nombre del proyecto
         th Concepto de Pago
         th Monto
         th Estado
@@ -27,6 +28,7 @@
     tbody
       - @cuotas_por_cliente.each do |cuota_por_cliente|
         tr
+          td = cuota_por_cliente.proyecto.codigo
           td = cuota_por_cliente.proyecto.nombre
           td = cuota_por_cliente.concepto_de_pago.nombre
           td = cuota_por_cliente.montoTotal

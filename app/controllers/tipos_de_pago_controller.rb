@@ -5,10 +5,11 @@ class TiposDePagoController < ApplicationController
   # GET /tipos_de_pago.json
   def index
     @tipos_de_pago = TipoDePago.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = TiposDePagoPdf.new(@tipos_de_pago)
+        pdf = TiposDePagoPdf.new(@tipos_de_pago, @usuario)
         send_data pdf.render, filename: "tipos_de_pago#{@tipos_de_pago}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls

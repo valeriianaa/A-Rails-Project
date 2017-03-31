@@ -5,10 +5,11 @@ class DepartamentosController < ApplicationController
   # GET /departamentos.json
   def index
     @departamentos = Departamento.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = DepartamentosPdf.new(@departamentos)
+        pdf = DepartamentosPdf.new(@departamentos, @usuario)
         send_data pdf.render, filename: "departamentos#{@departamentos}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls

@@ -10,10 +10,11 @@ class AccionesController < ApplicationController
   # GET /acciones/1
   # GET /acciones/1.json
   def show
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = AccionPdf.new(@accion)
+        pdf = AccionPdf.new(@accion, @usuario)
         send_data pdf.render, filename: "accion_#{@accion.id}.pdf", type: "application/pdf", disposition: "inline"
       end
     end

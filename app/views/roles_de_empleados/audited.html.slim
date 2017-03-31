@@ -1,7 +1,7 @@
 - breadcrumb :roles_de_empleado_auditorias
 .page-header
   h1
-    | Auditoria de Roles de Empleado
+    | Auditoría de Roles de Empleado
 
 table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
   thead
@@ -19,8 +19,8 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
       tr
         td = audit.action
         td = User.find(audit.user_id).persona.nombre_y_apellido
-        td = a.auditable.try(:id)
-        td = MiembroEquipo.find(audit.auditable.try(:id)).nombre
+        td = audit.auditable.try(:id)
+        td = RolDeEmpleado.find(audit.auditable.try(:id)).nombre
         td
           ul
             - audit.audited_changes.each do |k,v|

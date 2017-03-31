@@ -18,11 +18,14 @@ class PagoPdf < Prawn::Document
 
 	def detalle_items
 		move_down 20
-		table([[empresa_detalles, pago_numero]]) do |t|
-			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
-			t.cells[0,1].align = :center
-			t.cells[0,1].valign = :center
-			t.cells[0,1].size = 20
+		#table([[empresa_detalles, pago_numero]]) do |t|
+		table([[empresa_detalles]]) do |t|
+			#t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
+			t.column_widths = bounds.width
+			#t.cells[0,1].align = :center
+			#t.cells[0,1].valign = :center
+			#t.cells[0,1].size = 20
+			t.cell_style = {:height => 150}
 			t.width = bounds.width
 			t.row(0).font_style = :bold
 		end
@@ -111,7 +114,12 @@ class PagoPdf < Prawn::Document
 			end
 			image_path = Configuracion.last.logotipo.current_path 
 			#"#{c.nombre}\n #{retorno}"
-			return [[{:image => image_path, :scale => 0.5}],["#{c.nombre}\n #{retorno}"]]
+			image image_path, :scale => 0.8, :at => [0, 650]
+			make_table [["#{c.nombre}\n #{retorno}"]],:position => :center do |t|
+				t.cells.borders = []
+				t.column(0).align = :center
+				t.width = bounds.width*0.5
+			end
 		else
 			return [["##--##"],["##--##"],["##--##"]]
 		end

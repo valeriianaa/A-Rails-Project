@@ -1,7 +1,7 @@
 - breadcrumb :contrato_auditorias
 .page-header
   h1
-    | Auditoria de Contratos
+    | Auditoría de Contratos
 
 table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
   thead
@@ -19,8 +19,8 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
       tr
         td = audit.action
         td = User.find(audit.user_id).persona.nombre_y_apellido
-        td = a.auditable.try(:id)
-        td = a.auditable.try(:codigo)
+        td = audit.auditable.try(:id)
+        td = audit.auditable.try(:codigo)
         td
           ul
             - audit.audited_changes.each do |k,v|

@@ -5,11 +5,12 @@ class EtapasController < ApplicationController
   # GET /etapas.json
   def index
     @etapas = Etapa.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.xls # { send_data @products.to_csv(col_sep: "\t") }
       format.pdf do
-        pdf = EtapasPdf.new(@etapas)
+        pdf = EtapasPdf.new(@etapas, @usuario)
         send_data pdf.render, filename: "etapas#{@etapas}.pdf", type: "application/pdf", disposition: "inline"
       end
     end

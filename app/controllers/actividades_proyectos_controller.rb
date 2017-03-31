@@ -121,9 +121,13 @@ class ActividadesProyectosController < ApplicationController
   end
   
   def audited
-    audited = Audited::Adapters::ActiveRecord::Audit
-    @auditoria = audited.where(:auditable_type => "ActividadProyecto")
-    #@auditoria = audited.where("auditable_type = ? AND auditable_changes[:proyecto_id] = ?" "ActividadProyecto", 1 )
+    @proyecto = Proyecto.find(params[:id])
+    @auditoria = Array.new
+    @proyecto.actividades_proyectos.each do |ap|
+      ap.audits.each do |a|
+        @auditoria << a
+      end
+    end
   end
 
   private

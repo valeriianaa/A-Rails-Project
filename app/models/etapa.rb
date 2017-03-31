@@ -4,6 +4,8 @@ class Etapa < ActiveRecord::Base
 
 	validates :nombre, presence: true
 	validates :nombre, uniqueness: { case_sensitive: false }
+
+	audited
 	
 	def que_color
 		num = self.id

@@ -5,10 +5,11 @@ class EspecialidadesDeContactoController < ApplicationController
   # GET /especialidades_de_contacto.json
   def index
     @especialidades_de_contacto = EspecialidadDeContacto.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = EspecialidadesDeContactoPdf.new(@especialidades_de_contacto)
+        pdf = EspecialidadesDeContactoPdf.new(@especialidades_de_contacto, @usuario)
         send_data pdf.render, filename: "especialidades_de_contacto#{@especialidades_de_contacto}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls

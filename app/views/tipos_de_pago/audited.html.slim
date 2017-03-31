@@ -1,7 +1,7 @@
 - breadcrumb :tipos_de_pago_auditorias
 .page-header
   h1
-    | Auditoria de Tipos de Pago
+    | Auditoría de Tipos de Pago
 
 table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
   thead
@@ -19,7 +19,7 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
       tr
         td = audit.action
         td = User.find(audit.user_id).persona.nombre_y_apellido
-        td = a.auditable.try(:id)
+        td = audit.auditable.try(:id)
         td = TipoDePago.find(audit.auditable.try(:id)).nombre
         td
           ul

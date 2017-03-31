@@ -1,8 +1,9 @@
+-breadcrumb :actividades_proyectos_auditoria, @proyecto
 .page-header
   h1
-    | Auditoria de Actividades del proyecto
+    | Auditoría de Actividades del proyecto
 
-table.table.table-striped.table-bordered.table-hover.dataTeableSpc
+table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
   thead
     tr
       th Accion
@@ -15,7 +16,7 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc
     - @auditoria.each do |audit|
       tr
         td = audit.action
-        td = User.find(audit.user_id).persona.nombre_y_apellido
+        td = User.find(audit.try(:user_id)).persona.nombre_y_apellido
         td
           ul
             - audit.audited_changes.each do |k,v|

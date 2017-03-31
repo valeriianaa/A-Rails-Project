@@ -548,6 +548,11 @@ crumb :actividades_proyectos do |proyecto|
   parent :proyecto, proyecto
 end
 
+crumb :actividades_proyectos_auditoria do |proyecto|
+  link "Auditorías", actividades_proyectos_audited_path(proyecto)
+  parent :actividades_proyectos, proyecto
+end
+
 crumb :actividad_proyecto do |actividad_proyecto|
   link "Actividad", actividad_proyecto_path(actividad_proyecto)
   parent :actividades_proyectos, actividad_proyecto.proyecto

@@ -1,3 +1,5 @@
+require 'timeout'
+
 module WaitForAjax
   def wait_for_ajax
     Timeout.timeout(Capybara.default_max_wait_time) do
@@ -8,4 +10,8 @@ module WaitForAjax
   def finished_all_ajax_requests?
     page.evaluate_script('jQuery.active').zero?
   end
+end
+
+RSpec.configure do |config|
+  config.include WaitForAjax, type: :feature
 end

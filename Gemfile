@@ -75,6 +75,8 @@ gem 'carrierwave'
 group :development, :test do
   gem "minitest-rails"
   gem 'capybara'
+  #gem 'capybara-webkit'
+  gem 'selenium-webdriver', '~> 2.53'
   gem 'rspec-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

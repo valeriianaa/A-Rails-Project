@@ -8,6 +8,6 @@ class Empleado < Persona
 
 	validates :departamento_id, :rol_de_empleado_id, presence: true
 
-	audited
+	#audited
 
 end

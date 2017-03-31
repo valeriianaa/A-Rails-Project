@@ -5,10 +5,11 @@ class EstadosController < ApplicationController
   # GET /estados.json
   def index
     @estados = Estado.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = EstadosPdf.new(@estados)
+        pdf = EstadosPdf.new(@estados, @usuario)
         send_data pdf.render, filename: "estados#{@estados}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls

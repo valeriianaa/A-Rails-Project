@@ -83,7 +83,12 @@ class MiembrosEquipoController < ApplicationController
 
   def audited
     audited = Audited::Adapters::ActiveRecord::Audit
-    @auditoria = audited.where auditable_type: "MiembroEquipo"
+    @auditoria = Array.new
+    MiembroEquipo.all.each do |miembro_equipo|
+      miembro_equipo.audits.each do |a|
+        @auditoria << a
+      end
+    end
   end
 
   private

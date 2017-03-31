@@ -3,4 +3,5 @@ class Vencimiento < ActiveRecord::Base
 	belongs_to :interes
 
 	validates :fecha, :interes_id, presence: true
+
 end

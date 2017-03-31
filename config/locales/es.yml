@@ -40,6 +40,7 @@ es:
     formats:
       default: "%d/%m/%Y"
       long: "%d de %B de %Y"
+      time_long: "%d de %B de %Y, %H:%M hs"
       short: "%d de %b"
       mes_anio: "%B %Y"
     month_names:

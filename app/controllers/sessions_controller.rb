@@ -76,6 +76,7 @@ class SessionsController < Devise::SessionsController
     respond_to do |format|
       format.all { head :no_content }
       format.any(*navigational_formats) { redirect_to after_sign_out_path_for(resource_name) }
+      puts 'se destruyo la sesion'
     end
   end
   
@@ -85,6 +86,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def after_sign_out_path_for(resource)
+    puts 'entro al metodo after sign out'
     new_user_session_path
   end
 

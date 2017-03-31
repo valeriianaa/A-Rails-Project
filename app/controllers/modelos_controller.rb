@@ -10,10 +10,11 @@ class ModelosController < ApplicationController
   # GET /modelos/1
   # GET /modelos/1.json
   def show
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = ModeloPdf.new(@modelo)
+        pdf = ModeloPdf.new(@modelo, @usuario)
         send_data pdf.render, filename: "modelo_#{@modelo.id}.pdf", type: "application/pdf", disposition: "inline"
       end
     end

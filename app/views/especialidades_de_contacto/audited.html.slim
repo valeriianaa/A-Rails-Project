@@ -1,7 +1,7 @@
 - breadcrumb :especialidad_de_contacto_auditorias
 .page-header
   h1
-    | Auditoria de Especialidades de contacto
+    | Auditoría de Especialidades de contacto
 
 table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
   thead
@@ -19,7 +19,7 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
       tr
         td = audit.action
         td = User.find(audit.user_id).persona.nombre_y_apellido
-        td = a.auditable.try(:id)
+        td = audit.auditable.try(:id)
         td = EspecialidadDeContacto.find(audit.auditable.try(:id)).nombre
         td
           ul

@@ -1,5 +1,5 @@
 class CuotasPorClienteController < ApplicationController
-  before_action :set_cuota_por_cliente, only: [:show, :destroy, :audited]
+  before_action :set_cuota_por_cliente, only: [:show, :destroy]
   #before_action :set_cuota_por_cliente, only: [:show, :edit, :update, :destroy]
 
   # GET /contratos
@@ -79,8 +79,13 @@ class CuotasPorClienteController < ApplicationController
   end
 
   def audited
-    audited = Audited::Adapters::ActiveRecord::Audit
-    @auditoria = audited.where auditable_type: "CuotaPorCliente"
+    @proyecto = Proyecto.find(params[:id])
+    @auditoria = Array.new
+    @proyecto.cuotas_por_cliente.each do |cp|
+      cp.audits.each do |a|
+        @auditoria << a
+      end
+    end
   end
 
   private

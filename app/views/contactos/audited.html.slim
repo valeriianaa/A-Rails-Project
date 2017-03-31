@@ -1,7 +1,7 @@
 - breadcrumb :contacto_auditorias
 .page-header
   h1
-    | Auditoria de Contactos
+    | Auditoría de Contactos
 
 table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
   thead
@@ -16,30 +16,29 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
       th Fecha
   tbody
     - @auditoria.each do |audit|
-      -audit.auditable.try(:proyecto_id).each do |a|
-        tr
-          td = a.action
-          td = User.find(a.user_id).persona.nombre_y_apellido
-          td = a.auditable.try(:id)
-          td = a.auditable.try(:codigo)
-          td
-            ul
-              - a.audited_changes.each do |k,v|
-                li = k
-          td
-            ul
-              - a.audited_changes.each do |k,v|
-                - if v.kind_of? Array
-                  li = v[0]
-          td
-            ul
-              - a.audited_changes.each do |k,v|
-                - if a.action == "update"
-                  li = v[1]
-                - else
-                  li = v
-            / ul
-              /   - audit.audited_changes.each do |k,v|
-              /     li = v
+      tr
+        td = audit.action
+        td = User.find(audit.user_id).persona.nombre_y_apellido
+        td = audit.auditable.try(:id)
+        td = audit.auditable.try(:codigo)
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              li = k
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              - if v.kind_of? Array
+                li = v[0]
+        td
+          ul
+            - audit.audited_changes.each do |k,v|
+              - if audit.action == "update"
+                li = v[1]
+              - else
+                li = v
+          / ul
+            /   - audit.audited_changes.each do |k,v|
+            /     li = v
 
-          td = I18n.l a.created_at, format: :short
+        td = I18n.l audit.created_at, format: :short

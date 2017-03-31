@@ -26,6 +26,7 @@ class Persona < ActiveRecord::Base
 	#no es direccion lo que va. A que nivel habria que validar? calle, numero, piso dpto? todos?
     #validates :direccion, uniqueness: { scope: :ciudad_id, message: "la direccion ingresada ya existe para esta ciudad" }
 
+    audited
     def nombre_y_apellido
       return "#{nombre} #{apellido}"
     end

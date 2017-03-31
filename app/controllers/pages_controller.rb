@@ -1,5 +1,9 @@
 class PagesController < ApplicationController
 	def show
-	  render template: "pages/#{params[:page]}"
+	  if current_user == nil
+	  	redirect_to new_user_session_path
+	  else
+	  	render template: "pages/#{params[:page]}"
+	  end
 	end
 end

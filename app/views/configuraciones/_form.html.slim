@@ -7,24 +7,34 @@
           li = message
 
   .box.box-info style="width:100%"
-  	.box-header.with-border
-  	  h3 Datos Generales
-  	.box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
-  	  .field
-    		= f.label :logotipo, 'Logotipo: (*)'
-    		= f.file_field :logotipo, :class => "form-control",accept: 'image/png,image/gif,image/jpeg'
-  	  .field
-    		= f.label :nombre, 'Nombre de la Compañía: (*)'
-    		= f.text_field :nombre, :class => "form-control"
-  	  .field
-    		= f.label :eslogan, 'Eslogan: '
-    		= f.text_field :eslogan, :class => "form-control"
-  	  .field
-    		= f.label :cuit, 'CUIT-CUIL: (*)'
-    		= f.text_field :cuit, :class => "form-control"
-  	  .field
-    		= f.label :condicion_iva, 'Condicion frente al IVA: (*)'
-    		= f.select :condicion_iva, options_for_select([["Consumidor Final","cf"],["Exento", "exento"],["Monotributista", "monotributista"],["Responsable Inscripto", "ri"]]), {} ,{:class => "form-control"}
+    .box-header.with-border
+      h3 Datos Generales
+    .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
+      -if Configuracion.count > 0
+        .field#img_existente 
+          br
+          img src="#{Configuracion.last.logotipo.url}" alt="..." class="img-rounded"
+          a#bt_cambiar_imagen.btn.btn-success 
+            | Cambiar
+        .field#img_nuevo
+          = f.label :logotipo, 'Logotipo: (*)'
+          = f.file_field :logotipo, :class => "form-control", accept: 'image/png,image/gif,image/jpeg'
+      -else
+        .field
+          = f.label :logotipo, 'Logotipo: (*)'
+          = f.file_field :logotipo, :class => "form-control", accept: 'image/png,image/gif,image/jpeg'
+      .field
+        = f.label :nombre, 'Nombre de la Compañía: (*)'
+        = f.text_field :nombre, :class => "form-control"
+      .field
+        = f.label :eslogan, 'Eslogan: '
+        = f.text_field :eslogan, :class => "form-control"
+      .field
+        = f.label :cuit, 'CUIT-CUIL: (*)'
+        = f.text_field :cuit, :class => "form-control"
+      .field
+        = f.label :condicion_iva, 'Condicion frente al IVA: (*)'
+        = f.select :condicion_iva, options_for_select([["Consumidor Final"],["Exento"],["Monotributista"],["Responsable Inscripto"]]), {} ,{:class => "form-control"}
       .field
         = f.label :telefono, 'Teléfono: '
         = f.text_field :telefono, :class => "form-control"

@@ -5,10 +5,11 @@ class RolesDeEmpleadosController < ApplicationController
   # GET /roles_de_empleados.json
   def index
     @roles_de_empleados = RolDeEmpleado.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = RolesDeEmpleadosPdf.new(@roles_de_empleados)
+        pdf = RolesDeEmpleadosPdf.new(@roles_de_empleados, @usuario)
         send_data pdf.render, filename: "roles_de_empleados#{@roles_de_empleados}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls

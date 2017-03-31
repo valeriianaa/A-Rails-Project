@@ -5,10 +5,11 @@ class InteresesController < ApplicationController
   # GET /intereses.json
   def index
     @intereses = Interes.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = InteresesPdf.new(@intereses)
+        pdf = InteresesPdf.new(@intereses, @usuario)
         send_data pdf.render, filename: "intereses#{@intereses}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls
