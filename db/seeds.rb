@@ -896,6 +896,12 @@ Cuenta.create!([
   {saldo: 0.0, proyecto_id: 18}
 ])
 
+<<<<<<< HEAD
+=======
+
+Audited::Adapters::ActiveRecord::Audit.update_all(user_id: 1)
+
+>>>>>>> c76cbbbc99b18a9b4029815071eb94ef725edda4
 EspecialidadDeContacto.create!([
   {nombre: "Marketing", descripcion: "-"},
   {nombre: "Diseño Gráfico", descripcion: "-"},
