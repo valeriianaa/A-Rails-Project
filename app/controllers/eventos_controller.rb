@@ -5,6 +5,15 @@ class EventosController < ApplicationController
   # GET /eventos.json
   def index
     @eventos = Evento.all
+    @usuario = current_user
+    respond_to do |format|
+      format.html
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+      format.pdf do
+        pdf = EventosPdf.new(@eventos, @usuario)
+        send_data pdf.render, filename: "eventos#{@eventos}.pdf", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   # GET /eventos/1

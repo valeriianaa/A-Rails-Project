@@ -1,0 +1,41 @@
+-breadcrumb :eventos_de_un_proyecto, @proyecto
+.index-header
+  h1 
+    | Eventos del proyecto: 
+    = @proyecto.nombre
+br
+table id="datatable" class="table table-bordered table-striped" 
+  thead
+    tr
+      th Código
+      th Nombre
+      th Descripción
+      th Día
+      th Hora
+      th Expositor
+      th.no-print Acciones
+
+  tbody
+    - @proyecto.eventos.each do |evento|
+      tr
+        td = evento.codigo
+        td = evento.nombre
+        td = evento.descripcion
+        td = evento.dia.strftime('%d-%m-%y')
+        td = evento.hora.strftime('%H:%M')
+        td 
+          ul
+            - evento.personas.each do |p|
+              li = p.nombre_y_apellido
+        td.no-print style="padding: 3px;"
+          - if can? :show, Evento
+            a href=(evento_path(evento))
+              i.fa.fa-search
+          - if can? :update, Evento
+            a href=(edit_evento_path(evento))
+              i.fa.fa-pencil
+          - if can? :destroy, Evento              
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(evento_path(evento)) 
+              i.fa.fa-trash
+
+br

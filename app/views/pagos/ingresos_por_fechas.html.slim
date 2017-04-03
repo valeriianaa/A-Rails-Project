@@ -1,17 +1,18 @@
-
+-breadcrumb :ingresos
 .box.box-info
   .box-header.with-border
     h3 Ingresos por rango de fecha
   .box-body
-    .row
-      .col-md-4
-        label Buscar desde:
-        input.form-control type="date" id="ingreso_fecha_inicio"
-      .col-md-4
-        label hasta:
-        input.form-control type="date" id="ingreso_fecha_fin"
-      a#bt-filtrar.btn.btn-success
-        | Filtrar
+    .row-fluid
+      form#parametros.form-inline
+        .col-md-4
+          label Buscar desde:
+          input.form-control type="date" name="ingreso_fecha_inicio"
+        .col-md-4
+          label hasta:
+          input.form-control type="date" name="ingreso_fecha_fin"
+        a#bt-filtrar-por-mes.btn.btn-success
+          | Filtrar
   br
   
   #table_ingresos_fechas

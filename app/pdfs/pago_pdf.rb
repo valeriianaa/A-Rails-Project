@@ -1,11 +1,20 @@
 class PagoPdf < Prawn::Document
 
-	def initialize(pago)
+	def initialize(pago, usuario)
 		super(top_margin: 70)
 		@pago = pago
+		@usuario = usuario
+		fecha_impresion
 		detalle_top
 		detalle_items
 		detalle_bottom
+		text "Reporte generado por usuario: #{Persona.find(@usuario.persona_id).nombre_y_apellido}", size: 8, :align => :left, :valign => :bottom
+		number_pages "Página <page> de <total>", size: 8, at: [bounds.right - 70, 5]
+	end
+
+	def fecha_impresion
+		text "#{I18n.l(Time.now, format: :long)}", size: 8, :align => :right, :valign => :top
+		move_down -5
 	end
 
 	def detalle_top
@@ -18,14 +27,14 @@ class PagoPdf < Prawn::Document
 
 	def detalle_items
 		move_down 20
-		#table([[empresa_detalles, pago_numero]]) do |t|
-		table([[empresa_detalles]]) do |t|
-			#t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
-			t.column_widths = bounds.width
-			#t.cells[0,1].align = :center
-			#t.cells[0,1].valign = :center
-			#t.cells[0,1].size = 20
-			t.cell_style = {:height => 150}
+		#table([[empresa_detalles]]) do |t|
+		table([[empresa_detalles, pago_numero]]) do |t|
+			t.column_widths = [(bounds.width*0.5), (bounds.width* 0.5)]
+			#t.column_widths = bounds.width
+			t.cells[0,1].align = :center
+			t.cells[0,1].valign = :center
+			t.cells[0,1].size = 20
+			t.cell_style = {:height => 180}
 			t.width = bounds.width
 			t.row(0).font_style = :bold
 		end
@@ -98,10 +107,6 @@ class PagoPdf < Prawn::Document
 		end
 	end
 
-	# def pago_numero
-	# 	[ ["Fecha: #{@pago.fecha}"], ["Recibo N°: #{@pago.id}"], ["..."] ]
-	# end
-
 	def pago_numero
 		"Recibo N°: #{@pago.id}\nFecha: #{@pago.fecha}\n"
 	end
@@ -112,14 +117,26 @@ class PagoPdf < Prawn::Document
 			if c.condicion_iva = "ri"
 				retorno = "Responsable Inscripto"
 			end
-			image_path = Configuracion.last.logotipo.current_path 
-			#"#{c.nombre}\n #{retorno}"
-			image image_path, :scale => 0.8, :at => [0, 650]
-			make_table [["#{c.nombre}\n #{retorno}"]],:position => :center do |t|
-				t.cells.borders = []
-				t.column(0).align = :center
-				t.width = bounds.width*0.5
+			if c.telefono != nil
+				telefono = c.telefono
+			else
+				telefono = ""
 			end
+			if c.email != nil
+				email = c.email
+			else
+				email = ""
+			end
+			if c.pag_web != nil
+				pag_web = c.pag_web
+			else
+				pag_web = ""
+			end
+			direccion = "#{c.calle} #{c.nro_domicilio}. #{c.ciudad.nombre}, #{c.provincia.nombre}"
+			image_path = Configuracion.last.logotipo.current_path 
+			image image_path, :scale => 0.8, :at => [10, 670]
+			a = "#{c.nombre} Tel: #{telefono}\n #{direccion}\n #{retorno} #{c.cuit} \n #{email} - #{pag_web}"
+			text_box a, :at => [30, bounds.top - 155], :width => bounds.width*0.5
 		else
 			return [["##--##"],["##--##"],["##--##"]]
 		end

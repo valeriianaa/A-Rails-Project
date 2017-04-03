@@ -168,3 +168,9 @@ $(document).ready ->
           }, 400);
         else if data.status == 201
           location.href = data.responseText
+
+  $("#bt-filtrar-por-mes").click ->
+    $("#table_ingresos_fechas").empty()
+    $.post( "/pagos/ajax_table_por_fechas", $("#parametros").serializeArray())
+      .done (data) ->
+        $("#table_ingresos_fechas").append data

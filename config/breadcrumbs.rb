@@ -477,6 +477,10 @@ crumb :pagos_auditorias do
   link "Auditorías"
   parent :pagos
 end
+
+crumb :ingresos do
+  link "Ingresos por rango de fecha", ingresos_por_fechas_path
+end
 #Paises--------------------------------------------
 crumb :paises do
   link "Paises", paises_path
@@ -578,8 +582,8 @@ crumb :proyectos_pagos do |proyecto|
   parent :proyecto, proyecto
 end
 
-crumb :proyectos_eventos do |proyecto|
-  link "Contratos del proyecto", proyecto_eventos_path(proyecto)
+crumb :eventos_de_un_proyecto do |proyecto|
+  link "Eventos del proyecto", proyecto_eventos_path(proyecto)
   parent :proyecto, proyecto
 end
 

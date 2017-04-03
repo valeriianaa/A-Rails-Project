@@ -5,10 +5,11 @@ class ContratosController < ApplicationController
   # GET /contratos.json
   def index
     @contratos = Contrato.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = ContratosPdf.new(@contratos)
+        pdf = ContratosPdf.new(@contratos, @usuario)
         send_data pdf.render, filename: "contratos#{@contratos}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls

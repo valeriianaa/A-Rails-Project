@@ -7,10 +7,11 @@ class CuotasPorClienteController < ApplicationController
   def index
     @proyecto = Proyecto.find(params[:proyecto_id])
     @cuotas_por_cliente = @proyecto.cuotas_por_cliente.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = CuotasPorClientePdf.new(@cuotas_por_cliente)
+        pdf = CuotasPorClientePdf.new(@cuotas_por_cliente, @usuario)
         send_data pdf.render, filename: "cuotas_por_cliente#{@cuotas_por_cliente}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls

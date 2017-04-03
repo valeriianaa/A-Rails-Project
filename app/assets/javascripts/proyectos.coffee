@@ -5,7 +5,6 @@
 //= require jquery.chained
 
 $(document).ready ->
-<<<<<<< HEAD
   $("#proyecto_provincia_id").chained("#proyecto_pais_id")
   $("#proyecto_ciudad_id").chained("#proyecto_pais_id, #proyecto_provincia_id")
   $("#proyecto_rol_de_empleado_id").chained("#proyecto_departamento_id")
@@ -13,33 +12,21 @@ $(document).ready ->
   $('#proyectos_table').dataTable()
   $('#miembro_equipo_id').select2
     placeholder: "Seleccione uno o varios contactos..."  
-  if $('#velocidad').data('labels') != undefined
-
-=======
-
-  $("#proyecto_provincia_id").chained("#proyecto_pais_id")
-  $("#proyecto_ciudad_id").chained("#proyecto_pais_id, #proyecto_provincia_id")
-  $("#proyecto_rol_de_empleado_id").chained("#proyecto_departamento_id")
-  $("#proyecto_empleado_id").chained("#proyecto_departamento_id, #proyecto_rol_de_empleado_id")
-  $('#proyectos_table').dataTable()
-  $('#miembro_equipo_id').select2
-    placeholder: "Seleccione uno o varios contactos..."  
->>>>>>> c76cbbbc99b18a9b4029815071eb94ef725edda4
-
+  
   if $('#velocidad').data('labels') != undefined
     Morris.Area
       element: 'acumulativo'
       data: $('#acumulativo').data('actividades')
       xkey: 'semana'
-      ykeys: ['To do', 'Doing', 'Done']
-      labels: $('#velocidad').data('labels')
+      ykeys: $('#velocidad').data('labels').reverse()
+      labels: $('#velocidad').data('labels').reverse()
       parseTime: false
 
     Morris.Line
       element: 'velocidad'
       data: $('#velocidad').data('estados')
       xkey: 'semana'
-      ykeys: ['To do', 'Doing', 'Done']
+      ykeys: $('#velocidad').data('labels')
       labels: $('#velocidad').data('labels')
       parseTime: false
 

@@ -1,7 +1,7 @@
 class RolesDeEmpleadosPdf < Prawn::Document
 
 	def initialize(roles_de_empleados, usuario)
-		super(:top_margin => 10, :page_layout => :portrait)
+		super(:top_margin => 30, :page_layout => :portrait)
 		@roles_de_empleados = roles_de_empleados
 		@usuario = usuario
 		fecha_impresion

@@ -73,11 +73,12 @@ class ProyectosController < ApplicationController
   def actividadesProyecto
     #add_breadcrumb 'Pedidos'
     @proyecto = Proyecto.find(params[:id])
+    @usuario = current_user
     respond_to do |format|
       format.html { render 'actividades_del_proyecto.html.slim' }
       format.json { render json: @proyecto }
       format.pdf do
-        pdf = ActividadesProyectoPdf.new(@proyecto)
+        pdf = ActividadesProyectoPdf.new(@proyecto, @usuario)
         send_data pdf.render, filename: "actividades_del_proyecto#{@proyecto}.pdf", type: "application/pdf", disposition: "inline"
       end
     end

@@ -19,11 +19,12 @@ class EtapasController < ApplicationController
   # GET /etapas/1
   # GET /etapas/1.json
   def show
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.xls # { send_data @products.to_csv(col_sep: "\t") }
       format.pdf do
-        pdf = EtapaPdf.new(@etapa)
+        pdf = EtapaPdf.new(@etapa, @usuario)
         send_data pdf.render, filename: "etapa#{@etapa}.pdf", type: "application/pdf", disposition: "inline"
       end
     end

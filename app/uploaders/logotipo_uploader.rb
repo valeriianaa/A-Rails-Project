@@ -34,6 +34,16 @@ class LogotipoUploader < CarrierWave::Uploader::Base
   #   process resize_to_fit: [50, 50]
   # end
 
+  # for image size validation
+  # fetching dimensions in uploader, validating it in model
+  before :cache, :capture_size_before_cache # callback, example here: http://goo.gl/9VGHI
+  def capture_size_before_cache(new_file) 
+    if model.avatar_upload_width.nil? || model.avatar_upload_height.nil?
+      model.avatar_upload_width, model.avatar_upload_height = `identify -format "%wx %h" #{new_file.path}`.split(/x/).map { |dim| dim.to_i }
+    end
+  end
+
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_whitelist

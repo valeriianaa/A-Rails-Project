@@ -11,10 +11,11 @@ class PagosController < ApplicationController
   # GET /pagos_realizados/1
   # GET /pagos_realizados/1.json
   def show
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = PagoPdf.new(@pago)
+        pdf = PagoPdf.new(@pago, @usuario)
         send_data pdf.render, filename: "pago_#{@pago.id}.pdf", type: "application/pdf", disposition: "inline"
       end
     end 
@@ -96,8 +97,11 @@ class PagosController < ApplicationController
   end
 
   def ajax_table_por_fechas
-    @pagos = Pago.where(fecha: fecha1..fecha2)
-    
+    puts 'retorno:...', params[:ingreso_fecha_inicio].to_date
+    fecha1 = params[:ingreso_fecha_inicio].to_date
+    fecha2 = params[:ingreso_fecha_fin].to_date
+    @pagos_por_fechas = Pago.where(fecha: fecha1..fecha2)
+    #@total_del_mes = calcular_ingresos(@pagos_por_fechas)
     render :partial => "table_ingresos_por_fechas.html" 
   end
 

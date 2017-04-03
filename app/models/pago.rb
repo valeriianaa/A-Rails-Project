@@ -79,6 +79,14 @@ class Pago < ActiveRecord::Base
     end
   end
 
+  def self.calcular_ingresos
+    suma = 0
+    self.all.each do |p|
+      suma = suma + p.monto
+    end
+    return suma
+  end
+
   def setear_monto_de_acuerdo_a_saldo
     montoAcreditado = 0
     self.pagos_metodos.each {|pm| montoAcreditado += pm.monto }

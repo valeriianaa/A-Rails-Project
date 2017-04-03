@@ -5,10 +5,11 @@ class MiembrosEquipoController < ApplicationController
   # GET /miembros_equipo.json
   def index
     @miembros_equipo = MiembroEquipo.all
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = MiembrosEquipoPdf.new(@miembros_equipo)
+        pdf = MiembrosEquipoPdf.new(@miembros_equipo, @usuario)
         send_data pdf.render, filename: "miembros_equipo#{@miembros_equipo}.pdf", type: "application/pdf", disposition: "inline"
       end
       format.xls
@@ -18,11 +19,12 @@ class MiembrosEquipoController < ApplicationController
   # GET /miembros_equipo/1
   # GET /miembros_equipo/1.json
   def show
+    @usuario = current_user
     respond_to do |format|
       format.html
       format.xls # { send_data @products.to_csv(col_sep: "\t") }
       format.pdf do
-        pdf = MiembroEquipoPdf.new(@miembro_equipo)
+        pdf = MiembroEquipoPdf.new(@miembro_equipo, @usuario)
         send_data pdf.render, filename: "miembro_equipo#{@miembro_equipo}.pdf", type: "application/pdf", disposition: "inline"
       end
     end
