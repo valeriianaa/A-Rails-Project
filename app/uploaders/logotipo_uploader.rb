@@ -1,8 +1,8 @@
 class LogotipoUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  #include CarrierWave::RMagick
+  #include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -33,17 +33,33 @@ class LogotipoUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process resize_to_fit: [50, 50]
   # end
+  # process :get_geometry
+  # def geometry
+  #     @geometry
+  # end
+
+  # def get_geometry
+  #     if (@file)
+  #         img = ::Magick::Image::read(@file.file).last
+  #         @geometry = [ img.columns, img.rows ]
+  #     end
+  # end
 
   # for image size validation
   # fetching dimensions in uploader, validating it in model
-  before :cache, :capture_size_before_cache # callback, example here: http://goo.gl/9VGHI
-  def capture_size_before_cache(new_file) 
-    if model.avatar_upload_width.nil? || model.avatar_upload_height.nil?
-      model.avatar_upload_width, model.avatar_upload_height = `identify -format "%wx %h" #{new_file.path}`.split(/x/).map { |dim| dim.to_i }
-    end
-  end
-
-
+  # attr_reader :width, :height
+  # before :cache, :capture_size
+  # def capture_size(file)
+  #   if version_name.blank? # Only do this once, to the original version
+  #     if file.path.nil? # file sometimes is in memory
+  #       img = ::MiniMagick::Image::read(file.file)
+  #       @width = img[:width]
+  #       @height = img[:height]
+  #     else
+  #       @width, @height = `identify -format "%wx %h" #{file.path}`.split(/x/).map{|dim| dim.to_i }
+  #     end
+  #   end
+  # end
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_whitelist

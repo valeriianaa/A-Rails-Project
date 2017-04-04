@@ -18,14 +18,6 @@ RSpec.feature "PagosOtros", type: :feature do
       puts current_path
       wait_for_ajax
       assert_equal('Proyecto: Pro Care, Jardines', find('#proyecto-titulo').text)
-      Capybara.add_selector(:check_pago) do
-        xpath { "//*[@id="tabla_cuotas"]/tbody/tr[1]/td[7]/input[2]" }
-      end
-      check(:check_pago)
-      click_button('[+] Añadir forma de pago')
-      Capybara.add_selector(:select_metodo_pago) do
-        xpath {"//*[@id="pago_pagos_metodos_attributes_1490289565958_tipo_de_pago_id"]"}
-      end
       puts 'chau'
     end
   end

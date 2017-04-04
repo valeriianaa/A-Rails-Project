@@ -1,4 +1,5 @@
 class Configuracion < ActiveRecord::Base
+	attr_accessor :logotipo_width, :logotipo_height
 	mount_uploader :logotipo, LogotipoUploader
 	belongs_to :ciudad
 	belongs_to :pais
@@ -9,11 +10,17 @@ class Configuracion < ActiveRecord::Base
 	validates :pais_id, :provincia_id, :ciudad_id, :area_id, :presence => true
 	validates :cuit, :uniqueness => true
 
-	validate :check_logotipo_dimensions
-	  
-  	def check_logotipo_dimensions
-    	::Rails.logger.info "logotipo upload dimensions: #{self.avatar_upload_width}x#{self.avatar_upload_height}"
-    	errors.add :logotipo, "Las dimensiones del logotipo no deben ser mayores a 300x300 pixeles." if self.avatar_upload_width < 300 || avatar_upload_height < 300
-  	end
+	# validate :validate_minimum_image_size
+
+	# def validate_minimum_image_size
+	#     geometry = self.logotipo.geometry
+	#     if (! geometry.nil?)
+	#         self.width = geometry[0]
+	#         self.height = geometry[1]
+	#     end
+	#     unless (self.width > 300 && self.height > 300)
+	#         errors.add :base, "Naughty you... iPhone designs should be 320px x 480px or 640px x 960px." 
+	#     end
+	# end
 	
 end

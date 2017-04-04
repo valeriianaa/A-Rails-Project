@@ -293,8 +293,8 @@ Accion.create!([
   {nombre: "Crear", key_name: "create"},
   {nombre: "Eliminar", key_name: "destroy"},
   {nombre: "Ver", key_name: "show"},
-  {nombre: "Restringir acciones de acuerdo al tipo de persona", key_name: "by_persona_type"},
   {nombre: "Index", key_name: "index"},
+  {nombre: "Restringir acciones de acuerdo al tipo de persona", key_name: "by_persona_type"},
   {nombre: "Editar", key_name: "update"},
   {nombre: "Estadisticas", key_name: "estadistica"}
 ])
@@ -896,12 +896,6 @@ Cuenta.create!([
   {saldo: 0.0, proyecto_id: 18}
 ])
 
-<<<<<<< HEAD
-=======
-
-Audited::Adapters::ActiveRecord::Audit.update_all(user_id: 1)
-
->>>>>>> c76cbbbc99b18a9b4029815071eb94ef725edda4
 EspecialidadDeContacto.create!([
   {nombre: "Marketing", descripcion: "-"},
   {nombre: "Diseño Gráfico", descripcion: "-"},

@@ -67,6 +67,7 @@ gem 'morrisjs-rails'
 gem 'raphael-rails'
 
 gem 'carrierwave'
+gem "mini_magick"
 # Use Unicorn as the app server
 # gem 'unicorn'
 
