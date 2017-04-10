@@ -134,9 +134,9 @@ class PagoPdf < Prawn::Document
 			end
 			direccion = "#{c.calle} #{c.nro_domicilio}. #{c.ciudad.nombre}, #{c.provincia.nombre}"
 			image_path = Configuracion.last.logotipo.current_path 
-			image image_path, :scale => 0.8, :at => [10, 670]
+			image image_path, :fit => [230,230], :at => [20, 640]
 			a = "#{c.nombre} Tel: #{telefono}\n #{direccion}\n #{retorno} #{c.cuit} \n #{email} - #{pag_web}"
-			text_box a, :at => [30, bounds.top - 155], :width => bounds.width*0.5
+			text_box a, :at => [270, bounds.top - 170], :width => bounds.width*0.5, size: 10, :align => :center
 		else
 			return [["##--##"],["##--##"],["##--##"]]
 		end

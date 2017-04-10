@@ -20,7 +20,7 @@ class EventosPdf < Prawn::Document
 		if Configuracion.count > 0
 			c = Configuracion.last
 			image_path = Configuracion.last.logotipo.current_path 
- 			image image_path, :scale => 0.3, :align => :left, :valign => :top
+ 			image image_path, :fit => [90,90], :align => :left, :valign => :top
  			a = "#{c.nombre} - #{c.eslogan}"
  			if width_of(a) > bounds.width
  				a = "#{c.nombre}"

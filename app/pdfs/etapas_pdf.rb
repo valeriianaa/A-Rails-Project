@@ -8,7 +8,6 @@ class EtapasPdf < Prawn::Document
 		encabezado_horizontal
 		titulo_reporte
 		renderizar_tabla
-		# detalle_bottom
 		text "Reporte generado por usuario: #{Persona.find(@usuario.persona_id).nombre_y_apellido}", size: 8, :align => :left, :valign => :bottom
 		number_pages "Página <page> de <total>", size: 8, at: [bounds.right - 70, 5]
 	end
@@ -20,11 +19,8 @@ class EtapasPdf < Prawn::Document
 	def encabezado_horizontal
 		if Configuracion.count > 0
 			c = Configuracion.last
-			if c.condicion_iva = "ri"
-				retorno = "Responsable Inscripto"
-			end
 			image_path = Configuracion.last.logotipo.current_path 
- 			image image_path, :scale => 0.3, :align => :left, :valign => :top
+ 			image image_path, :fit => [90,90], :align => :left, :valign => :top
  			a = "#{c.nombre} - #{c.eslogan}"
  			if width_of(a) > bounds.width
  				a = "#{c.nombre}"

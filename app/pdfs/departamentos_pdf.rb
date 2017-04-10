@@ -19,12 +19,13 @@ class DepartamentosPdf < Prawn::Document
 	def encabezado_horizontal
 		if Configuracion.count > 0
 			c = Configuracion.last
-			if c.condicion_iva = "ri"
-				retorno = "Responsable Inscripto"
-			end
 			image_path = Configuracion.last.logotipo.current_path 
- 			image image_path, :scale => 0.3, :align => :left, :valign => :top
-			text_box "#{c.nombre} - #{c.eslogan}", :at => [bounds.width - 370, bounds.top - 30], :width => bounds.width
+ 			image image_path, :fit => [90,90], :align => :left, :valign => :top
+ 			a = "#{c.nombre} - #{c.eslogan}"
+ 			if width_of(a) > bounds.width
+ 				a = "#{c.nombre}"
+ 			end
+			text_box a, :at => [(bounds.width - (width_of(a) + (bounds.width - width_of(a))/2)).round, bounds.top - 30], :width => width_of(a)
 		end
 	end
 
