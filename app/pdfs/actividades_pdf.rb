@@ -38,6 +38,7 @@ class ActividadesPdf < Prawn::Document
 		move_down 5
 		table(actividades_items,{:cell_style =>{:size => 8}} ) do |t|
 			t.row(0).font_style = :bold
+			t.row(0).align = :center
 			t.column_widths = [30,170,240,80,70,130]
 			t.row(0).background_color = "f4f4f4"
 		end

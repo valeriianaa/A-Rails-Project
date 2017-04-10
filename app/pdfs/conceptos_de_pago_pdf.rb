@@ -39,6 +39,7 @@ class ConceptosDePagoPdf < Prawn::Document
 		table(conceptos_de_pago_items,{:cell_style =>{:size => 8}} ) do |t|
 			t.column_widths = [30,60,150,190,70]
 			t.row(0).font_style = :bold
+			t.row(0).align = :center
 			t.row(0).background_color = "f4f4f4"
 		end
 	end

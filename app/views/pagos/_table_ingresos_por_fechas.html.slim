@@ -9,12 +9,15 @@ table class="table table-bordered table-striped" id="table_ingresos_fechas"
   tbody
     - @pagos_por_fechas.each do |pago|
       tr
-        td = pago.fecha
+        td = I18n.localize(pago.fecha)
         td = pago.proyecto.codigo
         td 
           - pago.cuotas_por_cliente.each do |c|
-            li = "#{c.concepto_de_pago.nombre}"
+            li = "#{c.concepto_de_pago.codigo} - #{c.concepto_de_pago.nombre}"
         td = pago.monto.round
-      tr
-        td colspan="3" Total de este período:
-        td = @pagos_por_fechas.calcular_ingresos
+    br
+    tr
+      td colspan="3" 
+        strong Total de este período:
+      td 
+        strong = @pagos_por_fechas.calcular_ingresos

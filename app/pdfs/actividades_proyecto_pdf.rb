@@ -63,6 +63,7 @@ class ActividadesProyectoPdf < Prawn::Document
 			t.row(0).font_style = :bold
 			t.column_widths = [100,124,124,124,124,124]
 			t.row(0).background_color = "f4f4f4"
+			t.row(0).align = :center
 		end
 	end
 

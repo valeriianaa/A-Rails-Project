@@ -38,6 +38,7 @@ class ContactosPdf < Prawn::Document
 		move_down 5
 		table(contactos_items,{:cell_style =>{:size => 8}} ) do |t|
 			t.row(0).font_style = :bold
+			t.row(0).align = :center
 			t.column_widths = [30,86,86,86,125,96,125,86]
 			t.row(0).background_color = "f4f4f4"
 		end

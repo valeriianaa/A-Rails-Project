@@ -35,17 +35,9 @@ class RolesDeEmpleadosPdf < Prawn::Document
 
 	def renderizar_tabla
 		move_down 5
-		table(etapas_items,{:cell_style =>{:size => 8}} ) do |t|
-			t.row(0).font_style = :bold
-			t.column_widths = [60,160,160,160]
-			t.row(0).background_color = "f4f4f4"
-		end
-	end
-
-	def renderizar_tabla
-		move_down 5
 		table(roles_de_empleados_items,{:cell_style =>{:size => 8}} ) do |t|
 			t.row(0).font_style = :bold
+			t.row(0).align = :center
 			t.column_widths = [60,240,240]
 			t.row(0).background_color = "f4f4f4"
 		end

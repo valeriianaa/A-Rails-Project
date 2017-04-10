@@ -37,6 +37,7 @@ class DescuentosPdf < Prawn::Document
 		move_down 5
 		table(descuentos_items,{:cell_style =>{:size => 8}} ) do |t|
 			t.row(0).font_style = :bold
+			t.row(0).align = :center
 			t.column_widths = [60,240,240]
 			t.row(0).background_color = "f4f4f4"
 		end

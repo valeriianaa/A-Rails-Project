@@ -39,12 +39,13 @@ class CuotasPorClientePdf < Prawn::Document
 		table(cuotas_por_cliente_items,{:cell_style =>{:size => 8}} ) do |t|
 			t.column_widths = [30,98,98,98,58,228,98]
 			t.row(0).font_style = :bold
+			t.row(0).align = :center
 			t.row(0).background_color = "f4f4f4"
 		end
 	end
 
 	def cuotas_por_cliente_items
-		[["ID","Proyecto - Código","Concepto - Código","Nombre", "Monto", "Vencimientos", "MontoTotal"]] +
+		[["ID","Proyecto - Código","Concepto - Código","Nombre", "Monto", "Vencimientos", "Monto Total"]] +
 		@cuotas_por_cliente.map do |cuota|
 			retorno = ""
 			if (cuota.concepto_de_pago.vencimientos == nil)

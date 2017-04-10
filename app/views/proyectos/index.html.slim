@@ -17,8 +17,8 @@
     .pull-right
         a.btn.btn-default#pdf href=(proyectos_audited_path)
           | Auditorías
-        / a.btn.btn-default#pdf href=(miembros_equipo_path(format: "pdf")) title="Ver PDF"
-        /   i.fa.fa-file-pdf-o
+        a.btn.btn-default#pdf href=(proyectos_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
         a.btn.btn-default#excel href=(proyectos_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
 br
@@ -28,9 +28,9 @@ table id="datatable" class="table table-bordered table-striped"
       th Código
       th Nombre
       th Equipo que lo compone
-      th Telefono
+      th Etapa
+      th Empleado a cargo
       th Email
-      th Página web
       th.no-print Acciones
 
   tbody
@@ -42,9 +42,12 @@ table id="datatable" class="table table-bordered table-striped"
           ul 
             - proyecto.personas.where(type: 'MiembroEquipo').each do |p|
               li = p.nombre_y_apellido
-        td = proyecto.telefono
+        td = proyecto.etapa.nombre
+        td
+          ul 
+            - proyecto.personas.where(type: 'Empleado').each do |p|
+              li = p.nombre_y_apellido
         td = proyecto.email
-        td = proyecto.pagWeb
         td.no-print style="padding: 3px;"
           - if can? :show, Proyecto          
             a href=(proyecto_path(proyecto))

@@ -36,15 +36,16 @@ class EventosPdf < Prawn::Document
 
 	def renderizar_tabla
 		move_down 5
-		table(eventos_items,{:cell_style =>{:size => 8}} ) do |t|	
+		table(eventos_items,{:cell_style =>{:size => 8}}) do |t|	
 			t.row(0).font_style = :bold
-			t.column_widths = [30,170,240,80,70,65,65]
+			t.row(0).align = :center
+			t.column_widths = [30,50,170,240,100,130]
 			t.row(0).background_color = "f4f4f4"
 		end
 	end
 	
 	def eventos_items
-		[["ID","Código","Nombre","Descripción", "Dia", "Hora", "Expositores"]] +
+		[["ID","Código","Nombre","Descripción", "Dia y hora", "Expositores"]] +
 		@eventos.map do |evento|
 			retorno = ""
 			if (evento.personas == nil)
@@ -54,7 +55,7 @@ class EventosPdf < Prawn::Document
 					retorno = retorno + "#{a.nombre_y_apellido} \n"
 				end
 			end
-			[evento.id.to_s, evento.codigo, evento.nombre, evento.descripcion, evento.dia, evento.hora, retorno]
+			[evento.id.to_s, evento.codigo, evento.nombre, evento.descripcion, "#{evento.dia.strftime('%d-%m-%y')}, #{evento.hora.strftime('%H:%M')}", retorno]
 		end	
 	end
 

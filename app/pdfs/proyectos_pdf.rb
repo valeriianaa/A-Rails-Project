@@ -1,15 +1,15 @@
-class EmpleadosPdf < Prawn::Document
+class ProyectosPdf < Prawn::Document
 
-	def initialize(empleados, usuario)
+	def initialize(proyectos, usuario)
 		super(:top_margin => 30, :page_layout => :landscape)
-		@empleados = empleados
+		@proyectos = proyectos
 		@usuario = usuario
 		fecha_impresion
 		encabezado_horizontal
 		titulo_reporte
 		renderizar_tabla
 		text "Reporte generado por usuario: #{Persona.find(@usuario.persona_id).nombre_y_apellido}", size: 8, :align => :left, :valign => :bottom
-		number_pages "Página <page> de <total>", size: 8, at: [bounds.right - 50, 0]
+		number_pages "Página <page> de <total>", size: 8, at: [bounds.right - 50, 5]
 	end
 
 	def fecha_impresion
@@ -31,22 +31,41 @@ class EmpleadosPdf < Prawn::Document
 
 	def titulo_reporte
 		move_down 35
-		text "Todas las Actividades", size: 12, :align =>:left
+		text "Todos los Proyectos", size: 12, :align =>:left
 	end
 
-	def renderizar_tabla		
+	def renderizar_tabla
 		move_down 5
-		table(empleados_items,{:cell_style =>{:size => 8}} ) do |t|
+		table(proyectos_items,{:cell_style =>{:size => 8}} ) do |t|	
 			t.row(0).font_style = :bold
+			t.column(2).align = :justify
 			t.row(0).align = :center
+			t.column_widths = [50,100,240,165,80,85]
 			t.row(0).background_color = "f4f4f4"
 		end
 	end
-
-	def empleados_items
-		[["ID","Nombre","Apellido", "Tipo y N° Doc", "Departamento", "Rol","Dirección","Teléfono","Correo Electronico"]] +
-		@empleados.map do |empleado|
-			[empleado.id, empleado.nombre, empleado.apellido, "#{empleado.tipo_documento.nombre} #{empleado.nroIdentificacion}", empleado.departamento.nombre, empleado.rol_de_empleado.nombre, "#{empleado.calle}, #{empleado.nroDomicilio} piso:#{empleado.piso} dpto:#{empleado.dpto}",empleado.telefono, empleado.email]
+	
+	def proyectos_items
+		[["Código","Nombre","Descripción", "Miembros", "Etapa", "Empleado a cargo"]] +
+		@proyectos.map do |proyecto|
+			retorno = ""
+			if (proyecto.miembros_equipo == nil)
+				retorno = retorno + "" 
+			else
+				proyecto.miembros_equipo.map do |a|
+					retorno = retorno + "#{a.nombre_y_apellido} \n"
+				end
+			end
+			empleado = ""
+			if (proyecto.empleados == nil)
+				empleado = empleado + "" 
+			else
+				proyecto.empleados.map do |a|
+					empleado = empleado + "#{a.nombre_y_apellido} \n"
+				end
+			end
+			[proyecto.codigo, proyecto.nombre, proyecto.descripcion, retorno, proyecto.etapa.nombre, empleado]
 		end	
 	end
+
 end

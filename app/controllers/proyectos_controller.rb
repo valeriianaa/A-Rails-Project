@@ -5,9 +5,13 @@ class ProyectosController < ApplicationController
   # GET /proyectos.json
   def index
     @proyectos = Proyecto.all
+    @usuario = current_user
     respond_to do |format|
       format.html
-      #format.csv { send_data @contactos.to_csv, filename: "contactos-#{Date.today}.csv" }
+      format.pdf do
+        pdf = ProyectosPdf.new(@proyectos, @usuario)
+        send_data pdf.render, filename: "proyectos#{@proyectos}.pdf", type: "application/pdf", disposition: "inline"
+      end
       format.xls
     end
   end

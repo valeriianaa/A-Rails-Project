@@ -4,6 +4,9 @@ class Contrato < ActiveRecord::Base
   
   has_many :cuotas_por_cliente, dependent: :restrict_with_error
 
+  validates :proyecto_id, :fecha_inicio, :fecha_fin, presence: true
+  validate :orden_fechas
+
   audited
 	def anadir_conceptosdepago(fecha1, fecha2)
       vencimientos_conceptos = Vencimiento.where(fecha: fecha1..fecha2).uniq.pluck(:concepto_de_pago_id)
@@ -21,6 +24,12 @@ class Contrato < ActiveRecord::Base
 
   def contrato_descipcion
     return "#{I18n.localize(self.fecha_inicio, :format => :mes_anio)} - #{I18n.localize(self.fecha_fin, :format => :mes_anio)}"
+  end
+
+  def orden_fechas
+    if fecha_inicio > fecha_fin
+      errors.add(:base, "La fecha de inicio del contrato no puede ser posterior a la fecha de fin")
+    end
   end
 
 end

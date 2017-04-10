@@ -9,6 +9,9 @@ class Configuracion < ActiveRecord::Base
 	validates :nombre, :cuit, :condicion_iva, :presence => true
 	validates :pais_id, :provincia_id, :ciudad_id, :area_id, :presence => true
 	validates :cuit, :uniqueness => true
+	validates :logotipo, presence: true
+	#validates :logotipo, :file_geometry => {:max_width=>300, :max_height => 300}
+
 
 	# validate :validate_minimum_image_size
 
