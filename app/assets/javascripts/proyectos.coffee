@@ -18,8 +18,8 @@ $(document).ready ->
       element: 'acumulativo'
       data: $('#acumulativo').data('actividades')
       xkey: 'semana'
-      ykeys: $('#velocidad').data('labels').reverse()
-      labels: $('#velocidad').data('labels').reverse()
+      ykeys: $('#acumulativo').data('labels')
+      labels: $('#acumulativo').data('labels')
       parseTime: false
 
     Morris.Line

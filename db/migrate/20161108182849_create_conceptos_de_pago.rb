@@ -4,6 +4,7 @@ class CreateConceptosDePago < ActiveRecord::Migration
       t.string :codigo
       t.string :nombre
       t.text :descripcion
+      t.date :inicio
       t.float :monto
 
       t.timestamps null: false

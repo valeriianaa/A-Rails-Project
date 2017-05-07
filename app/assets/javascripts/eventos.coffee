@@ -5,4 +5,5 @@
 $(document).ready ->
   $('#eventos_table').dataTable()
   $('#evento_persona_id').select2
-  	placeholder: "Seleccione uno o varios contactos..."
+    placeholder: "Seleccione uno o varios contactos..."
+  

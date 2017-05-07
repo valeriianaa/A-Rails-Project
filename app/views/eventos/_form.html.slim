@@ -20,8 +20,19 @@
         = f.label :descripcion, 'Descripción:'
         = f.text_area :descripcion, :class => "form-control"
       .field
-        = f.label :persona_id, 'Expositor: (*)'
-        = f.collection_select :persona_ids, Contacto.all, :id, :codigo ,{:prompt => "Expositor"}, {:multiple => true, :class => 'form-control'}
+        = f.label :persona_ids, "Expositores: (*)", {class: "control-label"}
+        br
+          select#evento_persona_ids.form-control.select2 name="evento[persona_ids][]" multiple="true"
+            - Contacto.all.each do |contacto|
+              option value=(contacto.id) = contacto.nombre_y_apellido
+      .field
+        = f.label :especialidad_de_contacto_ids, "Areas del evento: (*)",  {class: "control-label"}
+        
+        = content_tag :div, "", id: "especialidades_by_c", data: {especialidades_by_contactos_data: getEspecialidadesByContactos.to_json}
+
+        br
+          select#evento_especialidad_de_contacto_ids.form-control.select2 name="evento[especialidad_de_contacto_ids][]" multiple="true"
+
       .field
         = f.label :dia, 'Día: (*)'
         = f.date_field :dia
@@ -38,3 +49,20 @@
     a.btn.btn-default href=(eventos_path)
       | Volver
 
+coffee:
+  $("#evento_persona_ids").change ->
+    ids_contactos = $(this).val()
+    $("#evento_especialidad_de_contacto_ids").empty()
+    if ids_contactos != null
+      especialidades_by_c = $("#especialidades_by_c")
+        .data("especialidades-by-contactos-data")
+      
+      hashDeEspecialidades = {}
+      for id in ids_contactos
+        id_int = parseInt(id)
+        # especialidades_by_c[id_int] = Array de Array [[id, nombre]]
+        for [esp_id, esp_nombre] in especialidades_by_c[id_int]
+          if hashDeEspecialidades.hasOwnProperty(esp_id) == false
+            hashDeEspecialidades[esp_id] = esp_nombre
+            $("#evento_especialidad_de_contacto_ids")
+              .append("<option value=#{esp_id}>#{esp_nombre}</option>")

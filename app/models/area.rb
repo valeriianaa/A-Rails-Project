@@ -6,4 +6,7 @@ class Area < ActiveRecord::Base
 	has_many :personas, dependent: :restrict_with_error
 	has_many :configuraciones, dependent: :restrict_with_error
 
+
+
+
 end

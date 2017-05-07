@@ -60,4 +60,8 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'abandonado', 'abandonados'
 	inflect.irregular 'persona_evento', 'personas_eventos'
 	inflect.irregular 'PersonaEvento', 'PersonasEventos'
+	inflect.irregular 'persona_especialidad', 'personas_especialidades'
+	inflect.irregular 'PersonaEspecialidad', 'PersonasEspecialidades'
+	inflect.irregular 'evento_especialidad', 'eventos_especialidades'
+	inflect.irregular 'EventoEspecialidad', 'EventosEspecialidades'
 end

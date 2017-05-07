@@ -1,7 +1,7 @@
+-breadcrumb :proyectos_pagos, @proyecto
 .index-header
-  h1 
-    | Pagos realizados por: 
-    = @proyecto.nombre
+  h1 Proyecto: #{@proyecto.codigo} - #{@proyecto.nombre}
+  h2 Pagos realizados 
 
 table id="datatable" class="table table-bordered table-striped" 
   thead

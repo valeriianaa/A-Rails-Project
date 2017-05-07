@@ -1,8 +1,7 @@
 -breadcrumb :proyectos_contratos, @proyecto
 .index-header
-  h1 
-    | Contratos del proyecto: 
-    = @proyecto.nombre
+  h1 Proyecto: #{@proyecto.codigo} - #{@proyecto.nombre}
+  h2 Contratos del proyecto
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead

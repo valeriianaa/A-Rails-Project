@@ -1,16 +1,46 @@
 - breadcrumb :actividad_proyecto, @actividad_proyecto
 p#notice = notice
 
+h1 Proyecto: #{@actividad_proyecto.proyecto.codigo} - #{@actividad_proyecto.proyecto.nombre}
+br
 .row
   .col-md-8
     .box.box-info
       .box-header.with-border
-        h3 Proyecto: #{@actividad_proyecto.proyecto.codigo}, Actividad: #{@actividad_proyecto.actividad.nombre}
+        h3 Actividad: #{@actividad_proyecto.actividad.nombre}
       .box-body
         table.table.table-bordered
           tr
             td
-              strong Fecha de Vencimiento
+              strong Etapa:
+            td = @actividad_proyecto.actividad.etapa.nombre
+          tr
+            td
+              strong Descripción:
+            td = @actividad_proyecto.actividad.descripcion
+          tr
+            td
+              strong Obligatorio:
+            td 
+              -if @actividad_proyecto.actividad.obligatorio == true
+                i.glyphicon.glyphicon-ok 
+              -else
+                i.glyphicon.glyphicon-remove
+          tr
+            td
+              strong Antecedentes:
+            td 
+              ul
+                - if (@actividad_proyecto.actividad.actividades_antecedentes != nil) 
+                  -if (@actividad_proyecto.actividad.actividades_antecedentes != [])
+                    - @actividad_proyecto.actividad.actividades_antecedentes.each do |a|
+                      li = Actividad.find(a.to_i).nombre
+
+        br
+        table.table.table-bordered
+          tr
+            td
+              strong Fecha de Vencimiento:
             td = @actividad_proyecto.fechaVencimiento
         br
         table.table.table-bordered

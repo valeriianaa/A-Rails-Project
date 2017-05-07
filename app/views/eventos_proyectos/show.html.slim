@@ -17,6 +17,13 @@ p#notice = notice
               td
                 strong Evento
               td = @evento_proyecto.evento.nombre
+            tr
+              td
+                strong Tipo de Evento
+              td
+                ul
+                  -evento_proyecto.evento.personas_eventos.each do |contacto|
+                    li = Contacto.find(contacto.persona_id).especialidad_de_contacto.nombre
             
 .row
   .col-xs-1 style="padding-right:40px;"

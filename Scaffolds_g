@@ -112,6 +112,11 @@ rails g migration CreatePersonaEvento
 rails g migration AddEventoRefToPersonaEvento evento:references
 rails g migration AddPersonaRefToPersonaEvento persona:references
 
+rails g  migration AddPersonaRefToPersonaEspecialidad persona:references
+rails g  migration AddEspecialidadDeContactoRefToPersonaEspecialidad especialidad_de_contacto:references
+rails g  migration AddEspecialidadDeContactoRefToEventoEspecialidad especialidad_de_contacto:references
+rails g  migration AddEventoRefToEventoEspecialidad evento:references
+
 --Historiales
 rails g migration AddActividadProyectoRefToHistorial actividad_proyecto:references
 rails g migration AddEstadoRefToHistorial estado:references
@@ -139,3 +144,4 @@ rails g migration AddPaisRefToConfiguracion pais:references
 rails g migration AddProvinciaRefToConfiguracion provincia:references
 rails g migration AddCiudadRefToConfiguracion ciudad:references
 rails g migration AddAreaRefToConfiguracion area:references
+

@@ -6,7 +6,7 @@ class ConceptoDePago < ActiveRecord::Base
 	accepts_nested_attributes_for :vencimientos, :allow_destroy => true
 	has_many :cuotas_por_cliente, dependent: :restrict_with_error
 
-	validates :codigo, :nombre, :monto, presence: true
+	validates :codigo, :nombre, :inicio, :monto, presence: true
 	validates :nombre, uniqueness: { case_sensitive: false }
 	validates :codigo, uniqueness: true
 	validates_associated :vencimientos
@@ -18,7 +18,7 @@ class ConceptoDePago < ActiveRecord::Base
 		retorno = monto
 		if vencimientos.exists?
 			vencimientos.each do |v|
-				if v.fecha < Date.today
+				if v.fecha <= Date.today
 					retorno = retorno * (1 + (v.interes.porcentaje/100))
 				end
 			end

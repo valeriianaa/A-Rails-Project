@@ -12,6 +12,7 @@ table id="datatable" class="table table-bordered table-striped"
     tr
       th Evento
       th Proyecto
+      th Tipo de Evento
       th.no-print Acciones
 
   tbody
@@ -19,6 +20,10 @@ table id="datatable" class="table table-bordered table-striped"
       tr
         td = evento_proyecto.evento.nombre
         td = evento_proyecto.proyecto.nombre
+        td
+          ul
+            -evento_proyecto.evento.personas_eventos.each do |contacto|
+              li = Contacto.find(contacto.persona_id).especialidad_de_contacto.nombre
         td.no-print style="padding: 3px;"
           - if can? :show, EventoProyecto
             a href=(evento_path(evento_proyecto))

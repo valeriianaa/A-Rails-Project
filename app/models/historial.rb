@@ -3,6 +3,7 @@ class Historial < ActiveRecord::Base
 	belongs_to :estado
 	belongs_to :user
 	
+	#validates :estado_id, uniqueness: true
 	# before_create :setear_usuario
 
 	# def setear_usuario

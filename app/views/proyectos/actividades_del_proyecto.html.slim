@@ -1,7 +1,8 @@
 -breadcrumb :actividades_proyectos, @proyecto
 
 .index-header
-  h1 
+  h1 Proyecto: #{@proyecto.codigo} - #{@proyecto.nombre}
+  h2 
     | Actividades del Proyecto 
     .pull-right
         a.btn.btn-default#pdf href=(actividades_proyectos_audited_path(@proyecto))

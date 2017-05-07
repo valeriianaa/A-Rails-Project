@@ -40,7 +40,11 @@ p#notice = notice
             tr
               td
                 strong Especialidad
-              td = @contacto.especialidad_de_contacto.nombre
+              td 
+                ul
+                  - @contacto.personas_especialidades.each do |pe|
+                    li = pe.especialidad_de_contacto.nombre
+
 
 .row
   .col-md-8

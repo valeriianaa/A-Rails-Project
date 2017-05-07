@@ -12,12 +12,15 @@ class Persona < ActiveRecord::Base
 
 	has_many :personas_eventos, dependent: :destroy
 	has_many :eventos , :through => :personas_eventos
+
+	has_many :personas_especialidades, dependent: :restrict_with_error
+	has_many :especialidades_de_contacto, :through => :personas_especialidades, dependent: :restrict_with_error
 	
 	validates :codigo, :nombre, :apellido, :nroIdentificacion, presence: true
 	validates :tipo_documento_id, presence: true
 	validates :pais_id, :provincia_id, :ciudad_id, :area_id, presence: true
 	validates :calle, :nroDomicilio, presence: true
-	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, allow_blank: true
 	#validates :telefono, :numericality => { :greater_than => 0}
 	validates :dpto, presence: true, if: :piso?
 	  
@@ -35,4 +38,20 @@ class Persona < ActiveRecord::Base
       tipo_doc = TipoDocumento.find(self.tipo_documento_id)
       return "#{tipo_doc.nombre} #{nroIdentificacion}"
     end
+
+    HUMANIZED_ATTRIBUTES = {
+    :codigo => "Código: ",
+    :nombre => "Nombre: ",
+    :nroIdentificacion => "Número de identificación: ",
+    :tipo_documento_id => "Tipo de documento: ",
+    :area_id => "Área: ",
+    :email => "Correo electrónico: ",
+    :nroDomicilio => "Número de domicilio:"
+  }
+
+  def self.human_attribute_name(*args)
+    puts "self.human_attribute_name"
+    puts "[args[0]]", args[0]
+    HUMANIZED_ATTRIBUTES[args[0]] || super
+  end
 end

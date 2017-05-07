@@ -1,8 +1,8 @@
 -breadcrumb :eventos_de_un_proyecto, @proyecto
 .index-header
-  h1 
-    | Eventos del proyecto: 
-    = @proyecto.nombre
+  h1 Proyecto: #{@proyecto.codigo} - #{@proyecto.nombre}
+  h2 Eventos del proyecto
+
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead

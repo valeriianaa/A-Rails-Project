@@ -1,12 +1,15 @@
 -breadcrumb :estadisticas, @proyecto
-h1 Estadísticas
+h1 Proyecto: #{@proyecto.codigo} - #{@proyecto.nombre}
+h2 Estadísticas del proyecto
 
-h2 Acumulativo
+br
+br
+h3 Flujo acumulativo
 
 = content_tag :div, "", id: "acumulativo", data: {actividades: @proyecto.acumulativo[0], labels: @proyecto.acumulativo[1]}
 
 br
-h2 Velocidad
+h3 Gráfico de velocidad
 br
 
 

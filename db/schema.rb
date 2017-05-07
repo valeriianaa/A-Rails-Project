@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227122909) do
+ActiveRecord::Schema.define(version: 20170506085558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20170227122909) do
     t.string   "codigo"
     t.string   "nombre"
     t.text     "descripcion"
+    t.date     "inicio"
     t.float    "monto"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -226,10 +227,17 @@ ActiveRecord::Schema.define(version: 20170227122909) do
     t.time     "hora"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "persona_id"
   end
 
-  add_index "eventos", ["persona_id"], name: "index_eventos_on_persona_id", using: :btree
+  create_table "eventos_especialidades", force: :cascade do |t|
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "especialidad_de_contacto_id"
+    t.integer  "evento_id"
+  end
+
+  add_index "eventos_especialidades", ["especialidad_de_contacto_id"], name: "index_eventos_especialidades_on_especialidad_de_contacto_id", using: :btree
+  add_index "eventos_especialidades", ["evento_id"], name: "index_eventos_especialidades_on_evento_id", using: :btree
 
   create_table "eventos_proyectos", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -339,14 +347,13 @@ ActiveRecord::Schema.define(version: 20170227122909) do
     t.string   "telefono"
     t.string   "email"
     t.string   "type"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "pais_id"
     t.integer  "provincia_id"
     t.integer  "ciudad_id"
     t.integer  "tipo_documento_id"
     t.integer  "departamento_id"
-    t.integer  "especialidad_de_contacto_id"
     t.integer  "area_id"
     t.integer  "rol_de_empleado_id"
   end
@@ -354,11 +361,20 @@ ActiveRecord::Schema.define(version: 20170227122909) do
   add_index "personas", ["area_id"], name: "index_personas_on_area_id", using: :btree
   add_index "personas", ["ciudad_id"], name: "index_personas_on_ciudad_id", using: :btree
   add_index "personas", ["departamento_id"], name: "index_personas_on_departamento_id", using: :btree
-  add_index "personas", ["especialidad_de_contacto_id"], name: "index_personas_on_especialidad_de_contacto_id", using: :btree
   add_index "personas", ["pais_id"], name: "index_personas_on_pais_id", using: :btree
   add_index "personas", ["provincia_id"], name: "index_personas_on_provincia_id", using: :btree
   add_index "personas", ["rol_de_empleado_id"], name: "index_personas_on_rol_de_empleado_id", using: :btree
   add_index "personas", ["tipo_documento_id"], name: "index_personas_on_tipo_documento_id", using: :btree
+
+  create_table "personas_especialidades", force: :cascade do |t|
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "persona_id"
+    t.integer  "especialidad_de_contacto_id"
+  end
+
+  add_index "personas_especialidades", ["especialidad_de_contacto_id"], name: "index_personas_especialidades_on_especialidad_de_contacto_id", using: :btree
+  add_index "personas_especialidades", ["persona_id"], name: "index_personas_especialidades_on_persona_id", using: :btree
 
   create_table "personas_eventos", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -504,7 +520,8 @@ ActiveRecord::Schema.define(version: 20170227122909) do
   add_foreign_key "cuotas_por_cliente", "descuentos"
   add_foreign_key "cuotas_por_cliente", "pagos"
   add_foreign_key "cuotas_por_cliente", "proyectos"
-  add_foreign_key "eventos", "personas"
+  add_foreign_key "eventos_especialidades", "especialidades_de_contacto"
+  add_foreign_key "eventos_especialidades", "eventos"
   add_foreign_key "eventos_proyectos", "eventos"
   add_foreign_key "eventos_proyectos", "proyectos"
   add_foreign_key "historiales", "actividades_proyectos"
@@ -522,11 +539,12 @@ ActiveRecord::Schema.define(version: 20170227122909) do
   add_foreign_key "personas", "areas"
   add_foreign_key "personas", "ciudades"
   add_foreign_key "personas", "departamentos"
-  add_foreign_key "personas", "especialidades_de_contacto"
   add_foreign_key "personas", "paises"
   add_foreign_key "personas", "provincias"
   add_foreign_key "personas", "roles_de_empleados"
   add_foreign_key "personas", "tipo_documentos"
+  add_foreign_key "personas_especialidades", "especialidades_de_contacto"
+  add_foreign_key "personas_especialidades", "personas"
   add_foreign_key "personas_eventos", "eventos"
   add_foreign_key "personas_eventos", "personas"
   add_foreign_key "personas_proyectos", "personas"

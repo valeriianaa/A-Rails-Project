@@ -4,3 +4,5 @@
 
 $(document).ready ->
   $('#modelos_table').dataTable()
+  $('#accion_ids').select2
+  	placeholder: "Seleccione una o varias Acciones"

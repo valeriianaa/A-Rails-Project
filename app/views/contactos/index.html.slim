@@ -20,7 +20,7 @@ table id="datatable" class="table table-bordered table-striped"
     tr
       th Código
       th Nombre
-      th Especialidad
+      th Especialidades
       th.no-print Acciones
 
   tbody
@@ -28,7 +28,10 @@ table id="datatable" class="table table-bordered table-striped"
       tr
         td = contacto.codigo
         td = contacto.nombre_y_apellido
-        td = contacto.especialidad_de_contacto.nombre
+        td 
+          ul
+            - contacto.personas_especialidades.each do |pe|
+              li = pe.especialidad_de_contacto.nombre
         td.no-print style="padding: 3px;"
           - if can? :show, Contacto
             a href=(contacto_path(contacto))

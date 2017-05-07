@@ -1,11 +1,8 @@
 -breadcrumb :proyectos_cuotas, @proyecto
 .index-header
-  h1 
+  h1 Proyecto: #{@proyecto.codigo} - #{@proyecto.nombre}
+  h2 
     | Cuotas del proyecto  
-    - if can? :create, CuotaPorCliente
-      a.btn.btn-info href=(new_proyecto_cuota_por_cliente_path)
-        i.ace-icon.fa.fa-plus.bigger-110
-        |  Nuevo
     .pull-right
         a.btn.btn-default#pdf href=(cuotas_por_cliente_audited_path(@proyecto))
           | Auditorías
@@ -14,33 +11,33 @@
         a.btn.btn-default#excel href=(proyecto_cuotas_por_cliente_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
 
-.box
-  table class="table table-bordered"
-    thead
-      tr
-        th Código del proyecto
-        th Nombre del proyecto
-        th Concepto de Pago
-        th Monto
-        th Estado
-        th colspan="3" Acciones
+br
+table id="datatable" class="table table-bordered"
+  thead
+    tr
+      th Código del proyecto
+      th Nombre del proyecto
+      th Concepto de Pago
+      th Monto
+      th Estado
+      th.no-print Acciones
 
-    tbody
-      - @cuotas_por_cliente.each do |cuota_por_cliente|
-        tr
-          td = cuota_por_cliente.proyecto.codigo
-          td = cuota_por_cliente.proyecto.nombre
-          td = cuota_por_cliente.concepto_de_pago.nombre
-          td = cuota_por_cliente.montoTotal
-          - if cuota_por_cliente.estado == true
-            td Pagado
-          - else
-            td No pagado
-          td style="padding: 3px;"
-            a href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente))
-              i.fa.fa-search
-            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente)) 
-              i.fa.fa-trash
+  tbody
+    - @cuotas_por_cliente.each do |cuota_por_cliente|
+      tr
+        td = cuota_por_cliente.proyecto.codigo
+        td = cuota_por_cliente.proyecto.nombre
+        td = cuota_por_cliente.concepto_de_pago.nombre
+        td = cuota_por_cliente.montoTotal
+        - if cuota_por_cliente.estado == true
+          td Pagado
+        - else
+          td No pagado
+        td.no-print style="padding: 3px;"
+          a href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente))
+            i.fa.fa-search
+          a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente)) 
+            i.fa.fa-trash
 
 
 br

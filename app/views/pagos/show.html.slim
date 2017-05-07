@@ -16,7 +16,7 @@ p#notice = notice
             tr
               td
                 strong Proyecto
-              td = @pago.proyecto.codigo
+              td = "#{@pago.proyecto.codigo} - #{@pago.proyecto.nombre}"
             tr
               td
                 strong Responsable
@@ -45,7 +45,7 @@ p#notice = notice
                         ul
                           - cuota.concepto_de_pago.vencimientos.each do |v|
                             - if v.fecha < Date.today
-                              li = v.fecha.strftime('%d-%m-%y')
+                              li = l v.fecha
                       -if cuota.concepto_de_pago.vencimientos.exists?
                       td
                         ul

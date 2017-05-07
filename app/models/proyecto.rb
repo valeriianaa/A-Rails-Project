@@ -26,7 +26,7 @@ class Proyecto < ActiveRecord::Base
 	has_many :eventos , :through => :eventos_proyectos
 
 	validates :codigo, :nombre, :descripcion, :calle, :nroDomicilio, :pais_id, :provincia_id, :ciudad_id, :etapa_id, :area_id, presence: true
-	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :email?
+	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, allow_blank: true
 	validates :dpto, presence: true, if: :piso?
 	validates :codigo, uniqueness: true
 	
@@ -103,32 +103,80 @@ class Proyecto < ActiveRecord::Base
 	end
 
 
+ #  def acumulativo
+ #    fecha = self.contratos.first.fecha_inicio
+ #    retorno = Array.new
+	# fecha = fecha - 1.week
+	# contenido = Hash.new
+ #  	contenido_aux = Hash.new
+	# contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
+	# Estado.all.each_with_index do |e, i|
+	# 	if actividades_proyectos.exists?
+	# 		contenido_aux[i] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+	#     	contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+ #    	end
+ #    end
+ #    labels = Array.new
+ #    while fecha <= Date.today
+	#     contenido = Hash.new
+	#     contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
+	#     Estado.all.each_with_index do |e,i|
+	#     	if actividades_proyectos.exists?
+	#     		contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+	#     		if contenido_aux[i] < contenido[e.nombre.to_sym]
+	#     			contenido_aux[i] = contenido[e.nombre.to_sym]
+	#     		else
+	#     			contenido[e.nombre.to_sym] = contenido[e.nombre.to_sym] + contenido_aux[i]
+	#     			contenido_aux[i] = contenido[e.nombre.to_sym]
+	#     		end
+	#     	end
+	#     end
+	#     retorno << contenido
+	#     fecha = fecha + 1.week
+	# end
+	# contenido = Hash.new
+	# contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
+	# Estado.all.each_with_index do |e,i|
+ #    	if actividades_proyectos.exists?
+ #    		contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+ #    		if contenido_aux[i] < contenido[e.nombre.to_sym]
+ #    			contenido_aux[i] = contenido[e.nombre.to_sym]
+ #    		else
+ #    			contenido[e.nombre.to_sym] = contenido[e.nombre.to_sym] + contenido_aux[i]
+ #    			contenido_aux[i] = contenido[e.nombre.to_sym]
+ #    		end
+ #    	end
+ #    end
+ #    retorno << contenido
+	# Estado.all.each do |e|
+	#     labels << e.nombre
+	# end
+	# return [retorno, labels]
+ #  end
+
   def acumulativo
-    fecha = self.contratos.first.fecha_inicio
+  	fecha = self.contratos.first.fecha_inicio
     retorno = Array.new
+    cantidad_ultimos = 0
 	fecha = fecha - 1.week
 	contenido = Hash.new
-  	contenido_aux = Hash.new
 	contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
-	Estado.all.each_with_index do |e, i|
-		if actividades_proyectos.exists?
-			contenido_aux[i] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
-	    	contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+	Estado.all.each do |e|
+    	contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+		if e.ultimo == true
+			cantidad_ultimos = contenido[e.nombre.to_sym].to_i
     	end
     end
     labels = Array.new
     while fecha <= Date.today
-	    contenido = Hash.new
+    	contenido = Hash.new
 	    contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
-	    Estado.all.each_with_index do |e,i|
-	    	if actividades_proyectos.exists?
+	    Estado.all.each do |e|
+	    	if e.ultimo == true
+	    		contenido[e.nombre.to_sym] = cantidad_ultimos + historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+	    		cantidad_ultimos = contenido[e.nombre.to_sym].to_i
+	    	else
 	    		contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
-	    		if contenido_aux[i] < contenido[e.nombre.to_sym]
-	    			contenido_aux[i] = contenido[e.nombre.to_sym]
-	    		else
-	    			contenido[e.nombre.to_sym] = contenido[e.nombre.to_sym] + contenido_aux[i]
-	    			contenido_aux[i] = contenido[e.nombre.to_sym]
-	    		end
 	    	end
 	    end
 	    retorno << contenido
@@ -136,22 +184,19 @@ class Proyecto < ActiveRecord::Base
 	end
 	contenido = Hash.new
 	contenido[:semana] = fecha.beginning_of_week.strftime('%d-%m-%y')
-	Estado.all.each_with_index do |e,i|
-    	if actividades_proyectos.exists?
+	Estado.all.each do |e|
+    	if e.ultimo == true
+	    	contenido[e.nombre.to_sym] = cantidad_ultimos  + historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
+	    	cantidad_ultimos = contenido[e.nombre.to_sym].to_i
+    	else
     		contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count
-    		if contenido_aux[i] < contenido[e.nombre.to_sym]
-    			contenido_aux[i] = contenido[e.nombre.to_sym]
-    		else
-    			contenido[e.nombre.to_sym] = contenido[e.nombre.to_sym] + contenido_aux[i]
-    			contenido_aux[i] = contenido[e.nombre.to_sym]
-    		end
     	end
     end
     retorno << contenido
 	Estado.all.each do |e|
-	    labels << e.nombre
+		labels << e.nombre
 	end
-	return [retorno, labels]
+	return [retorno, labels.reverse]
   end
 
   def velocidad
@@ -184,5 +229,36 @@ class Proyecto < ActiveRecord::Base
 	end
 	return [retorno, labels]
   end
+
+    # def velocidad
+    # 	fecha = self.contratos.first.fecha_inicio
+    #   	retorno = Array.new
+  		# fecha = fecha - 1.week
+  		# contenido = Hash.new
+  		# contenido[:semana] = fecha
+  		# Estado.all.each do |e|
+    #   		contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.day), estado_id: e.id).count
+    #   	end
+    #   	labels = Array.new
+    #   	while fecha <= Date.today
+    #   		contenido = Hash.new
+  	 #    	contenido[:semana] = fecha
+	  	#     Estado.all.each do |e|
+	  	#     	contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.day), estado_id: e.id).count
+	  	#     end
+	  	#     retorno << contenido
+	  	#     fecha = fecha + 1.day
+  		# end
+  		# contenido = Hash.new
+  		# contenido[:semana] = fecha
+  		# Estado.all.each do |e|
+    #   		contenido[e.nombre.to_sym] = historiales.where(fechaHora: (fecha..fecha + 1.day), estado_id: e.id).count
+    #   	end
+    #   	retorno << contenido
+  		# Estado.all.each do |e|
+  		# 	labels << e.nombre
+  		# end
+  		# return [retorno, labels]
+    # end
 
 end

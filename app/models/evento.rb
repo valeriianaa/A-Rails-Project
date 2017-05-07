@@ -1,10 +1,14 @@
 class Evento < ActiveRecord::Base
-	belongs_to :persona
+	
 	has_many :eventos_proyectos, dependent: :restrict_with_error
 	has_many :proyectos , :through => :eventos_proyectos
 
 	has_many :personas_eventos, dependent: :destroy
-	has_many :personas , :through => :personas_eventos, :inverse_of => :personas_eventos
+	has_many :personas , :through => :personas_eventos
+	#, :inverse_of => :personas_eventos
+
+	has_many :eventos_especialidades, dependent: :restrict_with_error
+	has_many :especialidades_de_contacto, :through => :eventos_especialidades, dependent: :restrict_with_error
 
 	validates :codigo, :nombre, :dia, :hora, presence: true
 	#validates :nombre, uniqueness: true

@@ -29,8 +29,8 @@
         = f.label :fechaNacimiento, 'Fecha de Nacimiento: (*)'
         = f.date_field :fechaNacimiento, :start_year => 1900, :end_year => Date.today.year
       .field
-        = f.label :especialidad_de_contacto_id, 'Especialidad:'
-        = f.collection_select :especialidad_de_contacto_id, EspecialidadDeContacto.all, :id, :nombre, {:prompt => "Seleccione una Especialidad"}, {:class => 'form-control', :id => "especialidades_fields"}
+        = f.label :especialidad_de_contacto_ids, 'Especialidades:'
+        = f.collection_select :especialidad_de_contacto_ids, EspecialidadDeContacto.all, :id, :nombre,{} ,{:class => 'form-control', :multiple => true}
       .field
         = f.label :telefono, 'Teléfono:'
         = f.text_field :telefono, :class => "form-control"

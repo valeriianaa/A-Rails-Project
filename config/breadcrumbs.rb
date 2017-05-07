@@ -578,7 +578,7 @@ crumb :proyectos_contratos do |proyecto|
 end
 
 crumb :proyectos_pagos do |proyecto|
-  link "Contratos del proyecto", proyecto_pagos_path(proyecto)
+  link "Pagos del proyecto", proyecto_pagos_path(proyecto)
   parent :proyecto, proyecto
 end
 

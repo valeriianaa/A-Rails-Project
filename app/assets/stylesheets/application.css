@@ -41,6 +41,14 @@ i.fa.fa-pencil{
 	margin-right: 3px;
 }
 
+i.fa.fa-dollar{
+	background-color: #f39c12;
+	color: #FFFFFF;
+	padding: 10px;
+	border-radius: 5px;
+	margin-right: 3px;
+}
+
 i.fa.fa-trash{
 	background-color: #dd4b39;
 	color: #FFFFFF;

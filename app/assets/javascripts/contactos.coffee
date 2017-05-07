@@ -8,3 +8,5 @@ $(document).ready ->
   $("#contacto_provincia_id").chained("#contacto_pais_id")
   $("#contacto_ciudad_id").chained("#contacto_pais_id, #contacto_provincia_id")
   $("#contactos_table").dataTable()
+  $("#contacto_especialidad_de_contacto_ids").select2
+  	placeholder: "Seleccione una o varias especialidades..."

@@ -4,3 +4,5 @@
 
 $(document).ready ->
   $('#usuarios_table').dataTable()
+  $('#user_persona_id').select2
+  	placeholder: "Nombre y Apellido"
