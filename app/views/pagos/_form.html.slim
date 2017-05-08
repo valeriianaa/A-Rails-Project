@@ -13,14 +13,29 @@
 
   = f.hidden_field :persona_id
   = f.hidden_field :cuenta_id
-
+  
   .box.box-info style="width:100%"
     .box-header.with-border
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;"  
       .field
-        = f.label :proyecto_id, "Proyecto: (*)", :class => "control-label"
-        = f.collection_select :proyecto_id, Proyecto.all, :id, :codigo,{:prompt => "Seleccione un Proyecto"}, {:class => 'form-control', :style => "width: 50%"}
+        = f.label :proyecto_id, "Proyecto: (*)", {class: "control-label"}
+        br
+          select#pago_proyecto_id.form-control.select2 name="pago[proyecto_id]"
+            - Proyecto.all.each do |proyecto|
+              - if @pago.proyecto == proyecto
+                option selected='' value=(proyecto.id) = proyecto.codigo
+              - else
+                option value=(proyecto.id) = proyecto.codigo
+      .field
+        = f.label :contrato, "Contrato: (*)",  {class: "control-label"}
+        br
+          select#pago_contrato_id.form-control.select2 name="pago[contrato_id]"
+            - Contrato.all.each do |contrato|
+              - if @pago.contrato == contrato
+                option selected='' class=(contrato.proyecto_id) value=(contrato.id) =contrato.contrato_descripcion
+              - else
+                option class=(contrato.proyecto_id) value=(contrato.id) = contrato.contrato_descripcion
         a#bt-filtrar.btn.btn-success
           | Filtrar
         br
@@ -48,5 +63,12 @@
 
   = f.submit
 
+javascript:
+  function getActionName () {
+    return "#{{ controller.action_name }}"
+  }
 
-
+  function getParametros(){
+    json_str = '#{{ @parametros.to_json }}'
+    return JSON.parse(json_str)
+  }

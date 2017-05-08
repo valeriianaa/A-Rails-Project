@@ -34,7 +34,14 @@ calcularTotales = ->
         total_cuotas += cuota
         total_a_pagar += cuota_con_descuento
         total_descuentos += cuota - cuota_con_descuento
-  [total_cuotas, total_descuentos, total_a_pagar]
+        
+        total_descuentos = Math.round(total_descuentos * 100) / 100
+  
+  [
+    parseFloat(total_cuotas).toFixed(2), 
+    parseFloat(total_descuentos).toFixed(2), 
+    parseFloat(total_a_pagar).toFixed(2)
+  ]
 
 setearTotales = ->
   [total_cuotas, total_descuentos, total_a_pagar] = calcularTotales()
@@ -43,7 +50,9 @@ setearTotales = ->
   $("#total-a-pagar").text("$ " + total_a_pagar)
 
 $(document).ready ->
+  $("#pago_contrato_id").chained("#pago_proyecto_id")
   $("#metodos-de-pago").hide()
+
   $("#bt-filtrar").click ->
     $("#spin-ajax").show()
     $.post( "/pagos/ajax_table_cuotas", $("form").serialize())
@@ -64,13 +73,33 @@ $(document).ready ->
 
             $("#pagos-table > tbody").empty()
 
-  $("form[id*='pago'][id!='new_tipo_de_pago']").on 'click', '.remove_fields_pagos', (event) ->
+            # Si esta en modo nuevo con parametros, selecciona todas las cuotas.
+            if getActionName() == "new_with_parameter"
+              $("input[name*='pago[cuota_por_cliente_ids][]']").each (i, v)->
+                $(v).prop('checked', true)
+              setearTotales()
+
+  if getActionName() == "new_with_parameter"
+    params = getParametros()
+    # Seleeciono el proyecto y el contrato
+    $("#pago_proyecto_id").val(params["proyecto_id"]).trigger('change');
+    $("#pago_contrato_id").val(params["contrato_id"]).trigger('change');
+
+    # Al hacer click en filtrar, se traen por ajax todas las cuotas.
+    # Si detecta el modo con parametros, selecciona todas las cuotas automaticamente
+    $("#bt-filtrar").click()
+
+    
+  else
+    console.log("p No soraya") 
+
+  $("form.new_pago, form.edit_pago").on 'click', '.remove_fields_pagos', (event) ->
     $trfieldset = $(this).parent().parent()
     $trfieldset.find('input[type=hidden]').val('1')
     $trfieldset.hide()
     event.preventDefault()
 
-  $("form[id*='pago'][id!='new_tipo_de_pago']").on 'click', '.add_fields_pagos', (event) ->
+  $("form.new_pago, form.edit_pago").on 'click', '.add_fields_pagos', (event) ->
     if parseInt( $("#tipo_de_pago_size").val() ) > get_tp_ids().size()
       tp_ids = get_tp_ids()
 
@@ -97,7 +126,7 @@ $(document).ready ->
 
   tp_ids = []
 
-  $("form[id*='pago'][id!='new_tipo_de_pago']").on("mousedown", ".select-tipos-de-pagos", (event) ->
+  $("form.new_pago, form.edit_pago").on("mousedown", ".select-tipos-de-pagos", (event) ->
     $(this).data 'value', $(this).val()
     tp_ids = get_tp_ids()
 
@@ -119,7 +148,7 @@ $(document).ready ->
             .prop('readonly', false)
         
   click = false
-  $("form[id*='pago'][id!='new_tipo_de_pago']").on("mousedown", "input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']", (event)->
+  $("form.new_pago, form.edit_pago").on("mousedown", "input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']", (event)->
     last_indice = $("input[name='pago[cuota_por_cliente_ids][]'][type='checkbox']:checked:last").data("indice")
     if last_indice == undefined
       last_indice = -1
@@ -138,10 +167,11 @@ $(document).ready ->
       setearTotales()
 
 
-  $("form[id*='pago'][id!='new_tipo_de_pago']").on "change", 'select[name$="[descuento_id]"]', (event)-> 
+  $("form.new_pago, form.edit_pago").on "change", 'select[name$="[descuento_id]"]', (event)-> 
     setearTotales()
 
-  $("form[id*='pago'][id!='new_tipo_de_pago']").submit (event)->
+  # $("form[id*='pago'][id!='new_tipo_de_pago']").submit (event)->
+  $("form.new_pago, form.edit_pago").submit (event)->
     event.preventDefault()
     $.post( $(this).prop("action") + ".json", $("form").serialize())
       .fail (data)->

@@ -129,13 +129,28 @@ class ProyectosController < ApplicationController
     end
   end
 
+  # def proyectos_con_cuotas_atrasadas
+  #   @proyectos = Array.new
+  #   aux = CuotaPorCliente.getAtrasadas.map {|e| e.proyecto_id}
+  #   aux = aux.uniq
+  #   aux.each do |i|
+  #     p = Proyecto.find(i)
+  #     @proyectos << p
+  #   end
+
+  #   respond_to do |format|
+  #     format.html { render "proyectos_con_cuotas_atrasadas.html.slim"}
+  #     #format.json { render json: @productos }
+  #   end
+  # end
+
   def proyectos_con_cuotas_atrasadas
-    @proyectos = Array.new
-    aux = CuotaPorCliente.getAtrasadas.map {|e| e.proyecto_id}
+    @contratos = Array.new
+    aux = CuotaPorCliente.getAtrasadas.map {|e| e.contrato_id}
     aux = aux.uniq
     aux.each do |i|
-      p = Proyecto.find(i)
-      @proyectos << p
+      p = Contrato.find(i)
+      @contratos << p
     end
 
     respond_to do |format|

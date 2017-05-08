@@ -7,29 +7,28 @@ table id="datatable" class="table table-bordered table-striped"
     tr
       th Código
       th Nombre
+      th Contrato
       th Responsable del Contrato
       th width="120px" Cantidad de cuotas morosas
       th Total adeudado
       th.no-print Acciones
 
   tbody
-    - @proyectos.each do |proyecto|
-      tr
-        td = proyecto.codigo
-        td = proyecto.nombre
-        td
-          - @contrato = Contrato.where('fecha_inicio < ? AND fecha_fin > ? AND proyecto_id = ?', Date.today, Date.today, proyecto.id).first
-          - @responsable = Persona.find(@contrato.persona_id)
-          = @responsable.nombre_y_apellido
-        td = proyecto.cuotas_por_cliente.where(estado: false).count
-        td = proyecto.cuotas_por_cliente.where(estado: false).sum(:montoTotal)
-        td.no-print style="padding: 3px;"
-          - if can? :show, Proyecto          
-            a href=(proyecto_path(proyecto)) title="Ver proyecto"
-              i.fa.fa-search
-          - if can? :show, Proyecto          
-            a href=(new_pago_path) title="Realizar pago"
-              i.fa.fa-dollar
+    - @contratos.each do |contrato|
+        tr
+          td = contrato.proyecto.codigo
+          td = contrato.proyecto.nombre
+          td = contrato.contrato_descripcion
+          td = contrato.persona.nombre_y_apellido
+          td = contrato.proyecto.cuotas_por_cliente.where(estado: false, contrato_id: contrato.id).count
+          td = contrato.proyecto.cuotas_por_cliente.where(estado: false, contrato_id: contrato.id).sum(:montoTotal)
+          td.no-print style="padding: 3px;"
+            - if can? :show, Proyecto          
+              a href=(proyecto_path(contrato.proyecto)) title="Ver proyecto"
+                i.fa.fa-search
+            - if can? :show, Proyecto          
+              a rel="nofollow" data-method="post" href=(pagos_new_with_parameter_path(Pago.new, contrato_id: contrato.id, proyecto_id: contrato.proyecto.id)) title="Realizar pago"
+                i.fa.fa-dollar
 
 br
 

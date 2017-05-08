@@ -5,6 +5,7 @@ class Pago < ActiveRecord::Base
   belongs_to :proyecto
   belongs_to :persona
   belongs_to :cuenta
+  belongs_to :contrato
 
   has_many :pagos_metodos, dependent: :destroy
   has_many :tipos_de_pago, :through => :pagos_metodos

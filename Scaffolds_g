@@ -82,6 +82,7 @@ rails g migration AddPagoRefToCuotaPorCliente pago:references
 
 rails g migration AddTipoDePagoToPago tipo_de_pago:references
 rails g migration AddProyectoRefToPago proyecto:references
+rails g migration AddContratoRefToPago contrato:references
 rails g migration AddPersonaRefToPago persona:references
 
 rails g migration AddInteresRefToCuotaPorCliente interes:references

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506085558) do
+ActiveRecord::Schema.define(version: 20170507233737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -292,8 +292,10 @@ ActiveRecord::Schema.define(version: 20170506085558) do
     t.integer  "proyecto_id"
     t.integer  "persona_id"
     t.integer  "cuenta_id"
+    t.integer  "contrato_id"
   end
 
+  add_index "pagos", ["contrato_id"], name: "index_pagos_on_contrato_id", using: :btree
   add_index "pagos", ["cuenta_id"], name: "index_pagos_on_cuenta_id", using: :btree
   add_index "pagos", ["persona_id"], name: "index_pagos_on_persona_id", using: :btree
   add_index "pagos", ["proyecto_id"], name: "index_pagos_on_proyecto_id", using: :btree
@@ -528,6 +530,7 @@ ActiveRecord::Schema.define(version: 20170506085558) do
   add_foreign_key "historiales", "estados"
   add_foreign_key "historiales", "proyectos"
   add_foreign_key "historiales", "users"
+  add_foreign_key "pagos", "contratos"
   add_foreign_key "pagos", "cuentas"
   add_foreign_key "pagos", "personas"
   add_foreign_key "pagos", "proyectos"

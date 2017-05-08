@@ -28,6 +28,19 @@ class PagosController < ApplicationController
     @pago.pagos_metodos.build
   end
 
+  def new_with_parameter
+    @pago = Pago.new
+    # Es solo para que funcione los botones de agregar y remover NO SACAR
+    @pago.pagos_metodos.build
+
+    @parametros = { 
+      contrato_id: params[:contrato_id], 
+      proyecto_id: params[:proyecto_id] 
+    }
+    
+    render "new"
+  end
+
   # GET /pagos_realizados/1/edit
   def edit
   end
@@ -90,7 +103,8 @@ class PagosController < ApplicationController
 
   def ajax_table_cuotas
     @proyecto = Proyecto.find(params[:pago][:proyecto_id])
-    @cuotas = CuotaPorCliente.where(proyecto_id: @proyecto.id, estado: false)
+    @contrato = Contrato.find(params[:pago][:contrato_id])
+    @cuotas = CuotaPorCliente.where(contrato_id: @contrato.id, estado: false)
     
     render :partial => "cuota.html"
     
@@ -113,7 +127,7 @@ class PagosController < ApplicationController
 
   def ajax_gon_variables
     @proyecto = Proyecto.find(params[:pago][:proyecto_id])
-    @contrato = Contrato.where('fecha_inicio < ? AND fecha_fin > ? AND proyecto_id = ?', Date.today, Date.today, @proyecto.id).first
+    @contrato = Contrato.find(params[:pago][:contrato_id])
     @cuenta = Cuenta.where(proyecto_id: @proyecto.id).first
     @responsable = Persona.find(@contrato.persona_id)
 
@@ -149,6 +163,7 @@ class PagosController < ApplicationController
         :proyecto_id, 
         :persona_id, 
         :cuenta_id,
+        :contrato_id,
         :monto, 
         :cuota_por_cliente_ids => [],
         :pagos_metodos_attributes => [ :id, :monto, :pago_id, :tipo_de_pago_id, :_destroy ]

@@ -1,4 +1,6 @@
 = form_for @concepto_de_pago do |f|
+  / Esto es para la validacion, por AJAX
+  #messages
   - if @concepto_de_pago.errors.any?
     #error_explanation
       h2 = "#{pluralize(@concepto_de_pago.errors.count, "error")} #{pluralize_without_count(@concepto_de_pago.errors.count, "prohibe", "prohiben")} almacenar este Concepto de pago:"

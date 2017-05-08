@@ -21,7 +21,7 @@
           br
             select#cuota_por_cliente_contrato_id.form-control.select2 name="cuota_por_cliente[contrato_id]"
               - Contrato.all.each do |contrato|
-                option class=(contrato.proyecto_id) value=(contrato.id) =contrato.contrato_descipcion
+                option class=(contrato.proyecto_id) value=(contrato.id) =contrato.contrato_descripcion
         .field
           = f.label :concepto_de_pago_id, "Concepto de pago: (*)", :class => "control-label"
           = f.collection_select :concepto_de_pago_id, ConceptoDePago.all, :id, :nombre,{:prompt => "Seleccione un concepto de pago..."}, {:class => 'form-control'}

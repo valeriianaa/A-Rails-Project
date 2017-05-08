@@ -22,8 +22,8 @@ class Contrato < ActiveRecord::Base
       end
 	end
 
-  def contrato_descipcion
-    return "#{I18n.localize(self.fecha_inicio, :format => :mes_anio)} - #{I18n.localize(self.fecha_fin, :format => :mes_anio)}"
+  def contrato_descripcion
+    return "#{I18n.localize(self.fecha_inicio, :format => :default)} - #{I18n.localize(self.fecha_fin, :format => :default)}"
   end
 
   def orden_fechas

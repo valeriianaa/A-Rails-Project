@@ -8,6 +8,8 @@ class Actividad < ActiveRecord::Base
 
 	before_save :eliminar_blanco
 
+	after_destroy :eliminar_antecedente
+
 	validates :nombre, :etapa_id, presence: true
 	validates :nombre, uniqueness: { case_sensitive: false }
 	validates_with ActividadValidator
@@ -46,7 +48,18 @@ class Actividad < ActiveRecord::Base
 		end
 	end
 
-	# def eliminar_antecedente
-	# 	actividades = Actividad.where()
-	# end
+
+	def self.eliminar_antecedente
+		Actividad.all.each do |actividad|
+			if actividad.tiene_antecedentes == true
+				actividad.actividades_antecedentes.each do |antecedente|
+					if Actividad.exists?(antecedente) == false
+						aux = actividad.actividades_antecedentes.delete(antecedente)
+						actividad.update(actividades_antecedentes: aux)
+					end
+				end
+			end
+		end
+	end
+
 end

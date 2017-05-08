@@ -23,10 +23,12 @@ class CuotaPorCliente < ActiveRecord::Base
 
 	def cuotas_atrasadas
 		retorno = false
-		if self.concepto_de_pago.vencimientos.exists?
-			self.concepto_de_pago.vencimientos.each do |v|
-				if v.fecha < Date.today
-					retorno = true
+		if self.estado == false
+			if self.concepto_de_pago.vencimientos.exists?
+				self.concepto_de_pago.vencimientos.each do |v|
+					if v.fecha <= Date.today
+						retorno = true
+					end
 				end
 			end
 		end

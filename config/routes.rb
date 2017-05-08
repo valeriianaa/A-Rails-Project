@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
   post "pagos/ajax_table_cuotas" => "pagos#ajax_table_cuotas"
   post "pagos/ajax_gon_variables" => "pagos#ajax_gon_variables"
+  
+  post "pagos/new_with_parameter" => "pagos#new_with_parameter"
+
   resources :conceptos_de_pago
   resources :eventos
   resources :especialidades_de_contacto

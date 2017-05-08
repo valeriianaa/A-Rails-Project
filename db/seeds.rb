@@ -255,40 +255,6 @@ PersonaProyecto.create!([
   {proyecto_id: 18, persona_id: 14}
 ])
 
-#Actividades Proyecto para PR-001 a PR-010 con historial y fecha de vencimiento en blanco
-# ActividadProyecto.create!([
-#   {fechaVencimiento: nil, proyecto_id: 1, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 1, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 1, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 2, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 2, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 2, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 3, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 3, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 3, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 4, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 4, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 4, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 5, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 5, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 5, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 6, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 6, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 6, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 7, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 7, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 7, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 8, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 8, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 8, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 9, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 9, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 9, actividad_id: 3, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 10, actividad_id: 1, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 10, actividad_id: 2, estado_id: nil},
-#   {fechaVencimiento: nil, proyecto_id: 10, actividad_id: 3, estado_id: nil}
-# ])
-
 Accion.create!([
   {nombre: "Crear", key_name: "create"},
   {nombre: "Eliminar", key_name: "destroy"},
@@ -738,18 +704,18 @@ Systemsetting.create!([
 ])
 
 ConceptoDePago.create!([
-  {codigo: "CP-001", nombre: "Cuota de Enero", descripcion: "Enero 2017", monto: 200.0},
-  {codigo: "CP-002", nombre: "Cuota de Febrero", descripcion: "Febrero 2017", monto: 200.0},
-  {codigo: "CP-003", nombre: "Cuota de Marzo", descripcion: "Marzo 2017", monto: 200.0},
-  {codigo: "CP-004", nombre: "Cuota de Abril", descripcion: "Abril 2017", monto: 200.0},
-  {codigo: "CP-005", nombre: "Cuota de Mayo", descripcion: "Mayo 2017", monto: 200.0},
-  {codigo: "CP-006", nombre: "Cuota de Junio", descripcion: "Junio 2017", monto: 200.0},
-  {codigo: "CP-007", nombre: "Cuota de Julio", descripcion: "Julio 2017", monto: 200.0},
-  {codigo: "CP-008", nombre: "Cuota de Agosto", descripcion: "Agosto 2017", monto: 200.0},
-  {codigo: "CP-009", nombre: "Cuota de Septiembre", descripcion: "Septiembre 2017", monto: 200.0},
-  {codigo: "CP-010", nombre: "Cuota de Octubre", descripcion: "Octubre 2017", monto: 200.0},
-  {codigo: "CP-011", nombre: "Cuota de Noviembre", descripcion: "Noviembre 2017", monto: 200.0},
-  {codigo: "CP-012", nombre: "Cuota de Diciembre", descripcion: "Diciembre 2017", monto: 200.0}
+  {codigo: "CP-001", nombre: "Cuota de Enero", descripcion: "Enero 2017", inicio: "01-01-17", monto: 200.0},
+  {codigo: "CP-002", nombre: "Cuota de Febrero", descripcion: "Febrero 2017", inicio: "01-02-17", monto: 200.0},
+  {codigo: "CP-003", nombre: "Cuota de Marzo", descripcion: "Marzo 2017", inicio: "01-03-17", monto: 200.0},
+  {codigo: "CP-004", nombre: "Cuota de Abril", descripcion: "Abril 2017", inicio: "01-04-17", monto: 200.0},
+  {codigo: "CP-005", nombre: "Cuota de Mayo", descripcion: "Mayo 2017", inicio: "01-05-17", monto: 200.0},
+  {codigo: "CP-006", nombre: "Cuota de Junio", descripcion: "Junio 2017", inicio: "01-06-17", monto: 200.0},
+  {codigo: "CP-007", nombre: "Cuota de Julio", descripcion: "Julio 2017", inicio: "01-07-17", monto: 200.0},
+  {codigo: "CP-008", nombre: "Cuota de Agosto", descripcion: "Agosto 2017", inicio: "01-08-17", monto: 200.0},
+  {codigo: "CP-009", nombre: "Cuota de Septiembre", descripcion: "Septiembre 2017", inicio: "01-09-17", monto: 200.0},
+  {codigo: "CP-010", nombre: "Cuota de Octubre", descripcion: "Octubre 2017", inicio: "01-10-17", monto: 200.0},
+  {codigo: "CP-011", nombre: "Cuota de Noviembre", descripcion: "Noviembre 2017", inicio: "01-11-17", monto: 200.0},
+  {codigo: "CP-012", nombre: "Cuota de Diciembre", descripcion: "Diciembre 2017", inicio: "01-12-17", monto: 200.0}
 ])
 
 Vencimiento.create!([
