@@ -22,6 +22,7 @@ table id="datatable" class="table table-bordered table-striped"
       th Nombre
       th Obligatorio
       th Etapa
+      th Cantidad de Antecedentes
       th.no-print Acciones
 
   tbody
@@ -34,6 +35,10 @@ table id="datatable" class="table table-bordered table-striped"
           -else
             i.glyphicon.glyphicon-remove 
         td = actividad.etapa.nombre
+        - if actividad.actividades_antecedentes != nil
+          td = actividad.actividades_antecedentes.count.to_s
+        - else
+          td = ""
         td.no-print style="padding: 3px;"
           - if can? :show, Actividad
             a href=(actividad_path(actividad))

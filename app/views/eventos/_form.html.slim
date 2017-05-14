@@ -39,6 +39,9 @@
       .field
         = f.label :hora, 'Hora: (*)'
         = f.time_select :hora
+      .field
+        = f.label :proyecto_ids, 'Proyectos: (*)'
+        = f.collection_select :proyecto_ids, Proyecto.all, :id, :codigo ,{}, {:class => 'form-control', :multiple => true}
     .box-footer
       p#foot = "(*) Campo Obligatorio"  
   

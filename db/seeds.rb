@@ -863,15 +863,127 @@ Cuenta.create!([
 ])
 
 EspecialidadDeContacto.create!([
-  {nombre: "Marketing", descripcion: "-"},
+  {nombre: "Marketing", descripcion: "Análisis del comportamiento de los mercados y de los consumidores"},
   {nombre: "Diseño Gráfico", descripcion: "-"},
   {nombre: "Diseño Web", descripcion: "-"},
   {nombre: "Fotografía", descripcion: "-"},
-  {nombre: "Multimedios", descripcion: "-"},
-  {nombre: "Community Manager", descripcion: "-"},
-  {nombre: "Crowdfunding", descripcion: "-"}
+  {nombre: "Multimedios", descripcion: "Televisión, Radio, Periódicos, Internet"},
+  {nombre: "Community Manager", descripcion: "Es el profesional responsable de construir, gestionar y administrar la comunidad online alrededor de una marca en Internet, creando y manteniendo relaciones estables y duraderas con sus clientes, sus fans y, en general, cualquier usuario interesado en la marca."},
+  {nombre: "Crowdfunding", descripcion: "El crowdfunding o micromecenazgo, en castellano, es una red de financiación colectiva, normalmente online, que a través de donaciones económicas o de otro tipo, consiguen financiar un determinado proyecto a cambio de recompensas, participaciones de forma altruista."},
+  {nombre: "Programador Java", descripcion: "-"},
+  {nombre: "Programador PHP", descripcion: "-"},
+  {nombre: "Programador web", descripcion: "Programador en los lenguajes HTML, CSS, Javascript."},
+  {nombre: "Impresiones de anuncios gigantes", descripcion: "Carteles Publicitarios, vallas, gigantografías"},
+  {nombre: "Consultoría", descripcion: "-"}
 ])
 
+Contacto.create!([
+  {codigo: "CO-001", nombre: "María Rosa", apellido: "Conti", nroIdentificacion: "25644132", fechaNacimiento: "1975-07-03", calle: "Ituzaingo", nroDomicilio: "245", piso: "12", dpto: "B", telefono: "424568", email: "mrconti@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-002", nombre: "Berta", apellido: "Rivera", nroIdentificacion: "33958772", fechaNacimiento: "1989-04-11", calle: "Leandro Gómez", nroDomicilio: "5886", piso: nil, dpto: nil, telefono: "4598765", email: "brivera@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 2, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-003", nombre: "Juliana", apellido: "Castiglione", nroIdentificacion: "30444512", fechaNacimiento: "1980-12-09", calle: "Brisas", nroDomicilio: "3280", piso: "3", dpto: "20", telefono: "555321", email: "jcastiglione@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-004", nombre: "Nahuel", apellido: "Estevez", nroIdentificacion: "19423568", fechaNacimiento: "1966-11-28", calle: "Av. Alta Gracia", nroDomicilio: "5332", piso: nil, dpto: nil, telefono: "154632108", email: "nestevez@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 2, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-005", nombre: "Pablo", apellido: "Gomez", nroIdentificacion: "25221305", fechaNacimiento: "1970-03-05", calle: "Neruda", nroDomicilio: "7393", piso: "8", dpto: "A", telefono: "154245689", email: "pablogomez@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-006", nombre: "Abigail", apellido: "Coronado", nroIdentificacion: "37926793", fechaNacimiento: "1994-03-21", calle: "Florencio Varela", nroDomicilio: "5659", piso: nil, dpto: nil, telefono: "432666", email: "abigailcoronado@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-007", nombre: "Hilda", apellido: "Zielinski", nroIdentificacion: "25334991", fechaNacimiento: "1970-04-07", calle: "Joaquin Suarez", nroDomicilio: "6863", piso: "6", dpto: "15", telefono: "4478909", email: "hildazielinski@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-008", nombre: "Antonio", apellido: "Goncalves Melo", nroIdentificacion: "34008128", fechaNacimiento: "1989-05-29", calle: "Maldonado", nroDomicilio: "2757", piso: nil, dpto: nil, telefono: "4498049", email: "antoniogm@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-009", nombre: "Isabela", apellido: "Correa", nroIdentificacion: "41889321", fechaNacimiento: "1997-11-04", calle: "Marejada", nroDomicilio: "5656", piso: nil, dpto: nil, telefono: "4482122", email: "isacorrea@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-010", nombre: "Franco", apellido: "Maur", nroIdentificacion: "41336729", fechaNacimiento: "1997-03-04", calle: "Corrientes", nroDomicilio: "314", piso: nil, dpto: nil, telefono: "4498049", email: "francomaur@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-011", nombre: "Felix", apellido: "Baer", nroIdentificacion: "30228128", fechaNacimiento: "1980-08-16", calle: "Maldonado", nroDomicilio: "9000", piso: nil, dpto: nil, telefono: "4601406", email: "felixbaer@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-012", nombre: "Eileen", apellido: "Macías Vargas", nroIdentificacion: "39756412", fechaNacimiento: "1996-01-19", calle: "Yapeyú", nroDomicilio: "3778", piso: nil, dpto: nil, telefono: "497986", email: "mercedesgarcia@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-013", nombre: "Mercedes", apellido: "García", nroIdentificacion: "34561928", fechaNacimiento: "1989-05-29", calle: "Maldonado", nroDomicilio: "2757", piso: nil, dpto: nil, telefono: "5557120", email: "antoniogm@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-014", nombre: "Clea", apellido: "Espino", nroIdentificacion: "24666124", fechaNacimiento: "1975-08-04", calle: "Tomás Guido", nroDomicilio: "8740", piso: nil, dpto: nil, telefono: "4981777", email: "cleaespino@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil},
+  {codigo: "CO-015", nombre: "Paul", apellido: "Flores Acosta", nroIdentificacion: "31672155", fechaNacimiento: "1985-06-21", calle: "Resistencia", nroDomicilio: "1813", piso: nil, dpto: nil, telefono: "4231456", email: "paulfloresacosta@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, area_id: 1, rol_de_empleado_id: nil}
+])
+
+PersonaEspecialidad.create!([
+  {persona_id: 101, especialidad_de_contacto_id: 1},
+  {persona_id: 101, especialidad_de_contacto_id: 5},
+  {persona_id: 102, especialidad_de_contacto_id: 2},
+  {persona_id: 102, especialidad_de_contacto_id: 11},
+  {persona_id: 103, especialidad_de_contacto_id: 2},
+  {persona_id: 103, especialidad_de_contacto_id: 3},
+  {persona_id: 103, especialidad_de_contacto_id: 10},
+  {persona_id: 104, especialidad_de_contacto_id: 3},
+  {persona_id: 104, especialidad_de_contacto_id: 8},
+  {persona_id: 104, especialidad_de_contacto_id: 9},
+  {persona_id: 104, especialidad_de_contacto_id: 10},
+  {persona_id: 105, especialidad_de_contacto_id: 7},
+  {persona_id: 106, especialidad_de_contacto_id: 2},
+  {persona_id: 106, especialidad_de_contacto_id: 3},
+  {persona_id: 106, especialidad_de_contacto_id: 4},
+  {persona_id: 107, especialidad_de_contacto_id: 6},
+  {persona_id: 107, especialidad_de_contacto_id: 7},
+  {persona_id: 108, especialidad_de_contacto_id: 1},
+  {persona_id: 108, especialidad_de_contacto_id: 12},
+  {persona_id: 109, especialidad_de_contacto_id: 1},
+  {persona_id: 109, especialidad_de_contacto_id: 7},
+  {persona_id: 110, especialidad_de_contacto_id: 3},
+  {persona_id: 110, especialidad_de_contacto_id: 9},
+  {persona_id: 111, especialidad_de_contacto_id: 1},
+  {persona_id: 111, especialidad_de_contacto_id: 2},
+  {persona_id: 111, especialidad_de_contacto_id: 11},
+  {persona_id: 112, especialidad_de_contacto_id: 4},
+  {persona_id: 113, especialidad_de_contacto_id: 2},
+  {persona_id: 113, especialidad_de_contacto_id: 4},
+  {persona_id: 114, especialidad_de_contacto_id: 7},
+  {persona_id: 114, especialidad_de_contacto_id: 12},
+  {persona_id: 115, especialidad_de_contacto_id: 8}
+])
+
+Evento.create!([
+  {codigo: "EV-001", nombre: "Reunion con Programadores ", descripcion: "Evento que tiene como objetivo poner en contacto programadores con miembros de equipos de los distintos proyectos para que celebren contratos de sistemas de gestión del negocio de dichos proyectos.", dia: "2017-05-15", hora: "2000-01-01 08:00:00"},
+  {codigo: "EV-002", nombre: "Conferencia de Marketing", descripcion: "Presentación de distintos expertos en el área de marketing que tiene como objetivo que los miembros de equipos de proyectos adquieran conocimientos básicos sobre como promocionar de manera apropiada su producto o servicio. ", dia: "2017-05-16", hora: "2000-01-01 08:00:00"}
+])
+
+EventoEspecialidad.create!([
+  {especialidad_de_contacto_id: 3, evento_id: 1},
+  {especialidad_de_contacto_id: 10, evento_id: 1},
+  {especialidad_de_contacto_id: 8, evento_id: 1},
+  {especialidad_de_contacto_id: 9, evento_id: 1},
+  {especialidad_de_contacto_id: 1, evento_id: 2},
+  {especialidad_de_contacto_id: 5, evento_id: 2},
+  {especialidad_de_contacto_id: 12, evento_id: 2}
+])
+
+PersonaEvento.create!([
+  {evento_id: 1, persona_id: 103},
+  {evento_id: 1, persona_id: 104},
+  {evento_id: 1, persona_id: 110},
+  {evento_id: 1, persona_id: 115},
+  {evento_id: 2, persona_id: 101},
+  {evento_id: 2, persona_id: 108},
+  {evento_id: 2, persona_id: 109},
+  {evento_id: 2, persona_id: 111},
+  {evento_id: 2, persona_id: 114}
+])
+
+EventoProyecto.create!([
+  {evento_id:1, proyecto_id: 4},
+  {evento_id:1, proyecto_id: 5},
+  {evento_id:1, proyecto_id: 7},
+  {evento_id:1, proyecto_id: 8},
+  {evento_id:1, proyecto_id: 9},
+  {evento_id:1, proyecto_id: 14},
+  {evento_id:1, proyecto_id: 16},
+  {evento_id:2, proyecto_id: 1},
+  {evento_id:2, proyecto_id: 2},
+  {evento_id:2, proyecto_id: 3},
+  {evento_id:2, proyecto_id: 4},
+  {evento_id:2, proyecto_id: 5},
+  {evento_id:2, proyecto_id: 6},
+  {evento_id:2, proyecto_id: 7},
+  {evento_id:2, proyecto_id: 8},
+  {evento_id:2, proyecto_id: 9},
+  {evento_id:2, proyecto_id: 10},
+  {evento_id:2, proyecto_id: 11},
+  {evento_id:2, proyecto_id: 12},
+  {evento_id:2, proyecto_id: 13},
+  {evento_id:2, proyecto_id: 14},
+  {evento_id:2, proyecto_id: 15},
+  {evento_id:2, proyecto_id: 16},
+  {evento_id:2, proyecto_id: 17},
+  {evento_id:2, proyecto_id: 18}
+  ])
 # Contacto.create!([
 #   {codigo: "CO-001", nombre: "María Rosa", apellido: "Conti", nroIdentificacion: "25644132", fechaNacimiento: "1975-07-03", calle: "Ituzaingo", nroDomicilio: "245", piso: "12", dpto: "B", telefono: "424568", email: "mrconti@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 1, area_id: 1, rol_de_empleado_id: nil},
 #   {codigo: "CO-002", nombre: "Berta", apellido: "Rivera", nroIdentificacion: "33958772", fechaNacimiento: "1989-04-11", calle: "Leandro Gomez", nroDomicilio: "5886", piso: nil, dpto: nil, telefono: "4598765", email: "brivera@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 2, area_id: 1, rol_de_empleado_id: nil},
@@ -944,7 +1056,5 @@ Audited::Adapters::ActiveRecord::Audit.update_all(user_id: 1)
 # PagoMetodo.create!([
 #   {monto: 288.0, pago_id: 1, tipo_de_pago_id: 1}
 # ])
-
-
 
 

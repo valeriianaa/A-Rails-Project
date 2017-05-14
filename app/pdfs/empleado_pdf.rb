@@ -36,7 +36,7 @@ class EmpleadoPdf < Prawn::Document
 	end
 
 	def detalle_empleado
-		table([[{:content => "Empleado Código: #{@empleado.codigo}", :colspan => 2}],["Nombre", "#{@empleado.nombre_y_apellido}"]]) do |t|
+		table([[{:content => "Empleado Código: #{@empleado.codigo}", :colspan => 2}],["Nombre y Apellido", "#{@empleado.nombre_y_apellido}"], ["Departamento", "#{@empleado.departamento.nombre}"], ["Rol dentro de la organización", "#{@empleado.rol_de_empleado.nombre}"]]) do |t|
 			t.width = bounds.width
 			t.column(0).font_style = :bold
 			t.row(0).font_style = :bold

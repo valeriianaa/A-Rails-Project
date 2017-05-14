@@ -33,6 +33,9 @@ class Actividad < ActiveRecord::Base
 			if self.actividades_antecedentes[0] == ""
 				self.actividades_antecedentes.shift
 			end
+			if self.actividades_antecedentes == []
+				self.actividades_antecedentes = nil
+			end
 		end
 	end
 
@@ -49,13 +52,13 @@ class Actividad < ActiveRecord::Base
 	end
 
 
-	def self.eliminar_antecedente
+	def eliminar_antecedente
 		Actividad.all.each do |actividad|
 			if actividad.tiene_antecedentes == true
 				actividad.actividades_antecedentes.each do |antecedente|
 					if Actividad.exists?(antecedente) == false
-						aux = actividad.actividades_antecedentes.delete(antecedente)
-						actividad.update(actividades_antecedentes: aux)
+						aux = actividad.actividades_antecedentes
+						actividad.update(actividades_antecedentes: aux - [antecedente])
 					end
 				end
 			end

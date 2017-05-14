@@ -22,11 +22,29 @@
         = f.check_box :obligatorio, :style => "margin-left: 10px;"
       br
       .field
-        = f.label :etapa_id, 'Etapa a la que pertenece: (*)'
-        = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {:prompt => "Seleccione una etapa"}, {:id => 'etapa_id', :class =>'form-control'}
+        = f.label :etapa_id, "Etapa: (*)", {class: "control-label"}
+        br
+            select#actividad_etapa_id.form-control.select2 name="actividad[etapa_id]"
+              - Etapa.all.each do |etapa|
+                - if @actividad.etapa == etapa
+                  option selected='' value=(etapa.id) = etapa.nombre
+                - else
+                  option value=(etapa.id) = etapa.nombre
       .field
-        = f.label :actividades_antecedentes, 'Actividades Antecedentes: (**)', :id => 'antecedente_label'
-        = f.grouped_collection_select :actividades_antecedentes, Etapa.all, :actividades, :nombre, :id, :nombre, {:selected => @actividad.actividades_antecedentes}, {:multiple => true, :id => 'actividad_antecedente_id', :class =>'form-control'}
+        = f.label :actividades_antecedentes, "Actividades antecedentes: (*)",  {class: "control-label"}
+        br
+            select#actividad_actividades_antecedentes.form-control.select2 name="actividad[actividades_antecedentes][]" multiple="true"
+              - Actividad.all.each do |antecedente|
+                - if (@actividad.actividades_antecedentes) != nil and (@actividad.actividades_antecedentes.include?(antecedente.id.to_s))
+                  option selected='' class=(antecedente.etapa_id) value=(antecedente.id) =antecedente.nombre
+                - else
+                  option class=(antecedente.etapa_id) value=(antecedente.id) =antecedente.nombre
+      / .field
+      /   = f.label :etapa_id, 'Etapa a la que pertenece: (*)'
+      /   = f.collection_select :etapa_id, Etapa.all, :id, :nombre, {:prompt => "Seleccione una etapa"}, {:id => 'etapa_id', :class =>'form-control'}
+      / .field
+      /   = f.label :actividades_antecedentes, 'Actividades Antecedentes: (**)', :id => 'antecedente_label'
+      /   = f.grouped_collection_select :actividades_antecedentes, Etapa.all, :actividades, :nombre, :id, :nombre, {:selected => @actividad.actividades_antecedentes}, {:multiple => true, :id => 'actividad_antecedente_id', :class =>'form-control'}
     .box-footer
       p#foot = "(*) Campo Obligatorio"
       p#foot = "(**) Las actividades antecedentes deben pertenecer a la misma etapa"

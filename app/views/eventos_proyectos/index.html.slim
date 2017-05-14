@@ -6,6 +6,15 @@
       a.btn.btn-info href=(new_evento_proyecto_path)
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
+      .pull-right
+        a.btn.btn-default#pdf href=""
+          | Auditorías
+        a.btn.btn-default#pdf href="" title="Ver PDF"
+          i.fa.fa-file-pdf-o
+        a.btn.btn-default#excel href="" title="Descargar Excel"
+          i.fa.fa-file-excel-o
+        a.btn.btn-default#excel href=(eventos_proyectos_estadisticas_path) title="Ver estadísticas"
+          i.fa.fa-pie-chart
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead
@@ -18,12 +27,12 @@ table id="datatable" class="table table-bordered table-striped"
   tbody
     - @eventos_proyectos.each do |evento_proyecto|
       tr
-        td = evento_proyecto.evento.nombre
-        td = evento_proyecto.proyecto.nombre
+        td = "#{evento_proyecto.evento.codigo} - #{evento_proyecto.evento.nombre}"
+        td = "#{evento_proyecto.proyecto.codigo} - #{evento_proyecto.proyecto.nombre}"
         td
           ul
-            -evento_proyecto.evento.personas_eventos.each do |contacto|
-              li = Contacto.find(contacto.persona_id).especialidad_de_contacto.nombre
+            -evento_proyecto.evento.eventos_especialidades.each do |ee|
+              li = EspecialidadDeContacto.find(ee.especialidad_de_contacto_id).nombre
         td.no-print style="padding: 3px;"
           - if can? :show, EventoProyecto
             a href=(evento_path(evento_proyecto))

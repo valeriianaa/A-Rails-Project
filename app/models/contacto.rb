@@ -6,7 +6,7 @@ class Contacto < Persona
 	#belongs_to :especialidad_de_contacto
 	
 	
-	validates :especialidad_de_contacto_ids, presence: true
+	#validates :especialidad_de_contacto_ids, presence: true
 	validates :codigo, uniqueness: true
 
 	#audited

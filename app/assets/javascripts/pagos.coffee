@@ -74,7 +74,7 @@ $(document).ready ->
             $("#pagos-table > tbody").empty()
 
             # Si esta en modo nuevo con parametros, selecciona todas las cuotas.
-            if getActionName() == "new_with_parameter"
+            if getControllerName() == "pagos" and getActionName() == "new_with_parameter"
               $("input[name*='pago[cuota_por_cliente_ids][]']").each (i, v)->
                 $(v).prop('checked', true)
               setearTotales()

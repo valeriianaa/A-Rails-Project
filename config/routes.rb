@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   resources :conceptos_de_pago
   resources :eventos
+  match 'eventos_proyectos_estadisticas'=> 'eventos_proyectos#estadisticas', :via => [:get], as: :eventos_proyectos_estadisticas
+
   resources :especialidades_de_contacto
   resources :contactos
   resources :roles_de_empleados

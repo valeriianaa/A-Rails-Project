@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Incubadora</title>
+    <title>Grower</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= stylesheet_link_tag "bootstrap/css/bootstrap.min.css" %>
     <%= stylesheet_link_tag "css/AdminLTE.css" %>
@@ -24,6 +24,16 @@
     <%= javascript_include_tag "js/bootstrap-datetimepicker.js" %>
     <%= csrf_meta_tags %>
   </head>
+  <script>
+    function getActionName () {
+      return "<%= controller.action_name %>"
+      
+    }
+    function getControllerName (){
+      return "<%= controller_name %>"
+    }
+  </script>
+
   <body class="sidebar-mini skin-blue">
     <div class="wrapper">
 

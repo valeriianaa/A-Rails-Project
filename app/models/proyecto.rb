@@ -58,6 +58,16 @@ class Proyecto < ActiveRecord::Base
 		return personas.where(type: 'MiembroEquipo')
 	end
 
+	def encontrar_empleado
+		empleado = nil
+		PersonaProyecto.where(proyecto_id: self).each do |pp|
+			if pp.persona.type == "Empleado"
+				empleado = pp.persona
+			end
+		end
+		return empleado
+	end
+
 	def ultima_actividad_actualizada
 		ultimo_actualizado = actividades_proyectos.first.updated_at
 		actividades_proyectos.each do |ap|

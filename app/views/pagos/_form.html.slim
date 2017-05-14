@@ -64,10 +64,6 @@
   = f.submit
 
 javascript:
-  function getActionName () {
-    return "#{{ controller.action_name }}"
-  }
-
   function getParametros(){
     json_str = '#{{ @parametros.to_json }}'
     return JSON.parse(json_str)

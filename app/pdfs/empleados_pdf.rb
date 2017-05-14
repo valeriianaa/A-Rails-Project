@@ -31,12 +31,13 @@ class EmpleadosPdf < Prawn::Document
 
 	def titulo_reporte
 		move_down 35
-		text "Todas las Actividades", size: 12, :align =>:left
+		text "Todos los Empleados", size: 12, :align =>:left
 	end
 
 	def renderizar_tabla		
 		move_down 5
 		table(empleados_items,{:cell_style =>{:size => 8}} ) do |t|
+			t.column_widths = [30,50,80,80,90,80,110,140,60]
 			t.row(0).font_style = :bold
 			t.row(0).align = :center
 			t.row(0).background_color = "f4f4f4"
@@ -44,9 +45,9 @@ class EmpleadosPdf < Prawn::Document
 	end
 
 	def empleados_items
-		[["ID","Nombre","Apellido", "Tipo y N° Doc", "Departamento", "Rol","Dirección","Teléfono","Correo Electronico"]] +
-		@empleados.map do |empleado|
-			[empleado.id, empleado.nombre, empleado.apellido, "#{empleado.tipo_documento.nombre} #{empleado.nroIdentificacion}", empleado.departamento.nombre, empleado.rol_de_empleado.nombre, "#{empleado.calle}, #{empleado.nroDomicilio} piso:#{empleado.piso} dpto:#{empleado.dpto}",empleado.telefono, empleado.email]
+		[["ID","Código","Nombre","Apellido", "Tipo y N° Doc", "Departamento", "Rol","Dirección","Teléfono"]] +
+		@empleados.each_with_index.map do |empleado, i|
+			[(i+1).to_s, empleado.codigo, empleado.nombre, empleado.apellido, "#{empleado.tipo_documento.nombre} #{empleado.nroIdentificacion}", empleado.departamento.nombre, empleado.rol_de_empleado.nombre, "#{empleado.calle}, #{empleado.nroDomicilio} piso:#{empleado.piso} dpto:#{empleado.dpto}",empleado.telefono]
 		end	
 	end
 end

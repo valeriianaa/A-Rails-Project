@@ -25,7 +25,7 @@ class EventosProyectosController < ApplicationController
   # POST /eventos_proyectos.json
   def create
     @evento_proyecto = EventoProyecto.new(evento_proyecto_params)
-
+    
     respond_to do |format|
       if @evento_proyecto.save
         format.html { redirect_to @evento_proyecto, notice: 'Evento y Proyecto fueron asociados exitosamente.' }
@@ -61,6 +61,15 @@ class EventosProyectosController < ApplicationController
     end
   end
 
+  def estadisticas
+    @eventos_proyectos = EventoProyecto.all
+
+    respond_to do |format|
+      format.html { render 'estadisticas.html.slim' }
+      format.json { render json: @eventos_proyectos }
+    end
+  end
+
   def audited
     audited = Audited::Adapters::ActiveRecord::Audit
     @auditoria = audited.where auditable_type: "EventoProyecto"
@@ -74,6 +83,6 @@ class EventosProyectosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def evento_proyecto_params
-      params.require(:evento_proyecto).permit(:proyecto_id, :evento_id)
+      params.require(:evento_proyecto).permit(:evento_id, :proyecto_id)
     end
 end

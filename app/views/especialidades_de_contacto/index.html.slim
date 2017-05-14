@@ -19,14 +19,12 @@ table id="datatable" class="table table-bordered table-striped"
   thead
     tr
       th Nombre
-      th Descripcion
       th.no-print Acciones
 
   tbody
     - @especialidades_de_contacto.each do |especialidad_de_contacto|
       tr
         td = especialidad_de_contacto.nombre
-        td = especialidad_de_contacto.descripcion
         td.no-print style="padding: 3px;"
           - if can? :show, EspecialidadDeContacto
             a href=(especialidad_de_contacto_path(especialidad_de_contacto))
