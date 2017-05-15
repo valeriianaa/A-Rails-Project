@@ -12,4 +12,13 @@ $(document).ready ->
     placeholder: "Seleccione las especialidades que conformarán la temática del evento"
   $('#evento_proyecto_ids').select2
     placeholder: "Seleccione uno o varios proyectos"
+
+  if $('#estadisticas').data('especialidades') != undefined
+      Morris.Donut
+          element: 'estadisticas'
+          data: $('#estadisticas').data('especialidades')
+          xkey: 'estadisticas'
+          ykeys: $('#estadisticas').data('labels')
+          labels: $('#estadisticas').data('labels')
+          parseTime: false
   

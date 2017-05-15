@@ -79,6 +79,15 @@ class EventosController < ApplicationController
     end
   end
 
+  def estadisticas
+    @eventos = Evento.all
+
+    respond_to do |format|
+      format.html { render 'estadisticas.html.slim' }
+      format.json { render json: @eventos }
+    end
+  end
+
   def audited
     audited = Audited::Adapters::ActiveRecord::Audit
     @auditoria = audited.where auditable_type: "Evento"

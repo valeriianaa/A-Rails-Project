@@ -9,7 +9,8 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
       th Accion
       th Usuario
       th Empleado Id
-      th Empleado Código
+      /th Empleado Código
+      th Persona - type
       th Cambios
       th Antes
       th Despues
@@ -20,7 +21,8 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
         td = audit.action
         td = User.find(audit.user_id).persona.nombre_y_apellido
         td = audit.auditable.try(:id)
-        td = Empleado.find(audit.auditable.try(:id)).codigo
+        /td = Empleado.find(audit.auditable.try(:id)).codigo
+        td = audit.auditable.try(:type)
         td
           ul
             - audit.audited_changes.each do |k,v|

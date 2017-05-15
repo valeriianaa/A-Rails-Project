@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   root "pages#show", page: "home"
   
   resources :eventos_proyectos
+  match 'eventos_proyectos_estadisticas'=> 'eventos_proyectos#estadisticas', :via => [:get], as: :eventos_proyectos_estadisticas
+
   resources :descuentos
   resources :intereses
   resources :tipos_de_pago
@@ -30,7 +32,7 @@ Rails.application.routes.draw do
 
   resources :conceptos_de_pago
   resources :eventos
-  match 'eventos_proyectos_estadisticas'=> 'eventos_proyectos#estadisticas', :via => [:get], as: :eventos_proyectos_estadisticas
+  match 'eventos_estadisticas'=> 'eventos#estadisticas', :via => [:get], as: :eventos_estadisticas
 
   resources :especialidades_de_contacto
   resources :contactos
@@ -41,6 +43,7 @@ Rails.application.routes.draw do
   resources :personas_proyectos
   resources :areas
   resources :actividades
+  post "actividades/ajax_actividades_auditoria" => "actividades#ajax_actividades_auditoria"
   resources :etapas
   resources :proyectos do
     resources :cuotas_por_cliente

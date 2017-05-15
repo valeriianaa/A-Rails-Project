@@ -17,4 +17,19 @@ class Evento < ActiveRecord::Base
 
 	audited
 
+	def self.estadisticas
+		retorno = Array.new 
+		EspecialidadDeContacto.all.each do |especialidad|
+			if especialidad.eventos != nil
+				if especialidad.eventos.count > 0
+					contenido = Hash.new 
+					contenido[:label] = especialidad.nombre
+					contenido[:value] = especialidad.eventos.count
+					retorno << contenido
+				end
+			end
+		end
+		return retorno
+	end
+
 end

@@ -6,13 +6,19 @@
 //= require jquery.chained
 //= require select2
 
-
 $(document).ready ->
   $("#actividad_actividades_antecedentes").chained("#actividad_etapa_id")
   $("#actividad_etapa_id").select2
     placeholder: "Seleccione una etapa"
   $("#actividad_actividades_antecedentes").select2
     placeholder: "Seleccione una o varias actividades antecedentes"
+
+  $("#bt-filtrar-auditorias-actividades").click ->
+    $(".table.table-striped.table-bordered.table-hover.actividades-auditorias").empty()
+    $.post( "/actividades/ajax_actividades_auditoria", $("#parametros").serializeArray())
+      .done (data) ->
+        $(".table.table-striped.table-bordered.table-hover.actividades-auditorias").append data
+
   # $('#actividad_antecedente_id').hide()
   # $('#antecedente_label').hide()
   # actividades = $('#actividad_antecedente_id').html()

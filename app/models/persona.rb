@@ -30,6 +30,8 @@ class Persona < ActiveRecord::Base
     #validates :direccion, uniqueness: { scope: :ciudad_id, message: "la direccion ingresada ya existe para esta ciudad" }
 
     audited
+    
+
     def nombre_y_apellido
       return "#{nombre} #{apellido}"
     end
@@ -42,10 +44,12 @@ class Persona < ActiveRecord::Base
     HUMANIZED_ATTRIBUTES = {
     :codigo => "Código: ",
     :nombre => "Nombre: ",
+    :apellido => "Apellido: ",
     :nroIdentificacion => "Número de identificación: ",
     :tipo_documento_id => "Tipo de documento: ",
     :area_id => "Área: ",
     :email => "Correo electrónico: ",
+    :calle => "Calle: ",
     :nroDomicilio => "Número de domicilio:"
   }
 

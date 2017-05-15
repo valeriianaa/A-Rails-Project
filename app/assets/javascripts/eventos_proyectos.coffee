@@ -9,3 +9,12 @@ $(document).ready ->
     placeholder: "Seleccione un evento"
   $('#evento_proyecto_proyecto_id').select2
     placeholder: "Seleccione un proyecto"
+
+  if $('#estadisticas').data('actividades') != undefined
+      Morris.Donut
+          element: 'estadisticas'
+          data: $('#estadisticas').data('actividades')
+          xkey: 'estadisticas'
+          ykeys: $('#estadisticas').data('labels')
+          labels: $('#estadisticas').data('labels')
+          parseTime: false

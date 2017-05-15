@@ -84,6 +84,7 @@ class EmpleadosController < ApplicationController
   end
 
   def audited
+
     audited = Audited::Adapters::ActiveRecord::Audit
     @auditoria = Array.new
     Empleado.all.each do |empleado|
@@ -93,6 +94,7 @@ class EmpleadosController < ApplicationController
     end
   end
 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_empleado

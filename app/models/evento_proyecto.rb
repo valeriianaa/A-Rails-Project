@@ -8,13 +8,16 @@ class EventoProyecto < ActiveRecord::Base
 	audited
 
 	def self.estadisticas
-		retorno, labels = Array.new
+		retorno = Array.new 
+		labels = Array.new
 		EspecialidadDeContacto.all.each do |especialidad|
 			if especialidad.eventos != nil
-				contenido = Hash.new 
-				contenido[:label] = especialidad.nombre
-				contenido[:value] = EventoProyecto.where(evento_id: especialidad.eventos).count
-				retorno << contenido
+				if EventoProyecto.where(evento_id: especialidad.eventos).count > 0
+					contenido = Hash.new 
+					contenido[:label] = especialidad.nombre
+					contenido[:value] = EventoProyecto.where(evento_id: especialidad.eventos).count
+					retorno << contenido
+				end
 			end
 		end
 		return retorno

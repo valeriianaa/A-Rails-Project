@@ -1003,7 +1003,6 @@ EventoProyecto.create!([
 #   {evento_id: 2, persona_id: 102},
 #   {evento_id: 2, persona_id: 105}
 # ])
-
 Audited::Adapters::ActiveRecord::Audit.update_all(user_id: 1)
 #--------------------------------------------------------
 
@@ -1056,5 +1055,4 @@ Audited::Adapters::ActiveRecord::Audit.update_all(user_id: 1)
 # PagoMetodo.create!([
 #   {monto: 288.0, pago_id: 1, tipo_de_pago_id: 1}
 # ])
-
 

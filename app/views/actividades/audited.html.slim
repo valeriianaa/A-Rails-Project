@@ -3,7 +3,19 @@
   h1
     | Auditoría de Actividades
 
-table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
+
+.row-fluid
+  form#parametros.form-inline
+    .col-md-4
+      label Buscar desde:
+      input.form-control type="date" name="actividades_fini"
+    .col-md-4
+      label hasta:
+      input.form-control type="date" name="actividades_ffin"
+    a#bt-filtrar-auditorias-actividades.btn.btn-success
+          | Filtrar
+br
+table.table.table-striped.table-bordered.table-hover.actividades-auditorias id="datatable"
   thead
     tr
       th Accion

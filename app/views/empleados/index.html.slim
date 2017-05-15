@@ -21,18 +21,18 @@ table id="datatable" class="table table-bordered table-striped"
     tr
       th Código
       th Nombre y Apellido
-      th Tipo y Número de Documento
       th Departamento
       th Rol
+      th Cantidad de proyectos a su cargo
       th.no-print Acciones
   tbody
     - @empleados.each do |empleado|
       tr
         td = empleado.codigo
         td = empleado.nombre_y_apellido
-        td = empleado.tipo_y_nro_documento
         td = empleado.departamento.nombre
         td = empleado.rol_de_empleado.nombre
+        td = "#{pluralize(empleado.proyectos.count, "proyecto")}"
         td.no-print style="padding: 3px;"
           - if can? :show, Empleado
             a href=(empleado_path(empleado))

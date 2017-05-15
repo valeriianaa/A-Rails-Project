@@ -105,6 +105,10 @@ div.index-header a#etapa{
 	border-color: #555299;
 }
 
+i#grower-verde{
+	color: #008d4c;
+}
+
 a.btn#pdf, a.btn#excel{
 	/*background-color: #001F3F;
 	border-color: #001F3F;*/

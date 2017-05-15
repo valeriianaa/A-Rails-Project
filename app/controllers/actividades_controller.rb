@@ -87,6 +87,20 @@ class ActividadesController < ApplicationController
     @auditoria = audited.where auditable_type: "Actividad"
   end
 
+  def ajax_actividades_auditoria
+    # audited = Audited::Adapters::ActiveRecord::Audit
+    # @auditoria = audited.where auditable_type: "Actividad"
+
+
+    puts 'retorno:...', params[:actividades_fini].to_date
+    fecha1 = params[:actividades_fini].to_date
+    fecha2 = params[:actividades_ffin].to_date
+    audited = Audited::Adapters::ActiveRecord::Audit
+    @auditoria = audited.where(fecha: fecha1..fecha2, auditable_type: "Actividad")
+    #@total_del_mes = calcular_ingresos(@pagos_por_fechas)
+    render :action => "audited.html.slim"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_actividad
