@@ -18,9 +18,11 @@ p#notice = notice
                 strong Saldo de la cuenta
               td = @cuenta.saldo
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_cuenta_path(@cuenta)) style="width:70px;" id="editar_cuenta"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(cuentas_path) style="width:70px;" id="volver_cuenta"
-      |Volver
+  - if can? :update, Cuenta
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_cuenta_path(@cuenta)) style="width:70px;" id="editar_cuenta"
+        |Editar
+  - if can? :index, Cuenta
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(cuentas_path) style="width:70px;" id="volver_cuenta"
+        |Volver

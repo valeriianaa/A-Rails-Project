@@ -11,14 +11,16 @@ p#notice = notice
 
 -if @etapa.proyectos.exists?
   .row
-    .col-xs-1 style="padding-right:40px; margin-right:130px;"
-      a.btn.btn-block.btn-primary href="/etapas/#{@etapa.id}.pdf" style="width:200px;" id="pdf_etapa"
-        i.fa.fa-file-pdf-o
-        |  Ver Proyectos de la Etapa
-    .col-xs-1 style="padding-right:40px;"
-      a.btn.btn-block.btn-primary href="/etapas/#{@etapa.id}.xls" style="width:230px;" id="excel_etapa"
-        i.fa.fa-file-excel-o
-        |  Proyectos de la Etapa - Excel
+    - if can? :model_pdf, Etapa
+      .col-xs-1 style="padding-right:40px; margin-right:130px;"
+        a.btn.btn-block.btn-primary href="/etapas/#{@etapa.id}.pdf" style="width:200px;" id="pdf_etapa"
+          i.fa.fa-file-pdf-o
+          |  Ver Proyectos de la Etapa
+    - if can? :model_calculo, Etapa
+      .col-xs-1 style="padding-right:40px;"
+        a.btn.btn-block.btn-primary href="/etapas/#{@etapa.id}.xls" style="width:230px;" id="excel_etapa"
+          i.fa.fa-file-excel-o
+          |  Proyectos de la Etapa - Excel
 br
 .row
   .col-md-8
@@ -46,9 +48,11 @@ br
             
            
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_etapa_path(@etapa)) style="width:70px;" id="editar_etapa"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(etapas_path) style="width:70px;" id="volver_etapa"
-      |Volver
+  - if can? :update, Etapa
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_etapa_path(@etapa)) style="width:70px;" id="editar_etapa"
+        |Editar
+  - if can? :index, Etapa
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(etapas_path) style="width:70px;" id="volver_etapa"
+        |Volver

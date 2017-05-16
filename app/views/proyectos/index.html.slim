@@ -15,13 +15,15 @@
         i.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
-      - if can? :auditoria, Proyecto
+      - if can? :auditorias, Proyecto
         a.btn.btn-default#pdf href=(proyectos_audited_path)
           | Auditorías
-      a.btn.btn-default#pdf href=(proyectos_path(format: "pdf")) title="Ver PDF"
-        i.fa.fa-file-pdf-o
-      a.btn.btn-default#excel href=(proyectos_path(format: "xls")) title="Descargar Excel"
-        i.fa.fa-file-excel-o
+      - if can? :pdf, Proyecto
+        a.btn.btn-default#pdf href=(proyectos_path(format: "pdf")) title="Ver PDF"
+          i.fa.fa-file-pdf-o
+      - if can? :calculo, Proyecto
+        a.btn.btn-default#excel href=(proyectos_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead

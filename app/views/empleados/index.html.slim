@@ -8,10 +8,13 @@
         i.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
+      - if can? :auditorias, Empleado
         a.btn.btn-default#pdf href=(empleados_audited_path)
           | Auditorías
+      - if can? :pdf, Empleado
         a.btn.btn-default#pdf href=(empleados_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
+      - if can? :calculo, Empleado
         a.btn.btn-default#excel href=(empleados_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
 

@@ -19,9 +19,11 @@ p#notice = notice
               td = @especialidad_de_contacto.descripcion
           
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_especialidad_de_contacto_path(@especialidad_de_contacto)) style="width:70px;" id="editar_especialidad_de_contacto"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(especialidades_de_contacto_path) style="width:70px;" id="volver_especialidad_de_contacto"
-      |Volver
+  - if can? :update, EspecialidadDeContacto
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_especialidad_de_contacto_path(@especialidad_de_contacto)) style="width:70px;" id="editar_especialidad_de_contacto"
+        |Editar
+  - if can? :index, EspecialidadDeContacto
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(especialidades_de_contacto_path) style="width:70px;" id="volver_especialidad_de_contacto"
+        |Volver

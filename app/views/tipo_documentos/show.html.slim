@@ -16,9 +16,11 @@ p#notice = notice
             
 
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_tipo_documento_path(@tipo_documento)) style="width:70px;" id="editar_tipo_documento"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(tipo_documentos_path) style="width:70px;" id="volver_tipo_documento"
-      |Volver
+  - if can? :update, TipoDocumento   
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_tipo_documento_path(@tipo_documento)) style="width:70px;" id="editar_tipo_documento"
+        |Editar
+  - if can? :index, TipoDocumento   
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(tipo_documentos_path) style="width:70px;" id="volver_tipo_documento"
+        |Volver

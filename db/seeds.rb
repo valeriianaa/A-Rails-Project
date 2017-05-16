@@ -269,7 +269,8 @@ Accion.create!([
   {nombre: "PDF del modelo", key_name: "model_pdf"},
   {nombre: "Hoja de cálculo del Modelo", key_name: "model_calculo"},
   {nombre: "Ver cuotas atrasadas", key_name: "cuotas_atrasadas"},
-  {nombre: "Ver proyectos en posible estado de abandono", key_name: "proyectos_abandonados"}
+  {nombre: "Ver proyectos en posible estado de abandono", key_name: "proyectos_abandonados"},
+  {nombre: "Ver Notificaciones", key_name: "notificaciones"}
 ])
 Modelo.create!([
   {nombre: "Actividad"},
@@ -441,6 +442,8 @@ Permiso.create!([
   {accion_id: 5, modelo_id: 27},
   {accion_id: 6, modelo_id: 27},
   {accion_id: 7, modelo_id: 20},
+  {accion_id: 7, modelo_id: 14},
+  {accion_id: 7, modelo_id: 15},
   {accion_id: 1, modelo_id: 28},
   {accion_id: 2, modelo_id: 28},
   {accion_id: 3, modelo_id: 28},
@@ -529,42 +532,17 @@ Permiso.create!([
   {accion_id: 12, modelo_id: 16},
   {accion_id: 13, modelo_id: 20},
   {accion_id: 13, modelo_id: 27},
-  {accion_id: 14, modelo_id: 20}
+  {accion_id: 14, modelo_id: 20},
+  {accion_id: 15, modelo_id: 20},
+  {accion_id: 15, modelo_id: 27}
 ])
 
 Rol.create!([
-  {nombre: "admin_empleados"},
-  {nombre: "super_admin"},
-  {nombre: "Encargado de Proyectos (mentor)"},
-  {nombre: "Miembro de Equipo"}
-])
-
-Rol::HABTM_Permisos.create!([
-  {permiso_id: 77, rol_id: 3},
-  {permiso_id: 78, rol_id: 3},
-  {permiso_id: 79, rol_id: 3},
-  {permiso_id: 80, rol_id: 3},
-  {permiso_id: 101, rol_id: 3},
-  {permiso_id: 80, rol_id: 4},
-  {permiso_id: 101, rol_id: 4},
-  {permiso_id: 121, rol_id: 3},
-  {permiso_id: 37, rol_id: 1},
-  {permiso_id: 38, rol_id: 1},
-  {permiso_id: 39, rol_id: 1},
-  {permiso_id: 40, rol_id: 1},
-  {permiso_id: 111, rol_id: 1},
-  {permiso_id: 77, rol_id: 1},
-  {permiso_id: 78, rol_id: 1},
-  {permiso_id: 79, rol_id: 1},
-  {permiso_id: 80, rol_id: 1},
-  {permiso_id: 101, rol_id: 1},
-  {permiso_id: 121, rol_id: 1}
+  {nombre: "super_admin"}
 ])
 
 User.create!([
-  {email: "valeriianaa@gmail.com", password: "12345678", encrypted_password: "$2a$11$IOIqTifJSSss5Ux4qvnwyet8eVOAXbLnDdygO/WWLL3gpl8eW7Bhu", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 1, rol_id: 2},
-  {email: "luiscastro@gmail.com", password: "12345678", encrypted_password: "$2a$11$uFat0oc4vonnYiRH71Egde1ZjZ7jIQdFNyb9vLL0jOTtZfNhEJEFq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 6, rol_id: 3},
-  {email: "mq@gmail.com", password: "12345678", encrypted_password: "$2a$11$ozq2DVoT.jkbDsKalmbklOAtl6RElAHDuglwK0D/RVIinX/hIa2.m", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 2, rol_id: 1}
+  {email: "valeriianaa@gmail.com", password: "12345678", encrypted_password: "$2a$11$IOIqTifJSSss5Ux4qvnwyet8eVOAXbLnDdygO/WWLL3gpl8eW7Bhu", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 1, rol_id: 2}
 ])
 
 Estado.create!([

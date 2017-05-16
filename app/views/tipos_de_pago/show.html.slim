@@ -24,9 +24,11 @@ p#notice = notice
             
 
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_tipo_de_pago_path(@tipo_de_pago)) style="width:70px;" id="editar_tipo_de_pago"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(tipos_de_pago_path) style="width:70px;" id="volver_tipo_de_pago"
-      |Volver
+  - if can? :update, TipoDePago
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_tipo_de_pago_path(@tipo_de_pago)) style="width:70px;" id="editar_tipo_de_pago"
+        |Editar
+  - if can? :index, TipoDePago
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(tipos_de_pago_path) style="width:70px;" id="volver_tipo_de_pago"
+        |Volver

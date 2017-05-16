@@ -47,10 +47,12 @@ p#notice = notice
                 td = vencimiento.interes.porcentaje
           
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_concepto_de_pago_path(@concepto_de_pago)) style="width:70px;" id="editar_concepto_de_pago"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(conceptos_de_pago_path) style="width:70px;" id="volver_concepto_de_pago"
-      |Volver
+  - if can? :update, ConceptoDePago
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_concepto_de_pago_path(@concepto_de_pago)) style="width:70px;" id="editar_concepto_de_pago"
+        |Editar
+  - if can? :index, ConceptoDePago
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(conceptos_de_pago_path) style="width:70px;" id="volver_concepto_de_pago"
+        |Volver
 

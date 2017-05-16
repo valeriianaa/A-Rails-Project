@@ -31,10 +31,12 @@ p#notice = notice
               td = @ciudad.pais.nombre
 
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_ciudad_path(@ciudad)) style="width:70px;" id="editar_ciudad"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(ciudades_path) style="width:70px;" id="volver_ciudad"
-      |Volver
+  - if can? :update, Ciudad
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_ciudad_path(@ciudad)) style="width:70px;" id="editar_ciudad"
+        |Editar
+  - if can? :index, Ciudad
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(ciudades_path) style="width:70px;" id="volver_ciudad"
+        |Volver
 

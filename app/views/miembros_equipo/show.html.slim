@@ -12,14 +12,16 @@ p#notice = notice
 
 -if @miembro_equipo.proyectos.exists?
   .row
-    .col-xs-1 style="padding-right:40px; margin-right:200px;"
-      a.btn.btn-block.btn-primary href="/miembros_equipo/#{@miembro_equipo.id}.pdf" style="width:260px;" id="pdf_miembro_equipo"
-        i.fa.fa-file-pdf-o
-        |  Ver Proyectos del Miembro de Equipo
-    .col-xs-1 style="padding-right:40px;"
-      a.btn.btn-block.btn-primary href="/miembros_equipo/#{@miembro_equipo.id}.xls" style="width:280px;" id="excel_miembro_equipo"
-        i.fa.fa-file-excel-o
-        |  Proyectos del Miembro de Equipo - Excel
+    - if can? :model_pdf, MiembroEquipo
+      .col-xs-1 style="padding-right:40px; margin-right:200px;"
+        a.btn.btn-block.btn-primary href="/miembros_equipo/#{@miembro_equipo.id}.pdf" style="width:260px;" id="pdf_miembro_equipo"
+          i.fa.fa-file-pdf-o
+          |  Ver Proyectos del Miembro de Equipo
+    - if can? :model_calculo, MiembroEquipo
+      .col-xs-1 style="padding-right:40px;"
+        a.btn.btn-block.btn-primary href="/miembros_equipo/#{@miembro_equipo.id}.xls" style="width:280px;" id="excel_miembro_equipo"
+          i.fa.fa-file-excel-o
+          |  Proyectos del Miembro de Equipo - Excel
 
 p#notice = notice
 
@@ -112,9 +114,11 @@ p#notice = notice
             /tr
               /td colspan="2"
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_miembro_equipo_path(@miembro_equipo)) style="width:70px;" id="editar_miembro_equipo"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(miembros_equipo_path) style="width:70px;" id="volver_miembro_equipo"
-      |Volver
+  - if can? :update, MiembroEquipo
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_miembro_equipo_path(@miembro_equipo)) style="width:70px;" id="editar_miembro_equipo"
+        |Editar
+  - if can? :index, MiembroEquipo
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(miembros_equipo_path) style="width:70px;" id="volver_miembro_equipo"
+        |Volver

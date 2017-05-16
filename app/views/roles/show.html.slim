@@ -5,6 +5,12 @@ p
   strong Nombre:
   = @rol.nombre
 
-= link_to 'Edit', edit_rol_path(@rol)
-'|
-= link_to 'Back', roles_path
+.row
+  - if can? :update, Rol
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_rol_path(@rol)) style="width:70px;" id="editar_rol"
+        |Editar
+  - if can? :index, Rol
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(roles_path) style="width:70px;" id="volver_rol"
+        |Volver

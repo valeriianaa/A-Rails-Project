@@ -8,10 +8,13 @@
         i.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
+      - if can? :auditorias, EspecialidadDeContacto
         a.btn.btn-default#pdf href=(especialidades_de_contacto_audited_path)
           | Auditorías
+      - if can? :pdf, EspecialidadDeContacto
         a.btn.btn-default#pdf href=(especialidades_de_contacto_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
+      - if can? :calculo, EspecialidadDeContacto
         a.btn.btn-default#excel href=(especialidades_de_contacto_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
 br

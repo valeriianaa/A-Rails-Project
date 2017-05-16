@@ -62,9 +62,11 @@ br
 
 
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_actividad_proyecto_path(@actividad_proyecto)) style="width:70px;" id="editar_actividad"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(actividades_del_proyecto_path(@actividad_proyecto.proyecto)) style="width:70px;" id="volver_actividad"
-      |Volver
+  - if can? :update, ActividadProyecto
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_actividad_proyecto_path(@actividad_proyecto)) style="width:70px;" id="editar_actividad"
+        |Editar
+  - if can? :index, ActividadProyecto
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(actividades_del_proyecto_path(@actividad_proyecto.proyecto)) style="width:70px;" id="volver_actividad"
+        |Volver

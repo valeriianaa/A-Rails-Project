@@ -7,10 +7,13 @@
       a.btn.btn-info href=(new_tipo_de_pago_path)
         |  Nuevo
     .pull-right
+      - if can? :auditorias, TipoDePago
         a.btn.btn-default#pdf href=(tipos_de_pago_audited_path)
           | Auditorías
+      - if can? :pdf, TipoDePago
         a.btn.btn-default#pdf href=(tipos_de_pago_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
+      - if can? :calculo, TipoDePago
         a.btn.btn-default#excel href=(tipos_de_pago_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
 
@@ -25,12 +28,15 @@ table id="datatable" class="table table-bordered table-striped"
       tr
         td = tipo_de_pago.nombre
         td.no-print style="padding: 3px;"
-          a href=(tipo_de_pago_path(tipo_de_pago))
-            i.fa.fa-search
-          a href=(edit_tipo_de_pago_path(tipo_de_pago))
-            i.fa.fa-pencil
-          a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(tipo_de_pago_path(tipo_de_pago)) 
-            i.fa.fa-trash
+          - if can? :show, TipoDePago
+            a href=(tipo_de_pago_path(tipo_de_pago))
+              i.fa.fa-search
+          - if can? :update, TipoDePago
+            a href=(edit_tipo_de_pago_path(tipo_de_pago))
+              i.fa.fa-pencil
+          - if can? :destroy, TipoDePago
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(tipo_de_pago_path(tipo_de_pago)) 
+              i.fa.fa-trash
 
 br
 

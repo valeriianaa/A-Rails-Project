@@ -8,12 +8,16 @@
         i.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
+      - if can? :auditorias, Evento
         a.btn.btn-default#pdf href=(eventos_audited_path)
           | Auditorías
+      - if can? :pdf, Evento
         a.btn.btn-default#pdf href=(eventos_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
+      - if can? :calculo, Evento
         a.btn.btn-default#excel href=(eventos_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
+      - if can? :estadistica, Evento
         a.btn.btn-default#excel href=(eventos_estadisticas_path) title="Ver estadísticas"
           i.fa.fa-pie-chart
 br

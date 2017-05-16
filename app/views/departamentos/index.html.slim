@@ -8,10 +8,13 @@
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
     .pull-right
+      - if can? :auditorias, Departamento
         a.btn.btn-default#pdf href=(departamentos_audited_path)
           | Auditorías
+      - if can? :pdf, Departamento
         a.btn.btn-default#pdf href=(departamentos_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
+      - if can? :calculo, Departamento
         a.btn.btn-default#excel href=(departamentos_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
 br

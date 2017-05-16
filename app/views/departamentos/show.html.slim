@@ -23,9 +23,11 @@ p#notice = notice
               td = @departamento.nombre
             
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_departamento_path(@departamento)) style="width:70px;" id="editar_departamento"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(departamentos_path) style="width:70px;" id="volver_departamento"
-      |Volver
+  - if can? :update, Departamento
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_departamento_path(@departamento)) style="width:70px;" id="editar_departamento"
+        |Editar
+  - if can? :index, Departamento
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(departamentos_path) style="width:70px;" id="volver_departamento"
+        |Volver

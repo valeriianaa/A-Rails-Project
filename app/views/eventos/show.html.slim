@@ -44,9 +44,11 @@ p#notice = notice
             
            
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_evento_path(@evento)) style="width:70px;" id="editar_evento"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(eventos_path) style="width:70px;" id="volver_evento"
-      |Volver
+  - if can? :update, Evento
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_evento_path(@evento)) style="width:70px;" id="editar_evento"
+        |Editar
+  - if can? :index, Evento
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(eventos_path) style="width:70px;" id="volver_evento"
+        |Volver

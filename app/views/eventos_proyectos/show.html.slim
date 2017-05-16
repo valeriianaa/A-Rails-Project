@@ -26,9 +26,11 @@ p#notice = notice
                     li = Contacto.find(contacto.persona_id).especialidad_de_contacto.nombre
             
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_evento_proyecto_path(@evento_proyecto)) style="width:70px;" id="editar_evento_proyecto"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(eventos_proyectos_path) style="width:70px;" id="volver_evento_proyecto"
-      |Volver
+  - if can? :update, EventoProyecto
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_evento_proyecto_path(@evento_proyecto)) style="width:70px;" id="editar_evento_proyecto"
+        |Editar
+  - if can? :index, EventoProyecto
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(eventos_proyectos_path) style="width:70px;" id="volver_evento_proyecto"
+        |Volver

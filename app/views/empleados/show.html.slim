@@ -12,14 +12,16 @@ p#notice = notice
 
 -if @empleado.proyectos.exists?
   .row
-    .col-xs-1 style="padding-right:40px; margin-right:130px;"
-      a.btn.btn-block.btn-primary href="/empleados/#{@empleado.id}.pdf" style="width:200px;" id="pdf_empleado"
-        i.fa.fa-file-pdf-o
-        |  Ver Proyectos del Empleado
-    .col-xs-1 style="padding-right:40px;"
-      a.btn.btn-block.btn-primary href="/empleados/#{@empleado.id}.xls" style="width:230px;" id="excel_empleado"
-        i.fa.fa-file-excel-o
-        |  Proyectos del Empleado - Excel
+    - if can? :model_pdf, Empleado
+      .col-xs-1 style="padding-right:40px; margin-right:130px;"
+        a.btn.btn-block.btn-primary href="/empleados/#{@empleado.id}.pdf" style="width:200px;" id="pdf_empleado"
+          i.fa.fa-file-pdf-o
+          |  Ver Proyectos del Empleado
+    - if can? :model_calculo, Empleado
+      .col-xs-1 style="padding-right:40px;"
+        a.btn.btn-block.btn-primary href="/empleados/#{@empleado.id}.xls" style="width:230px;" id="excel_empleado"
+          i.fa.fa-file-excel-o
+          |  Proyectos del Empleado - Excel
 
 br
 .row
@@ -109,9 +111,11 @@ br
               td = @empleado.area.nombre
               
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_empleado_path(@empleado)) style="width:70px;" id="editar_empleado"
-      |Editar
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-default href=(empleados_path) style="width:70px;" id="volver_empleado"
-      |Volver
+  - if can? :update, Empleado
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_empleado_path(@empleado)) style="width:70px;" id="editar_empleado"
+        |Editar
+  - if can? :index, Empleado
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-default href=(empleados_path) style="width:70px;" id="volver_empleado"
+        |Volver

@@ -89,10 +89,12 @@ p#notice = notice
             /tr
               /td colspan="2"
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_contacto_path(@contacto)) style="width:70px;" id="editar_contacto"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(contactos_path) style="width:70px;" id="volver_contacto"
-      |Volver
+  - if can? :update, Contacto
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_contacto_path(@contacto)) style="width:70px;" id="editar_contacto"
+        |Editar
+  - if can? :index, Contacto
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(contactos_path) style="width:70px;" id="volver_contacto"
+        |Volver
 

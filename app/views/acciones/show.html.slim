@@ -39,13 +39,16 @@ p#notice = notice
                         li = modelo.nombre
             
 .row
-  .col-xs-1
-    a.btn.btn-block.btn-success href=(edit_accion_path(@accion)) style="width:70px;" id="editar_accion"
-      |Editar
-  .col-xs-1 
-    a.btn.btn-block.btn-default href=(acciones_path) style="width:70px;" id="volver_accion"
-      |Volver
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-primary href="/acciones/#{@accion.id}.pdf" style="width:120px;" id="pdf_accion"
-      i.fa.fa-file-pdf-o
-      |  Ver PDF
+  - if can? :update, Accion
+    .col-xs-1
+      a.btn.btn-block.btn-success href=(edit_accion_path(@accion)) style="width:70px;" id="editar_accion"
+        |Editar
+  - if can? :index, Accion
+    .col-xs-1 
+      a.btn.btn-block.btn-default href=(acciones_path) style="width:70px;" id="volver_accion"
+        |Volver
+  - if can? :model_pdf, Accion
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-primary href="/acciones/#{@accion.id}.pdf" style="width:120px;" id="pdf_accion"
+        i.fa.fa-file-pdf-o
+        |  Ver PDF

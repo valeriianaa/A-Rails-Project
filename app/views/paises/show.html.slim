@@ -24,9 +24,11 @@ p#notice = notice
             
 
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_pais_path(@pais)) style="width:70px;" id="editar_pais"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(paises_path) style="width:70px;" id="volver_pais"
-      |Volver
+  - if can? :update, Pais
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_pais_path(@pais)) style="width:70px;" id="editar_pais"
+        |Editar
+  - if can? :index, Pais
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(paises_path) style="width:70px;" id="volver_pais"
+        |Volver

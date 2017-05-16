@@ -32,9 +32,11 @@ p#notice = notice
             
            
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_interes_path(@interes)) style="width:70px;" id="editar_interes"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(intereses_path) style="width:70px;" id="volver_interes"
-      |Volver
+  - if can? :update, Interes
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_interes_path(@interes)) style="width:70px;" id="editar_interes"
+        |Editar
+  - if can? :index, Interes
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(intereses_path) style="width:70px;" id="volver_interes"
+        |Volver

@@ -32,9 +32,11 @@ p#notice = notice
               td = @descuento.porcentaje
             
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_descuento_path(@descuento)) style="width:70px;" id="editar_descuento"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(descuentos_path) style="width:70px;" id="volver_descuento"
-      |Volver
+  - if can? :update, Descuento
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_descuento_path(@descuento)) style="width:70px;" id="editar_descuento"
+        |Editar
+  - if can? :index, Descuento
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(descuentos_path) style="width:70px;" id="volver_descuento"
+        |Volver

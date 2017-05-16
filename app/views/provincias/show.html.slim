@@ -19,9 +19,11 @@ p#notice = notice
               td = @provincia.pais.nombre
 
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_provincia_path(@provincia)) style="width:70px;" id="editar_provincia"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(provincias_path) style="width:70px;" id="volver_provincia"
-      |Volver
+  - if can? :update, Provincia
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_provincia_path(@provincia)) style="width:70px;" id="editar_provincia"
+        |Editar
+  - if can? :index, Provincia
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(provincias_path) style="width:70px;" id="volver_provincia"
+        |Volver

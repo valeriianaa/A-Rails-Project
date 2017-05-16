@@ -27,9 +27,11 @@ p#notice = notice
               td = @rol_de_empleado.departamento.nombre
             
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_rol_de_empleado_path(@rol_de_empleado)) style="width:70px;" id="editar_rol_de_empleado"
-      |Editar
-  .col-xs-1 style="padding-left:40px; padding-right:40px;"
-    a.btn.btn-block.btn-default href=(roles_de_empleados_path) style="width:70px;" id="volver_rol_de_empleado"
-      |Volver
+  - if can? :update, RolDeEmpleado
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_rol_de_empleado_path(@rol_de_empleado)) style="width:70px;" id="editar_rol_de_empleado"
+        |Editar
+  - if can? :index, RolDeEmpleado
+    .col-xs-1 style="padding-left:40px; padding-right:40px;"
+      a.btn.btn-block.btn-default href=(roles_de_empleados_path) style="width:70px;" id="volver_rol_de_empleado"
+        |Volver

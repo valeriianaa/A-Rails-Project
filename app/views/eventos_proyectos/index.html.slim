@@ -7,14 +7,18 @@
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo
       .pull-right
-        a.btn.btn-default#pdf href=""
-          | Auditorías
-        a.btn.btn-default#pdf href="" title="Ver PDF"
-          i.fa.fa-file-pdf-o
-        a.btn.btn-default#excel href="" title="Descargar Excel"
-          i.fa.fa-file-excel-o
-        a.btn.btn-default#excel href=(eventos_proyectos_estadisticas_path) title="Ver estadísticas"
-          i.fa.fa-pie-chart
+        - if can? :auditorias, EventoProyecto
+          a.btn.btn-default#pdf href=""
+            | Auditorías
+        - if can? :pdf, EventoProyecto
+          a.btn.btn-default#pdf href="" title="Ver PDF"
+            i.fa.fa-file-pdf-o
+        - if can? :calculo, EventoProyecto
+          a.btn.btn-default#excel href="" title="Descargar Excel"
+            i.fa.fa-file-excel-o
+        - if can? :estadistica, EventoProyecto
+          a.btn.btn-default#excel href=(eventos_proyectos_estadisticas_path) title="Ver estadísticas"
+            i.fa.fa-pie-chart
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead

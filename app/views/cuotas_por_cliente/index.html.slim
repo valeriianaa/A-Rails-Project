@@ -8,10 +8,13 @@
         i.ace-icon.fa.fa-plus.bigger-110
         |  Nuevo 
     .pull-right
+      - if can? :auditorias, CuotaPorCliente
         a.btn.btn-default#pdf href=(cuotas_por_cliente_audited_path(@proyecto))
           | Auditorías
+      - if can? :pdf, CuotaPorCliente
         a.btn.btn-default#pdf href=(proyecto_cuotas_por_cliente_path(format: "pdf")) title="Ver PDF"
           i.fa.fa-file-pdf-o
+      - if can? :calculo, CuotaPorCliente
         a.btn.btn-default#excel href=(proyecto_cuotas_por_cliente_path(format: "xls")) title="Descargar Excel"
           i.fa.fa-file-excel-o
 
@@ -38,10 +41,12 @@ table id="datatable" class="table table-bordered"
         - else
           td No pagado
         td.no-print style="padding: 3px;"
-          a href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente))
-            i.fa.fa-search
-          a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente)) 
-            i.fa.fa-trash
+          - if can? :show, CuotaPorCliente
+            a href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente))
+              i.fa.fa-search
+          - if can? :destroy, CuotaPorCliente
+            a data-confirm=("¿Esta Seguro de eliminar?") data-method="delete" href=(proyecto_cuota_por_cliente_path(cuota_por_cliente.proyecto, cuota_por_cliente)) 
+              i.fa.fa-trash
 
 
 br

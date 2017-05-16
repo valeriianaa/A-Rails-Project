@@ -30,13 +30,16 @@ p#notice = notice
                       li = accion.nombre
            
 .row
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-success href=(edit_modelo_path(@modelo)) style="width:70px;" id="editar_modelo"
-      |Editar
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-default href=(modelos_path) style="width:70px;" id="volver_modelo"
-      |Volver
-  .col-xs-1 style="padding-right:40px;"
-    a.btn.btn-block.btn-primary href="/modelos/#{@modelo.id}.pdf" style="width:120px;" id="pdf_modelo"
-      i.fa.fa-file-pdf-o
-      |  Ver PDF
+  - if can? :update, Modelo
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-success href=(edit_modelo_path(@modelo)) style="width:70px;" id="editar_modelo"
+        |Editar
+  - if can? :index, Modelo
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-default href=(modelos_path) style="width:70px;" id="volver_modelo"
+        |Volver
+  - if can? :model_pdf, Modelo
+    .col-xs-1 style="padding-right:40px;"
+      a.btn.btn-block.btn-primary href="/modelos/#{@modelo.id}.pdf" style="width:120px;" id="pdf_modelo"
+        i.fa.fa-file-pdf-o
+        |  Ver PDF
