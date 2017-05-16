@@ -84,11 +84,19 @@ class MiembrosEquipoController < ApplicationController
   end
 
   def audited
+
     audited = Audited::Adapters::ActiveRecord::Audit
+    auditoria_aux = audited.where auditable_type: "Persona"
     @auditoria = Array.new
-    MiembroEquipo.all.each do |miembro_equipo|
-      miembro_equipo.audits.each do |a|
-        @auditoria << a
+    auditoria_aux.each do |audit|
+      if audit.action == "update"
+        if audit.comment == "MiembroEquipo"
+          @auditoria << audit
+        end
+      else
+        if audit.audited_changes["tipo"] == "MiembroEquipo"
+          @auditoria << audit
+        end
       end
     end
   end
@@ -101,7 +109,7 @@ class MiembrosEquipoController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def miembro_equipo_params
-      params.require(:miembro_equipo).permit(:codigo, :nombre, :apellido, :nroIdentificacion, :fechaNacimiento, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :type, :pais_id, :provincia_id, :ciudad_id, :area_id, :tipo_documento_id, :proyecto_id)
+      params.require(:miembro_equipo).permit(:codigo, :nombre, :apellido, :nroIdentificacion, :fechaNacimiento, :calle, :nroDomicilio, :piso, :dpto, :telefono, :email, :type, :pais_id, :provincia_id, :ciudad_id, :area_id, :tipo_documento_id, :proyecto_id, :tipo, :audit_comment)
       #params.fetch(:miembro_equipo, {})
     end
 end

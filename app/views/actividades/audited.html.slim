@@ -32,7 +32,7 @@ table.table.table-striped.table-bordered.table-hover.actividades-auditorias id="
           td = audit.action
           td = User.find(audit.user_id).persona.nombre_y_apellido
           td = audit.auditable.try(:id)
-          td = audit.auditable.try(:nombre).truncate(15)
+          td = audit.auditable.try(:nombre)
           td
             ul
               - audit.audited_changes.each do |k,v|

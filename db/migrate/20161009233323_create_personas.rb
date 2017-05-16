@@ -12,6 +12,7 @@ class CreatePersonas < ActiveRecord::Migration
       t.string :dpto
       t.string :telefono
       t.string :email
+      t.string :tipo
       t.string :type
 
       t.timestamps null: false

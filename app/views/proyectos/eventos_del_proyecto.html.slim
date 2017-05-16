@@ -9,10 +9,9 @@ table id="datatable" class="table table-bordered table-striped"
     tr
       th Código
       th Nombre
-      th Descripción
       th Día
       th Hora
-      th Expositor
+      th Expositor/es
       th.no-print Acciones
 
   tbody
@@ -20,7 +19,6 @@ table id="datatable" class="table table-bordered table-striped"
       tr
         td = evento.codigo
         td = evento.nombre
-        td = evento.descripcion
         td = evento.dia.strftime('%d-%m-%y')
         td = evento.hora.strftime('%H:%M')
         td 

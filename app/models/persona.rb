@@ -16,7 +16,7 @@ class Persona < ActiveRecord::Base
 	has_many :personas_especialidades, dependent: :restrict_with_error
 	has_many :especialidades_de_contacto, :through => :personas_especialidades, dependent: :restrict_with_error
 	
-	validates :codigo, :nombre, :apellido, :nroIdentificacion, presence: true
+	validates :codigo, :nombre, :apellido, :nroIdentificacion, :tipo, presence: true
 	validates :tipo_documento_id, presence: true
 	validates :pais_id, :provincia_id, :ciudad_id, :area_id, presence: true
 	validates :calle, :nroDomicilio, presence: true
@@ -28,9 +28,10 @@ class Persona < ActiveRecord::Base
 	validates :codigo, uniqueness: true
 	#no es direccion lo que va. A que nivel habria que validar? calle, numero, piso dpto? todos?
     #validates :direccion, uniqueness: { scope: :ciudad_id, message: "la direccion ingresada ya existe para esta ciudad" }
+    #before_create :anadir_audit_coment
 
+    #audited :comment_required => true 
     audited
-    
 
     def nombre_y_apellido
       return "#{nombre} #{apellido}"

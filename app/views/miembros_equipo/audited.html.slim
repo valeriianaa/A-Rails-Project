@@ -20,7 +20,10 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
         td = audit.action
         td = User.find(audit.user_id).persona.nombre_y_apellido
         td = audit.auditable.try(:id)
-        td = MiembroEquipo.find(audit.auditable.try(:id)).codigo
+        - if audit.auditable.try(:id) != nil
+          td = MiembroEquipo.find(audit.auditable.try(:id)).codigo
+        -else
+          td
         td
           ul
             - audit.audited_changes.each do |k,v|

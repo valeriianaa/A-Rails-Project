@@ -11,6 +11,9 @@
       h3 Datos Generales
     .box-body style="margin-left:40px; margin-right:40px; padding: 30px;" 
       .field
+        = f.hidden_field :tipo, :value => "Empleado"
+        = f.hidden_field :audit_comment, :value => "Empleado"
+      .field
         = f.label :codigo, 'Código: (*)'
         = f.text_field :codigo, :class => "form-control"
       .field

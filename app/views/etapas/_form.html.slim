@@ -18,7 +18,7 @@
         = f.text_area :descripcion, :class => "form-control"
       .field
         = f.label :etapaAnterior, 'Etapa Anterior:'
-        = f.collection_select :etapaAnterior, Etapa.all, :id, :nombre,{:prompt => "Etapa"}, {:class => 'form-control'}
+        = f.collection_select :etapaAnterior, Etapa.all, :id, :nombre,{:prompt => "Seleccione una etapa"}, {:class => 'form-control'}
     .box-footer
       p#foot = "(*) Campo Obligatorio" 
   

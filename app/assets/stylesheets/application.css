@@ -25,6 +25,16 @@
 
 */
 
+.logo-lg{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 24px;
+}
+
+.manual-ayuda{
+	font-size: 20px;
+}
+
+
 i.fa.fa-search{
 	background-color: #00a65a;
 	color: #FFFFFF;

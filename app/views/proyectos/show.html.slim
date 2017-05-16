@@ -113,7 +113,7 @@ p#notice = notice
           -if can? :by_persona_type, Contrato
             li
               a href=(proyecto_contratos_path(@proyecto))
-                | Contrato
+                | Contratos
               /span.pull-right.badge.bg-yellow 12
           -if can? :by_persona_type, CuotaPorCliente
             -if @proyecto.contratos.exists?

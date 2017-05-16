@@ -6,15 +6,17 @@ br
 table id="datatable" class="table table-bordered table-striped" 
   thead
     tr
-      th Fechainicio
-      th Fechafin
+      th Fecha de inicio
+      th Fecha de finalización
+      th Responsable del contrato 
       th.no-print Acciones
 
   tbody
     - @proyecto.contratos.each do |contrato|
       tr
-        td = contrato.fecha_inicio
-        td = contrato.fecha_fin
+        td = l contrato.fecha_inicio, :format => :long
+        td = l contrato.fecha_fin, :format => :long
+        td = contrato.persona.nombre_y_apellido
         td.no-print style="padding: 3px;"
           - if can? :show, Contrato          
             a href=(contrato_path(contrato))

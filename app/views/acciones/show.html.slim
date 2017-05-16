@@ -28,10 +28,15 @@ p#notice = notice
             tr
               td
                 strong Modelos 
-              td 
-                ul#modelo-list
-                  - @accion.modelos.each do |modelo|
-                      li = modelo.nombre
+              td
+                -if @accion.modelos.count > 2 
+                  ul#modelo-list style="list-style-type: none; column-gap: 20px; column-count: 3; text-align: center;"
+                    - @accion.modelos.each do |modelo|
+                        li = modelo.nombre
+                -else
+                  ul#modelo-list style="list-style-type: none; column-gap: 20px; width:250px; text-align: center;"
+                    - @accion.modelos.each do |modelo|
+                        li = modelo.nombre
             
 .row
   .col-xs-1

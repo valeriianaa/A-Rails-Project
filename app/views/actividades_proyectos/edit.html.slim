@@ -1,5 +1,6 @@
 -breadcrumb :actividad_proyecto_editar, @actividad_proyecto
-h1 Editar actividad del proyecto
+h1 Proyecto: #{@actividad_proyecto.proyecto.codigo} - #{@actividad_proyecto.proyecto.nombre}
+h2 Editar actividad del proyecto
 
 == render 'form'
 

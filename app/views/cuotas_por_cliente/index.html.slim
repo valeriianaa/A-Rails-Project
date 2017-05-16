@@ -2,7 +2,11 @@
 .index-header
   h1 Proyecto: #{@proyecto.codigo} - #{@proyecto.nombre}
   h2 
-    | Cuotas del proyecto  
+    | Cuotas del proyecto 
+    - if can? :create, CuotaPorCliente
+      a.btn.btn-info href=(new_proyecto_cuota_por_cliente_path)
+        i.ace-icon.fa.fa-plus.bigger-110
+        |  Nuevo 
     .pull-right
         a.btn.btn-default#pdf href=(cuotas_por_cliente_audited_path(@proyecto))
           | Auditorías

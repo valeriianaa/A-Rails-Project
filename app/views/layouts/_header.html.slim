@@ -12,6 +12,9 @@ nav class="navbar navbar-static-top"
     span.sr-only Toggle
   div.navbar-custom-menu
     ul class="nav navbar-nav"
+      li class="manual-ayuda"
+        a href="http://127.0.0.1/incubadorapp_manual/doku.php" title="Manual de Usuario"
+          i.fa.fa-question-circle
       li class="dropdown messages-menu"
       - if can? :notificaciones, Proyecto, CuotaPorCliente
         li class="dropdown notifications-menu"

@@ -254,7 +254,7 @@ crumb :empleados do
 end
 
 crumb :empleado do |empleado|
-  link empleado.nombre_y_apellido, empleado
+  link empleado.codigo, empleado
   parent :empleados
 end
 

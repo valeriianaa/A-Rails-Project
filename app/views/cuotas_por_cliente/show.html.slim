@@ -13,11 +13,11 @@ p#notice = notice
             tr
               td
                 strong Proyecto
-              td = @cuota_por_cliente.proyecto.codigo
+              td = "#{@cuota_por_cliente.proyecto.codigo} - #{@cuota_por_cliente.proyecto.nombre}"
             tr
               td
                 strong Concepto de pago
-              td = @cuota_por_cliente.concepto_de_pago.nombre
+              td = "#{@cuota_por_cliente.concepto_de_pago.codigo} - #{@cuota_por_cliente.concepto_de_pago.nombre}"
             tr
               td
                 strong Subtotal
