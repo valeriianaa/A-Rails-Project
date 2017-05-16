@@ -9,6 +9,19 @@
         li = message
 p#notice = notice
 
+-if @evento.proyectos.exists?
+  .row
+    - if can? :model_pdf, Evento
+      .col-xs-1 style="padding-right:40px; margin-right:130px;"
+        a.btn.btn-block.btn-primary href="/eventos/#{@evento.id}.pdf" style="width:200px;" id="pdf_evento"
+          i.fa.fa-file-pdf-o
+          |  Ver Proyectos del Evento
+    - if can? :model_calculo, Evento
+      .col-xs-1 style="padding-right:40px;"
+        a.btn.btn-block.btn-primary href="/eventos/#{@evento.id}.xls" style="width:230px;" id="excel_evento"
+          i.fa.fa-file-excel-o
+          |  Proyectos del Evento - Excel
+br
 .row
   .col-md-8
     .box.box-info

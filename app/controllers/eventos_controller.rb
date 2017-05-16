@@ -19,16 +19,20 @@ class EventosController < ApplicationController
   # GET /eventos/1
   # GET /eventos/1.json
   def show
+    @usuario = current_user
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = EventoPdf.new(@evento, @usuario)
+        send_data pdf.render, filename: "evento#{@evento}.pdf", type: "application/pdf", disposition: "inline"
+      end
+      format.xls
+    end
   end
 
   # GET /eventos/new
   def new
     @evento = Evento.new
-    respond_to do |format|
-      format.html
-      #format.csv { send_data @contactos.to_csv, filename: "contactos-#{Date.today}.csv" }
-      format.xls
-    end
   end
 
   # GET /eventos/1/edit

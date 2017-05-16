@@ -538,12 +538,47 @@ Permiso.create!([
 ])
 
 Rol.create!([
-  {nombre: "super_admin"}
+  {nombre: "admin_empleados"},
+  {nombre: "super_admin"},
+  {nombre: "Encargado de Proyectos (mentor)"},
+  {nombre: "Miembro de Equipo"}
+])
+
+Permiso::HABTM_Roles.create!([
+  {permiso_id: 77, rol_id: 3},
+  {permiso_id: 78, rol_id: 3},
+  {permiso_id: 79, rol_id: 3},
+  {permiso_id: 80, rol_id: 3},
+  {permiso_id: 101, rol_id: 3},
+  {permiso_id: 80, rol_id: 4},
+  {permiso_id: 101, rol_id: 4},
+  {permiso_id: 121, rol_id: 3},
+  {permiso_id: 37, rol_id: 1},
+  {permiso_id: 38, rol_id: 1},
+  {permiso_id: 39, rol_id: 1},
+  {permiso_id: 40, rol_id: 1},
+  {permiso_id: 111, rol_id: 1},
+  {permiso_id: 77, rol_id: 1},
+  {permiso_id: 78, rol_id: 1},
+  {permiso_id: 79, rol_id: 1},
+  {permiso_id: 80, rol_id: 1},
+  {permiso_id: 101, rol_id: 1},
+  {permiso_id: 121, rol_id: 1}
 ])
 
 User.create!([
-  {email: "valeriianaa@gmail.com", password: "12345678", encrypted_password: "$2a$11$IOIqTifJSSss5Ux4qvnwyet8eVOAXbLnDdygO/WWLL3gpl8eW7Bhu", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 1, rol_id: 2}
+  {email: "valeriianaa@gmail.com", encrypted_password: "$2a$11$IOIqTifJSSss5Ux4qvnwyet8eVOAXbLnDdygO/WWLL3gpl8eW7Bhu", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 1, rol_id: 2},
+  {email: "luiscastro@gmail.com", encrypted_password: "$2a$11$uFat0oc4vonnYiRH71Egde1ZjZ7jIQdFNyb9vLL0jOTtZfNhEJEFq", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 6, rol_id: 3},
+  {email: "mq@gmail.com", encrypted_password: "$2a$11$ozq2DVoT.jkbDsKalmbklOAtl6RElAHDuglwK0D/RVIinX/hIa2.m", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 2, rol_id: 1}
 ])
+
+# Rol.create!([
+#   {nombre: "super_admin"}
+# ])
+
+# User.create!([
+#   {email: "valeriianaa@gmail.com", password: "12345678", encrypted_password: "$2a$11$IOIqTifJSSss5Ux4qvnwyet8eVOAXbLnDdygO/WWLL3gpl8eW7Bhu", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 0, current_sign_in_at: nil, last_sign_in_at: nil, current_sign_in_ip: nil, last_sign_in_ip: nil, persona_id: 1, rol_id: 2}
+# ])
 
 Estado.create!([
   {nombre: "To do", ultimo: false, previous: nil},
