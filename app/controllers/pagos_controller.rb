@@ -1,6 +1,6 @@
 class PagosController < ApplicationController
   before_action :set_pago, only: [:show, :edit, :update, :destroy]
-  before_action :set_systems_config, only: [:new]
+  before_action :set_systems_config, only: [:new, :new_with_parameter]
 
   # GET /pagos_realizados
   # GET /pagos_realizados.json
@@ -117,13 +117,7 @@ class PagosController < ApplicationController
     @pagos_por_fechas = Pago.where(fecha: fecha1..fecha2)
     #@total_del_mes = calcular_ingresos(@pagos_por_fechas)
     render :partial => "table_ingresos_por_fechas.html" 
-    respond_to do |format|
-      format.pdf do
-        pdf = PagoPdf.new(@pago, @usuario)
-        send_data pdf.render, filename: "pago_#{@pago.id}.pdf", type: "application/pdf", disposition: "inline"
-      end
-      format.xls
-    end
+    
   end
 
   def ajax_table_por_proyecto

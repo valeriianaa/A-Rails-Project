@@ -41,7 +41,7 @@ class SystemsettingsController < ApplicationController
   def update
     respond_to do |format|
       if @systemsetting.update(systemsetting_params)
-        format.html { redirect_to edit_systemsetting_path(@systemsetting), notice: 'Se Actualizo la Configuracion Correctamente.' }
+        format.html { redirect_to root_path, notice: 'Se Actualizo la Configuracion Correctamente.' }
       else
         format.html { render :edit }
         format.json { render json: @systemsetting.errors, status: :unprocessable_entity }

@@ -49,6 +49,13 @@ br
                 ul
                   - @evento.personas.each do |p|
                     li = p.nombre_y_apellido
+            tr
+              td
+                strong Tipo de evento
+              td 
+                ul
+                  - @evento.especialidades_de_contacto.each do |p|
+                    li = p.nombre
 
             tr
               td

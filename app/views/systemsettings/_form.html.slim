@@ -21,7 +21,7 @@ p#notice = notice
     =f.label 'Periodo para notificar posible abandono de proyecto'
     .field.form-inline
       = f.number_field :numero_abandono, {:class => "form-control", :style => "width:40%; margin-right:20px;"}
-      = f.select :tiempo_abandono, options_for_select([["Minutos","minutes"],["Horas","hours"],["Días","days"],["Semanas", "weeks"],["Meses", "months"],["Años", "years"]]), {} ,{:class => "form-control", :style => "width:40%" }
+      = f.select :tiempo_abandono, options_for_select([["Minutos","minutes"],["Horas","hours"],["Días","days"],["Semanas", "weeks"],["Meses", "months"],["Años", "years"]],  @systemsetting.tiempo_abandono), {} ,{:class => "form-control", :style => "width:40%"} 
 
   .box-footer.center
     = f.submit "Guardar", class: "btn btn-primary"

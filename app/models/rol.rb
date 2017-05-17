@@ -1,5 +1,5 @@
 class Rol < ActiveRecord::Base
-  has_many :user
+  has_many :user, dependent: :restrict_with_error
   has_and_belongs_to_many :permisos
     
   def can_modelos

@@ -93,7 +93,8 @@ class ConceptosDePagoController < ApplicationController
       params.require(:concepto_de_pago).permit(
         :codigo,
         :nombre, 
-        :descripcion, 
+        :descripcion,
+        :inicio, 
         :monto, 
         :fechaInicioDePago, 
         :fechaVencimiento, 

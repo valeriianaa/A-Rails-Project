@@ -38,7 +38,7 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
         td = audit.action
         td = User.find(audit.user_id).persona.nombre_y_apellido
         td = audit.auditable.try(:id)
-        td = Interes.find(audit.auditable.try(:id)).nombre
+        td = audit.auditable.try(:nombre)
         td
           ul
             - audit.audited_changes.each do |k,v|

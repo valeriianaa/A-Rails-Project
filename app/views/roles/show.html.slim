@@ -1,9 +1,27 @@
 - breadcrumb :rol, @rol
+- if @rol.errors.any?
+  .alert.alert-danger
+    button.close data-dismiss="alert" type="button" 
+      i.ace-icon.fa.fa-times
+    strong = "#{pluralize(@rol.errors.count, "error")} #{pluralize_without_count(@rol.errors.count, "prohibe", "prohiben")} eliminar este Rol:"
+    ul
+      - @rol.errors.full_messages.each do |message|
+        li = message
 p#notice = notice
 
-p
-  strong Nombre:
-  = @rol.nombre
+
+.row
+  .col-md-8
+    .box.box-info
+      .box-header.with-border
+        h3 Datos del Rol
+      .box-body
+        table.table.table-bordered
+          tbody
+            tr
+              td
+                strong Nombre
+              td = @rol.nombre
 
 .row
   - if can? :update, Rol
@@ -14,3 +32,8 @@ p
     .col-xs-1 style="padding-left:40px; padding-right:40px;"
       a.btn.btn-block.btn-default href=(roles_path) style="width:70px;" id="volver_rol"
         |Volver
+
+
+
+       
+

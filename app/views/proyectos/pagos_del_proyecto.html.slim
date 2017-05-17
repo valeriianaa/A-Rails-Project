@@ -2,6 +2,9 @@
 .index-header
   h1 Proyecto: #{@proyecto.codigo} - #{@proyecto.nombre}
   h2 Pagos realizados 
+  - if @proyecto.cuenta != nil
+    h3 Saldo en la cuenta: $ #{@proyecto.cuenta.saldo.round(2)}
+
 
 table id="datatable" class="table table-bordered table-striped" 
   thead
@@ -19,8 +22,8 @@ table id="datatable" class="table table-bordered table-striped"
         td = pago.persona.nombre_y_apellido
         td 
           - pago.cuotas_por_cliente.each do |c|
-            li = "#{c.concepto_de_pago.nombre}: #{c.montoTotal.round}"
-        td = pago.monto.round
+            li = "#{c.concepto_de_pago.nombre}: $ #{c.montoTotal.round}"
+        td = "$ #{pago.monto.round(2)}"
         td.no-print style="padding: 3px;"
           - if can? :show, Pago
             a href=(pago_path(pago))

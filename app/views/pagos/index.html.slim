@@ -11,8 +11,8 @@
           | Auditorías
         / a.btn.btn-default#pdf href=(miembros_equipo_path(format: "pdf")) title="Ver PDF"
         /   i.fa.fa-file-pdf-o
-        / a.btn.btn-default#excel href=(miembros_equipo_path(format: "xls")) title="Descargar Excel"
-        /   i.fa.fa-file-excel-o
+        a.btn.btn-default#excel href=(pagos_path(format: "xls")) title="Descargar Excel"
+          i.fa.fa-file-excel-o
 br
 table id="datatable" class="table table-bordered table-striped" 
   thead

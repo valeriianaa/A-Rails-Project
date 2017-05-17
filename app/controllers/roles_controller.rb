@@ -53,11 +53,23 @@ class RolesController < ApplicationController
 
   # DELETE /roles/1
   # DELETE /roles/1.json
+  # def destroy
+  #   @rol.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to roles_url, notice: 'Rol was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
+
   def destroy
-    @rol.destroy
     respond_to do |format|
-      format.html { redirect_to roles_url, notice: 'Rol was successfully destroyed.' }
-      format.json { head :no_content }
+      if @rol.destroy
+        format.html { redirect_to etapas_url, notice: 'El Rol fue eliminado exitosamente.' }
+        format.json { head :no_content }
+      else
+        format.html { render :show, notice: 'El Rol no pudo ser eliminado.' }
+        format.json { head :no_content }
+      end
     end
   end
 

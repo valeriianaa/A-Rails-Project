@@ -23,7 +23,7 @@ table id="datatable" class="table table-bordered table-striped"
     tr
       th Código
       th Nombre
-      th Descripcion
+      th Inicio
       th Monto
       th Vencimientos
       th.no-print Acciones
@@ -33,12 +33,12 @@ table id="datatable" class="table table-bordered table-striped"
       tr
         td = concepto_de_pago.codigo
         td = concepto_de_pago.nombre
-        td = concepto_de_pago.descripcion
+        td = l concepto_de_pago.inicio
         td = concepto_de_pago.monto
         td 
           ul
             - concepto_de_pago.vencimientos.each do |vencimiento|
-              li = vencimiento.fecha.strftime('%d-%m-%y')
+              li = l vencimiento.fecha
         td.no-print style="padding: 3px;"
           - if can? :show, ConceptoDePago
             a href=(concepto_de_pago_path(concepto_de_pago))

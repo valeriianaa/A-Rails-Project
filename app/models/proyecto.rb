@@ -25,14 +25,14 @@ class Proyecto < ActiveRecord::Base
 	has_many :eventos_proyectos, dependent: :destroy
 	has_many :eventos , :through => :eventos_proyectos
 
-	validates :codigo, :nombre, :descripcion, :calle, :nroDomicilio, :pais_id, :provincia_id, :ciudad_id, :etapa_id, :area_id, presence: true
+	validates :codigo, :nombre, :calle, :nroDomicilio, :pais_id, :provincia_id, :ciudad_id, :etapa_id, :area_id, presence: true
 	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, allow_blank: true
 	validates :dpto, presence: true, if: :piso?
 	validates :codigo, uniqueness: true
 	
 	validates_with ProyectoEtapaValidator, on: :update
 
-	#after_create :anadir_actividades
+	after_create :anadir_actividades
 
 	audited
 	
@@ -126,7 +126,11 @@ class Proyecto < ActiveRecord::Base
     end
 
       def acumulativo
-      	fecha = self.contratos.last.fecha_inicio
+        if self.contratos.exists?
+            fecha = self.contratos.last.fecha_inicio
+        else
+            fecha = self.created_at
+        end
       	fecha2 = Date.today
       	array_acumulativo = Array.new
         estados_ordenados.reverse.each_with_index do |e, index|
@@ -151,11 +155,14 @@ class Proyecto < ActiveRecord::Base
     			contenido[e.nombre.to_sym] = array_acumulativo[index]
     		else
     			contenido[e.nombre.to_sym] = (historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count + array_acumulativo[index]) - vector_de_estados[0]
-                if contenido[e.nombre.to_sym] > vector_de_estados[0]
-                    array_acumulativo[index] += vector_de_estados[index]
-                else
-                    array_acumulativo[index] = 0
+                if contenido[e.nombre.to_sym] < 0
+                    contenido[e.nombre.to_sym] = 0
                 end
+                # if contenido[e.nombre.to_sym] > vector_de_estados[0]
+                #     array_acumulativo[index] += vector_de_estados[index]
+                # else
+                #     array_acumulativo[index] = 0
+                # end
     		end
         end
         labels = Array.new
@@ -171,11 +178,14 @@ class Proyecto < ActiveRecord::Base
                     contenido[e.nombre.to_sym] = array_acumulativo[index]
                 else
                     contenido[e.nombre.to_sym] = (historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count + array_acumulativo[index]) - vector_de_estados[0]
-                    if contenido[e.nombre.to_sym] > vector_de_estados[0]
-                        array_acumulativo[index] += vector_de_estados[index]
-                    else
-                        array_acumulativo[index] = 0
+                    if contenido[e.nombre.to_sym] < 0
+                        contenido[e.nombre.to_sym] = 0
                     end
+                    # if contenido[e.nombre.to_sym] > vector_de_estados[0]
+                    #     array_acumulativo[index] += vector_de_estados[index]
+                    # else
+                    #     array_acumulativo[index] = 0
+                    # end
                 end
             end
 
@@ -193,11 +203,14 @@ class Proyecto < ActiveRecord::Base
                 contenido[e.nombre.to_sym] = array_acumulativo[index]
             else
                 contenido[e.nombre.to_sym] = (historiales.where(fechaHora: (fecha..fecha + 1.week), estado_id: e.id).count + array_acumulativo[index]) - vector_de_estados[0]
-                if contenido[e.nombre.to_sym] > vector_de_estados[0]
-                    array_acumulativo[index] += vector_de_estados[index]
-                else
-                    array_acumulativo[index] = 0
+                if contenido[e.nombre.to_sym] < 0
+                    contenido[e.nombre.to_sym] = 0
                 end
+                # if contenido[e.nombre.to_sym] > vector_de_estados[0]
+                #     array_acumulativo[index] += vector_de_estados[index]
+                # else
+                #     array_acumulativo[index] = 0
+                # end
             end
         end
 
@@ -209,7 +222,11 @@ class Proyecto < ActiveRecord::Base
       end
 
   def velocidad
-  	fecha = self.contratos.last.fecha_inicio
+  	if self.contratos.exists?
+        fecha = self.contratos.last.fecha_inicio
+    else
+        fecha = self.created_at
+    end
   	fecha2 = Date.today
   	if self.contratos.exists?
         if self.contratos.last.fecha_fin < Date.today

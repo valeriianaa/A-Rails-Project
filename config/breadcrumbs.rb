@@ -372,6 +372,11 @@ crumb :eventos_auditorias do
   parent :eventos
 end
 
+crumb :eventos_estadisticas do
+  link "Estadisticas"
+  parent :eventos
+end
+
 #EventosProyectos--------------------------------------------
 crumb :eventos_proyectos do
   link "Eventos asociados a proyectos", eventos_proyectos_path
@@ -385,6 +390,16 @@ end
 crumb :evento_proyecto_new do 
   link "Nuevo"
   parent :eventos
+end
+
+crumb :eventos_proyectos_auditorias do 
+  link "Auditorías"
+  parent :eventos_proyectos
+end
+
+crumb :eventos_proyectos_estadisticas do
+  link "Estadisticas"
+  parent :eventos_proyectos
 end
 
 #Intereses--------------------------------------------
@@ -545,6 +560,11 @@ end
 crumb :estadisticas do |proyecto|
   link "Estadisticas", proyecto_estadisticas_path(proyecto)
   parent :proyecto, proyecto
+end
+
+crumb :proyectos_auditorias do 
+  link "Auditorías"
+  parent :proyectos
 end
 
 crumb :actividades_proyectos do |proyecto|

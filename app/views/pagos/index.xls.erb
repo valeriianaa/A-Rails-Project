@@ -10,37 +10,49 @@
         <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">Fecha</Data></Cell>
         <Cell><Data ss:Type="String">Proyecto Código</Data></Cell>
+        <Cell><Data ss:Type="String">Contrato</Data></Cell>
         <Cell><Data ss:Type="String">Responsable del contrato</Data></Cell>
-        <Cell><Data ss:Type="String">Numero de Identificacion</Data></Cell>
-        <Cell><Data ss:Type="String">Fecha de Nacimiento</Data></Cell>
-        <Cell><Data ss:Type="String">Pais</Data></Cell>
-        <Cell><Data ss:Type="String">Provincia</Data></Cell>
-        <Cell><Data ss:Type="String">Ciudad</Data></Cell>
-        <Cell><Data ss:Type="String">Calle</Data></Cell>
-        <Cell><Data ss:Type="String">Numero</Data></Cell>
-        <Cell><Data ss:Type="String">Piso</Data></Cell>
-        <Cell><Data ss:Type="String">Departamento</Data></Cell>
-        <Cell><Data ss:Type="String">Telefono</Data></Cell>
-        <Cell><Data ss:Type="String">Correo Electronico</Data></Cell>
+        <Cell><Data ss:Type="String">Monto Total</Data></Cell>
+        <Cell><Data ss:Type="String">Saldo de Cuenta del pago</Data></Cell>
+        <Cell><Data ss:Type="String">Saldo de cuenta actual</Data></Cell>
       </Row>
     <% @pagos.each do |pago| %>
       <Row>
         <Cell><Data ss:Type="String"><%= pago.id.to_s %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.nombre %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.apellido %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.tipo_documento.nombre %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.nroIdentificacion %></Data></Cell>
-        <Cell><Data ss:Type="Data"><%= pago.fechaNacimiento %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.pais.nombre %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.provincia.nombre %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.ciudad.nombre %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.calle %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.nroDomicilio %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.piso %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.dpto %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.telefono %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= pago.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= pago.fecha %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= pago.proyecto.codigo %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= pago.contrato.contrato_descripcion %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= pago.persona.nombre_y_apellido %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= pago.monto.round(2) %></Data></Cell>
+        <% monto_acreditado = 0%>
+        <% pago.pagos_metodos.each do |pm| %>
+          <% monto_acreditado = monto_acreditado + pm.monto %>
+        <% end %>
+        <Cell><Data ss:Type="Number"><%= (monto_acreditado - pago.monto).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= pago.cuenta.saldo.round(2) %></Data></Cell>
       </Row>
+    <% end %>
+    </Table>
+
+
+    <Table>
+      <Row></Row>
+      <Row>
+        <Cell><Data ss:Type="String">Montos abonados por Tipo de pago</Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">ID del Pago</Data></Cell>
+        <Cell><Data ss:Type="String">Tipo de pago</Data></Cell>
+        <Cell><Data ss:Type="String">Monto pagado</Data></Cell>
+      </Row>
+    <% @pagos.each do |pago| %>
+      <% pago.pagos_metodos.each do |pm|%>
+        <Row>
+          <Cell><Data ss:Type="String"><%= pago.id.to_s %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= pm.tipo_de_pago.nombre %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= pm.monto.round(2) %></Data></Cell>
+        </Row>
+      <% end %>
     <% end %>
     </Table>
   </Worksheet>

@@ -87,7 +87,7 @@ class ActividadesProyectoPdf < Prawn::Document
         	if ap.historiales.exists?
             	retorno_fultact = "#{Historial.where(actividad_proyecto_id: ap.id).last.fechaHora.strftime('%d-%m-%y   %H:%M')}"
         	end
-			[@proyecto.etapa.nombre, ap.actividad.nombre, retorno_estado, retorno_fvenc, retorno_atrasado, retorno_fultact]
+			[ap.actividad.etapa.nombre, ap.actividad.nombre, retorno_estado, retorno_fvenc, retorno_atrasado, retorno_fultact]
 		end	
 	end
 end

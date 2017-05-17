@@ -11,7 +11,7 @@
         th Seleccionar
 
     tbody
-      - @cuotas.order(:id).each_with_index do |cuota_por_cliente, index|
+      - @cuotas.sort_by {|c| c.concepto_de_pago.inicio}.each_with_index do |cuota_por_cliente, index|
         = content_tag "tr", data: {monto_total: cuota_por_cliente.montoTotal } do|a|
           td = cuota_por_cliente.concepto_de_pago.nombre
           td = cuota_por_cliente.montoTotal
