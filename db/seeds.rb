@@ -1093,74 +1093,14 @@ EventoProyecto.create!([
   {evento_id:2, proyecto_id: 17},
   {evento_id:2, proyecto_id: 18}
   ])
-# Contacto.create!([
-#   {codigo: "CO-001", nombre: "María Rosa", apellido: "Conti", nroIdentificacion: "25644132", fechaNacimiento: "1975-07-03", calle: "Ituzaingo", nroDomicilio: "245", piso: "12", dpto: "B", telefono: "424568", email: "mrconti@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 1, area_id: 1, rol_de_empleado_id: nil},
-#   {codigo: "CO-002", nombre: "Berta", apellido: "Rivera", nroIdentificacion: "33958772", fechaNacimiento: "1989-04-11", calle: "Leandro Gomez", nroDomicilio: "5886", piso: nil, dpto: nil, telefono: "4598765", email: "brivera@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 2, area_id: 1, rol_de_empleado_id: nil},
-#   {codigo: "CO-003", nombre: "Juliana", apellido: "Castiglione", nroIdentificacion: "30444512", fechaNacimiento: "1980-12-09", calle: "Brisas", nroDomicilio: "3280", piso: "5", dpto: "15", telefono: "555321", email: "jcastiglione@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 3, area_id: 1, rol_de_empleado_id: nil},
-#   {codigo: "CO-004", nombre: "Nahuel", apellido: "Estevez", nroIdentificacion: "19423568", fechaNacimiento: "1966-11-28", calle: "Av. Alta Gracia", nroDomicilio: "5332", piso: "12", dpto: "B", telefono: "154632108", email: "mrconti@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 4, area_id: 1, rol_de_empleado_id: nil},
-#   {codigo: "CO-005", nombre: "Pablo", apellido: "Gomez", nroIdentificacion: "25221305", fechaNacimiento: "1970-03-05", calle: "Neruda", nroDomicilio: "7393", piso: "12", dpto: "B", telefono: "154245689", email: "mrconti@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 5, area_id: 1, rol_de_empleado_id: nil},
-#   {codigo: "CO-006", nombre: "Abigaíl", apellido: "Coronado", nroIdentificacion: "37926793", fechaNacimiento: "1994-03-21", calle: "F. Varela", nroDomicilio: "5659", piso: "12", dpto: "B", telefono: "432666", email: "mrconti@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 6, area_id: 1, rol_de_empleado_id: nil},
-#   {codigo: "CO-007", nombre: "Hilda", apellido: "Zielinski", nroIdentificacion: "25334991", fechaNacimiento: "1970-04-07", calle: "Joaquin Suarez", nroDomicilio: "6863", piso: "12", dpto: "B", telefono: "4478909", email: "mrconti@gmail.com", type: "Contacto", pais_id: 1, provincia_id: 1, ciudad_id: 1, tipo_documento_id: 1, departamento_id: nil, especialidad_de_contacto_id: 7, area_id: 1, rol_de_empleado_id: nil}
-# ])
 
-# Evento.create!([
-#   {codigo: "EV-001", nombre: "Charla de Marketing", descripcion: "-", dia: "2017-03-03", hora: "2000-01-01 08:00:00", persona_id: nil},
-#   {codigo: "EV-002", nombre: "Reunión con diseñadores", descripcion: "Reunión entre diseñadores gráficos, diseñadores web y miembros de los diferentes proyectos", dia: "2017-03-04", hora: "2000-01-01 09:00:00", persona_id: nil}
-# ])
-# PersonaEvento.create!([
-#   {evento_id: 1, persona_id: 101},
-#   {evento_id: 2, persona_id: 102},
-#   {evento_id: 2, persona_id: 105}
-# ])
 Audited::Adapters::ActiveRecord::Audit.update_all(user_id: 1)
+# ActividadProyecto.find(1).audits.update_all(user_id: 3)
+# ActividadProyecto.find(2).audits.update_all(user_id: 3)
+# ActividadProyecto.find(3).audits.update_all(user_id: 3)
+# ActividadProyecto.find(4).audits.update_all(user_id: 3)
+# ActividadProyecto.find(5).audits.update_all(user_id: 3)
+# ActividadProyecto.find(6).audits.update_all(user_id: 3)
 #--------------------------------------------------------
 
 
-# CuotaPorCliente.create!([
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 1, contrato_id: 1, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 2, contrato_id: 2, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 3, contrato_id: 3, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 4, contrato_id: 4, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 5, contrato_id: 5, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 6, contrato_id: 6, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 7, contrato_id: 7, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 8, contrato_id: 8, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 9, contrato_id: 9, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 1, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 288.0, estado: false, concepto_de_pago_id: 2, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 3, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
-#   {montoTotal: 200.0, estado: false, concepto_de_pago_id: 4, proyecto_id: 10, contrato_id: 10, pago_id: nil, descuento_id: nil},
-#->   {montoTotal: 288.0, estado: true, concepto_de_pago_id: 1, proyecto_id: 1, contrato_id: 1, pago_id: 1, descuento_id: nil}
-# ])
-# Pago.create!([
-#   {fecha: "2017-02-28", monto: 288.0, tipo_de_pago_id: nil, proyecto_id: 1, persona_id: 7, cuenta_id: 1}
-# ])
-# PagoMetodo.create!([
-#   {monto: 288.0, pago_id: 1, tipo_de_pago_id: 1}
-# ])
