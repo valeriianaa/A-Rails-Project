@@ -19,17 +19,34 @@
       .field
         = f.label :descripcion, 'Descripción:'
         = f.text_area :descripcion, :class => "form-control"
-      .field
-        = f.label :persona_ids, "Expositores: (*)", {class: "control-label"}
+      - if @evento.new_record?
+        .field
+          = f.label :persona_ids, "Expositores: (*)", {class: "control-label"}
+          br
+            select#evento_persona_ids.form-control.select2 name="evento[persona_ids][]" multiple="true"
+              - Contacto.all.each do |contacto|
+                option value=(contacto.id) = contacto.nombre_y_apellido
+        .field
+          = f.label :especialidad_de_contacto_ids, "Areas del evento: (*)",  {class: "control-label"}
+          
+          = content_tag :div, "", id: "especialidades_by_c", data: {especialidades_by_contactos_data: getEspecialidadesByContactos.to_json}
+      
         br
-          select#evento_persona_ids.form-control.select2 name="evento[persona_ids][]" multiple="true"
-            - Contacto.all.each do |contacto|
-              option value=(contacto.id) = contacto.nombre_y_apellido
-      .field
-        = f.label :especialidad_de_contacto_ids, "Areas del evento: (*)",  {class: "control-label"}
-        
-        = content_tag :div, "", id: "especialidades_by_c", data: {especialidades_by_contactos_data: getEspecialidadesByContactos.to_json}
+          select#evento_especialidad_de_contacto_ids.form-control.select2 name="evento[especialidad_de_contacto_ids][]" multiple="true"
 
+      - else 
+        
+        .field
+          = f.label :persona_ids, "Expositores: (*)", {class: "control-label"}
+          br
+            select#evento_persona_ids.form-control.select2 name="evento[persona_ids][]" multiple="true"
+              - Contacto.find(@evento.persona_ids).each do |contacto|
+                option value=(contacto.id) selected="selected" = contacto.nombre_y_apellido
+        .field
+          = f.label :especialidad_de_contacto_ids, "Areas del evento: (*)",  {class: "control-label"}
+          
+          = content_tag :div, "", id: "especialidades_by_c", data: {especialidades_by_contactos_data: getEspecialidadesByContactos.to_json}
+        
         br
           select#evento_especialidad_de_contacto_ids.form-control.select2 name="evento[especialidad_de_contacto_ids][]" multiple="true"
 
@@ -52,9 +69,17 @@
     a.btn.btn-default href=(eventos_path)
       | Volver
 
+ruby:
+  @new = @evento.new_record?
+
+javascript:
+  nuevo = #{ @new }
+  especialidad_de_contacto_ids_str = '#{ @evento.especialidad_de_contacto_ids.to_json }'
+  especialidad_de_contacto_ids_json = JSON.parse(especialidad_de_contacto_ids_str)
+
 coffee:
-  $("#evento_persona_ids").change ->
-    ids_contactos = $(this).val()
+  set_areas_by_contactos_change = ->
+    ids_contactos = $("#evento_persona_ids").val()
     $("#evento_especialidad_de_contacto_ids").empty()
     if ids_contactos != null
       especialidades_by_c = $("#especialidades_by_c")
@@ -69,3 +94,11 @@ coffee:
             hashDeEspecialidades[esp_id] = esp_nombre
             $("#evento_especialidad_de_contacto_ids")
               .append("<option value=#{esp_id}>#{esp_nombre}</option>")
+
+  $("#evento_persona_ids").change(set_areas_by_contactos_change)
+    
+  if not nuevo
+    set_areas_by_contactos_change()
+    $("#evento_especialidad_de_contacto_ids option").each (index, value) ->
+      if especialidad_de_contacto_ids_json.indexOf( parseInt($(value).val()) ) != -1
+        $(value).prop('selected', true);
