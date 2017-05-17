@@ -14,7 +14,7 @@ class ActividadProyecto < ActiveRecord::Base
 
 	def crear_historial
 		h = Historial.new
-		h.fechaHora = Time.now
+		h.fechaHora = self.fecha_hora
 		h.estado_id = self.estado_id
 		h.actividad_proyecto_id = self.id
 		h.save

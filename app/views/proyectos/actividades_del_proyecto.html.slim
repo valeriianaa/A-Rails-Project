@@ -49,7 +49,7 @@
           -else
             td
           -if actividad_proyecto.historiales.exists?
-            td = Historial.where(actividad_proyecto_id: actividad_proyecto.id).last.fechaHora.strftime('%d-%m-%y   %H:%M')
+            td = Historial.where(actividad_proyecto_id: actividad_proyecto.id).last.fechaHora.strftime('%d/%m/%y   %H:%M')
           -else
             td 
           td style="padding: 3px;"

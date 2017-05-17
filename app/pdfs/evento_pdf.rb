@@ -49,16 +49,18 @@ class EventoPdf < Prawn::Document
 	def expositores_evento
 		retorno = ""		
 		@evento.personas.map do |a|
-			retorno = retorno + "#{a.nombre_y_apellido} \n"
+			retorno = retorno + "#{a.nombre_y_apellido}, "
 		end
+		retorno = retorno[0, retorno.length - 2]
 		return retorno
 	end
 
 	def especialidades_evento
 		retorno = ""
 		@evento.eventos_especialidades.map do |a|
-			retorno = retorno + "#{a.especialidad_de_contacto.nombre} \n"
+			retorno = retorno + "#{a.especialidad_de_contacto.nombre}, "
 		end
+		retorno = retorno[0, retorno.length - 2]
 		return retorno
 	end
 
