@@ -1,7 +1,15 @@
-h1 Estadísticas de los eventos asociados a proyectos
+h1 Estadísticas de proyectos asociados a eventos
+
+h2 Clasificación según especialidad
 
 br
 br
-h3 Dona
+.row
+  .col-md-12
+    .box.box-info
+      .box-header.with-border
+        h3 Información 
+      .box-body
+      	p Por cada especialidad seleccionada en la creación de eventos, el siguiente gráfico ilustra cuantos proyectos fueron asociados a eventos con dicha especialidad.
 
 = content_tag :div, "", id: "estadisticas", data: {actividades: @eventos_proyectos.estadisticas}

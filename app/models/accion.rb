@@ -3,7 +3,6 @@ class Accion < ActiveRecord::Base
   has_many :modelos, through: :permisos
 
   validates :nombre, :key_name, presence: true
-  #validates :nombre, :key_name, uniqueness: true
   validates :nombre, uniqueness: { case_sensitive: false}
   validates :key_name, uniqueness: { case_sensitive: false}
 

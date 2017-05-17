@@ -1,7 +1,13 @@
-h1 Estadísticas de los eventos
+h1 Estadísticas de eventos creados según especialidad
 
 br
 br
-h3 Dona
+.row
+  .col-md-12
+    .box.box-info
+      .box-header.with-border
+        h3 Información 
+      .box-body
+      	p El siguiente gráfico muestra la cantidad de eventos creados, según la especialidad seleccionada al momento de dicha creación.
 
 = content_tag :div, "", id: "estadisticas", data: {especialidades: @eventos.estadisticas}

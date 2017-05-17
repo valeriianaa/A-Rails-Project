@@ -8,14 +8,8 @@
         |  Nuevo
       .pull-right
         - if can? :auditorias, EventoProyecto
-          a.btn.btn-default#pdf href=""
+          a.btn.btn-default#pdf href=(eventos_proyectos_audited_path)
             | Auditorías
-        - if can? :pdf, EventoProyecto
-          a.btn.btn-default#pdf href="" title="Ver PDF"
-            i.fa.fa-file-pdf-o
-        - if can? :calculo, EventoProyecto
-          a.btn.btn-default#excel href="" title="Descargar Excel"
-            i.fa.fa-file-excel-o
         - if can? :estadistica, EventoProyecto
           a.btn.btn-default#excel href=(eventos_proyectos_estadisticas_path) title="Ver estadísticas"
             i.fa.fa-pie-chart

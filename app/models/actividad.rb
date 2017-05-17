@@ -19,7 +19,8 @@ class Actividad < ActiveRecord::Base
 
 	HUMANIZED_ATTRIBUTES = {
     :nombre => "Nombre: ",
-    :etapa_id => "Etapa: "
+    :etapa_id => "Etapa: ",
+    :actividades_antecedentes => "Actividades antecedentes: "
   }
 
   def self.human_attribute_name(*args)

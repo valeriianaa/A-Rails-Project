@@ -5,13 +5,28 @@ h2 Estadísticas del proyecto
 br
 br
 h3 Flujo acumulativo
+br
+.row
+  .col-md-12
+    .box.box-info
+      .box-header.with-border style="padding: 0px 0px 0px 10px;"
+        h4 Información 
+      .box-body
+      	p En el siguiente gráfico se puede ver a traves del paso del tiempo los cambios de estados de las actividades, con la acumulacion de aquellas que estén completadas.
 
 = content_tag :div, "", id: "acumulativo", data: {actividades: @proyecto.acumulativo[0], labels: @proyecto.acumulativo[1]}
 
 br
+br
 h3 Gráfico de velocidad
 br
-
+.row
+  .col-md-12
+    .box.box-info
+      .box-header.with-border style="padding: 0px 0px 0px 10px;"
+        h4 Información 
+      .box-body
+      	p En el siguiente gráfico se puede ver a traves del paso del tiempo la cantidad de actualizaciones de estado.
 
 = content_tag :div, "", id: "velocidad", data: {estados: @proyecto.velocidad[0], labels: @proyecto.velocidad[1]}
 
