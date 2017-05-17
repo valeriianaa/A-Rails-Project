@@ -34,7 +34,7 @@
         = f.text_field :cuit, :class => "form-control"
       .field
         = f.label :condicion_iva, 'Condicion frente al IVA: (*)'
-        = f.select :condicion_iva, options_for_select([["Consumidor Final"],["Exento"],["Monotributista"],["Responsable Inscripto"]]), {} ,{:class => "form-control"}
+        = f.select :condicion_iva, options_for_select([["Consumidor Final"],["Exento"],["Monotributista"],["Responsable Inscripto"]], @configuracion.condicion_iva), {} ,{:class => "form-control"}
       .field
         = f.label :telefono, 'Teléfono: '
         = f.text_field :telefono, :class => "form-control"

@@ -28,7 +28,7 @@ table id="datatable" class="table table-bordered table-striped"
     - @pagos.each do |pago|
       tr
         td = pago.fecha
-        td = pago.proyecto.nombre
+        td = "#{pago.proyecto.codigo} - #{pago.proyecto.nombre}"
         td = pago.persona.nombre_y_apellido
         td 
           - pago.cuotas_por_cliente.each do |c|

@@ -32,7 +32,7 @@ class Proyecto < ActiveRecord::Base
 	
 	validates_with ProyectoEtapaValidator, on: :update
 
-	after_create :anadir_actividades
+	#after_create :anadir_actividades
 
 	audited
 	
