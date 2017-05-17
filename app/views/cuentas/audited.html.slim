@@ -3,7 +3,25 @@
   h1
     | Auditoría de Cuentas
 
-table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable"
+.row
+  .col-sm-4
+    .form-group
+      label for="datepicker_from" 
+        | Desde
+      #datepicker_from.input-group.date
+        input.form-control type="text" /
+        span.input-group-addon
+          span.glyphicon.glyphicon-calendar
+  .col-sm-4
+    .form-group
+      label for="datepicker_to" 
+        | Hasta
+      #datepicker_to.input-group.date
+        input.form-control type="text" /
+        span.input-group-addon
+          span.glyphicon.glyphicon-calendar
+
+table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable_auditoria"
   thead
     tr
       th Accion
@@ -41,4 +59,4 @@ table.table.table-striped.table-bordered.table-hover.dataTeableSpc id="datatable
             /   - audit.audited_changes.each do |k,v|
             /     li = v
 
-        td = I18n.l audit.created_at, format: :short
+        td = I18n.l audit.created_at, format: "%d/%m/%Y %H:%M"
