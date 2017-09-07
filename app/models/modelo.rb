@@ -4,7 +4,7 @@ class Modelo < ActiveRecord::Base
 	
 	validates :nombre, presence: true
 	validates :nombre, uniqueness: true
-	#validates :accion_ids, presence: true, :if => :accion?
+	validates :accion_ids, presence: true
 
 	def accion?
 	  	if Accion.exists?
